@@ -2,7 +2,9 @@ import axios from 'axios'
 
 const request = axios.create({
     // 基础路径
-    baseURL: '',
+    baseURL: import.meta.env.VITE_APP_BASE_API,
+    // `withCredentials` 表示跨域请求时是否需要使用凭证
+    withCredentials: true,
     // 请求超时
     timeout: 6000
 })

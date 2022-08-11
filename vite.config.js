@@ -9,11 +9,13 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // 修改title 可进行html的压缩
 import { createHtmlPlugin } from 'vite-plugin-html'
+// 处理svg
+import { svgBuilder } from './src/utils/svgBuilder'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, __dirname)
-    console.log(env)
+    // console.log(env)
     return {
         // root: './',
         // base: './',
@@ -37,7 +39,9 @@ export default defineConfig(({ mode }) => {
                         title: env.VITE_APP_TITLE
                     }
                 }
-            })
+            }),
+            // 增加svg处理插件
+            svgBuilder('./src/icons/svg/')
         ],
         // 解决路径问题
         resolve: {
@@ -51,10 +55,10 @@ export default defineConfig(({ mode }) => {
             port: 3000,
             open: env.VITE_MODE_NAME === 'development',
             proxy: () => {
-                if (env.VITE_MODE === 'development') {
+                if (env.VITE_MODE_NAME === 'development') {
                     return {
                         '/dev-api': {
-                            target: '',
+                            target: 'http://120.48.31.206:2999',
                             changeOrigin: true,
                             rewrite: { '^/dev-api': '' }
                         }
