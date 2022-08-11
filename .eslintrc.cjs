@@ -12,7 +12,7 @@ module.exports = {
         'eslint-config-prettier'
     ],
     parserOptions: {
-        ecmaVersion: 13,
+        ecmaVersion: 2020,
         sourceType: 'module',
         ecmaFeatures: {
             modules: true,
