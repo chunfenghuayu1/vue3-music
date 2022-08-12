@@ -52,7 +52,7 @@ export default defineConfig(({ mode }) => {
         // 配置代理
         server: {
             host: '127.0.0.1',
-            port: 3000,
+            port: 8800,
             open: env.VITE_MODE_NAME === 'development',
             proxy: () => {
                 if (env.VITE_MODE_NAME === 'development') {

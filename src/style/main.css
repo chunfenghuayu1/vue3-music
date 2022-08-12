@@ -3,16 +3,17 @@
 @tailwind utilities;
 
 @layer base {
-  /* :root {
-    --color-text-base: #ffffff;
-    --color-text-muted: #c7d2fe;
-    --color-text-inverted: #4f46e5;
-    --color-fill: #4338ca;
-    --color-button-accent: #ffffff;
-    --color-button-accent-hover: #eef2ff;
-    --color-button-muted: 99, 102, 241;
+  :root {
+    --color-text-base: 0, 0, 0;
+    --color-text-primary: 99, 187, 208;
+    --color-text-secondary: 48, 49, 51;
+    --color-text-tertiary: 144, 147, 153;
+    /* --color-fill: #4338ca; 
+     --color-button-accent: #ffffff; 
+     --color-button-hover: rgba(209,209,214,0.28); 
+     --color-button-muted: 99, 102, 241;  */
   }
-  .theme-swiss {
+  /* .theme-swiss {
     --color-text-base: #ffffff;
     --color-text-muted: #fecaca;
     --color-text-inverted: #dc2626;
@@ -20,15 +21,35 @@
     --color-button-accent: #ffffff;
     --color-button-accent-hover: #fef2f2;
     --color-button-muted: 239, 68, 68;
-  }
-  .theme-neon {
-    --color-text-base: #111802;
-    --color-text-muted: #2f4306;
-    --color-text-inverted: #ebfacc;
-    --color-fill: #b3ff17;
-    --color-button-accent: #243403;
-    --color-button-accent-hover: #374f05;
-    --color-button-muted: 212, 255, 122;
   } */
 }
 
+/* 定义字体 */
+* {
+  @apply antialiased font-sans;
+}
+/* 添加功能类 */
+@layer components {
+  /* 按钮通用样式 */
+  .btn {
+    @apply flex items-center justify-center m-1 p-2 rounded-xl hover:bg-opacity-25 hover:bg-gray-300 active:scale-90 transition-all;
+  }
+}
+/* 滚动条样式 */
+/*定义滚动条高宽及背景
+ 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  /* 隐藏滚动条 w-0 */
+  @apply w-0 h-2;
+}
+
+/*定义滚动条轨道
+  内阴影+圆角*/
+::-webkit-scrollbar-track {
+  @apply rounded-lg bg-gray-100;
+}
+/*定义滑块
+  内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  @apply rounded-lg shadow-md bg-gray-300;
+}

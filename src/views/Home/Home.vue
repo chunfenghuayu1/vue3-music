@@ -1,7 +1,48 @@
 <template>
-    <div>我是Home组件</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
+    <div>HOME</div>
 </template>
 
 <script setup></script>
 
-<style lang="less"></style>
+<style lang="postcss"></style>

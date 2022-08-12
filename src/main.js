@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import './style/main.css'
 import App from './App.vue'
-
+// import 'element-plus/theme-chalk/display.css'
 // 路由管理
 import router from './router'
 // 状态管理

@@ -1,10 +1,11 @@
 <template>
     <NavBar></NavBar>
-    <router-view></router-view>
+    <Main></Main>
 </template>
 
 <script setup>
 import NavBar from './layout/NavBar.vue'
+import Main from '@/layout/Main.vue'
 </script>
 
 <style lang="postcss"></style>

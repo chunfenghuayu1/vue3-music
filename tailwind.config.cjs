@@ -1,37 +1,45 @@
-// function withOpacity(variableName) {
-//     return ({ opacityValue }) => {
-//         if (opacityValue !== undefined) {
-//             return `rgba(var(${variableName}),${opacityValue})`
-//         }
-//         return `rgb(var(${variableName})`
-//     }
-// }
+// 切换颜色包含透明度函数
+function withOpacity(variableName) {
+    return ({ opacityValue }) => {
+        if (opacityValue !== undefined) {
+            return `rgba(var(${variableName}),${opacityValue})`
+        }
+        return `rgb(var(${variableName})`
+    }
+}
 
 module.exports = {
     mode: 'jit',
     content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-    darkMode: 'media', // or 'media' or 'class'
+    darkMode: 'class', // or 'media' or 'class'
     theme: {
         extend: {
-            // textColor: {
-            //     skin: {
-            //         base: 'var(--color-text-base)',
-            //         muted: 'var(--color-text-muted)',
-            //         inverted: 'var(--color-text-inverted)'
-            //     }
-            // },
-            // backgroundColor: {
-            //     skin: {
-            //         fill: 'var(--color-fill)',
-            //         'button-accent': 'var(--color-button-accent)',
-            //         'button-accent-hover': 'var(--color-button-accent-hover)',
-            //         'button-muted': withOpacity('--color-button-muted')
-            //     },
-            //     gradientColorStops: {
-            //         skin: {
-            //             hue: 'var(--color-fill)'
-            //         }
-            //     }
+            textColor: {
+                skin: {
+                    base: withOpacity('--color-text-base'),
+                    primary: withOpacity('--color-text-primary'),
+                    secondary: withOpacity('--color-text-secondary'),
+                    tertiary: withOpacity('--color-text-tertiary')
+                }
+            },
+            backgroundColor: {
+                skin: {
+                    base: withOpacity('--color-text-base'),
+                    primary: withOpacity('--color-text-primary'),
+                    secondary: withOpacity('--color-text-secondary'),
+                    tertiary: withOpacity('--color-text-tertiary')
+                }
+            },
+            borderColor: {
+                skin: {
+                    base: withOpacity('--color-text-base'),
+                    primary: withOpacity('--color-text-primary'),
+                    secondary: withOpacity('--color-text-secondary'),
+                    tertiary: withOpacity('--color-text-tertiary')
+                }
+            }
+            // animation: {
+            //     'spin-3': 'spin 2s linear'
             // }
         },
         variants: {

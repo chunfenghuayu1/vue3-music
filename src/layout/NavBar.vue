@@ -1,20 +1,23 @@
 <template>
-    <nav class="nav filter">
-        <div class="flex flex-1 bg-orange-300 items-center">
-            <SvgIcon icon-name="logo" icon-size="48"></SvgIcon>
-            <SvgIcon icon-name="back" icon-size="24"></SvgIcon>
-            <SvgIcon icon-name="forward" icon-size="24"></SvgIcon>
-        </div>
-        <div class="flex flex-grow justify-center bg-red-300">2</div>
-        <div class="flex flex-1 justify-end bg-blue-300">3</div>
+    <nav class="nav">
+        <!-- 左侧logo、前进与后退 -->
+        <NavBarLeft></NavBarLeft>
+        <!-- 中间导航 -->
+        <NavBarCenter></NavBarCenter>
+        <!-- 右侧功能区域 -->
+        <NavBarRight></NavBarRight>
     </nav>
 </template>
 
-<script setup></script>
+<script setup>
+import NavBarCenter from '../components/NavBar/NavBarCenter.vue'
+import NavBarLeft from '../components/NavBar/NavBarLeft.vue'
+import NavBarRight from '../components/NavBar/NavBarRight.vue'
+</script>
 
 <style lang="postcss">
 .nav {
-    @apply fixed top-0 left-0 h-16 flex w-full min-w-0 bg-slate-100;
+    @apply fixed top-0 left-0 h-16 flex w-full z-50 min-w-max;
     padding-left: 10vw;
     padding-right: 10vw;
     backdrop-filter: saturate(180%) blur(20px);
