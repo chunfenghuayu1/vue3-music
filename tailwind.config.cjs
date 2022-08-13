@@ -37,10 +37,15 @@ module.exports = {
                     secondary: withOpacity('--color-text-secondary'),
                     tertiary: withOpacity('--color-text-tertiary')
                 }
+            },
+            keyframes: {
+                pagination: {
+                    '100%': { width: '20px' }
+                }
+            },
+            animation: {
+                widthChange: 'pagination 0.2s linear forwards'
             }
-            // animation: {
-            //     'spin-3': 'spin 2s linear'
-            // }
         },
         variants: {
             extend: {}

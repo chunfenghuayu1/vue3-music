@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import './style/main.css'
 import App from './App.vue'
+// 配置响应式样式
 // import 'element-plus/theme-chalk/display.css'
 // 路由管理
 import router from './router'

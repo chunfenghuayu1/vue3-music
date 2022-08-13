@@ -54,15 +54,11 @@ export default defineConfig(({ mode }) => {
             host: '127.0.0.1',
             port: 8800,
             open: env.VITE_MODE_NAME === 'development',
-            proxy: () => {
-                if (env.VITE_MODE_NAME === 'development') {
-                    return {
-                        '/dev-api': {
-                            target: 'http://120.48.31.206:2999',
-                            changeOrigin: true,
-                            rewrite: { '^/dev-api': '' }
-                        }
-                    }
+            proxy: {
+                '/dev-api': {
+                    target: 'http://120.48.31.206:2999',
+                    changeOrigin: true,
+                    rewrite: path => path.replace(/^\/dev-api/, '')
                 }
             }
         }

@@ -17,5 +17,8 @@
     .router-link-exact-active {
         @apply text-skin-primary;
     }
+    .btn {
+        @apply rounded-md py-1;
+    }
 }
 </style>
