@@ -8,7 +8,7 @@
 
 <style lang="postcss">
 .content {
-    @apply mt-16;
+    @apply my-16;
     padding-left: 10vw;
     padding-right: 10vw;
 }

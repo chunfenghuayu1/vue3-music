@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import './style/main.css'
+import 'element-plus/es/components/notification/style/css'
 import App from './App.vue'
 // 配置响应式样式
 // import 'element-plus/theme-chalk/display.css'
