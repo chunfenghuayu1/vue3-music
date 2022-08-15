@@ -45,6 +45,13 @@ module.exports = {
             },
             animation: {
                 widthChange: 'pagination 0.2s linear forwards'
+            },
+            padding: {
+                vw: '10vw',
+                '1/20': '5%'
+            },
+            saturate: {
+                180: '1.8'
             }
         },
         variants: {

@@ -34,7 +34,18 @@
   .btn {
     @apply flex items-center justify-center m-1 p-2 rounded-xl hover:bg-opacity-25 hover:bg-gray-300 active:scale-90 transition-all;
   }
+  .lineClamp2 {
+    @apply overflow-hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
 }
+  /* 活跃路由样式 */
+  .router-link-exact-active {
+    @apply text-skin-primary;
+  }
+
 /* 滚动条样式 */
 /*定义滚动条高宽及背景
  高宽分别对应横竖滚动条的尺寸*/
@@ -53,4 +64,3 @@
 ::-webkit-scrollbar-thumb {
   @apply rounded-lg shadow-md bg-gray-300;
 }
-

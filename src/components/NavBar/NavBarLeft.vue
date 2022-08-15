@@ -1,10 +1,10 @@
 <template>
-    <div class="nav-items-left">
+    <div class="flex flex-1 items-center space-x-8">
         <router-link to="/home">
             <SvgIcon icon-name="logo" icon-size="48"></SvgIcon>
         </router-link>
 
-        <div class="nav-btn">
+        <div class="flex space-x-4">
             <button class="btn">
                 <SvgIcon icon-name="back" icon-size="20"></SvgIcon>
             </button>
@@ -17,11 +17,4 @@
 
 <script setup></script>
 
-<style lang="postcss">
-.nav-items-left {
-    @apply flex flex-1 items-center space-x-8;
-    .nav-btn {
-        @apply flex space-x-4;
-    }
-}
-</style>
+<style lang="postcss"></style>

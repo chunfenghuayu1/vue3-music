@@ -1,7 +1,6 @@
 <template>
-    <div class="switchTheme" @click="switch1">
-        <NavBarRightSwitchCheck v-if="switchTheme"></NavBarRightSwitchCheck>
-        <NavBarRightSwitchClose v-else></NavBarRightSwitchClose>
+    <div class="cursor-pointer" @click="switch1">
+        <component :is="switchTheme ? NavBarRightSwitchCheck : NavBarRightSwitchClose"></component>
     </div>
 </template>
 
@@ -17,8 +16,4 @@ const switch1 = () => {
 }
 </script>
 
-<style lang="postcss">
-.switchTheme {
-    @apply cursor-pointer transition-all;
-}
-</style>
+<style lang="postcss"></style>

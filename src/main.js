@@ -11,7 +11,6 @@ import { createPinia } from 'pinia'
 //  api接口
 import * as API from '@/api'
 import SvgIcon from '@/components/SvgIcon/SvgIcon.vue' // svg组件
-
 const app = createApp(App)
 app.config.globalProperties.$http = API
 app.use(router)

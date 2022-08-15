@@ -1,15 +1,9 @@
 <template>
-    <main class="content">
+    <main class="my-16 px-vw">
         <router-view></router-view>
     </main>
 </template>
 
 <script setup></script>
 
-<style lang="postcss">
-.content {
-    @apply my-16;
-    padding-left: 10vw;
-    padding-right: 10vw;
-}
-</style>
+<style lang="postcss"></style>

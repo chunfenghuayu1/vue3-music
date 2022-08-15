@@ -1,24 +1,26 @@
 <template>
-    <div class="nav-items-center">
-        <router-link to="/home" class="btn">首页</router-link>
-        <router-link to="/explore" class="btn">发现</router-link>
-        <router-link to="/my" class="btn">我的</router-link>
+    <div class="flex flex-grow justify-center items-center">
+        <router-link
+            to="/home"
+            class="btn text-skin-base text-lg mx-6 font-bold active:scale-95 rounded-md py-1"
+        >
+            首页
+        </router-link>
+        <router-link
+            to="/explore"
+            class="btn text-skin-base text-lg mx-6 font-bold active:scale-95 rounded-md py-1"
+        >
+            发现
+        </router-link>
+        <router-link
+            to="/my"
+            class="btn text-skin-base text-lg mx-6 font-bold active:scale-95 rounded-md py-1"
+        >
+            我的
+        </router-link>
     </div>
 </template>
 
 <script setup></script>
 
-<style lang="postcss">
-.nav-items-center {
-    @apply flex flex-grow justify-center items-center;
-    a {
-        @apply text-skin-base text-lg mx-6 font-bold active:scale-95;
-    }
-    .router-link-exact-active {
-        @apply text-skin-primary;
-    }
-    .btn {
-        @apply rounded-md py-1;
-    }
-}
-</style>
+<style lang="postcss"></style>
