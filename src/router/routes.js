@@ -5,18 +5,17 @@ const My = () => import('@/views/My/My.vue')
 export default [
     {
         path: '/',
-        redirect: '/home'
-    },
-    {
-        path: '/home',
+        name: 'home',
         component: Home
     },
     {
         path: '/explore',
+        name: 'explore',
         component: Explore
     },
     {
         path: '/my',
+        name: 'my',
         component: My
     }
 ]

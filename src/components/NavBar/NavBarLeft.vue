@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-1 items-center space-x-8">
-        <router-link to="/home">
+        <router-link to="/">
             <SvgIcon icon-name="logo" icon-size="48"></SvgIcon>
         </router-link>
 

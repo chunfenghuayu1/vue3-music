@@ -13,7 +13,7 @@
         :pagination="{ clickable: true, dynamicBullets: false }"
     >
         <swiper-slide v-for="(item, index) in bannerList" :key="index">
-            <img :src="`${item.imageUrl}?param=640y240`" loading="lazy" />
+            <img :src="`${item.imageUrl}?param=640y240`" />
         </swiper-slide>
     </swiper>
 </template>
