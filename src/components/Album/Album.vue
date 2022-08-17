@@ -1,5 +1,5 @@
 <template>
-    <section class="mt-16">
+    <div class="mt-16">
         <div class="flex justify-between items-end mb-5">
             <h3 class="text-3xl font-bold text-skin-base">{{ itemName }}</h3>
             <router-link to="/explore" class="text-skin-secondary font-semibold text-sm">
@@ -14,12 +14,11 @@
                 <Cover :row-list-item="item" :row-type="type"></Cover>
             </div>
         </div>
-    </section>
+    </div>
 </template>
 
 <script setup>
 import Cover from '@/components/Cover/Cover.vue'
-// import { computed, reactive } from 'vue'
 
 defineProps({
     itemList: {
@@ -35,21 +34,6 @@ defineProps({
         required: true
     }
 })
-// const typeList = reactive([
-//     { type: 'recomList', name: '推荐歌单' },
-//     { type: 'rankList', name: '排行榜' },
-//     { type: 'recomArtist', name: '热门歌手' },
-//     { type: 'albumNewest', name: '热门新碟' },
-//     {
-//         type: 'newSong',
-//         name: '上新歌曲'
-//     }
-// ])
-
-// // 处理title问题
-// const itemName = computed(() => {
-//     return typeList.find(item => item.type === props.type).name
-// })
 </script>
 
 <style lang="postcss"></style>

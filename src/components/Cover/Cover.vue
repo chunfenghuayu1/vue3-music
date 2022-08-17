@@ -1,12 +1,12 @@
 <template>
-    <div class="relative cursor-pointer" @mouseenter="show = true" @mouseleave="show = false">
+    <div class="relative" @mouseenter="show = true" @mouseleave="show = false">
         <div
-            class="flex items-center justify-center absolute top-0 min-w-full min-h-full bg-opacity-0"
+            class="flex items-center justify-center absolute top-0 min-w-full min-h-full bg-opacity-0 cursor-pointer"
         >
             <transition name="fade-play">
                 <div
                     v-show="show"
-                    class="flex items-center justify-center backdrop-saturate-180 backdrop-blur-md rounded-full p-1/20 bg-white bg-opacity-20 hover:bg-opacity-30 active:p-7/20 transition-all"
+                    class="flex items-center justify-center backdrop-saturate-180 backdrop-blur-md rounded-full p-1/20 bg-white bg-opacity-20 hover:bg-opacity-30 active:scale-90 transition-all"
                 >
                     <SvgIcon icon-name="play" icon-size="32"></SvgIcon>
                 </div>

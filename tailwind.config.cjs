@@ -41,10 +41,15 @@ module.exports = {
             keyframes: {
                 pagination: {
                     '100%': { width: '20px' }
+                },
+                bgMove: {
+                    '0%': { 'background-position': '0% 0%' },
+                    '100%': { 'background-position': '0% 100%' }
                 }
             },
             animation: {
-                widthChange: 'pagination 0.2s linear forwards'
+                widthChange: 'pagination 0.2s linear forwards',
+                'move-y': 'bgMove 30s linear forwards'
             },
             padding: {
                 vw: '10vw',

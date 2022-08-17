@@ -1,11 +1,6 @@
 <template>
-    <div class="flex flex-1 items-center justify-end min-w-max">
-        <el-avatar fit="cover" class="select-none">User</el-avatar>
-        <button
-            class="flex justify-center items-center font-bold my-4 mx-2 p-2 hover:text-skin-primary transition-colors"
-        >
-            未登录
-        </button>
+    <div class="flex flex-1 items-center justify-end min-w-max space-x-5">
+        <el-avatar fit="cover" class="select-none cursor-pointer">User</el-avatar>
         <SwitchTheme></SwitchTheme>
     </div>
 </template>
