@@ -16,3 +16,9 @@ export const reqRankList = () => request({ url: '/toplist' })
  * 获取热门新专辑
  */
 export const reqAlbumNewest = () => request({ url: '/album/newest' })
+/**
+ * 获取推荐新音乐
+ * @param {number} limit
+ */
+export const reqRecomNewSong = ({ limit }) =>
+    request({ url: `/personalized/newsong?limit=${limit}` })
