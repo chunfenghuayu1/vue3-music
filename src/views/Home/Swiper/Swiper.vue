@@ -3,7 +3,7 @@
         :modules="[Autoplay, Pagination]"
         :slides-per-view="4"
         :speed="1200"
-        :loop="false"
+        :loop="true"
         :space-between="10"
         :autoplay="{
             delay: 3000,
@@ -12,8 +12,12 @@
         }"
         :pagination="{ clickable: true, dynamicBullets: false }"
     >
-        <swiper-slide v-for="(item, index) in bannerList" :key="index">
-            <img :src="`${item.imageUrl}?param=640y240`" />
+        <swiper-slide v-for="(item, index) in bannerList" :key="index" class="cursor-pointer">
+            <img
+                :src="`${item.imageUrl}?param=512y512`"
+                loading="lazy"
+                class="object-fill rounded-lg h-36 w-full hover:shadow-lg transition-shadow"
+            />
         </swiper-slide>
     </swiper>
 </template>
@@ -22,10 +26,6 @@
 // core version + navigation, pagination modules:
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination } from 'swiper'
-/* // import Swiper and modules styles */
-import 'swiper/css/autoplay'
-import 'swiper/css/pagination'
-import 'swiper/css'
 
 defineProps({
     bannerList: {
@@ -39,12 +39,6 @@ defineProps({
 .swiper {
     :deep(.swiper-wrapper) {
         @apply my-8;
-        .swiper-slide {
-            @apply cursor-pointer;
-            img {
-                @apply object-fill rounded-lg h-36 w-full hover:shadow-lg transition-shadow;
-            }
-        }
     }
     :deep(.swiper-pagination) {
         .swiper-pagination-bullet-active {

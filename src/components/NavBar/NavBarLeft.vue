@@ -5,10 +5,10 @@
         </router-link>
 
         <div class="flex space-x-4">
-            <button class="btn">
+            <button class="btn m-1 p-2">
                 <SvgIcon icon-name="back" icon-size="20"></SvgIcon>
             </button>
-            <button class="btn">
+            <button class="btn m-1 p-2">
                 <SvgIcon icon-name="forward" icon-size="20"></SvgIcon>
             </button>
         </div>

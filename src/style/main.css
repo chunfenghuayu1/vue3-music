@@ -32,7 +32,7 @@
 @layer components {
   /* 按钮通用样式 */
   .btn {
-    @apply flex items-center justify-center m-1 p-2 rounded-xl hover:bg-opacity-30 hover:bg-gray-300 active:scale-90 transition-all;
+    @apply flex items-center justify-center rounded-xl hover:bg-opacity-30 hover:bg-gray-300 active:scale-90 transition-all;
   }
   .lineClamp2 {
     @apply overflow-hidden;

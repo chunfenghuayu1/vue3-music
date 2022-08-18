@@ -1,7 +1,7 @@
 <template>
     <!-- 轮播图 -->
     <Swiper :banner-list="bannerList"></Swiper>
-    <!-- 推荐歌曲 -->
+    <!-- 推荐歌单 -->
     <Album :item-list="dataList.albumList" :type="'recomList'" :item-name="'推荐歌单'"></Album>
     <!-- 个性推荐 -->
     <Personalized></Personalized>
@@ -21,7 +21,6 @@
 import Swiper from './Swiper/Swiper.vue'
 import Album from '@/components/Album/Album.vue'
 import { getCurrentInstance, onActivated, reactive, ref } from 'vue'
-import { ElNotification } from 'element-plus'
 import Personalized from './Personalized/Personalized.vue'
 import { sampleSize } from 'lodash'
 const { proxy } = getCurrentInstance()
@@ -60,7 +59,7 @@ const getData = () => {
             dataList.rankList = res.data.list.splice(0, 5)
         })
     } catch (error) {
-        ElNotification({
+        proxy.$notify({
             title: 'Error',
             message: error,
             type: 'error'
