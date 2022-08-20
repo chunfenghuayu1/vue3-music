@@ -2,7 +2,7 @@
     <NavBar></NavBar>
     <main class="pt-16 pb-24 px-vw fixed inset-0 overflow-auto">
         <router-view v-slot="{ Component }">
-            <keep-alive include="Home">
+            <keep-alive include="Home,Explore,My">
                 <component :is="Component"></component>
             </keep-alive>
         </router-view>

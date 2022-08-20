@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-1 items-center justify-end min-w-max space-x-5">
-        <el-avatar fit="cover" class="select-none cursor-pointer">User</el-avatar>
         <SwitchTheme></SwitchTheme>
+        <el-avatar fit="cover" class="select-none cursor-pointer">User</el-avatar>
     </div>
 </template>
 

@@ -43,3 +43,4 @@ export default ({ url, method = 'get', params = {}, data = {}, headers = {} }) =
         headers
     })
 }
+// export default request

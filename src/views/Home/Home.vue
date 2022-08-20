@@ -1,20 +1,35 @@
 <template>
-    <!-- 轮播图 -->
-    <Swiper :banner-list="bannerList"></Swiper>
-    <!-- 推荐歌单 -->
-    <Album :item-list="dataList.albumList" :type="'recomList'" :item-name="'推荐歌单'"></Album>
-    <!-- 个性推荐 -->
-    <Personalized></Personalized>
-    <!-- 热门歌手 -->
-    <Album :item-list="dataList.topArtists" :type="'recomArtist'" :item-name="'热门歌手'"></Album>
-    <!-- 热门新专 -->
-    <Album
-        :item-list="dataList.albumNewestList"
-        :type="'albumNewest'"
-        :item-name="'热门新碟'"
-    ></Album>
-    <!-- 排行榜单 -->
-    <Album :item-list="dataList.rankList" :type="'rankList'" :item-name="'排行榜'"></Album>
+    <div>
+        <!-- 轮播图 -->
+        <Swiper :banner-list="bannerList"></Swiper>
+        <!-- 推荐歌单 -->
+        <Album
+            :item-list="dataList.albumList"
+            :type="'recomList'"
+            :item-name="$t.home.recomAlbumTitle"
+        ></Album>
+        <!-- 个性推荐 -->
+        <Personalized></Personalized>
+
+        <!-- 热门歌手 -->
+        <Album
+            :item-list="dataList.topArtists"
+            :type="'recomArtist'"
+            :item-name="$t.home.recomArtist"
+        ></Album>
+        <!-- 热门新专 -->
+        <Album
+            :item-list="dataList.albumNewestList"
+            :type="'albumNewest'"
+            :item-name="$t.home.albumNewest"
+        ></Album>
+        <!-- 排行榜单 -->
+        <Album
+            :item-list="dataList.rankList"
+            :type="'rankList'"
+            :item-name="$t.home.recomRank"
+        ></Album>
+    </div>
 </template>
 
 <script setup>
@@ -38,6 +53,7 @@ const dataList = reactive({
 // 数据初始化
 const getData = () => {
     try {
+        // console.log(show.value)
         // 轮播图数据获取
         proxy.$http.reqBanner().then(res => {
             bannerList.value = res.data.banners

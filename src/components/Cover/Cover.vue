@@ -1,5 +1,6 @@
 <template>
     <div class="relative" @mouseenter="show = true" @mouseleave="show = false">
+        <!-- 播放按钮 遮罩层 -->
         <div
             class="flex items-center justify-center absolute top-0 min-w-full min-h-full bg-opacity-0 cursor-pointer"
         >
@@ -12,12 +13,16 @@
                 </div>
             </transition>
         </div>
+        <!-- 播放数量 -->
+        <slot name="playCount" :play-count="playCount"></slot>
+        <!-- 图片层 -->
         <img
             :src="picUrl"
             loading="lazy"
             :class="rowType === 'recomArtist' ? 'rounded-full' : 'rounded-lg'"
             class="object-cover w-full h-full"
         />
+        <!-- 图片阴影层 -->
         <transition name="fade">
             <img
                 v-show="show"
@@ -28,30 +33,19 @@
             />
         </transition>
     </div>
+    <!-- 标题 -->
     <div class="lineClamp2 mt-2" :class="rowType === 'recomArtist' ? 'text-center' : ''">
         <router-link to="/" class="cursor-pointer hover:underline font-semibold text-skin-base">
             {{ rowListItem.name }}
         </router-link>
     </div>
-    <!-- 排行榜显示更新频率 -->
-    <template v-if="rowType === 'rankList'">
-        <span class="text-xs text-skin-tertiary lineClamp1 mt-1">
-            {{ rowListItem.updateFrequency }}
-        </span>
-    </template>
-    <!-- 热门新碟显示歌手名 -->
-    <template v-if="rowType === 'albumNewest'">
-        <div v-for="(item, index) in rowListItem.artists" :key="index">
-            <i v-if="index !== 0">/</i>
-            <router-link to="/" class="text-xs text-skin-tertiary cursor-pointer hover:underline">
-                {{ item.name }}
-            </router-link>
-        </div>
-    </template>
+    <!-- 副标题 -->
+    <slot name="subTilte" :row-list-item="rowListItem"></slot>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import { formatPlayCount } from '@/utils/fromat.js'
 const props = defineProps({
     rowListItem: {
         type: Object,
@@ -68,7 +62,12 @@ const show = ref(false)
 // 计算图片地址
 const picUrl = computed(() => {
     let url = props.rowListItem.picUrl || props.rowListItem.coverImgUrl
-    return `${url}?param=512y512`
+    return `${url?.replace('http://', 'https://')}?param=512y512`
+})
+// 计算播放数量
+const playCount = computed(() => {
+    let count = props.rowListItem?.playCount
+    return formatPlayCount(count)
 })
 </script>
 
