@@ -3,7 +3,7 @@
         v-for="(item, index) in activeTags"
         :key="index"
         class="tag transition-all"
-        :class="category === item && !showMore ? 'activeTag' : ''"
+        :class="category === item && !modelValue ? 'activeTag' : ''"
         @click="changeCategory(item)"
     >
         {{ item }}
@@ -13,8 +13,9 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-
-const props = defineProps({
+import { getCurrentInstance } from 'vue'
+const { proxy } = getCurrentInstance()
+defineProps({
     activeTags: {
         type: Array,
         required: true
@@ -23,14 +24,16 @@ const props = defineProps({
         type: String,
         required: true
     },
-    showMore: {
+    modelValue: {
         type: Boolean,
         required: true
     }
 })
+defineEmits(['update:modelValue'])
 const router = useRouter()
 const changeCategory = item => {
-    !props.showMore && router.push({ path: '/explore', query: { cat: item } })
+    router.push({ path: '/explore', query: { cat: item } })
+    proxy.$emit('update:modelValue', false)
 }
 </script>
 

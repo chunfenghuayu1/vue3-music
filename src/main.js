@@ -22,6 +22,7 @@ const app = createApp(App)
 app.config.globalProperties.$http = API
 app.config.globalProperties.$notify = ElNotification
 app.config.globalProperties.$t = i18n
+app.config.performance = true
 
 app.use(router)
 app.component('SvgIcon', SvgIcon)

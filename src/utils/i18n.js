@@ -5,7 +5,7 @@ export default {
         my: '我的'
     },
     home: {
-        more: '查看全部',
+        more: '查看更多',
         recomAlbumTitle: '推荐歌单',
         personlized: '个性推荐',
         personlizedSong: '上新音乐',

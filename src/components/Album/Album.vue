@@ -15,7 +15,8 @@
                         #playCount="{ playCount }"
                     >
                         <div
-                            class="absolute left-0 bottom-2 flex justify-center items-center rounded-tr-lg rounded-bl-lg pl-1.5 pr-3 py-0.5"
+                            :class="type === 'explore' ? 'right-0 top-2' : 'left-0 bottom-2'"
+                            class="absolute flex justify-center items-center rounded-tr-lg rounded-bl-lg pl-1.5 pr-3 py-0.5"
                         >
                             <SvgIcon icon-name="play" icon-size="18" class="opacity-90"></SvgIcon>
                             <span

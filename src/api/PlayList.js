@@ -5,8 +5,16 @@ import request from '@/utils/request'
  * 可选参数 : limit: 取出数量 , 默认为 30 (不支持 offset)
  * @param { number } limit
  */
-
 export const reqAlbumListList = ({ limit }) => request({ url: `/personalized?limit=${limit}` })
+
+/**
+ * 获取精品歌单
+ * cat: tag, 比如 " 华语 "、" 古风 " 、" 欧美 "、" 流行 ", 默认为 "全部",可从精品歌单标签列表接口获取(/playlist/highquality/tags)
+ * limit: 取出歌单数量 , 默认为 50
+ * before: 分页参数,取上一页最后一个歌单的 updateTime 获取下一页数据
+ */
+export const reqHighqualityPlaylist = ({ limit, cat }) =>
+    request({ url: '/top/playlist/highquality', params: { limit, cat } })
 
 /**
  * 获取排行榜单数据

@@ -3,6 +3,7 @@
         <h3 class="text-3xl font-bold text-skin-base mb-5">{{ $t.home.personlizedSong }}</h3>
         <div
             class="h-52 rounded-lg shadow-lg bg-no-repeat bg-cover bg-center w-full"
+            :class="anime ? 'bg-opacity-60' : ''"
             :style="{ backgroundImage: `url(${itemObj.picUrl})` }"
         >
             <div
@@ -12,6 +13,7 @@
                 <div class="flex-shrink-0">
                     <img
                         class="h-44 object-fill rounded-lg shadow-lg transition-all duration-700 hover:scale-105"
+                        :class="anime ? 'scale-95' : ''"
                         :src="itemObj.picUrl"
                     />
                 </div>
@@ -59,7 +61,7 @@
 
 <script setup>
 import { throttle } from 'lodash'
-import { getCurrentInstance, ref, onActivated, computed } from 'vue'
+import { getCurrentInstance, ref, onActivated, computed, watch } from 'vue'
 const { proxy } = getCurrentInstance()
 
 // 保存信息
@@ -86,6 +88,17 @@ const itemObj = computed(() => {
     }
     return obj
 })
+// 监听图片变化，开始切换动画
+const anime = ref(false)
+watch(
+    () => itemObj.value.picUrl,
+    () => {
+        anime.value = true
+        setTimeout(() => {
+            anime.value = false
+        }, 300)
+    }
+)
 // 处理索引值点击事件
 const changePic = throttle(() => {
     currentIndex.value++

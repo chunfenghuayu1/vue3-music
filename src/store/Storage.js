@@ -23,6 +23,16 @@ export const useStorageStore = defineStore('storageStore', {
             } else {
                 this.data.activeTags = getLocal('data').activeTags
             }
+        },
+        // 存储标签选择
+        storeTags(item) {
+            const flag = this.data.activeTags.indexOf(item.name)
+            if (flag !== -1) {
+                this.data.activeTags.splice(flag, 1)
+            } else {
+                this.data.activeTags.push(item.name)
+            }
+            setLocal('data', this.data)
         }
     }
 })
