@@ -13,7 +13,7 @@
                 </div>
             </transition>
         </div>
-        <!-- 播放数量 -->
+        <!-- 播放数量插槽 -->
         <slot name="playCount" :play-count="playCount"></slot>
         <!-- 图片层 -->
         <img

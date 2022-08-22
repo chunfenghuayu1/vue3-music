@@ -24,7 +24,6 @@
 
 <script setup>
 import { sample } from 'lodash'
-import { computed } from 'vue'
 
 // 每日推荐背景图（需要登录）
 

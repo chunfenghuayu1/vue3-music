@@ -4,14 +4,11 @@
             <!-- 每日推荐 -->
             <PersonalizedDaily></PersonalizedDaily>
             <!-- 上新音乐 -->
-            <PersonalizedNewSong></PersonalizedNewSong>
+            <PersonalizeNewSong></PersonalizeNewSong>
         </div>
     </div>
 </template>
 
-<script setup>
-import PersonalizedDaily from './PersonalizedDaily.vue'
-import PersonalizedNewSong from '@/views/Home/Personalized/PersonalizeNewSong.vue'
-</script>
+<script setup></script>
 
 <style lang="postcss"></style>

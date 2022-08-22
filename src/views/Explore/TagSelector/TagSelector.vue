@@ -27,7 +27,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import localData from '@/utils/localData.js'
 import { useStorageStore } from '@/store/Storage.js'
 const storageStore = useStorageStore()
@@ -55,13 +54,13 @@ const getTags = index => {
 <style lang="postcss">
 .scaleY-enter-active,
 .scaleY-leave-active {
-    transform: scaleY(1);
-    transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+    transform: rotateX(0deg);
+    transition: all 0.3s ease-in-out;
 }
 
 .scaleY-enter-from,
 .scaleY-leave-to {
-    transform: scaleY(0);
+    transform: rotateX(90deg);
     opacity: 0.3;
 }
 </style>

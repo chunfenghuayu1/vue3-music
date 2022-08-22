@@ -90,8 +90,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import SvgIcon from '../../components/SvgIcon/SvgIcon.vue'
 const str = ref('你成长的经过\n你说你也在美国留学\n住在洛杉矶')
 </script>
 

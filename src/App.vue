@@ -1,6 +1,6 @@
 <template>
     <NavBar></NavBar>
-    <main class="pt-16 pb-24 px-vw fixed inset-0 overflow-auto">
+    <main class="pt-16 pb-24 px-vw lg:px-10 fixed inset-0 overflow-auto">
         <router-view v-slot="{ Component }">
             <keep-alive include="Home,Explore,My">
                 <component :is="Component"></component>
@@ -9,8 +9,6 @@
     </main>
 </template>
 
-<script setup>
-import NavBar from './layout/NavBar.vue'
-</script>
+<script setup></script>
 
 <style lang="postcss"></style>

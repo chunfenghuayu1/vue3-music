@@ -3,7 +3,7 @@
     <!-- 标签栏 -->
     <div class="flex flex-wrap mb-2">
         <ExploreTag
-            v-model="showMore"
+            v-model:showMore="showMore"
             :active-tags="storageStore.data.activeTags"
             :category="category"
         >
@@ -16,14 +16,27 @@
     </div>
     <TagSelector :show-more="showMore" :active-tags="storageStore.data.activeTags"></TagSelector>
     <!-- 渲染歌单列表 -->
-    <Album :item-list="playList" :type="'explore'" :item-name="'explore'"></Album>
+    <div class="mt-16 grid gap-10 grid-cols-6 lg:gap-x-5">
+        <div v-for="(item, index) in playList" :key="index">
+            <Cover :row-list-item="item">
+                <template #playCount="{ playCount }">
+                    <div
+                        class="absolute right-0 top-2 flex justify-center items-center pr-3 pt-0.5"
+                    >
+                        <SvgIcon icon-name="play" icon-size="18" class="opacity-90"></SvgIcon>
+                        <span
+                            class="italic text-white text-sm lg:text-xs flex-shrink-0 font-semibold text-opacity-90"
+                            >{{ playCount }}</span
+                        >
+                    </div>
+                </template>
+            </Cover>
+        </div>
+    </div>
 </template>
 
 <script setup>
-import { computed, onActivated, getCurrentInstance, ref } from 'vue'
-import { onBeforeRouteUpdate, useRoute } from 'vue-router'
-import ExploreTag from './ExploreTag/ExploreTag.vue'
-import TagSelector from './TagSelector/TagSelector.vue'
+import { onBeforeRouteUpdate } from 'vue-router'
 import { useStorageStore } from '@/store/Storage.js'
 const storageStore = useStorageStore()
 const { proxy } = getCurrentInstance()

@@ -3,40 +3,19 @@
         <!-- 轮播图 -->
         <Swiper :banner-list="bannerList"></Swiper>
         <!-- 推荐歌单 -->
-        <Album
-            :item-list="dataList.albumList"
-            :type="'recomList'"
-            :item-name="$t.home.recomAlbumTitle"
-        ></Album>
+        <HomeRecomAlbum :item-list="dataList.albumList"></HomeRecomAlbum>
         <!-- 个性推荐 -->
         <Personalized></Personalized>
-
         <!-- 热门歌手 -->
-        <Album
-            :item-list="dataList.topArtists"
-            :type="'recomArtist'"
-            :item-name="$t.home.recomArtist"
-        ></Album>
-        <!-- 热门新专 -->
-        <Album
-            :item-list="dataList.albumNewestList"
-            :type="'albumNewest'"
-            :item-name="$t.home.albumNewest"
-        ></Album>
+        <HomeRecomArtist :item-list="dataList.topArtists"></HomeRecomArtist>
+        <!-- 最新专辑 -->
+        <HomeAlbumNewest :item-list="dataList.albumNewestList"></HomeAlbumNewest>
         <!-- 排行榜单 -->
-        <Album
-            :item-list="dataList.rankList"
-            :type="'rankList'"
-            :item-name="$t.home.recomRank"
-        ></Album>
+        <HomeRankList :item-list="dataList.rankList"></HomeRankList>
     </div>
 </template>
 
 <script setup>
-import Swiper from './Swiper/Swiper.vue'
-import Album from '@/components/Album/Album.vue'
-import { getCurrentInstance, onActivated, reactive, ref } from 'vue'
-import Personalized from './Personalized/Personalized.vue'
 import { sampleSize } from 'lodash'
 const { proxy } = getCurrentInstance()
 
@@ -66,7 +45,7 @@ const getData = () => {
         proxy.$http.reqTopArtists({ limit: 20 }).then(res => {
             dataList.topArtists = sampleSize(res.data.artists, 6)
         })
-        // 热门新碟数据
+        // 最新专辑数据
         proxy.$http.reqAlbumNewest().then(res => {
             dataList.albumNewestList = res.data.albums.splice(0, 5)
         })

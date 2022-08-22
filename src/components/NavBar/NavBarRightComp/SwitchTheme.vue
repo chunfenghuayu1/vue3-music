@@ -8,8 +8,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
 // 控制主题切换
 const switchTheme = ref(true)
 const switch1 = () => {

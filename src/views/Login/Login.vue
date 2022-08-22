@@ -18,9 +18,7 @@
 </template>
 
 <script setup>
-import { getCurrentInstance, onMounted, ref } from 'vue'
 import QRCode from 'qrcode'
-
 const { proxy } = getCurrentInstance()
 const qrcode = ref('')
 // 获取二维码

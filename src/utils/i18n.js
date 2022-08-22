@@ -10,7 +10,7 @@ export default {
         personlized: '个性推荐',
         personlizedSong: '上新音乐',
         recomArtist: '热门歌手',
-        albumNewest: '热门新碟',
+        albumNewest: '最新专辑',
         recomRank: '排行榜'
     },
     explore: {

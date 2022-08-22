@@ -7,8 +7,6 @@
     </div>
 </template>
 
-<script setup>
-import SwitchTheme from '@/components/NavBarRightComp/SwitchTheme.vue'
-</script>
+<script setup></script>
 
 <style lang="postcss"></style>

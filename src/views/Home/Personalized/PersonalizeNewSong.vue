@@ -61,7 +61,6 @@
 
 <script setup>
 import { throttle } from 'lodash'
-import { getCurrentInstance, ref, onActivated, computed, watch } from 'vue'
 const { proxy } = getCurrentInstance()
 
 // 保存信息

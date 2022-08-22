@@ -9,10 +9,11 @@ module.exports = {
         'plugin:vue/vue3-recommended', // 使用插件支持vue3
         // 如果你没有安装第7步,以下两个包不要引入,否则报错
         'plugin:prettier/recommended',
-        'eslint-config-prettier'
+        'eslint-config-prettier',
+        './.eslintrc-auto-import.json'
     ],
     parserOptions: {
-        ecmaVersion: 6,
+        ecmaVersion: 2020,
         sourceType: 'module',
         ecmaFeatures: {
             modules: true,
