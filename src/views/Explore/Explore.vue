@@ -1,5 +1,5 @@
 <template>
-    <h3 class="font-bold text-6xl my-9">{{ $t.explore.title }}</h3>
+    <h3 class="font-bold text-6xl my-8">{{ $t.explore.title }}</h3>
     <!-- 标签栏 -->
     <div class="flex flex-wrap mb-2">
         <ExploreTag

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="text-3xl font-bold text-skin-base mb-5">{{ $t.home.personlized }}</h3>
+        <h3 class="text-3xl font-bold mb-5">{{ $t.home.personlized }}</h3>
         <div
             class="h-52 rounded-lg bg-no-repeat bg-top animate-move-y flex items-center justify-between min-w-max cursor-pointer shadow-lg"
             :style="{ backgroundImage: `url(${picUrl})`, backgroundSize: '100%' }"

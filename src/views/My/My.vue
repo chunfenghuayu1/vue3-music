@@ -14,18 +14,18 @@
         <div class="flex space-x-8 lg:space-x-0 lg:flex-wrap lg:h-full lg:flex-col lg:space-y-8">
             <!-- 左侧横幅 -->
             <div
-                class="h-52 flex justify-between flex-col flex-shrink-0 bg-purple-100 w-1/3 rounded-lg p-4 lg:w-full"
+                class="h-52 flex justify-between flex-col flex-shrink-0 bg-skin-primary bg-opacity-20 w-1/3 rounded-lg p-4 lg:w-full"
             >
                 <!-- 描述内容 -->
-                <div class="text-purple-400 flex-shrink-0" v-text="str"></div>
+                <div class="text-skin-primary flex-shrink-0" v-text="str"></div>
                 <!-- 喜欢的音乐 -->
                 <div class="flex justify-between">
                     <div class="flex-grow flex-shrink-0">
-                        <div class="text-2xl font-bold text-purple-400">我喜欢的音乐</div>
-                        <div class="text-purple-400 text-sm">共130首歌</div>
+                        <div class="text-2xl font-bold text-skin-primary">我喜欢的音乐</div>
+                        <div class="text-skin-primary text-sm">共130首歌</div>
                     </div>
                     <!-- 播放按钮 -->
-                    <div class="p-1 rounded-full flex items-center justify-center bg-purple-400">
+                    <div class="p-1 rounded-full flex items-center justify-center bg-skin-primary">
                         <SvgIcon icon-name="play" icon-size="44"></SvgIcon>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         <!-- 歌名 -->
                         <div class="font-bold lineClamp1">热汤-《假日暖洋洋2》</div>
                         <!-- 歌手 -->
-                        <div class="text-xs lineClamp1 text-gray-500">周杰伦</div>
+                        <div class="text-xs lineClamp1 text-skin-tertiary">周杰伦</div>
                     </div>
                 </div>
             </div>
@@ -59,8 +59,8 @@
         <!-- 歌单标题 -->
         <div class="flex justify-between items-center h-9 mt-12">
             <!-- 左侧选择区域 -->
-            <div class="flex space-x-8 font-bold items-center text-gray-500 flex-shrink-0">
-                <div class="p-2 bg-gray-100 rounded-lg text-skin-base">创建的歌单</div>
+            <div class="flex space-x-8 font-bold items-center text-skin-tertiary flex-shrink-0">
+                <div class="p-2 bg-gray-100 rounded-lg">创建的歌单</div>
                 <div>专辑</div>
                 <div>艺人</div>
                 <div>MV</div>
@@ -68,7 +68,7 @@
                 <div>听歌排行</div>
             </div>
             <!-- 右侧 新建歌单-->
-            <div class="text-sm text-gray-500 flex-shrink-0">+&nbsp;&nbsp;新建歌单</div>
+            <div class="text-sm text-skin-tertiary flex-shrink-0">+&nbsp;&nbsp;新建歌单</div>
         </div>
         <!-- 歌单内容 -->
         <div class="grid grid-cols-5 gap-6">

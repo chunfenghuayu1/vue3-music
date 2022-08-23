@@ -1,7 +1,7 @@
 <template>
     <div class="mt-16">
         <div class="flex justify-between items-end mb-5">
-            <h3 class="text-3xl font-bold text-skin-base">{{ $t.home.recomAlbumTitle }}</h3>
+            <h3 class="text-3xl font-bold">{{ $t.home.recomAlbumTitle }}</h3>
             <router-link
                 :to="{ path: '/explore', query: { cat: '推荐歌单' } }"
                 class="text-skin-secondary font-semibold text-sm"

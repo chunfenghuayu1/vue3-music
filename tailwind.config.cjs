@@ -35,7 +35,9 @@ module.exports = {
                     base: withOpacity('--color-text-base'),
                     primary: withOpacity('--color-text-primary'),
                     secondary: withOpacity('--color-text-secondary'),
-                    tertiary: withOpacity('--color-text-tertiary')
+                    tertiary: withOpacity('--color-text-tertiary'),
+                    base1: withOpacity('--color-text-base1'),
+                    base2: withOpacity('--color-text-base2')
                 }
             },
             backgroundColor: {
@@ -43,7 +45,9 @@ module.exports = {
                     base: withOpacity('--color-text-base'),
                     primary: withOpacity('--color-text-primary'),
                     secondary: withOpacity('--color-text-secondary'),
-                    tertiary: withOpacity('--color-text-tertiary')
+                    tertiary: withOpacity('--color-text-tertiary'),
+                    base1: withOpacity('--color-text-base1'),
+                    base2: withOpacity('--color-text-base2')
                 }
             },
             borderColor: {

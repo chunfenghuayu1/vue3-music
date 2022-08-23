@@ -1,7 +1,7 @@
 <template>
     <div class="mt-16">
         <div class="flex justify-between items-end mb-5">
-            <h3 class="text-3xl font-bold text-skin-base">{{ $t.home.recomArtist }}</h3>
+            <h3 class="text-3xl font-bold">{{ $t.home.recomArtist }}</h3>
             <router-link to="/explore" class="text-skin-secondary font-semibold text-sm">
                 {{ $t.home.more }}
             </router-link>

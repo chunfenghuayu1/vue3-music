@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="text-3xl font-bold text-skin-base mb-5">{{ $t.home.personlizedSong }}</h3>
+        <h3 class="text-3xl font-bold mb-5">{{ $t.home.personlizedSong }}</h3>
         <div
             class="h-52 rounded-lg shadow-lg bg-no-repeat bg-cover bg-center w-full"
             :class="anime ? 'bg-opacity-60' : ''"
@@ -80,7 +80,7 @@ const itemObj = computed(() => {
         obj.picUrl = `${newSongList.value[index].picUrl?.replace(
             'http://',
             'https://'
-        )}?param=512y512`
+        )}?param=176y176`
         obj.artistList = newSongList.value[index].song.artists
         obj.title = newSongList.value[index].name
         obj.length = newSongList.value.length
@@ -121,10 +121,7 @@ const initData = () => {
         })
     }
 }
-
-onActivated(() => {
-    initData()
-})
+initData()
 </script>
 
 <style lang="postcss" scoped></style>

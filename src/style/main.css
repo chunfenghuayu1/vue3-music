@@ -8,6 +8,8 @@
     --color-text-primary: 99, 187, 208;
     --color-text-secondary: 48, 49, 51;
     --color-text-tertiary: 144, 147, 153;
+    --color-text-base1: 79, 206, 208;
+    --color-text-base2: 106, 143, 200;
     /* --color-fill: #4338ca; 
      --color-button-accent: #ffffff; 
      --color-button-hover: rgba(209,209,214,0.28); 
@@ -33,6 +35,12 @@
   /* 按钮通用样式 */
   .btn {
     @apply flex items-center justify-center rounded-xl hover:bg-opacity-30 hover:bg-gray-300 active:scale-90 transition-all;
+  }
+  .lineClamp3 {
+    @apply overflow-hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
   }
   .lineClamp2 {
     @apply overflow-hidden;

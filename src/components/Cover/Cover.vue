@@ -17,7 +17,7 @@
         <slot name="playCount" :play-count="playCount"></slot>
         <!-- 图片层 -->
         <img
-            :src="picUrl"
+            v-lazy="picUrl"
             loading="lazy"
             :class="rowType === 'recomArtist' ? 'rounded-full' : 'rounded-lg'"
             class="object-cover w-full h-full"
@@ -26,16 +26,16 @@
         <transition name="fade">
             <img
                 v-show="show"
+                :src="picUrl"
                 class="w-full h-full absolute top-3 -z-10 bg-cover blur-md opacity-60 scale-95"
                 :class="rowType === 'recomArtist' ? 'rounded-full' : 'rounded-lg'"
-                :src="picUrl"
                 loading="lazy"
             />
         </transition>
     </div>
     <!-- 标题 -->
     <div class="lineClamp2 mt-2" :class="rowType === 'recomArtist' ? 'text-center' : ''">
-        <router-link to="/" class="cursor-pointer hover:underline font-semibold text-skin-base">
+        <router-link to="/" class="cursor-pointer hover:underline font-semibold">
             {{ rowListItem.name }}
         </router-link>
     </div>

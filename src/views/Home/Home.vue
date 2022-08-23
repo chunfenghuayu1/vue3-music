@@ -18,7 +18,7 @@
 <script setup>
 import { sampleSize } from 'lodash'
 const { proxy } = getCurrentInstance()
-
+const isShow = ref(false)
 // 轮播图数据获取
 const bannerList = ref([])
 // 其他数据
@@ -40,6 +40,8 @@ const getData = () => {
         // 推荐歌单数据获取
         proxy.$http.reqAlbumListList({ limit: 10 }).then(res => {
             dataList.albumList = res.data.result
+            // 展示页面
+            isShow.value = true
         })
         // 热门歌手数据
         proxy.$http.reqTopArtists({ limit: 20 }).then(res => {
@@ -47,7 +49,7 @@ const getData = () => {
         })
         // 最新专辑数据
         proxy.$http.reqAlbumNewest().then(res => {
-            dataList.albumNewestList = res.data.albums.splice(0, 5)
+            dataList.albumNewestList = res.data.albums
         })
         // 排行榜单数据获取
         proxy.$http.reqRankList().then(res => {
@@ -64,6 +66,7 @@ const getData = () => {
 onActivated(() => {
     getData()
 })
+// getData()
 </script>
 
 <style lang="postcss">

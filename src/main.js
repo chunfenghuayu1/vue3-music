@@ -4,7 +4,8 @@ import App from './App.vue'
 import './style/main.css'
 import '@/externals.js'
 import { ElNotification } from 'element-plus'
-
+import VueLazyload from 'vue-lazyload'
+import lazyImg from '/loading.gif'
 // 配置响应式样式
 // import 'element-plus/theme-chalk/display.css'
 // 路由管理
@@ -23,6 +24,13 @@ app.config.globalProperties.$http = API
 app.config.globalProperties.$notify = ElNotification
 app.config.globalProperties.$t = i18n
 app.config.performance = true
+
+app.use(VueLazyload, {
+    preLoad: 1, //预加载的宽高比
+    loading: lazyImg, //图片加载状态下显示的图片
+    // error: errorimage, //图片加载失败时显示的图片
+    attempt: 1 // 加载错误后最大尝试次数
+})
 
 app.use(router)
 app.component('SvgIcon', SvgIcon)

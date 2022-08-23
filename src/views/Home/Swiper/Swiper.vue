@@ -5,6 +5,9 @@
             :slides-per-view="4"
             :speed="1200"
             :space-between="10"
+            :observer="true"
+            :observe-parents="true"
+            :observe-slide-children="true"
             :autoplay="{
                 delay: 3000,
                 stopOnLastSlide: false,
@@ -18,7 +21,7 @@
                 class="cursor-pointer relative"
             >
                 <img
-                    :src="`${item.imageUrl?.replace('http://', 'https://')}?param=512y512`"
+                    :src="`${item.imageUrl?.replace('http://', 'https://')}?param=377y144`"
                     loading="lazy"
                     class="object-fill rounded-lg h-36 w-full hover:shadow-lg transition-shadow"
                 />
@@ -36,7 +39,6 @@
 // core version + navigation, pagination modules:
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination } from 'swiper'
-
 defineProps({
     bannerList: {
         type: Array,
