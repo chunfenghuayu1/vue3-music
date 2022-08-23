@@ -1,36 +1,45 @@
 <template>
-    <h3 class="font-bold text-6xl my-8">{{ $t.explore.title }}</h3>
-    <!-- 标签栏 -->
-    <div class="flex flex-wrap mb-2">
-        <ExploreTag
-            v-model:showMore="showMore"
-            :active-tags="storageStore.data.activeTags"
-            :category="category"
-        >
-            <template #more>
-                <div class="tag" :class="showMore ? 'activeTag' : ''" @click="showMore = !showMore">
-                    &bull;&bull;&bull;
-                </div>
-            </template>
-        </ExploreTag>
-    </div>
-    <TagSelector :show-more="showMore" :active-tags="storageStore.data.activeTags"></TagSelector>
-    <!-- 渲染歌单列表 -->
-    <div class="mt-16 grid gap-10 grid-cols-6 lg:gap-x-5">
-        <div v-for="(item, index) in playList" :key="index">
-            <Cover :row-list-item="item">
-                <template #playCount="{ playCount }">
+    <div>
+        <h3 class="font-bold text-6xl my-8">{{ $t.explore.title }}</h3>
+        <!-- 标签栏 -->
+        <div class="flex flex-wrap mb-2">
+            <ExploreTag
+                v-model:showMore="showMore"
+                :active-tags="storageStore.data.activeTags"
+                :category="category"
+            >
+                <template #more>
                     <div
-                        class="absolute right-0 top-2 flex justify-center items-center pr-3 pt-0.5"
+                        class="tag"
+                        :class="showMore ? 'activeTag' : ''"
+                        @click="showMore = !showMore"
                     >
-                        <SvgIcon icon-name="play" icon-size="18" class="opacity-90"></SvgIcon>
-                        <span
-                            class="italic text-white text-sm lg:text-xs flex-shrink-0 font-semibold text-opacity-90"
-                            >{{ playCount }}</span
-                        >
+                        &bull;&bull;&bull;
                     </div>
                 </template>
-            </Cover>
+            </ExploreTag>
+        </div>
+        <TagSelector
+            :show-more="showMore"
+            :active-tags="storageStore.data.activeTags"
+        ></TagSelector>
+        <!-- 渲染歌单列表 -->
+        <div class="mt-16 grid gap-10 grid-cols-6 lg:gap-x-5">
+            <div v-for="(item, index) in playList" :key="index">
+                <Cover :row-list-item="item">
+                    <template #playCount="{ playCount }">
+                        <div
+                            class="absolute right-0 top-2 flex justify-center items-center pr-3 pt-0.5"
+                        >
+                            <SvgIcon icon-name="play" icon-size="18" class="opacity-90"></SvgIcon>
+                            <span
+                                class="italic text-white text-sm lg:text-xs flex-shrink-0 font-semibold text-opacity-90"
+                                >{{ playCount }}</span
+                            >
+                        </div>
+                    </template>
+                </Cover>
+            </div>
         </div>
     </div>
 </template>
