@@ -2,13 +2,9 @@
     <div>
         <h3 class="text-3xl font-bold mb-5">{{ $t.home.personlizedSong }}</h3>
         <div
-            class="h-52 rounded-lg shadow-lg bg-no-repeat bg-cover bg-center w-full"
-            :class="anime ? 'bg-opacity-60' : ''"
-            :style="{ backgroundImage: `url(${itemObj.picUrl})` }"
+            class="h-52 rounded-lg shadow-lg w-full bg-gradient-to-r from-pink-300 via-indigo-300 to-purple-400"
         >
-            <div
-                class="backdrop-saturate-180 backdrop-blur-xl w-full h-full flex space-x-6 p-4 rounded-lg"
-            >
+            <div class="w-full h-full flex space-x-6 p-4 rounded-lg">
                 <!-- 歌曲图片 -->
                 <div class="flex-shrink-0">
                     <img
@@ -41,11 +37,14 @@
                     </div>
                     <!-- 按钮操作 -->
                     <div class="flex space-x-4">
-                        <button class="btn m-1 p-1 cursor-pointer">
-                            <SvgIcon icon-name="play" icon-size="32"></SvgIcon>
+                        <button class="active:scale-90 transition-all m-1 p-1 cursor-pointer">
+                            <SvgIcon name="play" size="32"></SvgIcon>
                         </button>
-                        <button class="btn m-1 p-1 cursor-pointer" @click="changePic">
-                            <SvgIcon icon-name="goEnd" icon-size="32"></SvgIcon>
+                        <button
+                            class="active:scale-90 transition-all m-1 p-1 cursor-pointer"
+                            @click="changePic"
+                        >
+                            <SvgIcon name="goEnd" size="32"></SvgIcon>
                         </button>
                         <div class="flex flex-grow justify-end items-end m-1 p-1">
                             <p class="text-white text-opacity-80 font-bold text-sm">

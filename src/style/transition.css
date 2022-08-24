@@ -1,0 +1,54 @@
+/* explore  */
+/* tagSelector */
+.tagSelector-enter-active,
+.tagSelector-leave-active {
+    transform: rotateX(0deg);
+    @apply transition-all duration-300 ease-in-out;
+}
+
+.tagSelector-enter-from,
+.tagSelector-leave-to {
+    transform: rotateX(90deg);
+    @apply opacity-30;
+}
+/* tag展示列表过渡 */
+.tagList-move,
+.tagList-enter-active,
+.tagList-leave-active {
+    @apply transition-all duration-300 ease-in-out;
+}
+.tagList-enter-from {
+    @apply opacity-0;
+}
+.tagList-leave-to {
+    @apply opacity-0;
+}
+.tagList-leave-active {
+    @apply absolute;
+}
+
+/* 路由过渡 */
+.fade-route-enter-active {
+    @apply transition-all duration-300 ease-linear;
+}
+.fade-route-leave-active {
+    @apply transition-all duration-200 ease-in;
+}
+.fade-route-enter-from,
+.fade-route-leave-to {
+    @apply opacity-0;
+}
+
+/* 主题切换过渡 */
+.theme-slide-enter-active,
+.theme-slide-leave-active {
+    @apply transition-all duration-300 ease-out;
+}
+
+.theme-slide-enter-from {
+    @apply opacity-0 transform -translate-y-8;
+}
+
+.theme-slide-leave-to {
+    @apply opacity-0 transform translate-y-5;
+}

@@ -1,5 +1,5 @@
 <template>
-    <transition name="scaleY">
+    <transition name="tagSelector">
         <div
             v-if="showMore"
             class="space-y-8 p-8 bg-gray-300 bg-opacity-30 rounded-lg text-gray-800 text-opacity-80 origin-top"
@@ -51,16 +51,4 @@ const getTags = index => {
 }
 </script>
 
-<style lang="postcss">
-.scaleY-enter-active,
-.scaleY-leave-active {
-    transform: rotateX(0deg);
-    transition: all 0.3s ease-in-out;
-}
-
-.scaleY-enter-from,
-.scaleY-leave-to {
-    transform: rotateX(90deg);
-    opacity: 0.3;
-}
-</style>
+<style lang="postcss"></style>

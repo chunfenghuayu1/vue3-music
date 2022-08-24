@@ -5,7 +5,7 @@ import request from '@/utils/request'
  * 说明: 调用此接口可生成一个 key
  */
 export const reqLoginKey = ({ timestamp }) =>
-    request({ url: `/login/qr/key?timestamp=${timestamp}` })
+    request({ url: `/login/qr/key`, params: { timestamp } })
 
 /**
  * 二维码生成接口
@@ -13,14 +13,15 @@ export const reqLoginKey = ({ timestamp }) =>
  * 必选参数: key,由第一个接口生成
  * 可选参数: qrimg 传入后会额外返回二维码图片 base64 编码
  */
-export const reqLoginQRCode = ({ key }) => request({ url: `/login/qr/create?key=${key}` })
+export const reqLoginQRCode = ({ key }) => request({ url: `/login/qr/create`, params: { key } })
 
 /**
  * 二维码检测扫码状态接口
  * 说明: 轮询此接口可获取二维码扫码状态,800 为二维码过期,801 为等待扫码,802 为待确认,803 为授权登录成功(803 状态码下会返回 cookies)必选参数: key,由第一个接口生成
  *
  */
-export const reqLoginCheck = ({ key }) => request({ url: `/login/qr/check?key=${key}` })
+export const reqLoginCheck = ({ key, timestamp }) =>
+    request({ url: `/login/qr/check`, params: { key, timestamp } })
 
 /**
  * 发送验证码
@@ -39,3 +40,18 @@ export const reqCaptcha = ({ phone }) => request({ url: `/captcha/sent?phone=${p
  */
 export const reqCaptchaVerify = ({ phone, captcha }) =>
     request({ url: `/captcha/verify?phone=${phone}&captcha=${captcha}` })
+
+/**
+ *获取账号信息
+ */
+export const reqAccount = () => request({ url: '/user/account' })
+
+/**
+ * 获取用户信息 , 歌单，收藏，mv, dj 数量
+ */
+export const reqSubcount = () => request({ url: '/user/subcount' })
+
+/**
+ * 退出登录
+ */
+export const reqLogout = () => request({ url: '/logout' })

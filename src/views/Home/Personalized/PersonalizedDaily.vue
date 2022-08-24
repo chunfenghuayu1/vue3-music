@@ -15,7 +15,7 @@
                 <div
                     class="backdrop-saturate-180 backdrop-blur-md rounded-full p-2 bg-white bg-opacity-20 hover:bg-opacity-30 transition-all active:scale-90"
                 >
-                    <SvgIcon icon-name="play" icon-size="40"></SvgIcon>
+                    <SvgIcon name="play" size="40"></SvgIcon>
                 </div>
             </div>
         </div>

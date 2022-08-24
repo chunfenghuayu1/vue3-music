@@ -11,7 +11,7 @@
             <div class="bg-gray-100 p-6 rounded-xl">
                 <img v-lazy="qrcode" class="w-48 h-48" />
             </div>
-            <p>打开网易云音乐APP扫码登录</p>
+            <p>{{ notify }}</p>
         </div>
         <!-- 切换登录方式 -->
         <div class="mt-5">
@@ -26,17 +26,22 @@
 
 <script setup>
 import QRCode from 'qrcode'
+import { useStorageStore } from '@/store/Storage.js'
 const { proxy } = getCurrentInstance()
-const qrcode = ref()
+const router = useRouter()
+const storageStore = useStorageStore()
+const qrcode = ref('')
+const unikey = ref('')
+const notify = ref('打开网易云音乐APP扫码登录')
 // 获取二维码
 const getQRCode = async () => {
     try {
         // 获取unikey
         const { data } = await proxy.$http.reqLoginKey({ timestamp: +new Date() })
         if (data.code === 200) {
-            const unikey = data.data.unikey
+            unikey.value = data.data.unikey
             // 获取qrurl
-            const { data: res } = await proxy.$http.reqLoginQRCode({ key: unikey })
+            const { data: res } = await proxy.$http.reqLoginQRCode({ key: unikey.value })
             if (res.code === 200) {
                 // 获取qrcode图像
                 const svg = await QRCode.toString(res.data.qrurl, {
@@ -50,16 +55,51 @@ const getQRCode = async () => {
                 })
                 qrcode.value = `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`
             }
-
-            // console.log(res2)
-            // code.value = res2.data.data.qrurl
-            // 此处进行登录状态检测
-            // if (res2.code === 200) {
-            // }
+            checkQRCodeLogin()
         }
     } catch (error) {
-        console.log(error)
+        proxy.$notify({
+            title: 'Error',
+            message: error,
+            type: 'error'
+        })
     }
+}
+// 轮询接口，验证用户是否登录
+const loginInterval = ref(null)
+const checkQRCodeLogin = () => {
+    if (unikey.value === '') return
+    loginInterval.value = setInterval(() => {
+        proxy.$http.reqLoginCheck({ key: unikey.value, timestamp: +new Date() }).then(res => {
+            if (res.data.code === 801) {
+                notify.value = '打开网易云音乐APP扫码登录'
+            } else if (res.data.code === 800) {
+                notify.value = '二维码已失效，请重新扫码'
+                // 重新获取二维码
+                getQRCode()
+                clearInterval(loginInterval.value)
+                loginInterval.value = null
+            } else if (res.data.code === 802) {
+                notify.value = '扫描成功，请在手机上确认登录'
+            } else if (res.data.code === 803) {
+                notify.value = '登录成功'
+                // 清除定时器
+                clearInterval(loginInterval.value)
+                loginInterval.value = null
+                // 本地存储更改用户登录状态,获取用户信息
+                const res = storageStore.storeStatus()
+                if (res) {
+                    router.push('/')
+                } else {
+                    proxy.$notify({
+                        title: 'Error',
+                        message: '获取用户信息失败',
+                        type: 'error'
+                    })
+                }
+            }
+        })
+    }, 2000)
 }
 onMounted(() => {
     getQRCode()

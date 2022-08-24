@@ -6,10 +6,10 @@
             </h3>
             <div class="flex space-x-8 items-center justify-center">
                 <div class="cursor-pointer swiper-prev" @click="mySwiper.slidePrev()">
-                    <SvgIcon icon-name="back" icon-size="20"></SvgIcon>
+                    <SvgIcon name="back" size="20"></SvgIcon>
                 </div>
                 <div class="cursor-pointer swiper-next" @click="mySwiper.slideNext()">
-                    <SvgIcon icon-name="forward" icon-size="20"></SvgIcon>
+                    <SvgIcon name="forward" size="20"></SvgIcon>
                 </div>
             </div>
         </div>

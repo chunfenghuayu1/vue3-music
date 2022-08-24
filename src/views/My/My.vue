@@ -31,7 +31,7 @@
                         <div
                             class="p-1 rounded-full flex items-center justify-center bg-skin-primary"
                         >
-                            <SvgIcon icon-name="play" icon-size="44"></SvgIcon>
+                            <SvgIcon name="play" size="44"></SvgIcon>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                         class="w-1/4 h-1/3 flex items-center space-x-2 px-2"
                     >
                         <!-- 歌曲图片 -->
-                        <div class="flex-shrink-0">
+                        <div class="flex-shrink-0 flex items-center justify-center">
                             <img
                                 src="http://p2.music.126.net/VldbGI7kjph0TeIbttQHGQ==/109951167672625652.jpg?param=36y36"
                                 class="rounded-lg h-9 w-9"

@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 头部 -->
-        <div class="flex space-x-12 mt-8">
+        <div class="flex space-x-12 mt-8 my-16">
             <div class="flex items-center justify-center flex-shrink-0">
                 <img
                     src="https://p2.music.126.net/Ak2mqnmim2sFjxKAYnRb-A==/109951163085080176.jpg?param=512y512"
@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <!-- 歌单描述 -->
-                <div class="my-4 lineClamp3 text-skin-tertiary text-sm">
+                <div class="my-4 lineClamp3 text-skin-tertiary text-sm" @click="showModal">
                     备受瞩目的日本新男团PSYCHIC FEVER from EXILE
                     TRIBE最新remix单曲，为7月份首张专辑《P.C.F.》中的主打热门单曲《Choose
                     One》remix版本。融合了HIPHOP和摇滚乐以及来自美国西海岸的清新之风，原曲上线后荣登多个榜单榜首，播放量达450万+。remix版本由饶舌歌手ELIONE（Eli
@@ -56,10 +56,21 @@
             </div>
         </div>
         <!-- 列表 -->
-        <div></div>
+        <div v-for="item in 10" :key="item" class="space-y-6">
+            <ListItem></ListItem>
+        </div>
+        <Teleport to="#main">
+            <Modal :show="show" @click="show = false"></Modal>
+        </Teleport>
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+// 弹出框逻辑
+const show = ref(false)
+const showModal = () => {
+    show.value = true
+}
+</script>
 
 <style lang="postcss"></style>

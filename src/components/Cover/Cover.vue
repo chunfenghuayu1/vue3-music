@@ -3,13 +3,15 @@
         <!-- 播放按钮 遮罩层 -->
         <div
             class="flex items-center justify-center absolute top-0 min-w-full min-h-full bg-opacity-0 cursor-pointer"
+            @click="handleRouter"
         >
-            <transition name="fade-play">
+            <transition name="cover-playbtn">
                 <div
                     v-show="show"
-                    class="flex items-center justify-center backdrop-saturate-180 backdrop-blur-md rounded-full p-1/20 bg-white bg-opacity-20 hover:bg-opacity-30 active:scale-90 transition-all"
+                    class="flex items-center justify-center backdrop-saturate-180 backdrop-blur-md rounded-full p-2 bg-white bg-opacity-20 hover:bg-opacity-30 active:scale-90 transition-all"
+                    @click.stop="handlePlay"
                 >
-                    <SvgIcon icon-name="play" icon-size="32"></SvgIcon>
+                    <SvgIcon name="play" size="32"></SvgIcon>
                 </div>
             </transition>
         </div>
@@ -22,8 +24,9 @@
             :class="rowType === 'recomArtist' ? 'rounded-full' : 'rounded-lg'"
             class="object-cover w-full h-full"
         />
+
         <!-- 图片阴影层 -->
-        <transition name="fade">
+        <transition name="cover-shadow">
             <img
                 v-show="show"
                 :src="picUrl"
@@ -35,7 +38,10 @@
     </div>
     <!-- 标题 -->
     <div class="lineClamp2 mt-2" :class="rowType === 'recomArtist' ? 'text-center' : ''">
-        <router-link to="/" class="cursor-pointer hover:underline font-semibold">
+        <router-link
+            :to="{ path: '/playlist', query: { id: rowListItem.id } }"
+            class="cursor-pointer hover:underline font-semibold"
+        >
             {{ rowListItem.name }}
         </router-link>
     </div>
@@ -44,8 +50,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
 import { formatPlayCount } from '@/utils/fromat.js'
+
 const props = defineProps({
     rowListItem: {
         type: Object,
@@ -69,27 +75,40 @@ const playCount = computed(() => {
     let count = props.rowListItem?.playCount
     return formatPlayCount(count)
 })
+
+// 处理跳转和播放
+const router = useRouter()
+const handleRouter = () => {
+    // 隐藏动画
+    show.value = false
+    if (props.rowType === '') {
+        router.push({ path: '/playlist', query: { id: props.rowListItem.id } })
+        return
+    }
+}
+const handlePlay = () => {
+    console.log(props.rowListItem)
+}
 </script>
 
 <style lang="postcss">
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.3s;
+.cover-shadow-enter-active,
+.cover-shadow-leave-active {
+    @apply transition-opacity duration-300;
 }
 
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
-}
-.fade-play-enter-active,
-.fade-play-leave-active {
-    transition: opacity 0.3s;
-    transition: scale 0.5s;
+.cover-shadow-enter-from,
+.cover-shadow-leave-to {
+    @apply opacity-0;
 }
 
-.fade-play-enter-from,
-.fade-play-leave-to {
-    opacity: 0;
-    scale: 0.86;
+.cover-playbtn-enter-active,
+.cover-playbtn-leave-active {
+    @apply transition-all duration-300;
+}
+
+.cover-playbtn-enter-from,
+.cover-playbtn-leave-to {
+    @apply opacity-0 scale-90;
 }
 </style>

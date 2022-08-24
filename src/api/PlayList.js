@@ -46,9 +46,9 @@ export const reqRecomNewSong = ({ limit }) =>
 /**
  * 获取热门歌单标签
  */
-export const reqHotCatTags = () => request({ url: '/playlist/hot' })
+// export const reqHotCatTags = () => request({ url: '/playlist/hot' })
 
 /**
  * 获取全部歌单标签
  */
-export const reqCatTags = () => request({ url: '/playlist/catlist' })
+// export const reqCatTags = () => request({ url: '/playlist/catlist' })
