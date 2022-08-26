@@ -85,7 +85,7 @@ export default defineConfig(({ mode }) => {
                 }
             }),
             // 增加svg处理插件
-            svgBuilder('./src/icons/svg/')
+            svgBuilder('./src/icons/')
         ],
         // 解决路径问题
         resolve: {
@@ -100,8 +100,8 @@ export default defineConfig(({ mode }) => {
             open: env.VITE_MODE_NAME === 'development',
             proxy: {
                 '/dev-api': {
-                    // target: 'http://120.48.31.206:2999',
-                    target: 'http://127.0.0.1:3000/',
+                    target: 'http://120.48.31.206:2999',
+                    // target: 'http://127.0.0.1:3000/',
                     changeOrigin: true,
                     rewrite: path => path.replace(/^\/dev-api/, '')
                 }

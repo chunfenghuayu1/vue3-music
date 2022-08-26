@@ -11,6 +11,18 @@
     </main>
 </template>
 
-<script setup></script>
+<script setup>
+import { useStorageStore } from '@/store/Storage.js'
+import { useMySongs } from '@/store/MySongs.js'
+
+// 初始化本地存储
+const MySongs = useMySongs()
+// 初始化my数据
+
+onMounted(() => {
+    MySongs.getUserPlayList()
+    useStorageStore()
+})
+</script>
 
 <style lang="postcss"></style>

@@ -14,7 +14,6 @@
 </template>
 
 <script setup>
-// const { proxy } = getCurrentInstance()
 defineProps({
     activeTags: {
         type: Array,

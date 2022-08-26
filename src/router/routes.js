@@ -17,7 +17,8 @@ export default [
     {
         path: '/my',
         name: 'my',
-        component: My
+        component: My,
+        meta: { requireAuth: true }
     },
     {
         path: '/login',
@@ -25,7 +26,7 @@ export default [
         component: Login
     },
     {
-        path: '/playlist',
+        path: '/playlist/:id',
         name: 'playlist',
         component: PlayList
     }

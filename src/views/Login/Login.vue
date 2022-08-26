@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col items-center my-8">
         <!-- logo -->
-        <div class="w-24 h-24">
+        <div class="w-24 h-24 mb-4">
             <img src="/nest.png" />
         </div>
         <!-- 登录账号 -->
@@ -9,7 +9,7 @@
         <!-- 二维码 -->
         <div class="flex flex-col items-center space-y-4">
             <div class="bg-gray-100 p-6 rounded-xl">
-                <img v-lazy="qrcode" class="w-48 h-48" />
+                <img :src="qrcode" class="w-48 h-48" />
             </div>
             <p>{{ notify }}</p>
         </div>
@@ -29,6 +29,7 @@ import QRCode from 'qrcode'
 import { useStorageStore } from '@/store/Storage.js'
 const { proxy } = getCurrentInstance()
 const router = useRouter()
+const route = useRoute()
 const storageStore = useStorageStore()
 const qrcode = ref('')
 const unikey = ref('')
@@ -86,23 +87,25 @@ const checkQRCodeLogin = () => {
                 // 清除定时器
                 clearInterval(loginInterval.value)
                 loginInterval.value = null
-                // 本地存储更改用户登录状态,获取用户信息
-                const res = storageStore.storeStatus()
-                if (res) {
-                    router.push('/')
-                } else {
-                    proxy.$notify({
-                        title: 'Error',
-                        message: '获取用户信息失败',
-                        type: 'error'
-                    })
-                }
+                // 登录成功后处理的事件
+                afterLogin()
             }
         })
     }, 2000)
 }
+// 处理登录成功后的事件
+const afterLogin = () => {
+    // 本地存储更改用户登录状态,获取用户信息
+    storageStore.getUserInfo()
+    // 获取路由参数
+    const query = route.query.redirect
+    query ? router.replace(query) : router.replace('/')
+}
 onMounted(() => {
     getQRCode()
+})
+onBeforeUnmount(() => {
+    clearInterval(loginInterval.value)
 })
 </script>
 

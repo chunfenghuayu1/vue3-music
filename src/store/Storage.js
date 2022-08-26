@@ -1,38 +1,23 @@
 import { defineStore } from 'pinia'
 import { getLocal, setLocal } from '@/utils/localStorage.js'
-import localData from '@/utils/localData.js'
-import { reqAccount } from '@/api/Login.js'
+import { reqLoginStatus, reqLogout } from '@/api/Login.js'
+// 初始化本地存储
+import localStorage from './initLocalStorage'
+if (getLocal('data') === null) {
+    setLocal('data', localStorage.data)
+}
+if (getLocal('settings') === null) {
+    setLocal('settings', localStorage.settings)
+}
+
 export const useStorageStore = defineStore('storageStore', {
     state: () => {
         return {
-            data: {
-                accountStatus: '',
-                user: {
-                    // 账号信息
-                    account: { avatarUrl: '', nickname: '' }
-                }
-            },
-            settings: {
-                activeTags: []
-            }
+            data: getLocal('data'),
+            settings: getLocal('settings')
         }
     },
     actions: {
-        // 获取全部标签,本地化
-        getTags() {
-            const tagsList = getLocal('settings')?.activeTags
-            // 如果首次使用，则本地没有数据，进行初始化
-            // 如果有数据，则直接从本地取
-            if (!tagsList) {
-                this.settings.activeTags = localData.explore.tags
-                    .filter(item => item.hot === true)
-                    .map(item => item.name)
-                // 初始化存在本地
-                setLocal('settings', this.settings)
-            } else {
-                this.settings.activeTags = getLocal('settings').activeTags
-            }
-        },
         // 存储标签选择
         storeTags(item) {
             const flag = this.settings.activeTags.indexOf(item.name)
@@ -41,31 +26,36 @@ export const useStorageStore = defineStore('storageStore', {
             } else {
                 this.settings.activeTags.push(item.name)
             }
-            // 每次设置调用本地存储
-            setLocal('settings', this.settings)
         },
-        // 保存用户登录信息
-        storeStatus() {
-            this.data.accountStatus = 'qrcode'
-            setLocal('data', this.data)
-            this.getAccount()
+        // 刷新登录状态，获取用户信息
+        getUserInfo() {
+            reqLoginStatus().then(({ data }) => {
+                if (data.data.code === 200) {
+                    this.data.user = data.data.profile
+                    this.data.loginMode = 'qrcode'
+                }
+            })
         },
-        // 打开网站获取用户数据
-        getStatus() {
-            this.data.accountStatus = getLocal('data')?.accountStatus
-        },
-        // 获取用户信息
-        getAccount() {
-            reqAccount().then(({ data }) => {
+        // 退出登录
+        async handlerLogout() {
+            await reqLogout().then(({ data }) => {
                 if (data.code === 200) {
-                    this.user.account.avatarUrl = data.profile.avatarUrl
-                    this.user.account.nickname = data.profile.nickname
-                    setLocal('data', this.data)
-                    return true
-                } else {
-                    return false
+                    this.data.loginMode = ''
+                    this.data.user = {}
                 }
             })
         }
+    },
+    getters: {
+        // 用户名
+        nickname: state => state.data.user.nickname,
+        // 用户头像
+        avatarUrl: state => state.data.user.avatarUrl,
+        // 用户id
+        userId: state => state.data.user.userId
+    },
+    // 开启持久化
+    persist: {
+        enable: true
     }
 })

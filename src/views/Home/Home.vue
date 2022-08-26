@@ -66,7 +66,7 @@ const getData = () => {
 onActivated(() => {
     getData()
 })
-getData()
+// getData()
 </script>
 
 <style lang="postcss">

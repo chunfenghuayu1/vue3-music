@@ -12,6 +12,7 @@ import lazyImg from '/loading.gif'
 import router from './router'
 // 状态管理
 import { createPinia } from 'pinia'
+import persist from '@/store/Subscribe/persist.js'
 //  api接口
 import * as API from '@/api'
 import SvgIcon from '@/components/SvgIcon/SvgIcon.vue' // svg组件
@@ -26,13 +27,14 @@ app.config.globalProperties.$t = i18n
 app.config.performance = true
 
 app.use(VueLazyload, {
-    preLoad: 1, //预加载的宽高比
+    preLoad: 1.3, //预加载的宽高比
     loading: lazyImg, //图片加载状态下显示的图片
     // error: errorimage, //图片加载失败时显示的图片
     attempt: 1 // 加载错误后最大尝试次数
 })
-
+const pinia = createPinia()
+pinia.use(persist)
 app.use(router)
 app.component('SvgIcon', SvgIcon)
-app.use(createPinia())
+app.use(pinia)
 app.mount('#app')

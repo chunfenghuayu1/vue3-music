@@ -1,5 +1,5 @@
 <template>
-    <div class="cursor-pointer relative w-5 h-5" @click="switch1">
+    <div class="cursor-pointer relative w-5 h-5 select-none" @click="switch1">
         <Transition name="theme-slide">
             <SvgIcon v-if="switchTheme" name="check" size="20" class="absolute"></SvgIcon>
             <SvgIcon v-else name="close" size="20" class="absolute"></SvgIcon>

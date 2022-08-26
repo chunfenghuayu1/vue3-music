@@ -27,7 +27,10 @@
                     </div>
                 </div>
                 <!-- 歌单描述 -->
-                <div class="my-4 lineClamp3 text-skin-tertiary text-sm" @click="showModal">
+                <div
+                    class="my-4 lineClamp3 text-skin-tertiary text-sm cursor-pointer"
+                    @click="showModal"
+                >
                     备受瞩目的日本新男团PSYCHIC FEVER from EXILE
                     TRIBE最新remix单曲，为7月份首张专辑《P.C.F.》中的主打热门单曲《Choose
                     One》remix版本。融合了HIPHOP和摇滚乐以及来自美国西海岸的清新之风，原曲上线后荣登多个榜单榜首，播放量达450万+。remix版本由饶舌歌手ELIONE（Eli

@@ -18,7 +18,7 @@
             :slides-per-view="5"
             :slides-per-group="5"
             :space-between="20"
-            :speed="800"
+            :speed="1200"
             :observer="true"
             :observe-parents="true"
             :observe-slide-children="true"

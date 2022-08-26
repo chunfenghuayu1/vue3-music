@@ -3,12 +3,12 @@
         <!-- 播放按钮 遮罩层 -->
         <div
             class="flex items-center justify-center absolute top-0 min-w-full min-h-full bg-opacity-0 cursor-pointer"
-            @click="handleRouter"
+            @click.self="handleRouter"
         >
             <transition name="cover-playbtn">
                 <div
                     v-show="show"
-                    class="flex items-center justify-center backdrop-saturate-180 backdrop-blur-md rounded-full p-2 bg-white bg-opacity-20 hover:bg-opacity-30 active:scale-90 transition-all"
+                    class="flex items-center justify-center backdrop-saturate-180 backdrop-blur-md rounded-full p-3 bg-white bg-opacity-20 hover:bg-opacity-30 active:scale-90 transition-all"
                     @click.stop="handlePlay"
                 >
                     <SvgIcon name="play" size="32"></SvgIcon>
@@ -19,7 +19,7 @@
         <slot name="playCount" :play-count="playCount"></slot>
         <!-- 图片层 -->
         <img
-            v-lazy="picUrl"
+            :src="picUrl"
             loading="lazy"
             :class="rowType === 'recomArtist' ? 'rounded-full' : 'rounded-lg'"
             class="object-cover w-full h-full"
@@ -37,20 +37,25 @@
         </transition>
     </div>
     <!-- 标题 -->
-    <div class="lineClamp2 mt-2" :class="rowType === 'recomArtist' ? 'text-center' : ''">
-        <router-link
-            :to="{ path: '/playlist', query: { id: rowListItem.id } }"
-            class="cursor-pointer hover:underline font-semibold"
-        >
-            {{ rowListItem.name }}
-        </router-link>
+    <div class="mt-2 flex items-center" :class="rowType === 'recomArtist' ? 'justify-center' : ''">
+        <div v-if="rowType === 'mylist' && rowListItem.privacy !== 0" class="mr-1">
+            <SvgIcon name="lock" size="18"></SvgIcon>
+        </div>
+        <div class="lineClamp2">
+            <router-link
+                :to="{ name: 'playlist', params: { id: rowListItem.id } }"
+                class="cursor-pointer hover:underline font-semibold"
+            >
+                {{ rowListItem.name }}
+            </router-link>
+        </div>
     </div>
     <!-- 副标题 -->
     <slot name="subTilte" :row-list-item="rowListItem"></slot>
 </template>
 
 <script setup>
-import { formatPlayCount } from '@/utils/fromat.js'
+import { formatPlayCount } from '@/utils/format.js'
 
 const props = defineProps({
     rowListItem: {
@@ -80,15 +85,18 @@ const playCount = computed(() => {
 const router = useRouter()
 const handleRouter = () => {
     // 隐藏动画
-    show.value = false
+    // show.value = false
     if (props.rowType === '') {
-        router.push({ path: '/playlist', query: { id: props.rowListItem.id } })
+        router.push({ name: 'playlist', params: { id: props.rowListItem.id } })
         return
     }
 }
 const handlePlay = () => {
     console.log(props.rowListItem)
 }
+onActivated(() => {
+    show.value = false
+})
 </script>
 
 <style lang="postcss">

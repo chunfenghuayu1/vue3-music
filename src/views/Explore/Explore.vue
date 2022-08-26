@@ -19,7 +19,7 @@
         ></TagSelector>
         <!-- 渲染歌单列表 -->
         <div class="mt-16 grid gap-10 grid-cols-6 lg:gap-x-5">
-            <div v-for="(item, index) in playList" :key="item.id + index">
+            <div v-for="(item, index) in playList" :key="index">
                 <Cover :row-list-item="item">
                     <template #playCount="{ playCount }">
                         <div
@@ -84,7 +84,6 @@ const getPlayList = ({ limit, cat }) => {
 
 onActivated(() => {
     // 获取标签信息
-    storageStore.getTags()
     getPlayList({ limit: 20, cat: category.value })
 })
 
