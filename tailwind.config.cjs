@@ -32,30 +32,31 @@ module.exports = {
         extend: {
             textColor: {
                 skin: {
-                    base: withOpacity('--color-text-base'),
-                    primary: withOpacity('--color-text-primary'),
-                    secondary: withOpacity('--color-text-secondary'),
-                    tertiary: withOpacity('--color-text-tertiary'),
-                    base1: withOpacity('--color-text-base1'),
-                    base2: withOpacity('--color-text-base2')
-                }
+                    base: withOpacity('--color-base'),
+                    primary: withOpacity('--color-primary'),
+                    secondary: withOpacity('--color-secondary'),
+                    tertiary: withOpacity('--color-tertiary'),
+                    base1: withOpacity('--color-base1'),
+                    base2: withOpacity('--color-base2')
+                },
+                base: withOpacity('--color-text-base')
             },
             backgroundColor: {
                 skin: {
-                    base: withOpacity('--color-text-base'),
-                    primary: withOpacity('--color-text-primary'),
-                    secondary: withOpacity('--color-text-secondary'),
-                    tertiary: withOpacity('--color-text-tertiary'),
-                    base1: withOpacity('--color-text-base1'),
-                    base2: withOpacity('--color-text-base2')
+                    base: withOpacity('--color-base'),
+                    primary: withOpacity('--color-primary'),
+                    secondary: withOpacity('--color-secondary'),
+                    tertiary: withOpacity('--color-tertiary'),
+                    base1: withOpacity('--color-base1'),
+                    base2: withOpacity('--color-base2')
                 }
             },
             borderColor: {
                 skin: {
-                    base: withOpacity('--color-text-base'),
-                    primary: withOpacity('--color-text-primary'),
-                    secondary: withOpacity('--color-text-secondary'),
-                    tertiary: withOpacity('--color-text-tertiary')
+                    base: withOpacity('--color-base'),
+                    primary: withOpacity('--color-primary'),
+                    secondary: withOpacity('--color-secondary'),
+                    tertiary: withOpacity('--color-tertiary')
                 }
             },
             keyframes: {

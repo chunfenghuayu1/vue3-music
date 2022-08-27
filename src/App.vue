@@ -19,10 +19,9 @@ import { useMySongs } from '@/store/MySongs.js'
 const MySongs = useMySongs()
 // 初始化my数据
 
-onMounted(() => {
-    MySongs.getUserPlayList()
-    useStorageStore()
-})
+MySongs.getUserPlayList()
+MySongs.getLikeList()
+useStorageStore()
 </script>
 
 <style lang="postcss"></style>

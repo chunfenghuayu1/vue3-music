@@ -38,7 +38,7 @@
                     <!-- 按钮操作 -->
                     <div class="flex space-x-4">
                         <button class="active:scale-90 transition-all m-1 p-1 cursor-pointer">
-                            <SvgIcon name="play" size="32"></SvgIcon>
+                            <SvgIcon name="play" size="32" class="text-white"></SvgIcon>
                         </button>
                         <button
                             class="active:scale-90 transition-all m-1 p-1 cursor-pointer"

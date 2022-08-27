@@ -15,7 +15,7 @@ import { createPinia } from 'pinia'
 import persist from '@/store/Subscribe/persist.js'
 //  api接口
 import * as API from '@/api'
-import SvgIcon from '@/components/SvgIcon/SvgIcon.vue' // svg组件
+import 'virtual:svg-icons-register'
 // 导入共享文字
 import i18n from '@/utils/i18n.js'
 
@@ -35,6 +35,5 @@ app.use(VueLazyload, {
 const pinia = createPinia()
 pinia.use(persist)
 app.use(router)
-app.component('SvgIcon', SvgIcon)
 app.use(pinia)
 app.mount('#app')

@@ -11,7 +11,7 @@
                     class="flex items-center justify-center backdrop-saturate-180 backdrop-blur-md rounded-full p-3 bg-white bg-opacity-20 hover:bg-opacity-30 active:scale-90 transition-all"
                     @click.stop="handlePlay"
                 >
-                    <SvgIcon name="play" size="32"></SvgIcon>
+                    <SvgIcon name="play" size="32" class="text-white"></SvgIcon>
                 </div>
             </transition>
         </div>

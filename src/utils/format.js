@@ -7,3 +7,19 @@ export const formatPlayCount = count => {
         return count
     }
 }
+// 毫秒转年月日
+export const formatDate = value => {
+    const date = new Date(value)
+
+    const YY = date.getFullYear()
+    const MM = date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
+    const DD = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+    return `${YY}年${MM}月${DD}日`
+}
+// 毫秒转分钟
+export const forminute = value => {
+    const time = new Date(value)
+    const mm = time.getMinutes()
+    const ss = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds()
+    return `${mm}:${ss}`
+}

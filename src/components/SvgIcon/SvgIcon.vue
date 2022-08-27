@@ -1,21 +1,17 @@
 <template>
-    <svg
-        :class="['svg-icon', $attrs.class]"
-        :style="{
-            width: size + 'px',
-            height: size + 'px'
-        }"
-        aria-hidden="true"
-    >
-        <use :xlink:href="'#icon-' + name" :fill="color" />
+    <svg aria-hidden="true" class="svg-icon" :style="{ width: size + 'px', height: size + 'px' }">
+        <use :xlink:href="symbolId" :fill="color" />
     </svg>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script>
 export default defineComponent({
     name: 'SvgIcon',
     props: {
+        prefix: {
+            type: String,
+            default: 'icon'
+        },
         name: {
             type: String,
             required: true
@@ -25,20 +21,23 @@ export default defineComponent({
             default: '#fff'
         },
         size: {
-            type: [Number, String],
-            default: 14
+            type: String,
+            default: '14'
         }
     },
-    setup() {
-        return {}
+    setup(props) {
+        const symbolId = computed(() => `#${props.prefix}-${props.name}`)
+        return { symbolId }
     }
 })
 </script>
 
-<style scoped lang="postcss">
+<style lang="postcss" scoped>
 .svg-icon {
-    vertical-align: middle;
+    width: 1em;
+    height: 1em;
     fill: currentColor;
     stroke: currentColor;
+    vertical-align: middle;
 }
 </style>

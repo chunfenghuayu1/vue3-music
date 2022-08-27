@@ -52,3 +52,5 @@
 .theme-slide-leave-to {
     @apply opacity-0 transform translate-y-5;
 }
+/* 歌单单个歌曲动画 */
+

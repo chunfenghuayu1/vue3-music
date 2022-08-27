@@ -6,7 +6,7 @@
 
         <div class="flex space-x-4 lg:space-x-0">
             <button class="btn m-1 p-2" @click="$router.go(-1)">
-                <SvgIcon name="back" size="20"></SvgIcon>
+                <SvgIcon name="back" size="20" class=""></SvgIcon>
             </button>
             <button class="btn m-1 p-2" @click="$router.go(1)">
                 <SvgIcon name="forward" size="20"></SvgIcon>

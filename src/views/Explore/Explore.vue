@@ -25,7 +25,7 @@
                         <div
                             class="absolute right-0 top-2 flex justify-center items-center pr-3 pt-0.5"
                         >
-                            <SvgIcon name="play" size="18" class="opacity-90"></SvgIcon>
+                            <SvgIcon name="play" size="18" class="opacity-90 text-white"></SvgIcon>
                             <span
                                 class="italic text-white text-sm lg:text-xs flex-shrink-0 font-semibold text-opacity-90"
                                 >{{ playCount }}</span

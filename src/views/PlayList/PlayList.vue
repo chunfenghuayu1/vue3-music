@@ -1,29 +1,31 @@
 <template>
-    <div>
+    <div v-show="playlist.name">
         <!-- 头部 -->
         <div class="flex space-x-12 mt-8 my-16">
             <div class="flex items-center justify-center flex-shrink-0">
-                <img
-                    src="https://p2.music.126.net/Ak2mqnmim2sFjxKAYnRb-A==/109951163085080176.jpg?param=512y512"
-                    class="rounded-lg h-72 w-72"
-                />
+                <img :src="`${playlist.coverImgUrl}?param=512y512`" class="rounded-lg h-72 w-72" />
             </div>
             <div class="flex flex-col justify-center">
                 <!-- 歌单标题 -->
                 <h3 class="font-bold text-4xl mb-4 lineClamp2">
-                    2022全网最火最好听华语歌推荐（持更）
+                    {{ playlist.name }}
                 </h3>
                 <!-- 歌单简介 -->
                 <div class="">
-                    <div class="lineClamp1 text-lg">
-                        <span>播放列表</span>
+                    <div class="lineClamp1 font-bold">
+                        <span>歌单列表</span>
                         <span> &bull; </span>
-                        <span>大肥猫好可爱哟</span>
+                        <a
+                            target="_blank"
+                            :href="`https://music.163.com/#/user/home?id=${playlist.creator?.userId}`"
+                            class="hover:underline"
+                            >{{ playlist.creator?.nickname }}</a
+                        >
                     </div>
                     <div class="lineClamp1 text-skin-tertiary text-sm">
-                        <span>最后更新于2022年08月03日</span>
+                        <span>最后更新于{{ formatDate(playlist.updateTime) }}</span>
                         <span> &bull; </span>
-                        <span>100首歌</span>
+                        <span>{{ playlist.trackCount }}首歌</span>
                     </div>
                 </div>
                 <!-- 歌单描述 -->
@@ -31,12 +33,7 @@
                     class="my-4 lineClamp3 text-skin-tertiary text-sm cursor-pointer"
                     @click="showModal"
                 >
-                    备受瞩目的日本新男团PSYCHIC FEVER from EXILE
-                    TRIBE最新remix单曲，为7月份首张专辑《P.C.F.》中的主打热门单曲《Choose
-                    One》remix版本。融合了HIPHOP和摇滚乐以及来自美国西海岸的清新之风，原曲上线后荣登多个榜单榜首，播放量达450万+。remix版本由饶舌歌手ELIONE（Eli
-                    One、Billy Laurent以及EXILE TRIBE成员Leo Sano（Lee）共同完成。PSYCHIC
-                    FEVER已在日本进行了多场演出，备受歌迷喜爱，今年2月，担任ØMI 演唱会LIVE TOUR 2022
-                    "ANSWER..." 开场。
+                    {{ playlist.description }}
                 </div>
                 <!-- 操作区 -->
                 <div class="mt-4 flex items-center space-x-8">
@@ -59,21 +56,40 @@
             </div>
         </div>
         <!-- 列表 -->
-        <div v-for="item in 10" :key="item" class="space-y-6">
-            <ListItem></ListItem>
+        <div v-for="(item, index) in trackAll" :key="index" class="space-y-6">
+            <ListItem :song="item"></ListItem>
         </div>
         <Teleport to="#main">
-            <Modal :show="show" @click="show = false"></Modal>
+            <Modal v-model="show" type="歌单介绍" :content="playlist.description"></Modal>
         </Teleport>
     </div>
 </template>
 
 <script setup>
+import { formatDate } from '@/utils/format.js'
+const { proxy } = getCurrentInstance()
+const route = useRoute()
 // 弹出框逻辑
 const show = ref(false)
 const showModal = () => {
     show.value = true
 }
+// 获取对应id
+const playlist = ref({})
+const trackAll = ref([])
+const getPlayListDetail = () => {
+    // 获取歌单详情
+    proxy.$http.reqPlayListDetail({ id: route.params.id }).then(({ data }) => {
+        playlist.value = data.playlist
+    })
+    // 获取歌单歌曲详情
+    proxy.$http
+        .reqPlayLsitTrankAll({ id: route.params.id, limit: 100, offset: 0 })
+        .then(({ data }) => {
+            trackAll.value = data.songs
+        })
+}
+getPlayListDetail()
 </script>
 
 <style lang="postcss"></style>

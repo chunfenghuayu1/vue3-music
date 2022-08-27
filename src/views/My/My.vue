@@ -23,14 +23,14 @@
                         <div class="flex-grow flex-shrink-0">
                             <div class="text-2xl font-bold text-skin-primary">我喜欢的音乐</div>
                             <div class="text-skin-primary text-sm">
-                                共{{ MySongs.trackCount }}首歌
+                                共{{ MySongs.tracksCount }}首歌
                             </div>
                         </div>
                         <!-- 播放按钮 -->
                         <div
                             class="p-1 rounded-full flex items-center justify-center bg-skin-primary"
                         >
-                            <SvgIcon name="play" size="44"></SvgIcon>
+                            <SvgIcon name="play" size="44" class="text-white"></SvgIcon>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                         <template #subTilte>
                             <div>
                                 <span class="text-xs text-skin-tertiary lineClamp1 mt-1">
-                                    by {{ storageStore.nickname }}
+                                    by {{ item.creator.nickname }}
                                 </span>
                             </div>
                         </template>
@@ -111,10 +111,6 @@ const storageStore = useStorageStore()
 const MySongs = useMySongs()
 
 const str = ref('你成长的经过\n你说你也在美国留学\n住在洛杉矶')
-
-onActivated(() => {
-    // MySongs.getUserPlayList()
-})
 </script>
 
 <style lang="postcss"></style>
