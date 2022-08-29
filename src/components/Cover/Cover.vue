@@ -43,7 +43,11 @@
         </div>
         <div class="lineClamp2">
             <router-link
-                :to="{ name: 'playlist', params: { id: rowListItem.id } }"
+                :to="
+                    rowType === 'newAlbum'
+                        ? { name: 'newAlbum', params: { id: rowListItem.id } }
+                        : { name: 'playlist', params: { id: rowListItem.id } }
+                "
                 class="cursor-pointer hover:underline font-semibold"
             >
                 {{ rowListItem.name }}
@@ -88,6 +92,14 @@ const handleRouter = () => {
     // show.value = false
     if (props.rowType === '') {
         router.push({ name: 'playlist', params: { id: props.rowListItem.id } })
+        return
+    }
+    // 如果点击新专辑，则传递type参数
+    if (props.rowType === 'newAlbum') {
+        router.push({
+            name: 'newAlbum',
+            params: { id: props.rowListItem.id }
+        })
         return
     }
 }

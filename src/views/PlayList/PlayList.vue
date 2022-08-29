@@ -73,11 +73,8 @@
             </transition-group>
         </div>
         <!-- 到底了 -->
-        <div
-            v-if="more"
-            class="text-sm text-skin-tertiary flex items-center justify-center mt-8 select-none"
-        >
-            没有更多数据了......
+        <div class="text-sm text-skin-tertiary flex items-center justify-center mt-8 select-none">
+            <div v-if="more">没有更多数据了......</div>
         </div>
 
         <Teleport to="#main">
@@ -101,6 +98,15 @@ const showModal = () => {
 const playList = ref({})
 const trackAll = ref([])
 const getPlayListDetail = ({ id, limit, offset }) => {
+    if (route.params.type === 'albumNewest') {
+        proxy.$http.reqAlbumDetail({ id }).then(({ data }) => {
+            console.log(data)
+            playList.value = data.songs
+            // 关闭无限加载
+            more.value = true
+        })
+        return
+    }
     // 获取歌单详情
     if (offset < 1) {
         proxy.$http.reqPlayListDetail({ id }).then(({ data }) => {
@@ -114,7 +120,7 @@ const getPlayListDetail = ({ id, limit, offset }) => {
         more.value = data.songs.length === 0 ? true : false
     })
 }
-
+// 无限加载数据
 const offset = ref(0)
 const limit = ref(25)
 const more = ref(false)
@@ -123,6 +129,7 @@ getPlayListDetail({
     limit: limit.value,
     offset: limit.value * offset.value
 })
+
 const load = () => {
     if (more.value) return
     offset.value++

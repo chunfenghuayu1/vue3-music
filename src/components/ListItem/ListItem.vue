@@ -13,7 +13,7 @@
             <!-- 遮罩层 -->
             <div
                 v-show="showBtn"
-                class="absolute bg-gray-900 bg-opacity-40 w-12 h-12 flex items-center justify-center cursor-pointer"
+                class="absolute bg-gray-900 bg-opacity-40 w-full h-full flex items-center justify-center cursor-pointer"
             >
                 <SvgIcon name="play" size="28" class="text-white"></SvgIcon>
             </div>
@@ -50,7 +50,7 @@
             </div>
         </div>
         <!-- 歌曲时间 -->
-        <div class="flex items-center justify-center">{{ forminute(song.dt) }}</div>
+        <div class="flex items-center justify-center font-semibold">{{ forminute(song.dt) }}</div>
     </div>
 </template>
 

@@ -3,6 +3,7 @@ const Explore = () => import('@/views/Explore/Explore.vue')
 const My = () => import('@/views/My/My.vue')
 const Login = () => import('@/views/Login/Login.vue')
 const PlayList = () => import('@/views/PlayList/PlayList.vue')
+const NewAlbum = () => import('@/views/NewAlbum/NewAlbum.vue')
 export default [
     {
         path: '/',
@@ -29,5 +30,10 @@ export default [
         path: '/playlist/:id',
         name: 'playlist',
         component: PlayList
+    },
+    {
+        path: '/newAlbum/:id',
+        name: 'newAlbum',
+        component: NewAlbum
     }
 ]

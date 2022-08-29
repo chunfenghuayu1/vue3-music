@@ -41,13 +41,13 @@
                 class="cursor-pointer relative"
             >
                 <div>
-                    <Cover :row-list-item="item">
-                        <!-- 热门新碟显示歌手名 -->
+                    <Cover :row-list-item="item" :row-type="'newAlbum'">
+                        <!-- 最新专辑显示歌手名 -->
                         <template #subTilte="{ rowListItem }">
                             <div v-for="(item1, index1) in rowListItem.artists" :key="index1">
                                 <i v-if="index1 !== 0">/</i>
                                 <router-link
-                                    to="/"
+                                    :to="{ name: 'newAlbum', params: { id: item1.id } }"
                                     class="text-xs text-skin-tertiary cursor-pointer hover:underline"
                                 >
                                     {{ item1.name }}

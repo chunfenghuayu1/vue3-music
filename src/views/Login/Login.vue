@@ -94,12 +94,12 @@ const checkQRCodeLogin = () => {
     }, 2000)
 }
 // 处理登录成功后的事件
-const afterLogin = () => {
+const afterLogin = async () => {
     // 本地存储更改用户登录状态,获取用户信息
-    storageStore.getUserInfo()
+    await storageStore.getUserInfo()
     // 获取路由参数
     const query = route.query.redirect
-    query ? router.replace(query) : router.replace('/')
+    query ? router.replace(query) : router.go(0)
 }
 onMounted(() => {
     getQRCode()

@@ -4,7 +4,7 @@
             <SvgIcon name="logo" size="48" class="lg:hidden"></SvgIcon>
         </div>
 
-        <div class="flex space-x-4 lg:space-x-0">
+        <div class="flex space-x-4 lg:space-x-2">
             <button class="btn m-1 p-2" @click="$router.go(-1)">
                 <SvgIcon name="back" size="20" class=""></SvgIcon>
             </button>

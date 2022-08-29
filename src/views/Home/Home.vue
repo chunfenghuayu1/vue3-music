@@ -3,15 +3,15 @@
         <!-- 轮播图 -->
         <Swiper :banner-list="bannerList"></Swiper>
         <!-- 推荐歌单 -->
-        <HomeRecomAlbum :item-list="dataList.albumList"></HomeRecomAlbum>
+        <HomeRecomAlbum :item-list="albumList"></HomeRecomAlbum>
         <!-- 个性推荐 -->
         <Personalized></Personalized>
         <!-- 热门歌手 -->
-        <HomeRecomArtist :item-list="dataList.topArtists"></HomeRecomArtist>
+        <HomeRecomArtist :item-list="topArtists"></HomeRecomArtist>
         <!-- 最新专辑 -->
-        <HomeAlbumNewest :item-list="dataList.albumNewestList"></HomeAlbumNewest>
+        <HomeAlbumNewest :item-list="albumNewestList"></HomeAlbumNewest>
         <!-- 排行榜单 -->
-        <HomeRankList :item-list="dataList.rankList"></HomeRankList>
+        <HomeRankList :item-list="rankList"></HomeRankList>
     </div>
 </template>
 
@@ -28,11 +28,11 @@ const dataList = reactive({
     albumNewestList: [],
     rankList: []
 })
+const { albumList, topArtists, albumNewestList, rankList } = toRefs(dataList)
 
 // 数据初始化
 const getData = () => {
     try {
-        // console.log(show.value)
         // 轮播图数据获取
         proxy.$http.reqBanner().then(res => {
             bannerList.value = res.data.banners

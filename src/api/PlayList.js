@@ -37,6 +37,11 @@ export const reqPlayList = ({ limit, cat, offset }) =>
 export const reqAlbumNewest = () => request({ url: '/album/newest' })
 
 /**
+ * 获取专辑内容
+ * 必选参数 : id: 专辑 id
+ */
+export const reqAlbumDetail = ({ id }) => request({ url: '/album', params: { id } })
+/**
  * 获取推荐新音乐
  * @param {number} limit
  */
