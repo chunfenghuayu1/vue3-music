@@ -41,7 +41,7 @@
         <div class="flex justify-end items-center w-8">
             <div v-show="showBtn" class="cursor-pointer">
                 <SvgIcon
-                    v-if="MySongs.likeSongIds.includes(song.id)"
+                    v-if="MySongs.likeSongIds(song.id)"
                     name="like"
                     size="20"
                     class="text-skin-primary"

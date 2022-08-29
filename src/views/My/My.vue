@@ -88,7 +88,7 @@
             </div>
             <!-- 歌单内容 -->
             <div class="grid grid-cols-5 gap-8">
-                <div v-for="(item, index) in MySongs.playlist" :key="index">
+                <div v-for="(item, index) in MySongs.playlist(1)" :key="index">
                     <Cover :row-list-item="item" :row-type="'mylist'">
                         <template #subTilte>
                             <div>
@@ -109,8 +109,10 @@ import { useStorageStore } from '@/store/Storage.js'
 import { useMySongs } from '@/store/MySongs.js'
 const storageStore = useStorageStore()
 const MySongs = useMySongs()
-MySongs.getUserPlayList()
-MySongs.getLikeList()
+onActivated(() => {
+    MySongs.getUserPlayList()
+    MySongs.getLikeList()
+})
 
 const str = ref('你成长的经过\n你说你也在美国留学\n住在洛杉矶')
 </script>

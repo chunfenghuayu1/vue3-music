@@ -106,8 +106,8 @@ const getPlayList = ({ limit, cat, offset, before }) => {
 // 无限加载调用方法
 const load = () => {
     if (category.value === '排行榜' || category.value === '推荐歌单') return
-    offset.value++
     if (more.value) {
+        offset.value++
         getPlayList({
             limit: limit.value,
             cat: category.value,

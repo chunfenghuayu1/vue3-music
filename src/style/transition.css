@@ -30,7 +30,7 @@
 /* 路由过渡 */
 .fade-route-enter-active,
 .fade-route-leave-active {
-    @apply transition-all duration-200 ease-linear;
+    @apply transition-all duration-150 ease-linear;
 }
 .fade-route-enter-from,
 .fade-route-leave-to {
@@ -53,7 +53,7 @@
 /* playlist 歌单单个歌曲动画 */
 .track-item-enter-active,
 .track-item-leave-active {
-    @apply transition-all duration-500 ease-linear;
+    @apply transition-all duration-200 ease-linear;
 }
 .track-item-enter-from,
 .track-item-leave-to {

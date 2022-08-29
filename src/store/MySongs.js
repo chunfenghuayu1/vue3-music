@@ -51,16 +51,36 @@ export const useMySongs = defineStore('MySongs', {
         }
     },
     getters: {
-        // 喜欢的歌单列表
+        // 歌单列表
         playlist: state => {
+            // 用户id
             const storageStore = useStorageStore()
-            return state.userList.playlist.slice(1).filter(i => i.userId === storageStore.userId)
+            const id = storageStore.userId
+            // 缓存数组
+            const list = state.userList.playlist.slice(1)
+            return value => {
+                // 创建的歌单
+                if (value === 1) {
+                    return list.filter(i => i.userId === id)
+                }
+                // 所有歌单列表
+                if (value === 2) {
+                    return list
+                }
+                // 收藏的歌单列表
+                if (value === 3) {
+                    return list.filter(i => i.userId !== id)
+                }
+            }
         },
         // 喜欢的音乐数量
         tracksCount: state => state.like.tracks.length,
         // 展示的音乐，只有12首
         showLikeSongs: state => state.like.tracks.slice(0, 12),
         // 喜欢的音乐id
-        likeSongIds: state => state.like.likeSongIds
+        likeSongIds: state => {
+            const ids = state.like.likeSongIds
+            return id => ids.includes(id)
+        }
     }
 })

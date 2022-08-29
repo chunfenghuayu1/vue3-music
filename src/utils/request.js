@@ -6,7 +6,7 @@ const request = axios.create({
     // `withCredentials` 表示跨域请求时是否需要使用凭证
     withCredentials: true,
     // 请求超时
-    timeout: 6000
+    timeout: 8000
 })
 
 // 添加请求拦截器

@@ -1,5 +1,5 @@
 <template>
-    <div v-show="playList.name">
+    <div v-if="playList.name">
         <!-- 头部 -->
         <div class="flex space-x-12 mt-8 my-16">
             <div class="flex items-center justify-center flex-shrink-0 relative">
@@ -64,11 +64,11 @@
             v-infinite-scroll="load"
             :infinite-scroll-immediate="false"
             infinite-scroll-distance="100"
-            infinite-scroll-delay="500"
+            infinite-scroll-delay="600"
         >
             <transition-group tag="div" name="track-item">
                 <div v-for="(item, index) in trackAll" :key="index" class="space-y-6">
-                    <ListItem :song="item"></ListItem>
+                    <PlayListItem :song="item"></PlayListItem>
                 </div>
             </transition-group>
         </div>
@@ -98,15 +98,6 @@ const showModal = () => {
 const playList = ref({})
 const trackAll = ref([])
 const getPlayListDetail = ({ id, limit, offset }) => {
-    if (route.params.type === 'albumNewest') {
-        proxy.$http.reqAlbumDetail({ id }).then(({ data }) => {
-            console.log(data)
-            playList.value = data.songs
-            // 关闭无限加载
-            more.value = true
-        })
-        return
-    }
     // 获取歌单详情
     if (offset < 1) {
         proxy.$http.reqPlayListDetail({ id }).then(({ data }) => {
@@ -120,6 +111,7 @@ const getPlayListDetail = ({ id, limit, offset }) => {
         more.value = data.songs.length === 0 ? true : false
     })
 }
+
 // 无限加载数据
 const offset = ref(0)
 const limit = ref(25)
