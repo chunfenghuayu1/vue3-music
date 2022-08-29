@@ -5,7 +5,7 @@
             class="flex items-center justify-center absolute top-0 min-w-full min-h-full bg-opacity-0 cursor-pointer"
             @click.self="handleRouter"
         >
-            <transition name="cover-playbtn">
+            <transition name="cover-playbtn" mode="out-in">
                 <div
                     v-show="show"
                     class="flex items-center justify-center backdrop-saturate-180 backdrop-blur-md rounded-full p-3 bg-white bg-opacity-20 hover:bg-opacity-30 active:scale-90 transition-all"
@@ -26,7 +26,7 @@
         />
 
         <!-- 图片阴影层 -->
-        <transition name="cover-shadow">
+        <transition name="cover-shadow" mode="out-in">
             <img
                 v-show="show"
                 :src="picUrl"

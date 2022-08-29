@@ -17,7 +17,7 @@ export const reqSubcount = () => request({ url: '/user/subcount' })
  * limit : 返回数量 , 默认为 30
  * offset : 偏移数量，用于分页 , 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0
  */
-export const reqUserPlayList = ({ uid, limit = 30, offset = 0, timestamp = +new Date() }) =>
+export const reqUserPlayList = ({ uid, limit, offset = 0, timestamp = +new Date() }) =>
     request({ url: '/user/playlist', params: { uid, limit, offset, timestamp } })
 
 /**

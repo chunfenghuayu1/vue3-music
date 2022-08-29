@@ -21,6 +21,9 @@ router.beforeEach((to, from) => {
     if (to.path === '/login' && loginMode !== '') {
         return { path: '/' }
     }
+    if (to.path === '/explore' && !to.query.cat) {
+        return { path: '/explore', query: { cat: '全部' } }
+    }
     return true
 })
 export default router

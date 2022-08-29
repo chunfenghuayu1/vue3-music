@@ -15,7 +15,7 @@
 .tagList-move,
 .tagList-enter-active,
 .tagList-leave-active {
-    @apply transition-all duration-300 ease-in-out;
+    @apply transition-all duration-300 ease-in;
 }
 .tagList-enter-from {
     @apply opacity-0;
@@ -28,21 +28,19 @@
 }
 
 /* 路由过渡 */
-.fade-route-enter-active {
-    @apply transition-all duration-300 ease-linear;
-}
+.fade-route-enter-active,
 .fade-route-leave-active {
-    @apply transition-all duration-200 ease-in;
+    @apply transition-all duration-200 ease-linear;
 }
 .fade-route-enter-from,
 .fade-route-leave-to {
     @apply opacity-0;
 }
 
-/* 主题切换过渡 */
+/* 主题切换按钮过渡 */
 .theme-slide-enter-active,
 .theme-slide-leave-active {
-    @apply transition-all duration-300 ease-out;
+    @apply transition-all duration-150;
 }
 
 .theme-slide-enter-from {
@@ -52,5 +50,12 @@
 .theme-slide-leave-to {
     @apply opacity-0 transform translate-y-5;
 }
-/* 歌单单个歌曲动画 */
-
+/* playlist 歌单单个歌曲动画 */
+.track-item-enter-active,
+.track-item-leave-active {
+    @apply transition-all duration-500 ease-linear;
+}
+.track-item-enter-from,
+.track-item-leave-to {
+    @apply opacity-0;
+}

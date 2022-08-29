@@ -8,7 +8,7 @@
             {{ $t.nav.home }}
         </router-link>
         <router-link
-            to="/explore"
+            :to="{ path: '/explore' }"
             class="mx-4 my-1 px-2 py-1 text-lg font-bold active:scale-95 rounded-md"
             :class="$route.name === 'explore' ? 'text-skin-primary' : ''"
         >

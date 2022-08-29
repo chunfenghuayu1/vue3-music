@@ -7,20 +7,18 @@ export default [
     {
         path: '/',
         name: 'home',
-        component: Home,
-        meta: { keepAlive: true }
+        component: Home
     },
     {
         path: '/explore',
         name: 'explore',
-        component: Explore,
-        meta: { keepAlive: true }
+        component: Explore
     },
     {
         path: '/my',
         name: 'my',
         component: My,
-        meta: { requireAuth: true, keepAlive: true }
+        meta: { requireAuth: true }
     },
     {
         path: '/login',

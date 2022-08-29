@@ -3,7 +3,7 @@ import { useStorageStore } from '@/store/Storage'
 import { reqUserPlayList, reqLikeSongs } from '@/api/User.js'
 // import { reqSongDetail } from '@/api/Song.js'
 import { reqPlayListDetail } from '@/api/PlayList.js'
-const storageStore = useStorageStore()
+
 export const useMySongs = defineStore('MySongs', {
     state: () => {
         return {
@@ -26,7 +26,8 @@ export const useMySongs = defineStore('MySongs', {
     actions: {
         // 获取用户歌单列表
         async getUserPlayList() {
-            const { data } = await reqUserPlayList({ uid: storageStore.userId })
+            const storageStore = useStorageStore()
+            const { data } = await reqUserPlayList({ uid: storageStore.userId, limit: 100 })
             if (data.code === 200) {
                 this.userList.more = data.more
                 this.userList.playlist = data.playlist
@@ -42,7 +43,7 @@ export const useMySongs = defineStore('MySongs', {
         },
         // 获取用户已喜欢音乐列表
         async getLikeList() {
-            // const storageStore = useStorageStore()
+            const storageStore = useStorageStore()
             const { data } = await reqLikeSongs({ uid: storageStore.userId })
             if (data.code === 200) {
                 this.like.likeSongIds = data.ids
@@ -52,7 +53,7 @@ export const useMySongs = defineStore('MySongs', {
     getters: {
         // 喜欢的歌单列表
         playlist: state => {
-            // const storageStore = useStorageStore()
+            const storageStore = useStorageStore()
             return state.userList.playlist.slice(1).filter(i => i.userId === storageStore.userId)
         },
         // 喜欢的音乐数量

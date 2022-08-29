@@ -10,7 +10,6 @@ export const formatPlayCount = count => {
 // 毫秒转年月日
 export const formatDate = value => {
     const date = new Date(value)
-
     const YY = date.getFullYear()
     const MM = date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
     const DD = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()

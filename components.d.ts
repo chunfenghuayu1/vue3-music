@@ -44,4 +44,7 @@ declare module '@vue/runtime-core' {
     SwitchTheme: typeof import('./src/components/NavBar/NavBarRightComp/SwitchTheme.vue')['default']
     TagSelector: typeof import('./src/views/Explore/TagSelector/TagSelector.vue')['default']
   }
+  export interface ComponentCustomProperties {
+    vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
+  }
 }

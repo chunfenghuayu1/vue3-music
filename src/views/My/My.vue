@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div v-if="MySongs.tracksCount">
         <div>
             <!-- 标题 -->
             <div class="flex items-center space-x-4 my-8">
                 <!-- 头像 -->
                 <img :src="`${storageStore.avatarUrl}?param=54y54`" class="rounded-full" />
                 <!-- 用户名 -->
-                <h3 class="text-4xl font-bold flex-wrap">{{ storageStore.nickname }}的音乐库</h3>
+                <h3 class="text-5xl font-bold flex-wrap">{{ storageStore.nickname }}的音乐库</h3>
             </div>
             <!-- 喜欢的音乐 -->
             <div
@@ -109,6 +109,8 @@ import { useStorageStore } from '@/store/Storage.js'
 import { useMySongs } from '@/store/MySongs.js'
 const storageStore = useStorageStore()
 const MySongs = useMySongs()
+MySongs.getUserPlayList()
+MySongs.getLikeList()
 
 const str = ref('你成长的经过\n你说你也在美国留学\n住在洛杉矶')
 </script>

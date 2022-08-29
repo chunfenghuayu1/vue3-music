@@ -18,14 +18,12 @@ import * as API from '@/api'
 import 'virtual:svg-icons-register'
 // 导入共享文字
 import i18n from '@/utils/i18n.js'
-
 const app = createApp(App)
 
 app.config.globalProperties.$http = API
 app.config.globalProperties.$notify = ElNotification
 app.config.globalProperties.$t = i18n
 app.config.performance = true
-
 app.use(VueLazyload, {
     preLoad: 1.3, //预加载的宽高比
     loading: lazyImg, //图片加载状态下显示的图片

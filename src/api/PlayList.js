@@ -13,8 +13,8 @@ export const reqAlbumListList = ({ limit }) => request({ url: `/personalized?lim
  * limit: 取出歌单数量 , 默认为 50
  * before: 分页参数,取上一页最后一个歌单的 updateTime 获取下一页数据
  */
-export const reqHighqualityPlaylist = ({ limit, cat }) =>
-    request({ url: '/top/playlist/highquality', params: { limit, cat } })
+export const reqHighqualityPlaylist = ({ limit, cat, before = null }) =>
+    request({ url: '/top/playlist/highquality', params: { limit, cat, before } })
 
 /**
  * 获取排行榜单数据
@@ -28,8 +28,8 @@ export const reqRankList = () => request({ url: '/toplist' })
  * limit: 取出歌单数量 , 默认为 50
  * offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*50, 其中 50 为 limit 的值
  */
-export const reqPlayList = ({ limit, cat }) =>
-    request({ url: '/top/playlist', params: { limit, cat } })
+export const reqPlayList = ({ limit, cat, offset }) =>
+    request({ url: '/top/playlist', params: { limit, cat, offset } })
 
 /**
  * 获取热门新专辑
