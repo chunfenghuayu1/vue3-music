@@ -32,12 +32,11 @@ export default defineComponent({
 })
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
 .svg-icon {
     width: 1em;
     height: 1em;
     fill: currentColor;
-    stroke: currentColor;
     vertical-align: middle;
 }
 </style>

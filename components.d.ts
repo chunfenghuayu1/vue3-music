@@ -7,8 +7,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AlbumItem: typeof import('./src/components/AlbumItem/AlbumItem.vue')['default']
-    Cover: typeof import('./src/components/Cover/Cover.vue')['default']
+    1: typeof import('./src/components/1.vue')['default']
+    AlbumItem: typeof import('./src/components/AlbumItem.vue')['default']
+    Artist: typeof import('./src/views/Artist/Artist.vue')['default']
+    Cover: typeof import('./src/components/Cover.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     Explore: typeof import('./src/views/Explore/Explore.vue')['default']
     ExploreTag: typeof import('./src/views/Explore/ExploreTag/ExploreTag.vue')['default']
@@ -17,9 +19,9 @@ declare module '@vue/runtime-core' {
     HomeRankList: typeof import('./src/views/Home/HomeRankList.vue')['default']
     HomeRecomAlbum: typeof import('./src/views/Home/HomeRecomAlbum.vue')['default']
     HomeRecomArtist: typeof import('./src/views/Home/HomeRecomArtist.vue')['default']
-    ListItem: typeof import('./src/components/PlayListItem/ListItem.vue')['default']
     Login: typeof import('./src/views/Login/Login.vue')['default']
-    Modal: typeof import('./src/components/Modal/Modal.vue')['default']
+    Modal: typeof import('./src/components/Modal.vue')['default']
+    MvCover: typeof import('./src/components/MvCover.vue')['default']
     My: typeof import('./src/views/My/My.vue')['default']
     NavBar: typeof import('./src/layout/NavBar.vue')['default']
     NavBarCenter: typeof import('./src/components/NavBar/NavBarCenter.vue')['default']
@@ -30,13 +32,14 @@ declare module '@vue/runtime-core' {
     PersonalizedDaily: typeof import('./src/views/Home/Personalized/PersonalizedDaily.vue')['default']
     PersonalizeNewSong: typeof import('./src/views/Home/Personalized/PersonalizeNewSong.vue')['default']
     PlayList: typeof import('./src/views/PlayList/PlayList.vue')['default']
-    PlayListItem: typeof import('./src/components/PlayListItem/PlayListItem.vue')['default']
+    PlayListItem: typeof import('./src/components/PlayListItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SvgIcon: typeof import('./src/components/SvgIcon/SvgIcon.vue')['default']
     Swiper: typeof import('./src/views/Home/Swiper/Swiper.vue')['default']
     SwitchTheme: typeof import('./src/components/NavBar/NavBarRightComp/SwitchTheme.vue')['default']
     TagSelector: typeof import('./src/views/Explore/TagSelector/TagSelector.vue')['default']
+    TrackCover: typeof import('./src/components/TrackCover.vue')['default']
   }
   export interface ComponentCustomProperties {
     vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']

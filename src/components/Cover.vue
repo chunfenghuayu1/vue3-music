@@ -1,17 +1,19 @@
 <template>
-    <div class="relative" @mouseenter="show = true" @mouseleave="show = false">
+    <div class="relative">
         <!-- 播放按钮 遮罩层 -->
         <div
-            class="flex items-center justify-center absolute top-0 min-w-full min-h-full bg-opacity-0 cursor-pointer"
+            class="flex items-center justify-center absolute top-0 w-full h-full bg-opacity-0 cursor-pointer"
             @click.self="handleRouter"
+            @mouseenter="show = true"
+            @mouseleave="show = false"
         >
             <transition name="cover-playbtn" mode="out-in">
                 <div
                     v-show="show"
-                    class="flex items-center justify-center backdrop-saturate-180 backdrop-blur-md rounded-full p-3 bg-white bg-opacity-20 hover:bg-opacity-30 active:scale-90 transition-all"
+                    class="flex items-center justify-center backdrop-saturate-180 backdrop-blur-md rounded-full p-2 bg-white bg-opacity-20 active:scale-90 transition-all"
                     @click.stop="handlePlay"
                 >
-                    <SvgIcon name="play" size="32" class="text-white"></SvgIcon>
+                    <SvgIcon name="play" size="36" class="text-white"></SvgIcon>
                 </div>
             </transition>
         </div>
@@ -26,7 +28,7 @@
         />
 
         <!-- 图片阴影层 -->
-        <transition name="cover-shadow" mode="out-in">
+        <transition name="cover" mode="out-in">
             <img
                 v-show="show"
                 :src="picUrl"
@@ -37,21 +39,18 @@
         </transition>
     </div>
     <!-- 标题 -->
-    <div class="mt-2 flex items-center" :class="rowType === 'recomArtist' ? 'justify-center' : ''">
+    <div
+        v-if="showTitle"
+        class="mt-2 flex items-center"
+        :class="rowType === 'recomArtist' ? 'justify-center' : ''"
+    >
         <div v-if="rowType === 'mylist' && rowListItem.privacy !== 0" class="mr-1">
-            <SvgIcon name="lock" size="18"></SvgIcon>
+            <SvgIcon name="lock" size="20"></SvgIcon>
         </div>
         <div class="lineClamp2">
-            <router-link
-                :to="
-                    rowType === 'newAlbum'
-                        ? { name: 'newAlbum', params: { id: rowListItem.id } }
-                        : { name: 'playlist', params: { id: rowListItem.id } }
-                "
-                class="cursor-pointer hover:underline font-semibold"
-            >
+            <a class="cursor-pointer hover:underline font-semibold" @click="handleRouter">
                 {{ rowListItem.name }}
-            </router-link>
+            </a>
         </div>
     </div>
     <!-- 副标题 -->
@@ -69,6 +68,10 @@ const props = defineProps({
     rowType: {
         type: String,
         default: ''
+    },
+    showTitle: {
+        type: Boolean,
+        default: true
     }
 })
 // 控制遮罩显示
@@ -90,15 +93,25 @@ const router = useRouter()
 const handleRouter = () => {
     // 隐藏动画
     // show.value = false
-    if (props.rowType === '') {
-        router.push({ name: 'playlist', params: { id: props.rowListItem.id } })
+    const type = props.rowType
+    const id = props.rowListItem.id
+    if (type === '') {
+        router.push({ name: 'playlist', params: { id } })
         return
     }
     // 如果点击新专辑，则传递type参数
-    if (props.rowType === 'newAlbum') {
+    if (type === 'newAlbum') {
         router.push({
             name: 'newAlbum',
-            params: { id: props.rowListItem.id }
+            params: { id }
+        })
+        return
+    }
+    // 如果点击歌手
+    if (type === 'recomArtist') {
+        router.push({
+            name: 'artist',
+            params: { id }
         })
         return
     }
@@ -112,13 +125,13 @@ onActivated(() => {
 </script>
 
 <style lang="postcss">
-.cover-shadow-enter-active,
-.cover-shadow-leave-active {
+.cover-enter-active,
+.cover-leave-active {
     @apply transition-opacity duration-300;
 }
 
-.cover-shadow-enter-from,
-.cover-shadow-leave-to {
+.cover-enter-from,
+.cover-leave-to {
     @apply opacity-0;
 }
 

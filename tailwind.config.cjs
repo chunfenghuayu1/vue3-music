@@ -7,6 +7,8 @@ function withOpacity(variableName) {
         return `rgb(var(${variableName})`
     }
 }
+// 默认主题字体
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
     mode: 'jit',
@@ -30,6 +32,9 @@ module.exports = {
             // => @media (max-width: 639px) { ... }
         },
         extend: {
+            fontFamily: {
+                sans: ['Barlow', ...defaultTheme.fontFamily.sans]
+            },
             textColor: {
                 skin: {
                     base: withOpacity('--color-base'),

@@ -25,12 +25,16 @@
 * {
   @apply antialiased font-sans;
 }
+#main,nav {
+  min-width: 900px;
+}
 /* 添加功能类 */
 @layer components {
   /* 按钮通用样式 */
   .btn {
     @apply flex items-center justify-center rounded-xl hover:bg-opacity-20 hover:bg-skin-tertiary active:scale-90 transition-all;
   }
+  /* 省略字 */
   .lineClamp3 {
     @apply overflow-hidden;
     display: -webkit-box;
@@ -49,11 +53,16 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
   }
-  .tag {
-    @apply font-bold text-lg text-gray-600 text-opacity-80 bg-gray-300 bg-opacity-30  py-2 px-4 rounded-lg hover:bg-skin-primary hover:bg-opacity-20 hover:text-skin-primary cursor-pointer mr-4 my-2;
+  /* explore 选择标签按钮 */
+  .selector-tag {
+    @apply font-bold text-lg text-gray-600 text-opacity-80 bg-gray-300 bg-opacity-30  py-1.5 px-3.5 rounded-lg hover:bg-skin-primary hover:bg-opacity-20 hover:text-skin-primary cursor-pointer mr-4 my-2;
   }
   .activeTag{
     @apply bg-skin-primary bg-opacity-20 text-skin-primary;
+  }
+  /* my 选择标签按钮 */
+  .my-tag {
+    @apply cursor-pointer p-2 hover:bg-gray-100 rounded-lg;
   }
 }
 
@@ -62,7 +71,7 @@
  高宽分别对应横竖滚动条的尺寸*/
 ::-webkit-scrollbar {
   /* 隐藏滚动条 w-0 */
-  @apply w-2 h-2;
+  @apply w-0 h-2;
 }
 
 /*定义滚动条轨道

@@ -35,11 +35,7 @@
             :allow-touch-move="false"
             @swiper="onSwiper"
         >
-            <swiper-slide
-                v-for="(item, index) in itemList"
-                :key="index"
-                class="cursor-pointer relative"
-            >
+            <swiper-slide v-for="(item, index) in itemList" :key="index" class="relative">
                 <div>
                     <Cover :row-list-item="item" :row-type="'newAlbum'">
                         <!-- 最新专辑显示歌手名 -->
@@ -47,7 +43,7 @@
                             <div v-for="(item1, index1) in rowListItem.artists" :key="index1">
                                 <i v-if="index1 !== 0">/</i>
                                 <router-link
-                                    :to="{ name: 'newAlbum', params: { id: item1.id } }"
+                                    :to="{ name: 'artist', params: { id: item1.id } }"
                                     class="text-xs text-skin-tertiary cursor-pointer hover:underline"
                                 >
                                     {{ item1.name }}

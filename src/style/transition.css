@@ -27,6 +27,7 @@
     @apply absolute;
 }
 
+/* Router */
 /* 路由过渡 */
 .fade-route-enter-active,
 .fade-route-leave-active {
@@ -37,6 +38,7 @@
     @apply opacity-0;
 }
 
+/* theme */
 /* 主题切换按钮过渡 */
 .theme-slide-enter-active,
 .theme-slide-leave-active {
@@ -50,6 +52,7 @@
 .theme-slide-leave-to {
     @apply opacity-0 transform translate-y-5;
 }
+
 /* playlist 歌单单个歌曲动画 */
 .track-item-enter-active,
 .track-item-leave-active {
@@ -59,3 +62,5 @@
 .track-item-leave-to {
     @apply opacity-0;
 }
+
+

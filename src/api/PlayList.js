@@ -41,6 +41,7 @@ export const reqAlbumNewest = () => request({ url: '/album/newest' })
  * 必选参数 : id: 专辑 id
  */
 export const reqAlbumDetail = ({ id }) => request({ url: '/album', params: { id } })
+
 /**
  * 获取推荐新音乐
  * @param {number} limit

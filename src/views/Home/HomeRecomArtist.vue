@@ -8,7 +8,7 @@
         </div>
         <div class="grid gap-x-10 grid-cols-6 lg:gap-x-5">
             <div v-for="(item, index) in itemList" :key="index">
-                <Cover :row-list-item="item" :row-type="'recomArtist'"> </Cover>
+                <Cover :row-list-item="item" row-type="recomArtist"> </Cover>
             </div>
         </div>
     </div>

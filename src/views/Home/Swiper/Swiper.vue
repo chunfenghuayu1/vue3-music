@@ -19,6 +19,7 @@
                 v-for="(item, index) in bannerList"
                 :key="index"
                 class="cursor-pointer relative"
+                @click="handlerClick(item.typeTitle, item)"
             >
                 <img
                     :src="`${item.imageUrl?.replace('http://', 'https://')}?param=377y144`"
@@ -45,6 +46,22 @@ defineProps({
         default: () => []
     }
 })
+const router = useRouter()
+const handlerClick = (type, item) => {
+    if (type === '歌单') {
+        router.push({ name: 'playlist', params: { id: item.targetId } })
+        return
+    }
+    if (type === '新碟首发' || type === '数字专辑') {
+        const id = item.url.split('?id=')[1]
+        router.push({ name: 'newAlbum', params: { id } })
+        return
+    }
+    if (type === '新歌首发') {
+        console.log('还未处理')
+        return
+    }
+}
 </script>
 
 <style lang="postcss" scoped>

@@ -20,7 +20,7 @@
                     <div class="text-skin-primary flex-shrink-0" v-text="str"></div>
                     <!-- 喜欢的音乐 -->
                     <div class="flex justify-between">
-                        <div class="flex-grow flex-shrink-0">
+                        <div class="flex-grow flex-shrink-0 space-y-1">
                             <div class="text-2xl font-bold text-skin-primary">我喜欢的音乐</div>
                             <div class="text-skin-primary text-sm">
                                 共{{ MySongs.tracksCount }}首歌
@@ -28,45 +28,26 @@
                         </div>
                         <!-- 播放按钮 -->
                         <div
-                            class="p-1 rounded-full flex items-center justify-center bg-skin-primary"
+                            class="p-1.5 flex items-center justify-center bg-skin-primary rounded-full"
                         >
                             <SvgIcon name="play" size="44" class="text-white"></SvgIcon>
                         </div>
                     </div>
                 </div>
                 <!-- 右侧音乐列表 -->
-                <div class="w-2/3 h-56 flex flex-wrap items-center lg:w-full">
+                <div class="w-2/3 h-56 lg:w-full flex flex-wrap items-center">
                     <div
                         v-for="(item, index) in MySongs.showLikeSongs"
                         :key="index"
-                        class="w-1/3 h-1/4 flex items-center space-x-3 py-2 px-2 hover:bg-gray-300 hover:bg-opacity-30 rounded-lg"
+                        class="w-1/3 h-1/4"
                     >
-                        <!-- 歌曲图片 -->
-                        <div class="flex-shrink-0 flex items-center justify-center">
-                            <img
-                                :src="`${item.al.picUrl}?param=36y36`"
-                                class="rounded-lg h-9 w-9"
-                            />
-                        </div>
-                        <!-- 歌曲描述 -->
-                        <div class="flex flex-col justify-center">
-                            <!-- 歌名 -->
-                            <div class="font-bold lineClamp1 select-none">
-                                <span>{{ item.name }}</span>
-                                <span v-if="item.alia.length > 0" class="text-skin-tertiary">
-                                    {{ item.alia[0].name }}
-                                </span>
-                            </div>
-                            <!-- 歌手 -->
-                            <div class="text-xs lineClamp1 text-skin-tertiary">
-                                <div v-for="(ar, index1) in item.ar" :key="index1" class="inline">
-                                    <span v-if="index1 !== 0"> / </span>
-                                    <span class="cursor-pointer hover:underline">
-                                        {{ ar.name }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                        <TrackCover
+                            :item="item"
+                            :pic-url="item.al.picUrl"
+                            :name="item.name"
+                            :alia="item.alia"
+                            :ar="item.ar"
+                        ></TrackCover>
                     </div>
                 </div>
             </div>
@@ -75,16 +56,20 @@
             <!-- 歌单标题 -->
             <div class="flex justify-between items-center h-9 mt-12">
                 <!-- 左侧选择区域 -->
-                <div class="flex space-x-8 font-bold items-center text-skin-tertiary flex-shrink-0">
-                    <div class="p-2 bg-gray-100 rounded-lg">创建的歌单</div>
-                    <div>专辑</div>
-                    <div>艺人</div>
-                    <div>MV</div>
-                    <div>云盘</div>
-                    <div>听歌排行</div>
+                <div
+                    class="flex space-x-8 font-bold items-center text-skin-tertiary flex-shrink-0 select-none"
+                >
+                    <div class="my-tag bg-gray-100">创建的歌单</div>
+                    <div class="my-tag">专辑</div>
+                    <div class="my-tag">艺人</div>
+                    <div class="my-tag">MV</div>
+                    <div class="my-tag">云盘</div>
+                    <div class="my-tag">听歌排行</div>
                 </div>
                 <!-- 右侧 新建歌单-->
-                <div class="text-sm text-skin-tertiary flex-shrink-0">+&nbsp;&nbsp;新建歌单</div>
+                <div class="text-sm text-skin-tertiary flex-shrink-0 cursor-pointer select-none">
+                    +&nbsp;&nbsp;新建歌单
+                </div>
             </div>
             <!-- 歌单内容 -->
             <div class="grid grid-cols-5 gap-8">

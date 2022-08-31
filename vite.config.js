@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => {
     // console.log(env)
     return {
         // root: './',
-        // base: './',
+        base: './',
         publicDir: './public',
         plugins: [
             vue(),

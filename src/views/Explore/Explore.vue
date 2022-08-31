@@ -8,7 +8,11 @@
             :category="category"
         >
             <template #more>
-                <div class="tag" :class="showMore ? 'activeTag' : ''" @click="showMore = !showMore">
+                <div
+                    class="selector-tag"
+                    :class="showMore ? 'activeTag' : ''"
+                    @click="showMore = !showMore"
+                >
                     &bull;&bull;&bull;
                 </div>
             </template>
@@ -20,7 +24,7 @@
         <!-- 渲染歌单列表 -->
         <div
             v-infinite-scroll="load"
-            class="mt-16 grid gap-10 grid-cols-6 lg:gap-x-5"
+            class="mt-12 grid gap-10 grid-cols-6 lg:gap-x-5"
             :infinite-scroll-immediate="false"
             infinite-scroll-distance="300"
             infinite-scroll-delay="500"

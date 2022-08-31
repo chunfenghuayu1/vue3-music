@@ -10,13 +10,6 @@
             class="flex items-center justify-center rounded-md overflow-hidden relative w-12 flex-shrink-0"
         >
             <img :src="`${song.al.picUrl}?param=48y48`" class="w-12 h-12" loading="lazy" />
-            <!-- 遮罩层 -->
-            <div
-                v-show="showBtn"
-                class="absolute bg-gray-900 bg-opacity-40 w-full h-full flex items-center justify-center cursor-pointer"
-            >
-                <SvgIcon name="play" size="28" class="text-white"></SvgIcon>
-            </div>
         </div>
         <!-- 歌名 作者 -->
         <div class="flex flex-col justify-center flex-1">
@@ -34,12 +27,12 @@
             </div>
         </div>
         <!-- 出处 -->
-        <div class="flex items-center flex-1 lineClamp1 hover:underline cursor-pointer">
-            {{ song.al.name }}
+        <div class="flex items-center flex-1">
+            <span class="hover:underline cursor-pointer lineClamp1">{{ song.al.name }}</span>
         </div>
         <!-- 收藏或喜欢 -->
         <div class="flex justify-end items-center w-8">
-            <div v-show="showBtn" class="cursor-pointer">
+            <div v-show="MySongs.likeSongIds(song.id) || showBtn" class="cursor-pointer">
                 <SvgIcon
                     v-if="MySongs.likeSongIds(song.id)"
                     name="like"
@@ -50,7 +43,7 @@
             </div>
         </div>
         <!-- 歌曲时间 -->
-        <div class="flex items-center justify-center font-semibold">{{ forminute(song.dt) }}</div>
+        <div class="flex items-center justify-center select-none">{{ forminute(song.dt) }}</div>
     </div>
 </template>
 

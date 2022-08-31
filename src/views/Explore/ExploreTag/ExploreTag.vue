@@ -3,7 +3,7 @@
         <div
             v-for="item in activeTags"
             :key="item"
-            class="tag transition-all"
+            class="selector-tag transition-all"
             :class="category === item && !showMore ? 'activeTag' : ''"
             @click="changeCategory(item)"
         >

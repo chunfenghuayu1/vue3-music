@@ -12,7 +12,7 @@
             </div>
             <div class="flex flex-col justify-center">
                 <!-- 专辑标题 -->
-                <h3 class="font-bold text-4xl mb-4 lineClamp2">
+                <h3 class="font-bold text-5xl mb-4 lineClamp2">
                     {{ album.name }}
                 </h3>
                 <!-- 专辑简介 -->
@@ -20,12 +20,11 @@
                     <div class="lineClamp1 font-bold">
                         <span>专辑列表</span>
                         <span> &bull; </span>
-                        <a
+                        <router-link
                             v-if="album.artists?.length > 0"
-                            target="_blank"
-                            :href="`https://music.163.com/#/user/home?id=${album.userId}`"
+                            :to="{ name: 'artist', params: { id: album.artist.id } }"
                             class="hover:underline"
-                            >{{ album.artists[0].name }}</a
+                            >{{ album.artist.name }}</router-link
                         >
                     </div>
                     <div class="lineClamp1 text-skin-tertiary text-sm">
@@ -43,19 +42,26 @@
                 <!-- 操作区 -->
                 <div class="mt-4 flex items-center space-x-8">
                     <button
-                        class="py-1 px-4 rounded-lg flex items-center justify-center bg-skin-primary bg-opacity-20 flex-shrink-0"
+                        class="py-1.5 px-2.5 rounded-lg flex items-center justify-center space-x-1 bg-skin-primary bg-opacity-20 flex-shrink-0"
                     >
-                        <span class="font-bold text-lg text-skin-primary">播放</span>
+                        <SvgIcon name="play" size="24" class="text-skin-primary"></SvgIcon>
+                        <span class="font-bold text-skin-primary">播放</span>
                     </button>
                     <button
-                        class="py-1 px-4 rounded-lg flex items-center justify-center bg-gray-400 bg-opacity-20 font-bold text-lg flex-shrink-0"
+                        class="p-2 rounded-lg flex items-center justify-center bg-gray-400 bg-opacity-10 flex-shrink-0"
                     >
-                        收藏
+                        <SvgIcon
+                            v-if="true"
+                            name="dislike"
+                            size="20"
+                            class="text-skin-primary"
+                        ></SvgIcon>
+                        <SvgIcon v-else name="like" size="20" class="text-skin-primary"></SvgIcon>
                     </button>
                     <button
-                        class="py-1 px-2 rounded-lg flex items-center justify-center bg-gray-400 bg-opacity-20 flex-shrink-0"
+                        class="p-0.5 rounded-lg flex items-center justify-center bg-gray-400 bg-opacity-10 flex-shrink-0"
                     >
-                        &bull;&bull;&bull;
+                        <SvgIcon name="more" size="32" class="text-skin-primary"></SvgIcon>
                     </button>
                 </div>
             </div>

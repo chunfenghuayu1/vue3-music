@@ -1,7 +1,7 @@
 <template>
     <div
         v-show="song.name"
-        class="flex space-x-6 items-center hover:bg-opacity-10 hover:bg-skin-tertiary transition-all rounded-lg py-2 px-4"
+        class="flex space-x-6 items-center hover:bg-opacity-10 hover:bg-skin-tertiary transition-all rounded-lg py-3 px-4"
         @mouseenter="showBtn = true"
         @mouseleave="showBtn = false"
     >
@@ -25,7 +25,10 @@
         </div>
         <!-- 收藏或喜欢 -->
         <div class="flex justify-end items-center w-8">
-            <div v-show="showBtn && song.dt" class="cursor-pointer">
+            <div
+                v-show="MySongs.likeSongIds(song.id) || (showBtn && song.dt)"
+                class="cursor-pointer"
+            >
                 <SvgIcon
                     v-if="MySongs.likeSongIds(song.id)"
                     name="like"
@@ -36,7 +39,7 @@
             </div>
         </div>
         <!-- 歌曲时间 -->
-        <div v-if="song.dt" class="flex items-center justify-center font-semibold">
+        <div v-if="song.dt" class="flex items-center justify-center">
             {{ forminute(song.dt) }}
         </div>
     </div>

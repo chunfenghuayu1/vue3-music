@@ -8,7 +8,9 @@ const router = createRouter({
     scrollBehavior() {
         return { top: 0 }
     }
+    // base: import.meta.env.VITE_APP_BasePath
 })
+
 router.beforeEach((to, from) => {
     const storageStore = useStorageStore()
     const loginMode = storageStore.data.loginMode

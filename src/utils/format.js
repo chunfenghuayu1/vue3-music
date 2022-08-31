@@ -22,3 +22,11 @@ export const forminute = value => {
     const ss = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds()
     return `${mm}:${ss}`
 }
+// xxxx-xx-xx
+export const formatDateStr = value => {
+    const arr = value.split('-')
+    const y = arr[0]
+    const m = arr[1]
+    const d = arr[2]
+    return `${y}年${m}月${d}日`
+}
