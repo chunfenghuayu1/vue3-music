@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-1 items-center lg:space-x-0 space-x-8">
-        <div class="cursor-pointer" @click="handler">
+        <div v-if="false" class="cursor-pointer" @click="handler">
             <SvgIcon name="logo" size="48" class="lg:hidden"></SvgIcon>
         </div>
 
