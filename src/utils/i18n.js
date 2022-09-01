@@ -2,7 +2,8 @@ export default {
     nav: {
         home: '首页',
         explore: '发现',
-        my: '我的'
+        my: '我的',
+        search: '搜索'
     },
     home: {
         more: '查看更多',

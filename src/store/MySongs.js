@@ -77,6 +77,8 @@ export const useMySongs = defineStore('MySongs', {
         tracksCount: state => state.like.tracks.length,
         // 展示的音乐，只有12首
         showLikeSongs: state => state.like.tracks.slice(0, 12),
+        // 全部喜欢音乐
+        showAllLikeSongs: state => state.like.tracks,
         // 喜欢的音乐id
         likeSongIds: state => {
             const ids = state.like.likeSongIds

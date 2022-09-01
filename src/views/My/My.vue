@@ -14,7 +14,8 @@
             >
                 <!-- 左侧横幅 -->
                 <div
-                    class="h-56 flex justify-between flex-col flex-shrink-0 bg-skin-primary bg-opacity-20 w-1/3 rounded-lg p-4 lg:w-full"
+                    class="h-56 flex justify-between flex-col flex-shrink-0 bg-skin-primary bg-opacity-20 w-1/3 rounded-lg p-4 lg:w-full cursor-pointer"
+                    @click="$router.push('/likesongs')"
                 >
                     <!-- 描述内容 -->
                     <div class="text-skin-primary flex-shrink-0" v-text="str"></div>
@@ -29,6 +30,7 @@
                         <!-- 播放按钮 -->
                         <div
                             class="p-1.5 flex items-center justify-center bg-skin-primary rounded-full"
+                            @click="$router.replace('/')"
                         >
                             <SvgIcon name="play" size="44" class="text-white"></SvgIcon>
                         </div>
@@ -94,10 +96,10 @@ import { useStorageStore } from '@/store/Storage.js'
 import { useMySongs } from '@/store/MySongs.js'
 const storageStore = useStorageStore()
 const MySongs = useMySongs()
-onActivated(() => {
-    MySongs.getUserPlayList()
-    MySongs.getLikeList()
-})
+// onActivated(() => {
+//     MySongs.getUserPlayList()
+//     MySongs.getLikeList()
+// })
 
 const str = ref('你成长的经过\n你说你也在美国留学\n住在洛杉矶')
 </script>

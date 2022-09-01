@@ -1,5 +1,5 @@
 <template>
-    <div v-cloak>
+    <div v-if="dataList.albumList.length > 0">
         <!-- 轮播图 -->
         <Swiper :banner-list="bannerList"></Swiper>
         <!-- 推荐歌单 -->
@@ -68,8 +68,4 @@ onActivated(() => {
 })
 </script>
 
-<style lang="postcss">
-[v-cloak] {
-    display: none !important;
-}
-</style>
+<style lang="postcss"></style>

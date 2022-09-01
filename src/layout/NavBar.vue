@@ -11,10 +11,6 @@
     </nav>
 </template>
 
-<script setup>
-import NavBarCenter from '../components/NavBar/NavBarCenter.vue'
-import NavBarLeft from '../components/NavBar/NavBarLeft.vue'
-import NavBarRight from '../components/NavBar/NavBarRight.vue'
-</script>
+<script setup></script>
 
 <style lang="postcss"></style>

@@ -7,7 +7,6 @@
             :space-between="10"
             :observer="true"
             :observe-parents="true"
-            :observe-slide-children="true"
             :autoplay="{
                 delay: 3000,
                 stopOnLastSlide: false,
@@ -52,13 +51,17 @@ const handlerClick = (type, item) => {
         router.push({ name: 'playlist', params: { id: item.targetId } })
         return
     }
-    if (type === '新碟首发' || type === '数字专辑') {
+    if (type === '数字专辑') {
         const id = item.url.split('?id=')[1]
         router.push({ name: 'newAlbum', params: { id } })
         return
     }
     if (type === '新歌首发') {
         console.log('还未处理')
+        return
+    }
+    if (type === '新碟首发') {
+        router.push({ name: 'newAlbum', params: { id: item.targetId } })
         return
     }
 }

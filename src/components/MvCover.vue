@@ -1,24 +1,25 @@
 <template>
     <div class="relative">
         <div class="cursor-pointer" @mouseenter="show = true" @mouseleave="show = false">
-            <img
-                :src="`${item.imgurl}?param=285y160`"
-                class="rounded-lg object-cover h-full w-full"
-            />
+            <img :src="`${imgUrl}?param=285y160`" class="rounded-lg object-cover" />
             <!-- 图片阴影层 -->
             <transition name="cover" mode="out-in">
                 <img
                     v-show="show"
-                    :src="`${item.imgurl}?param=285y160`"
-                    class="h-full w-full absolute top-3 -z-10 bg-cover blur-md opacity-60 scale-95"
+                    :src="`${imgUrl}?param=285y160`"
+                    class="absolute top-3 -z-10 object-cover blur-md opacity-60 scale-95"
                     loading="lazy"
                 />
             </transition>
         </div>
     </div>
     <div v-if="showTitle" class="mt-2">
-        <div class="font-bold mb-2 lineClamp2">{{ item.name }}</div>
-        <div class="text-xs text-gray-400 italic">{{ item.publishTime }}</div>
+        <div class="font-bold mb-2 lineClamp2">
+            {{ name }}
+        </div>
+        <div class="text-xs text-gray-400 italic">
+            {{ subText }}
+        </div>
     </div>
 </template>
 
@@ -34,6 +35,18 @@ defineProps({
     showTitle: {
         type: Boolean,
         default: true
+    },
+    name: {
+        type: String,
+        default: ''
+    },
+    imgUrl: {
+        type: String,
+        required: true
+    },
+    subText: {
+        type: String,
+        default: ''
     }
 })
 </script>

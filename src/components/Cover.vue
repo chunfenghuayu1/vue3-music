@@ -79,6 +79,9 @@ const show = ref(false)
 
 // 计算图片地址
 const picUrl = computed(() => {
+    if (props.rowListItem.img1v1 === -1) {
+        return `https://p1.music.126.net/VnZiScyynLG7atLIZ2YPkw==/18686200114669622.jpg?param=512y512`
+    }
     let url = props.rowListItem.picUrl || props.rowListItem.coverImgUrl
     return `${url?.replace('http://', 'https://')}?param=512y512`
 })

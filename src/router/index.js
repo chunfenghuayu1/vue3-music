@@ -11,12 +11,12 @@ const router = createRouter({
     // base: import.meta.env.VITE_APP_BasePath
 })
 
-router.beforeEach((to, from) => {
+router.beforeEach(to => {
     const storageStore = useStorageStore()
     const loginMode = storageStore.data.loginMode
     if (to.meta.requireAuth) {
         if (loginMode === '') {
-            return { path: '/login', query: { redirect: from.path } }
+            return { path: '/login', query: { redirect: to.path } }
         }
         return true
     }

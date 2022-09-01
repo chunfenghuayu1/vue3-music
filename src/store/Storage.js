@@ -28,8 +28,8 @@ export const useStorageStore = defineStore('storageStore', {
             }
         },
         // 刷新登录状态，获取用户信息
-        getUserInfo() {
-            reqLoginStatus().then(({ data }) => {
+        async getUserInfo() {
+            await reqLoginStatus().then(({ data }) => {
                 if (data.data.code === 200) {
                     this.data.user = data.data.profile
                     this.data.loginMode = 'qrcode'

@@ -17,15 +17,15 @@
                 </h3>
                 <!-- 专辑简介 -->
                 <div class="flex justify-start space-x-4">
-                    <div class="flex text-skin-tertiary text-sm space-x-1">
+                    <div class="flex items-center text-skin-tertiary text-sm space-x-1">
                         <SvgIcon name="music" size="18" class="text-gray-400"></SvgIcon>
                         <span>{{ artist.musicSize }}首</span>
                     </div>
-                    <div class="flex text-skin-tertiary text-sm space-x-1">
+                    <div class="flex items-center text-skin-tertiary text-sm space-x-1">
                         <SvgIcon name="album" size="18" class="text-gray-400"></SvgIcon>
                         <span>{{ artist.albumSize }}张</span>
                     </div>
-                    <div class="flex text-skin-tertiary text-sm space-x-1">
+                    <div class="flex items-center text-skin-tertiary text-sm space-x-1">
                         <SvgIcon name="mv" size="18" class="text-gray-400"></SvgIcon>
                         <span>{{ artist.mvSize }}部</span>
                     </div>
@@ -64,11 +64,11 @@
             </div>
         </div>
         <!-- 内容 -->
-        <div v-if="newest.album" class="space-y-8">
+        <div v-if="newest?.album" class="space-y-8">
             <!-- 最新发布 -->
             <div>
                 <h3 class="font-bold text-2xl mb-4">最新发布</h3>
-                <div class="flex">
+                <div class="flex h-40">
                     <!-- 最新专辑 -->
                     <div class="flex flex-1 items-center space-x-4">
                         <div class="w-40 flex-shrink-0">
@@ -95,8 +95,12 @@
                     </div>
                     <!-- 最新mv -->
                     <div v-if="newest.mv" class="flex-1 flex space-x-4">
-                        <div class="h-36">
-                            <MvCover :item="newest.mv" :show-title="false"></MvCover>
+                        <div class="flex-shrink-0">
+                            <MvCover
+                                :item="newest.mv"
+                                :img-url="newest.mv.imgurl"
+                                :show-title="false"
+                            ></MvCover>
                         </div>
                         <div class="flex flex-col justify-center">
                             <div class="font-bold text-lg mb-2">{{ newest.mv.name }}</div>
@@ -155,7 +159,13 @@
                 <h3 class="font-bold text-2xl mb-4">MVs</h3>
                 <div class="grid grid-cols-5 gap-10 lg:gap-x-5">
                     <div v-for="(item, index) in mvs" :key="index">
-                        <MvCover :item="item" :show-title="true"></MvCover>
+                        <MvCover
+                            :item="item"
+                            :img-url="item.imgurl"
+                            :name="item.name"
+                            :sub-text="item.publishTime"
+                            :show-title="true"
+                        ></MvCover>
                     </div>
                 </div>
             </div>
@@ -176,6 +186,7 @@
 </template>
 
 <script setup>
+// import { onBeforeRouteUpdate } from 'vue-router'
 import { formatDate, formatDateStr } from '@/utils/format.js'
 const { proxy } = getCurrentInstance()
 const route = useRoute()
@@ -223,7 +234,7 @@ const getAritstDetail = () => {
     })
 }
 getAritstDetail()
-// 路由相同情况
+
 watch(route, (toParams, prev) => {
     // 对路由变化做出响应...
     prev.name === toParams.name && router.go(0)

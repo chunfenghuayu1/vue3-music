@@ -27,10 +27,12 @@
 <script setup>
 import QRCode from 'qrcode'
 import { useStorageStore } from '@/store/Storage.js'
+import { useMySongs } from '@/store/MySongs.js'
 const { proxy } = getCurrentInstance()
 const router = useRouter()
 const route = useRoute()
 const storageStore = useStorageStore()
+const MySongs = useMySongs()
 const qrcode = ref('')
 const unikey = ref('')
 const notify = ref('打开网易云音乐APP扫码登录')
@@ -91,12 +93,18 @@ const checkQRCodeLogin = () => {
                 afterLogin()
             }
         })
-    }, 2000)
+    }, 1000)
+}
+// 刷新数据
+const updateData = async () => {
+    await storageStore.getUserInfo()
+    MySongs.getUserPlayList()
+    MySongs.getLikeList()
 }
 // 处理登录成功后的事件
 const afterLogin = async () => {
     // 本地存储更改用户登录状态,获取用户信息
-    await storageStore.getUserInfo()
+    await updateData()
     // 获取路由参数
     const query = route.query.redirect
     query ? router.replace(query) : router.go(0)

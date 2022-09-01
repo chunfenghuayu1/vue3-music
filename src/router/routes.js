@@ -5,6 +5,8 @@ const Login = () => import('@/views/Login/Login.vue')
 const PlayList = () => import('@/views/PlayList/PlayList.vue')
 const NewAlbum = () => import('@/views/NewAlbum/NewAlbum.vue')
 const Artist = () => import('@/views/Artist/Artist.vue')
+const LikeSongs = () => import('@/views/LikeSongs/LikeSongs.vue')
+const Search = () => import('@/views/Search/Search.vue')
 export default [
     {
         path: '/',
@@ -41,5 +43,16 @@ export default [
         path: '/artist/:id',
         name: 'artist',
         component: Artist
+    },
+    {
+        path: '/likesongs',
+        name: 'likesongs',
+        component: LikeSongs,
+        meta: { requireAuth: true }
+    },
+    {
+        path: '/search',
+        name: 'search',
+        component: Search
     }
 ]

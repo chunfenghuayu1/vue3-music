@@ -11,9 +11,7 @@
             <!-- 歌名 -->
             <div class="font-bold lineClamp1 select-none">
                 <span>{{ name }}</span>
-                <span v-if="alia?.length > 0" class="text-skin-tertiary">
-                    {{ alia[0].name }}
-                </span>
+                <span v-if="alia?.length > 0" class="text-skin-tertiary"> ({{ alia[0] }}) </span>
             </div>
             <!-- 歌手 -->
             <div class="text-xs lineClamp1 text-skin-tertiary">

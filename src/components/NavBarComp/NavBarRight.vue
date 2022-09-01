@@ -1,5 +1,6 @@
 <template>
     <div class="flex flex-1 items-center justify-end min-w-max space-x-5">
+        <SearchInput></SearchInput>
         <SwitchTheme></SwitchTheme>
         <el-avatar
             v-if="storageStore.data.loginMode === ''"
@@ -26,7 +27,7 @@ const storageStore = useStorageStore()
 const router = useRouter()
 const loginout = async () => {
     await storageStore.handlerLogout()
-    router.replace('/')
+    router.go(0)
 }
 </script>
 
