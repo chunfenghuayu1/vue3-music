@@ -18,12 +18,12 @@
             :slides-per-view="5"
             :slides-per-group="5"
             :space-between="20"
-            :speed="1200"
+            :speed="800"
             :observer="true"
             :observe-parents="true"
             :observe-slide-children="true"
             :breakpoints="{
-                1023: {
+                1300: {
                     spaceBetween: 40
                 }
             }"

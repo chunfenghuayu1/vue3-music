@@ -46,11 +46,11 @@
 }
 
 .theme-slide-enter-from {
-    @apply opacity-0 transform -translate-y-8;
+    @apply opacity-0 transform -translate-y-4;
 }
 
 .theme-slide-leave-to {
-    @apply opacity-0 transform translate-y-5;
+    @apply opacity-0 transform translate-y-4;
 }
 
 /* playlist 歌单单个歌曲动画 */

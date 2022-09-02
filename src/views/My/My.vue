@@ -54,19 +54,32 @@
                 </div>
             </div>
         </div>
-        <div class="space-y-8">
+        <div ref="title" class="mt-12 space-y-8">
             <!-- 歌单标题 -->
-            <div class="flex justify-between items-center h-9 mt-12">
+            <div class="flex justify-between items-center h-9">
                 <!-- 左侧选择区域 -->
                 <div
                     class="flex space-x-8 font-bold items-center text-skin-tertiary flex-shrink-0 select-none"
+                    @click="hanlderClick"
                 >
-                    <div class="my-tag bg-gray-100">创建的歌单</div>
-                    <div class="my-tag">专辑</div>
-                    <div class="my-tag">艺人</div>
-                    <div class="my-tag">MV</div>
-                    <div class="my-tag">云盘</div>
-                    <div class="my-tag">听歌排行</div>
+                    <div class="my-tag bg-gray-100">
+                        <DropDown v-model:toggleShow="toggleShow" v-model:type="type" :row="type1">
+                            <template #button="{ active }">
+                                <div
+                                    class="flex items-center justify-center space-x-1 p-2"
+                                    @click="toggleShow = !toggleShow"
+                                >
+                                    <div>{{ active.name }}</div>
+                                    <SvgIcon name="down" size="20"></SvgIcon>
+                                </div>
+                            </template>
+                        </DropDown>
+                    </div>
+                    <div class="my-tag p-2">专辑</div>
+                    <div class="my-tag p-2">艺人</div>
+                    <div class="my-tag p-2">MV</div>
+                    <div class="my-tag p-2">云盘</div>
+                    <div class="my-tag p-2">听歌排行</div>
                 </div>
                 <!-- 右侧 新建歌单-->
                 <div class="text-sm text-skin-tertiary flex-shrink-0 cursor-pointer select-none">
@@ -74,8 +87,8 @@
                 </div>
             </div>
             <!-- 歌单内容 -->
-            <div class="grid grid-cols-5 gap-8">
-                <div v-for="(item, index) in MySongs.playlist(1)" :key="index">
+            <div class="grid grid-cols-5 gap-8 min-h-screen">
+                <div v-for="(item, index) in MySongs.playlist(type)" :key="index">
                     <Cover :row-list-item="item" :row-type="'mylist'">
                         <template #subTilte>
                             <div>
@@ -96,12 +109,28 @@ import { useStorageStore } from '@/store/Storage.js'
 import { useMySongs } from '@/store/MySongs.js'
 const storageStore = useStorageStore()
 const MySongs = useMySongs()
-// onActivated(() => {
-//     MySongs.getUserPlayList()
-//     MySongs.getLikeList()
-// })
-
+// 切换下拉框
+const toggleShow = ref(false)
 const str = ref('你成长的经过\n你说你也在美国留学\n住在洛杉矶')
+
+/**
+ * 1 创建的歌单
+ * 2 所有歌单
+ * 3 收藏的歌单
+ */
+const type = ref(1)
+const type1 = reactive([
+    { type: 1, name: '创建的歌单' },
+    { type: 2, name: '所有歌单' },
+    { type: 3, name: '收藏的歌单' }
+])
+
+// 获取需要滚动的元素
+// const title =
+const hanlderClick = () => {
+    // const el = document.querySelector
+    window.scrollTo({ top: 640, behavior: 'smooth' })
+}
 </script>
 
 <style lang="postcss"></style>

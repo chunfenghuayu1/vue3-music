@@ -85,7 +85,13 @@
         </div>
 
         <Teleport to="#main">
-            <Modal v-model="show" type="歌单介绍" :content="playList.description"></Modal>
+            <Modal v-model="show" type="歌单介绍">
+                <template #content>
+                    <div class="overflow-auto text-sm whitespace-pre-wrap">
+                        {{ playList.description }}
+                    </div>
+                </template>
+            </Modal>
         </Teleport>
     </div>
 </template>

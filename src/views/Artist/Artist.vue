@@ -64,9 +64,9 @@
             </div>
         </div>
         <!-- 内容 -->
-        <div v-if="newest?.album" class="space-y-8">
+        <div class="space-y-8">
             <!-- 最新发布 -->
-            <div>
+            <div v-if="newest?.album">
                 <h3 class="font-bold text-2xl mb-4">最新发布</h3>
                 <div class="flex h-40">
                     <!-- 最新专辑 -->
@@ -115,7 +115,7 @@
                 </div>
             </div>
             <!-- 热门歌曲 -->
-            <div>
+            <div v-if="topSongs.length > 0">
                 <h3 class="font-bold text-2xl mb-4">热门歌曲</h3>
                 <div class="w-full flex flex-wrap items-center">
                     <div v-for="(item, index) in topSongs" :key="index" class="w-1/4 h-1/3 py-1">
@@ -130,7 +130,7 @@
                 </div>
             </div>
             <!-- 专辑 -->
-            <div>
+            <div v-if="albums.length > 0">
                 <h3 class="font-bold text-2xl mb-4">专辑</h3>
                 <div class="grid grid-cols-5 gap-8 lg:gap-x-5">
                     <div v-for="(item, index) in albums" :key="index">
@@ -139,7 +139,7 @@
                 </div>
             </div>
             <!-- EP和单曲 -->
-            <div>
+            <div v-if="EP.length > 0">
                 <h3 class="font-bold text-2xl mb-4">EP和单曲</h3>
                 <div class="grid grid-cols-5 gap-10 lg:gap-x-5">
                     <div v-for="(item, index) in EP" :key="index">
@@ -155,7 +155,7 @@
                 </div>
             </div>
             <!-- MVs -->
-            <div>
+            <div v-if="mvs.length > 0">
                 <h3 class="font-bold text-2xl mb-4">MVs</h3>
                 <div class="grid grid-cols-5 gap-10 lg:gap-x-5">
                     <div v-for="(item, index) in mvs" :key="index">
@@ -170,7 +170,7 @@
                 </div>
             </div>
             <!-- 相似歌手 -->
-            <div>
+            <div v-if="simi.length > 0">
                 <h3 class="font-bold text-2xl mb-4">相似歌手</h3>
                 <div class="grid gap-10 grid-cols-6 lg:gap-x-5">
                     <div v-for="(item, index) in simi" :key="index">
@@ -180,7 +180,13 @@
             </div>
         </div>
         <Teleport to="#main">
-            <Modal v-model="show" type="专辑介绍" :content="artist.briefDesc"></Modal>
+            <Modal v-model="show" type="专辑介绍">
+                <template #content>
+                    <div class="overflow-auto text-sm whitespace-pre-wrap">
+                        {{ artist.briefDesc }}
+                    </div>
+                </template>
+            </Modal>
         </Teleport>
     </div>
 </template>

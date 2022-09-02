@@ -1,5 +1,5 @@
 <template>
-    <transition name="tagSelector">
+    <transition name="tagSelector" mode="in-out">
         <div
             v-if="showMore"
             class="space-y-8 p-8 bg-gray-300 bg-opacity-30 rounded-lg text-gray-800 text-opacity-80 origin-top"

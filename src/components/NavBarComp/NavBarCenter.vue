@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-grow justify-center items-center">
+    <div class="flex flex-1 flex-shrink-0 justify-center items-center">
         <router-link
             to="/"
             class="mx-4 my-1 px-2 py-1 text-lg font-bold active:scale-95 rounded-md"

@@ -3,7 +3,7 @@
         <swiper
             :modules="[Autoplay, Pagination]"
             :slides-per-view="4"
-            :speed="1200"
+            :speed="800"
             :space-between="10"
             :observer="true"
             :observe-parents="true"

@@ -17,7 +17,7 @@
                         ×
                     </div>
                 </div>
-                <div class="overflow-auto text-sm whitespace-pre-wrap">{{ content }}</div>
+                <slot name="content"></slot>
             </div>
         </div>
     </Transition>
@@ -32,10 +32,6 @@ defineProps({
     type: {
         type: String,
         default: '歌单介绍'
-    },
-    content: {
-        type: String,
-        default: ''
     }
 })
 defineEmits(['update:modelValue'])

@@ -78,7 +78,13 @@
             </div>
         </transition-group>
         <Teleport to="#main">
-            <Modal v-model="show" type="专辑介绍" :content="album.description"></Modal>
+            <Modal v-model="show" type="专辑介绍">
+                <template #content>
+                    <div class="overflow-auto text-sm whitespace-pre-wrap">
+                        {{ album.description }}
+                    </div>
+                </template>
+            </Modal>
         </Teleport>
     </div>
 </template>
