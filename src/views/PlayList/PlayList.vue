@@ -12,7 +12,7 @@
             </div>
             <div class="flex flex-col justify-center">
                 <!-- 歌单标题 -->
-                <h3 class="font-bold text-5xl mb-4 lineClamp2">
+                <h3 class="font-bold text-5xl mb-4">
                     {{ playList.name }}
                 </h3>
                 <!-- 歌单简介 -->
@@ -48,6 +48,7 @@
                         <span class="font-bold text-skin-primary">播放</span>
                     </button>
                     <button
+                        v-if="likeBtn"
                         class="p-2 rounded-lg flex items-center justify-center bg-gray-400 bg-opacity-10 flex-shrink-0"
                     >
                         <SvgIcon
@@ -97,9 +98,11 @@
 </template>
 
 <script setup>
+import { useMySongs } from '@/store/MySongs.js'
 import { formatDate } from '@/utils/format.js'
 const { proxy } = getCurrentInstance()
 const route = useRoute()
+const MySongs = useMySongs()
 
 // 弹出框逻辑
 const show = ref(false)
@@ -144,6 +147,12 @@ const load = () => {
         offset: limit.value * offset.value
     })
 }
+
+// 判断收藏按钮是否显示
+// 如果歌单id在自己的所有歌单里面，则不显示
+const likeBtn = computed(() => {
+    return !MySongs.userList.playlist.some(item => item.id === Number(route.params.id))
+})
 </script>
 
 <style lang="postcss"></style>

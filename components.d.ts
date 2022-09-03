@@ -7,10 +7,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    1: typeof import('./src/components/1.vue')['default']
     AlbumItem: typeof import('./src/components/AlbumItem.vue')['default']
     Artist: typeof import('./src/views/Artist/Artist.vue')['default']
-    Button: typeof import('./src/components/Button.vue')['default']
     Cover: typeof import('./src/components/Cover.vue')['default']
     DropDown: typeof import('./src/components/DropDown.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
@@ -39,7 +37,6 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./src/views/Search/Search.vue')['default']
-    SearchDetail: typeof import('./src/views/SearchDetail/SearchDetail.vue')['default']
     SearchInput: typeof import('./src/components/NavBarComp/NavBarRightComp/SearchInput.vue')['default']
     SearchItem: typeof import('./src/views/Search/SearchComp/SearchItem.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon/SvgIcon.vue')['default']

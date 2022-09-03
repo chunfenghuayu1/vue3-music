@@ -17,8 +17,8 @@ export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, __dirname)
     // console.log(env)
     return {
-        // root: './',
-        base: './',
+        root: './',
+        base: '/',
         publicDir: './public',
         plugins: [
             vue(),
@@ -116,8 +116,6 @@ export default defineConfig(({ mode }) => {
             open: env.VITE_MODE_NAME === 'development',
             proxy: {
                 '/dev-api': {
-                    // target: 'https://netease-cloud-music-lpjl5rktf-chunfenghuayu1.vercel.app/',
-                    // target: 'http://120.48.31.206:3000',
                     target: 'http://127.0.0.1:3000/',
                     changeOrigin: true,
                     rewrite: path => path.replace(/^\/dev-api/, '')

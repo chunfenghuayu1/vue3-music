@@ -9,7 +9,7 @@
         <div
             class="flex items-center justify-center rounded-md overflow-hidden relative w-12 flex-shrink-0"
         >
-            <img :src="`${song.al.picUrl}?param=48y48`" class="w-12 h-12" loading="lazy" />
+            <img v-lazy="`${song.al.picUrl}?param=48y48`" class="w-12 h-12" loading="lazy" />
         </div>
         <!-- 歌名 作者 -->
         <div class="flex flex-col justify-center flex-1">

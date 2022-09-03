@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-        <div ref="title" class="mt-12 space-y-8">
+        <div class="mt-16 space-y-8">
             <!-- 歌单标题 -->
             <div class="flex justify-between items-center h-9">
                 <!-- 左侧选择区域 -->
@@ -75,6 +75,7 @@
                             </template>
                         </DropDown>
                     </div>
+                    <!-- 功能后续考虑 -->
                     <div class="my-tag p-2">专辑</div>
                     <div class="my-tag p-2">艺人</div>
                     <div class="my-tag p-2">MV</div>
@@ -82,14 +83,18 @@
                     <div class="my-tag p-2">听歌排行</div>
                 </div>
                 <!-- 右侧 新建歌单-->
-                <div class="text-sm text-skin-tertiary flex-shrink-0 cursor-pointer select-none">
+                <!-- 功能后续考虑 -->
+                <div
+                    v-if="false"
+                    class="text-sm text-skin-tertiary flex-shrink-0 cursor-pointer select-none"
+                >
                     +&nbsp;&nbsp;新建歌单
                 </div>
             </div>
             <!-- 歌单内容 -->
             <div class="grid grid-cols-5 gap-8 min-h-screen">
                 <div v-for="(item, index) in MySongs.playlist(type)" :key="index">
-                    <Cover :row-list-item="item" :row-type="'mylist'">
+                    <Cover :row-list-item="item" row-type="mylist">
                         <template #subTilte>
                             <div>
                                 <span class="text-xs text-skin-tertiary lineClamp1 mt-1">
@@ -126,10 +131,8 @@ const type1 = reactive([
 ])
 
 // 获取需要滚动的元素
-// const title =
 const hanlderClick = () => {
-    // const el = document.querySelector
-    window.scrollTo({ top: 640, behavior: 'smooth' })
+    document.querySelector('#main').scrollTo({ top: 400, behavior: 'smooth' })
 }
 </script>
 

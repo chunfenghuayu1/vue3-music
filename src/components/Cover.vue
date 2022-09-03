@@ -21,7 +21,7 @@
         <slot name="playCount" :play-count="playCount"></slot>
         <!-- 图片层 -->
         <img
-            :src="picUrl"
+            v-lazy="picUrl"
             loading="lazy"
             :class="rowType === 'recomArtist' ? 'rounded-full' : 'rounded-lg'"
             class="object-cover w-full h-full"
@@ -117,6 +117,13 @@ const handleRouter = () => {
             params: { id }
         })
         return
+    }
+    // 如果是我的歌单
+    if (type === 'mylist') {
+        router.push({
+            name: 'playlist',
+            params: { id }
+        })
     }
 }
 const handlePlay = () => {

@@ -5,7 +5,7 @@ import './style/main.css'
 import '@/externals.js'
 import { ElNotification } from 'element-plus'
 import VueLazyload from 'vue-lazyload'
-import lazyImg from '/loading.gif'
+import lazyImg from '/img_loading.gif'
 // 配置响应式样式
 // import 'element-plus/theme-chalk/display.css'
 // 路由管理
