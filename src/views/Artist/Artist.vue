@@ -1,12 +1,12 @@
 <template>
-    <div v-show="artist.name">
+    <div v-show="newest.album || artist.avatarUrl">
         <!-- 头部 -->
         <div class="flex space-x-12 mt-8 my-16">
             <div class="flex items-center justify-center flex-shrink-0 relative">
-                <img :src="`${artist.cover}?param=512y512`" class="rounded-full h-72 w-72" />
+                <img :src="`${artist.avatarUrl}?param=512y512`" class="rounded-full h-72 w-72" />
                 <!-- 图片阴影层 -->
                 <img
-                    :src="`${artist.cover}?param=512y512`"
+                    :src="`${artist.avatarUrl}?param=512y512`"
                     class="h-72 w-72 absolute top-3 -z-10 bg-cover blur-md opacity-60 rounded-full"
                 />
             </div>
@@ -210,6 +210,9 @@ const EP = ref([])
 const mvs = ref([])
 const simi = ref([])
 const newest = computed(() => {
+    if (EP.value[0]?.publishTime > albums.value[0]?.publishTime) {
+        return { album: EP.value[0], mv: mvs.value[0] }
+    }
     return { album: albums.value[0], mv: mvs.value[0] }
 })
 // 获取歌手数据
@@ -217,6 +220,8 @@ const getAritstDetail = () => {
     const id = route.params.id
     // 获取歌手详情
     proxy.$http.reqArtistDetail({ id }).then(({ data }) => {
+        // 获取正确的头像
+        data.data.artist.avatarUrl = data.data.user.avatarUrl.replace('http://', 'https://')
         artist.value = data.data.artist
     })
     // 获取热门歌曲

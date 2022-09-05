@@ -34,6 +34,7 @@ declare module '@vue/runtime-core' {
     PersonalizeNewSong: typeof import('./src/views/Home/Personalized/PersonalizeNewSong.vue')['default']
     PlayList: typeof import('./src/views/PlayList/PlayList.vue')['default']
     PlayListItem: typeof import('./src/components/PlayListItem.vue')['default']
+    RecordItem: typeof import('./src/components/RecordItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./src/views/Search/Search.vue')['default']

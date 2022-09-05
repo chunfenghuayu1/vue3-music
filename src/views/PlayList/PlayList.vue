@@ -1,5 +1,5 @@
 <template>
-    <div v-if="playList.name">
+    <div v-show="playList.name">
         <!-- 头部 -->
         <div class="flex space-x-12 mt-8 my-16">
             <div class="flex items-center justify-center flex-shrink-0 relative">

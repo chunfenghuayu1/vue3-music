@@ -18,8 +18,7 @@ import { useMySongs } from '@/store/MySongs.js'
 // // 初始化本地存储
 const MySongs = useMySongs()
 // // 初始化my数据
-MySongs.getUserPlayList()
-MySongs.getLikeList()
+MySongs.initMySong()
 useStorageStore()
 </script>
 

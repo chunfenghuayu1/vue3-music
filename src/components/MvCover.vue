@@ -1,12 +1,15 @@
 <template>
     <div class="relative">
         <div class="cursor-pointer" @mouseenter="show = true" @mouseleave="show = false">
-            <img :src="`${imgUrl}?param=285y160`" class="rounded-lg object-cover" />
+            <img
+                :src="`${imgUrl.replace('http://', 'https://')}?param=285y160`"
+                class="rounded-lg object-cover"
+            />
             <!-- 图片阴影层 -->
             <transition name="cover" mode="out-in">
                 <img
                     v-show="show"
-                    :src="`${imgUrl}?param=285y160`"
+                    :src="`${imgUrl.replace('http://', 'https://')}?param=285y160`"
                     class="absolute top-3 -z-10 object-cover blur-md opacity-60 scale-95"
                     loading="lazy"
                 />

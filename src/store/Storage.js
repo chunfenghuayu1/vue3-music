@@ -50,7 +50,7 @@ export const useStorageStore = defineStore('storageStore', {
         // 用户名
         nickname: state => state.data.user.nickname,
         // 用户头像
-        avatarUrl: state => state.data.user.avatarUrl,
+        avatarUrl: state => state.data.user.avatarUrl.replace('http://', 'https://'),
         // 用户id
         userId: state => state.data.user.userId
     },

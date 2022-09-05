@@ -18,6 +18,7 @@ import * as API from '@/api'
 import 'virtual:svg-icons-register'
 // 导入共享文字
 import i18n from '@/utils/i18n.js'
+
 const app = createApp(App)
 
 app.config.globalProperties.$http = API

@@ -9,7 +9,7 @@
                 {{ $t.home.more }}
             </router-link>
         </div>
-        <div class="grid gap-x-10 grid-cols-5 lg:gap-x-5">
+        <div class="grid grid-cols-5 gap-10 lg:gap-x-5">
             <div v-for="(item, index) in itemList" :key="index">
                 <Cover :row-list-item="item">
                     <!-- 排行榜显示播放数量 -->

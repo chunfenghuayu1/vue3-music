@@ -14,7 +14,7 @@
             v-else
             fit="cover"
             class="select-none cursor-pointer"
-            :src="storageStore.avatarUrl"
+            :src="`${storageStore.avatarUrl}?param=40y40`"
         ></el-avatar>
         <!--  v-if="storageStore.data.loginMode !== ''" -->
         <div v-if="false" class="select-none" @click="loginout">退出登录</div>

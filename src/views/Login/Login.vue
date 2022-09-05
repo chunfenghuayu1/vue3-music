@@ -98,8 +98,7 @@ const checkQRCodeLogin = () => {
 // 刷新数据
 const updateData = async () => {
     await storageStore.getUserInfo()
-    MySongs.getUserPlayList()
-    MySongs.getLikeList()
+    MySongs.initMySong()
 }
 // 处理登录成功后的事件
 const afterLogin = async () => {
