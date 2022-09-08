@@ -84,7 +84,7 @@ const picUrl = computed(() => {
     }
     let url =
         props.rowListItem.img1v1Url || props.rowListItem.picUrl || props.rowListItem.coverImgUrl
-    return `${url?.replace('http://', 'https://')}?param=512y512`
+    return `${url?.replace(/^http:/, 'https://')}?param=512y512`
 })
 // 计算播放数量
 const playCount = computed(() => {

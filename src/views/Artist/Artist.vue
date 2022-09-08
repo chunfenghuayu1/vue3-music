@@ -220,10 +220,11 @@ const getAritstDetail = () => {
     const id = route.params.id
     // 获取歌手详情
     proxy.$http.reqArtistDetail({ id }).then(({ data }) => {
+        console.log(data.data)
         // 获取正确的头像
         data.data.artist.cover =
-            data.data.user.avatarUrl.replace('http://', 'https://') ||
-            data.data.artist.cover.replace('http://', 'https://')
+            data.data.user?.avatarUrl.replace(/^http:/, 'https://') ||
+            data.data.artist.cover.replace(/^http:/, 'https://')
         artist.value = data.data.artist
     })
     // 获取热门歌曲

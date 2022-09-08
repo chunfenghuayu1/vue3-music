@@ -77,7 +77,7 @@ const itemObj = computed(() => {
     const index = currentIndex.value
     if (length > 0) {
         obj.picUrl = `${newSongList.value[index].picUrl?.replace(
-            'http://',
+            /^http:/,
             'https://'
         )}?param=176y176`
         obj.artistList = newSongList.value[index].song.artists

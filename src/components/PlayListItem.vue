@@ -11,7 +11,7 @@
             class="flex items-center justify-center rounded-md overflow-hidden relative w-12 flex-shrink-0"
         >
             <img
-                v-lazy="`${song.al?.picUrl.replace('http://', 'https://')}?param=48y48`"
+                v-lazy="`${song.al?.picUrl.replace(/^http:/, 'https://')}?param=48y48`"
                 class="w-12 h-12"
                 loading="lazy"
             />

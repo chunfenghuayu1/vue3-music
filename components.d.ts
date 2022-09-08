@@ -22,6 +22,7 @@ declare module '@vue/runtime-core' {
     LikeSongs: typeof import('./src/views/LikeSongs/LikeSongs.vue')['default']
     Login: typeof import('./src/views/Login/Login.vue')['default']
     Modal: typeof import('./src/components/Modal.vue')['default']
+    MV: typeof import('./src/views/MV/MV.vue')['default']
     MvCover: typeof import('./src/components/MvCover.vue')['default']
     My: typeof import('./src/views/My/My.vue')['default']
     NavBar: typeof import('./src/layout/NavBar.vue')['default']

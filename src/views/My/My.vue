@@ -45,7 +45,7 @@
                     >
                         <TrackCover
                             :item="item"
-                            :pic-url="item.al.picUrl.replace('http://', 'https://')"
+                            :pic-url="item.al.picUrl.replace(/^http:/, 'https://')"
                             :name="item.name"
                             :alia="item.alia"
                             :ar="item.ar"

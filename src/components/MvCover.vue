@@ -1,15 +1,20 @@
 <template>
     <div class="relative">
-        <div class="cursor-pointer" @mouseenter="show = true" @mouseleave="show = false">
+        <div
+            class="cursor-pointer"
+            @mouseenter="show = true"
+            @mouseleave="show = false"
+            @click="$router.push({ name: 'mv', params: { vid: item.id || item.vid } })"
+        >
             <img
-                :src="`${imgUrl.replace('http://', 'https://')}?param=285y160`"
+                :src="`${imgUrl.replace(/^http:/, 'https://')}?param=285y160`"
                 class="rounded-lg object-cover"
             />
             <!-- 图片阴影层 -->
             <transition name="cover" mode="out-in">
                 <img
                     v-show="show"
-                    :src="`${imgUrl.replace('http://', 'https://')}?param=285y160`"
+                    :src="`${imgUrl.replace(/^http:/, 'https://')}?param=285y160`"
                     class="absolute top-3 -z-10 object-cover blur-md opacity-60 scale-95"
                     loading="lazy"
                 />
@@ -18,7 +23,12 @@
     </div>
     <div v-if="showTitle" class="mt-2">
         <div class="font-bold mb-2 lineClamp2">
-            {{ name }}
+            <router-link
+                :to="{ name: 'mv', params: { vid: item.id || item.vid } }"
+                class="hover:underline"
+            >
+                {{ name }}
+            </router-link>
         </div>
         <div class="text-xs text-gray-400 italic">
             {{ subText }}
@@ -29,7 +39,6 @@
 <script setup>
 // 控制遮罩显示
 const show = ref(false)
-
 defineProps({
     item: {
         type: Object,

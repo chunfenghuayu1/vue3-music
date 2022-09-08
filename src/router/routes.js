@@ -7,6 +7,7 @@ const NewAlbum = () => import('@/views/NewAlbum/NewAlbum.vue')
 const Artist = () => import('@/views/Artist/Artist.vue')
 const LikeSongs = () => import('@/views/LikeSongs/LikeSongs.vue')
 const Search = () => import('@/views/Search/Search.vue')
+const MV = () => import('@/views/MV/MV.vue')
 export default [
     {
         path: '/',
@@ -54,5 +55,10 @@ export default [
         path: '/search',
         name: 'search',
         component: Search
+    },
+    {
+        path: '/mv/:vid',
+        name: 'mv',
+        component: MV
     }
 ]

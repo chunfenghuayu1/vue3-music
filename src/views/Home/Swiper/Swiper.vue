@@ -21,7 +21,7 @@
                 @click="handlerClick(item.typeTitle, item)"
             >
                 <img
-                    :src="`${item.imageUrl?.replace('http://', 'https://')}?param=377y144`"
+                    :src="`${item.imageUrl?.replace(/^http:/, 'https://')}?param=377y144`"
                     loading="lazy"
                     class="object-fill rounded-lg h-36 w-full hover:shadow-lg transition-shadow"
                 />
