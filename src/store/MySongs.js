@@ -49,6 +49,7 @@ export const useMySongs = defineStore('MySongs', {
         initMySong() {
             const storageStore = useStorageStore()
             // 如果没有登录，则不发送请求
+            storageStore.getUserInfo()
             if (storageStore.data.loginMode === '') return
             // 如果登录了
             // 则获取用户歌单及喜欢的音乐
