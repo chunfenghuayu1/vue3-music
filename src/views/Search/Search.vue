@@ -49,17 +49,17 @@
             </SearchItem>
         </div>
         <!-- 视频 -->
-        <div v-if="searchList.videos.length > 0">
+        <div v-if="searchList.mvs.length > 0">
             <SearchItem title="视频">
                 <template #content>
                     <div class="grid grid-cols-5 gap-10 lg:gap-x-5">
-                        <div v-for="(item, index) in searchList.videos" :key="index">
+                        <div v-for="(item, index) in searchList.mvs" :key="index">
                             <MvCover
                                 :item="item"
                                 :show-title="true"
-                                :name="item.title"
-                                :sub-text="item.creator[0].userName"
-                                :img-url="item.coverUrl"
+                                :name="item.name"
+                                :sub-text="item.artists[0].userName"
+                                :img-url="item.cover"
                             ></MvCover>
                         </div>
                     </div>
@@ -119,9 +119,9 @@ const type = ref([
         kw: 'songs'
     },
     {
-        type: 1014,
+        type: 1004,
         limit: 5,
-        kw: 'videos'
+        kw: 'mvs'
     },
     {
         type: 1000,
@@ -134,7 +134,7 @@ const searchList = reactive({
     artists: [],
     albums: [],
     songs: [],
-    videos: [],
+    mvs: [],
     playlists: []
 })
 // 定义请求数组

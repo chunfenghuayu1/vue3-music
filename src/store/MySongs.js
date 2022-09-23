@@ -113,7 +113,7 @@ export const useMySongs = defineStore('MySongs', {
         // 获取用户云盘
         // 这里不做按需加载，默认获取1000首
         async getUserLikeCloud() {
-            const { data } = await reqlikeCloud({ limit: 1000, offset: 0 })
+            const { data } = await reqlikeCloud({ limit: 300, offset: 0 })
             if (data.code === 200) {
                 this.like.likeCloud = data.data
             }

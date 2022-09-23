@@ -3,7 +3,7 @@
         <!-- 播放器 -->
         <div class="space-y-2">
             <div class="rounded-2xl bg-transparent overflow-hidden max-h-full">
-                <video ref="VideoPlayer"></video>
+                <video ref="VideoPlayer" style="--plyr-color-main: #63bbd0"></video>
             </div>
             <div class="flex items-center space-x-8">
                 <div class="font-bold text-2xl">{{ mv.artistName }} - {{ mv.name }}</div>
@@ -49,12 +49,15 @@ const VideoPlayer = ref(null)
 const initVideo = () => {
     // 视频播放配置项
     let options = {
-        settings: ['quality'],
+        settings: ['quality', 'speed'],
         autoplay: false,
+        loadSprite: true,
+        volume: 0.5,
         quality: {
             default: 1080,
             options: [1080, 720, 480, 240]
-        }
+        },
+        speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 4] }
     }
     VPlayer.value = new Plyr(VideoPlayer.value, options)
 }

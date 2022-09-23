@@ -1,12 +1,12 @@
 <template>
-    <div v-show="newest.album || artist.cover">
+    <div v-show="artist.cover">
         <!-- 头部 -->
         <div class="flex space-x-12 mt-8 my-16">
             <div class="flex items-center justify-center flex-shrink-0 relative">
-                <img :src="`${artist.cover}?param=512y512`" class="rounded-full h-72 w-72" />
+                <img v-lazy="`${artist.cover}?param=512y512`" class="rounded-full h-72 w-72" />
                 <!-- 图片阴影层 -->
                 <img
-                    :src="`${artist.cover}?param=512y512`"
+                    v-lazy="`${artist.cover}?param=512y512`"
                     class="h-72 w-72 absolute top-3 -z-10 bg-cover blur-md opacity-60 rounded-full"
                 />
             </div>
@@ -220,7 +220,6 @@ const getAritstDetail = () => {
     const id = route.params.id
     // 获取歌手详情
     proxy.$http.reqArtistDetail({ id }).then(({ data }) => {
-        console.log(data.data)
         // 获取正确的头像
         data.data.artist.cover =
             data.data.user?.avatarUrl.replace(/^http:/, 'https://') ||

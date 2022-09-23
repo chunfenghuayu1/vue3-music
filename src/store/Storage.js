@@ -30,10 +30,13 @@ export const useStorageStore = defineStore('storageStore', {
         // 刷新登录状态，获取用户信息
         async getUserInfo() {
             await reqLoginStatus().then(({ data }) => {
+                // 如果获取不到用户状态，则退出登录
+                if (data.data.profile === null) return this.handlerLogout()
                 if (data.data.code === 200) {
                     this.data.user = data.data.profile
                     this.data.loginMode = 'qrcode'
                 }
+                console.log(data)
             })
         },
         // 退出登录
