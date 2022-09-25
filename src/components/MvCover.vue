@@ -31,7 +31,10 @@
         </div>
         <router-link
             class="text-xs text-gray-400 italic hover:underline"
-            :to="{ name: 'artist', params: { id: item.artist.id || item.artists[0].id } }"
+            :to="{
+                name: 'artist',
+                params: { id: item.artist?.id || item.artists[0].id }
+            }"
         >
             {{ subText }}
         </router-link>

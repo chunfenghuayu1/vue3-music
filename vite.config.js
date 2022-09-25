@@ -8,6 +8,7 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createStyleImportPlugin, ElementPlusResolve } from 'vite-plugin-style-import'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import viteCompression from 'vite-plugin-compression'
 
 // 修改title 可进行html的压缩
 import { createHtmlPlugin } from 'vite-plugin-html'
@@ -101,6 +102,15 @@ export default defineConfig(({ mode }) => {
                  * @default: __svg__icons__dom__
                  */
                 // customDomId: '__svg__icons__dom__',
+            }),
+            // 静态资源压缩
+            viteCompression({
+                verbose: true,
+                disable: false,
+                deleteOriginFile: false, // 压缩后是否删除原文件
+                threshold: 10240,
+                algorithm: 'gzip',
+                ext: '.gz'
             })
         ],
         build: {
@@ -111,6 +121,13 @@ export default defineConfig(({ mode }) => {
                     //生产环境时移除console
                     drop_console: true,
                     drop_debugger: true
+                }
+            },
+            rollupOptions: {
+                output: {
+                    chunkFileNames: 'static/js/[name]-[hash].js',
+                    entryFileNames: 'static/js/[name]-[hash].js',
+                    assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
                 }
             }
         },
