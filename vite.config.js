@@ -104,6 +104,7 @@ export default defineConfig(({ mode }) => {
             })
         ],
         build: {
+            outDir: 'test2',
             minify: 'terser',
             terserOptions: {
                 compress: {

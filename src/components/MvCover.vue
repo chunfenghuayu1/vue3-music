@@ -1,10 +1,9 @@
 <template>
     <div class="relative">
-        <div
-            class="cursor-pointer"
+        <router-link
+            :to="{ name: 'mv', params: { vid: item.id || item.vid } }"
             @mouseenter="show = true"
             @mouseleave="show = false"
-            @click="$router.push({ name: 'mv', params: { vid: item.id || item.vid } })"
         >
             <img
                 :src="`${imgUrl.replace(/^http:/, 'https://')}?param=285y160`"
@@ -19,7 +18,7 @@
                     loading="lazy"
                 />
             </transition>
-        </div>
+        </router-link>
     </div>
     <div v-if="showTitle" class="mt-2">
         <div class="font-bold mb-2 lineClamp2">
@@ -30,9 +29,12 @@
                 {{ name }}
             </router-link>
         </div>
-        <div class="text-xs text-gray-400 italic">
+        <router-link
+            class="text-xs text-gray-400 italic hover:underline"
+            :to="{ name: 'artist', params: { id: item.artist.id || item.artists[0].id } }"
+        >
             {{ subText }}
-        </div>
+        </router-link>
     </div>
 </template>
 

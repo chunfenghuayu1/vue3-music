@@ -17,9 +17,12 @@
             <div class="text-xs lineClamp1 text-skin-tertiary">
                 <div v-for="(ar1, index1) in ar" :key="index1" class="inline">
                     <span v-if="index1 !== 0"> / </span>
-                    <span class="cursor-pointer hover:underline">
+                    <router-link
+                        class="hover:underline"
+                        :to="{ name: 'artist', params: { id: ar1.id } }"
+                    >
                         {{ ar1.name }}
-                    </span>
+                    </router-link>
                 </div>
             </div>
         </div>

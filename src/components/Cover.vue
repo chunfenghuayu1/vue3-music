@@ -3,19 +3,19 @@
         <!-- 播放按钮 遮罩层 -->
         <div
             class="flex items-center justify-center absolute top-0 w-full h-full bg-opacity-0 cursor-pointer"
-            @click.self="handleRouter"
             @mouseenter="show = true"
             @mouseleave="show = false"
         >
             <transition name="cover-playbtn" mode="out-in">
                 <div
                     v-show="show"
-                    class="flex items-center justify-center backdrop-saturate-180 backdrop-blur-md rounded-full p-2 bg-white bg-opacity-20 active:scale-90 transition-all"
+                    class="flex items-center justify-center backdrop-saturate-180 backdrop-blur-md rounded-full p-2 bg-white bg-opacity-20 active:scale-90 transition-all z-10"
                     @click.stop="handlePlay"
                 >
                     <SvgIcon name="play" size="36" class="text-white"></SvgIcon>
                 </div>
             </transition>
+            <router-link :to="handleRouter" class="w-full h-full absolute top-0"></router-link>
         </div>
         <!-- 播放数量插槽 -->
         <slot name="playCount" :play-count="playCount"></slot>
@@ -48,9 +48,9 @@
             <SvgIcon name="lock" size="20"></SvgIcon>
         </div>
         <div class="lineClamp2">
-            <a class="cursor-pointer hover:underline font-semibold" @click="handleRouter">
+            <router-link class="cursor-pointer hover:underline font-semibold" :to="handleRouter">
                 {{ rowListItem.name }}
-            </a>
+            </router-link>
         </div>
     </div>
     <!-- 副标题 -->
@@ -93,40 +93,28 @@ const playCount = computed(() => {
 })
 
 // 处理跳转和播放
-const router = useRouter()
-const handleRouter = () => {
+const handleRouter = computed(() => {
     // 隐藏动画
     // show.value = false
     const type = props.rowType
     const id = props.rowListItem.id
     if (type === '') {
-        router.push({ name: 'playlist', params: { id } })
-        return
+        // router.push({ name: 'playlist', params: { id } })
+        return { name: 'playlist', params: { id } }
     }
     // 如果点击新专辑，则传递type参数
     if (type === 'newAlbum') {
-        router.push({
-            name: 'newAlbum',
-            params: { id }
-        })
-        return
+        return { name: 'newAlbum', params: { id } }
     }
     // 如果点击歌手
     if (type === 'recomArtist') {
-        router.push({
-            name: 'artist',
-            params: { id }
-        })
-        return
+        return { name: 'artist', params: { id } }
     }
     // 如果是我的歌单
     if (type === 'mylist') {
-        router.push({
-            name: 'playlist',
-            params: { id }
-        })
+        return { name: 'playlist', params: { id } }
     }
-}
+})
 const handlePlay = () => {
     console.log(props.rowListItem)
 }

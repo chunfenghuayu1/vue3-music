@@ -66,7 +66,7 @@
         <!-- 内容 -->
         <div class="space-y-8">
             <!-- 最新发布 -->
-            <div v-if="newest?.album">
+            <div v-if="newest.album">
                 <h3 class="font-bold text-2xl mb-4">最新发布</h3>
                 <div class="flex h-40">
                     <!-- 最新专辑 -->
@@ -212,8 +212,9 @@ const simi = ref([])
 const newest = computed(() => {
     if (EP.value[0]?.publishTime > albums.value[0]?.publishTime) {
         return { album: EP.value[0], mv: mvs.value[0] }
+    } else {
+        return { album: albums.value[0], mv: mvs.value[0] }
     }
-    return { album: albums.value[0], mv: mvs.value[0] }
 })
 // 获取歌手数据
 const getAritstDetail = () => {
