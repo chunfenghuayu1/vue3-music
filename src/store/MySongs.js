@@ -47,7 +47,7 @@ export const useMySongs = defineStore('MySongs', {
     },
     actions: {
         // 初始化我的音乐
-        initMySong() {
+        async initMySong() {
             const storageStore = useStorageStore()
             // 如果没有登录，则不发送请求
             if (!jsCookie.get('__csrf')) {
@@ -55,7 +55,7 @@ export const useMySongs = defineStore('MySongs', {
                 storageStore.data.user = {}
                 return
             }
-            storageStore.getUserInfo()
+            await storageStore.getUserInfo()
             // 如果登录了
             // 则获取用户歌单及喜欢的音乐
             this.getUserPlayList()
