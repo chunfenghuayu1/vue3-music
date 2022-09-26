@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { getLocal, setLocal } from '@/utils/localStorage.js'
 import { reqLoginStatus, reqLogout } from '@/api/Login.js'
+import jsCookie from 'js-cookie'
 // 初始化本地存储
 import localStorage from './initLocalStorage'
 if (getLocal('data') === null) {
@@ -45,6 +46,8 @@ export const useStorageStore = defineStore('storageStore', {
                 if (data.code === 200) {
                     this.data.loginMode = ''
                     this.data.user = {}
+                    // 清除cookie
+                    jsCookie.remove()
                 }
             })
         }

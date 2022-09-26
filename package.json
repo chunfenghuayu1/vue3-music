@@ -1,7 +1,7 @@
 {
   "name": "my-music",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "element-plus": "^2.2.12",
+    "js-cookie": "^3.0.1",
     "pinia": "^2.0.17",
     "plyr": "^3.7.2",
     "qrcode": "^1.5.1",
@@ -38,6 +39,7 @@
     "unplugin-auto-import": "^0.11.2",
     "unplugin-vue-components": "^0.22.4",
     "vite": "^3.0.0",
+    "vite-plugin-chunk-split": "^0.4.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-eslint": "^1.7.0",
     "vite-plugin-html": "^3.2.0",

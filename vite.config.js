@@ -12,6 +12,8 @@ import viteCompression from 'vite-plugin-compression'
 
 // 修改title 可进行html的压缩
 import { createHtmlPlugin } from 'vite-plugin-html'
+// 拆包
+import { chunkSplitPlugin } from 'vite-plugin-chunk-split'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -111,6 +113,14 @@ export default defineConfig(({ mode }) => {
                 threshold: 10240,
                 algorithm: 'gzip',
                 ext: '.gz'
+            }),
+            // 拆包
+            chunkSplitPlugin({
+                strategy: 'default',
+                customSplitting: {
+                    plyr: ['plyr'],
+                    swiper: ['swiper']
+                }
             })
         ],
         build: {

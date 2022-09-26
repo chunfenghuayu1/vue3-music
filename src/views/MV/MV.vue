@@ -36,6 +36,7 @@
 <script setup>
 import { formatPlayCount } from '@/utils/format.js'
 import Plyr from 'plyr'
+import 'plyr/dist/plyr.css'
 import { onBeforeRouteUpdate } from 'vue-router'
 const route = useRoute()
 // const router = useRouter()

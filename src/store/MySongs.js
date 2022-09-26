@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { useStorageStore } from '@/store/Storage'
+import jsCookie from 'js-cookie'
 import {
     reqUserPlayList,
     reqLikeSongs,
@@ -49,7 +50,11 @@ export const useMySongs = defineStore('MySongs', {
         initMySong() {
             const storageStore = useStorageStore()
             // 如果没有登录，则不发送请求
-            if (storageStore.data.loginMode === '') return
+            if (!jsCookie.get('__csrf')) {
+                storageStore.data.loginMode = ''
+                storageStore.data.user = {}
+                return
+            }
             storageStore.getUserInfo()
             // 如果登录了
             // 则获取用户歌单及喜欢的音乐
