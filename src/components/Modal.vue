@@ -2,7 +2,7 @@
     <Transition name="modal">
         <div
             v-if="modelValue"
-            class="fixed top-0 left-0 z-50 w-full h-full transition-all flex items-center justify-center"
+            class="fixed top-0 left-0 z-10 w-full h-full transition-all flex items-center justify-center"
             @click.self="$emit('update:modelValue', false)"
         >
             <div
@@ -11,7 +11,7 @@
                 <div class="flex justify-between items-center mb-6">
                     <div class="font-bold text-xl">{{ type }}</div>
                     <div
-                        class="text-2xl font-bold cursor-pointer rounded-full hover:bg-gray-100 w-8 h-8 text-center"
+                        class="flex justify-center items-center text-2xl font-bold cursor-pointer rounded-full hover:bg-gray-100 w-8 h-8 text-center"
                         @click="$emit('update:modelValue', false)"
                     >
                         ×
@@ -24,7 +24,8 @@
 </template>
 
 <script setup>
-defineProps({
+// const { proxy } = getCurrentInstance()
+const props = defineProps({
     modelValue: {
         type: Boolean,
         required: true
@@ -35,6 +36,18 @@ defineProps({
     }
 })
 defineEmits(['update:modelValue'])
+watch(
+    () => props.modelValue,
+    value => {
+        if (value) {
+            document.body.classList.position = 'fixed'
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.position = ''
+            document.body.style.overflow = ''
+        }
+    }
+)
 </script>
 
 <style lang="postcss">

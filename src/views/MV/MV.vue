@@ -26,6 +26,8 @@
                         :name="item.name"
                         :img-url="item.cover.replace(/^http:/, 'https:')"
                         :sub-text="item.artistName"
+                        :show-artist="true"
+                        :artist-id="item.artists[0]?.id"
                     ></MvCover>
                 </div>
             </div>

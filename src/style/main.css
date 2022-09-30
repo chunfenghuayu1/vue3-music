@@ -84,3 +84,6 @@
 ::-webkit-scrollbar-thumb {
   @apply rounded-lg shadow-md bg-gray-300;
 }
+.lock {
+  @apply  overflow-hidden fixed;
+}

@@ -56,8 +56,7 @@ const getData = () => {
             dataList.rankList = res.data.list.splice(0, 5)
         })
     } catch (error) {
-        proxy.$notify({
-            title: 'Error',
+        proxy.$message({
             message: error,
             type: 'error'
         })

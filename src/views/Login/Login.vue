@@ -61,8 +61,7 @@ const getQRCode = async () => {
             checkQRCodeLogin()
         }
     } catch (error) {
-        proxy.$notify({
-            title: 'Error',
+        proxy.$message({
             message: error,
             type: 'error'
         })

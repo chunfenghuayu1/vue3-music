@@ -5,13 +5,18 @@ import jsCookie from 'js-cookie'
 const router = createRouter({
     history: createWebHistory(),
     routes,
-    scrollBehavior() {
-        return { top: 0 }
+    scrollBehavior(to, from) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve({ top: from.meta.scrollTop })
+            }, 150)
+        })
     },
     base: '/'
 })
 
 router.beforeEach(to => {
+    to.meta.scrollTop = document.documentElement.scrollTop
     if (to.meta.requireAuth) {
         if (!jsCookie.get('__csrf')) {
             return { path: '/login', query: { redirect: to.path } }

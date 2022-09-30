@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './style/main.css'
 import '@/externals.js'
-import { ElNotification } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import VueLazyload from 'vue-lazyload'
 import lazyImg from '/img_loading.gif'
 // 配置响应式样式
@@ -22,7 +22,7 @@ import i18n from '@/utils/i18n.js'
 const app = createApp(App)
 
 app.config.globalProperties.$http = API
-app.config.globalProperties.$notify = ElNotification
+app.config.globalProperties.$message = ElMessage
 app.config.globalProperties.$t = i18n
 app.config.performance = true
 app.use(VueLazyload, {

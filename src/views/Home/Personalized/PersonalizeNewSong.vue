@@ -113,8 +113,7 @@ const initData = () => {
             newSongList.value = res.data.result
         })
     } catch (error) {
-        proxy.$notify({
-            title: 'Error',
+        proxy.$message({
             message: error,
             type: 'error'
         })

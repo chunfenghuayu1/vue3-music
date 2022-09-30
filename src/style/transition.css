@@ -31,7 +31,7 @@
 /* 路由过渡 */
 .fade-route-enter-active,
 .fade-route-leave-active {
-    @apply transition-all duration-150 ease-linear;
+    @apply transition-opacity duration-150 ease-linear;
 }
 .fade-route-enter-from,
 .fade-route-leave-to {

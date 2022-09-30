@@ -29,15 +29,20 @@
                 {{ name }}
             </router-link>
         </div>
+
         <router-link
+            v-if="showArtist"
             class="text-xs text-gray-400 italic hover:underline"
             :to="{
                 name: 'artist',
-                params: { id: item.artist?.id || item.artists[0].id }
+                params: { id: artistId }
             }"
         >
             {{ subText }}
         </router-link>
+        <div v-else class="text-xs text-gray-400 italic">
+            {{ subText }}
+        </div>
     </div>
 </template>
 
@@ -64,6 +69,14 @@ defineProps({
     subText: {
         type: String,
         default: ''
+    },
+    artistId: {
+        type: Number,
+        default: 0
+    },
+    showArtist: {
+        type: Boolean,
+        default: false
     }
 })
 </script>

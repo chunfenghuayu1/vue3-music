@@ -12,18 +12,20 @@ export default [
     {
         path: '/',
         name: 'home',
-        component: Home
+        component: Home,
+        meta: { scrollTop: 0 }
     },
     {
         path: '/explore',
         name: 'explore',
-        component: Explore
+        component: Explore,
+        meta: { scrollTop: 0 }
     },
     {
         path: '/my',
         name: 'my',
         component: My,
-        meta: { requireAuth: true }
+        meta: { requireAuth: true, scrollTop: 0 }
     },
     {
         path: '/login',

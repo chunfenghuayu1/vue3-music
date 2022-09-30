@@ -165,6 +165,7 @@
                             :name="item.name"
                             :sub-text="item.publishTime"
                             :show-title="true"
+                            :show-artist="false"
                         ></MvCover>
                     </div>
                 </div>

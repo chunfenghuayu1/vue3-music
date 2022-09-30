@@ -133,8 +133,10 @@
                             :item="item"
                             :show-title="true"
                             :name="item.title"
-                            :sub-text="item.creator[0].userName"
+                            :sub-text="item.creator[0]?.userName"
                             :img-url="item.coverUrl"
+                            :show-artist="true"
+                            :artist-id="item.creator[0]?.userId"
                         ></MvCover>
                     </div>
                 </template>
@@ -209,9 +211,7 @@ const hanlderClick = typeV => {
     // 切换标签
     btnType.value = typeV
     // 滑动效果
-    document
-        .querySelector('#main')
-        .scrollTo({ top: section1.value.offsetHeight + 80, behavior: 'smooth' })
+    window.scrollTo({ top: section1.value.offsetHeight + 80, behavior: 'smooth' })
     // 隐藏下拉框
     toggleShow.value = false
 }

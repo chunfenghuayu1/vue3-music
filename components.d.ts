@@ -33,6 +33,7 @@ declare module '@vue/runtime-core' {
     Personalized: typeof import('./src/views/Home/Personalized/Personalized.vue')['default']
     PersonalizedDaily: typeof import('./src/views/Home/Personalized/PersonalizedDaily.vue')['default']
     PersonalizeNewSong: typeof import('./src/views/Home/Personalized/PersonalizeNewSong.vue')['default']
+    Player: typeof import('./src/components/Player/Player.vue')['default']
     PlayList: typeof import('./src/views/PlayList/PlayList.vue')['default']
     PlayListItem: typeof import('./src/components/PlayListItem.vue')['default']
     RecordItem: typeof import('./src/components/RecordItem.vue')['default']

@@ -60,6 +60,7 @@
                                 :name="item.name"
                                 :sub-text="item.artists[0].userName"
                                 :img-url="item.cover"
+                                :show-artist="false"
                             ></MvCover>
                         </div>
                     </div>
@@ -163,8 +164,7 @@ const getSearchData = () => {
             })
         })
         .catch(error => {
-            proxy.$notify({
-                title: 'Error',
+            proxy.$message({
                 message: error.response.data.message,
                 type: 'error'
             })
