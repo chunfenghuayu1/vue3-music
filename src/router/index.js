@@ -9,7 +9,7 @@ const router = createRouter({
         return new Promise(resolve => {
             setTimeout(() => {
                 resolve({ top: from.meta.scrollTop })
-            }, 150)
+            }, 200)
         })
     },
     base: '/'

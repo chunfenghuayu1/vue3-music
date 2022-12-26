@@ -1,7 +1,7 @@
 <template>
     <div v-if="dataList.albumList.length > 0">
         <!-- 轮播图 -->
-        <Swiper :banner-list="bannerList"></Swiper>
+        <Swiper v-if="false" :banner-list="bannerList"></Swiper>
         <!-- 推荐歌单 -->
         <HomeRecomAlbum :item-list="albumList"></HomeRecomAlbum>
         <!-- 个性推荐 -->

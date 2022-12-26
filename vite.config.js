@@ -13,7 +13,7 @@ import viteCompression from 'vite-plugin-compression'
 // 修改title 可进行html的压缩
 import { createHtmlPlugin } from 'vite-plugin-html'
 // 拆包
-import { chunkSplitPlugin } from 'vite-plugin-chunk-split'
+// import { chunkSplitPlugin } from 'vite-plugin-chunk-split'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -113,19 +113,21 @@ export default defineConfig(({ mode }) => {
                 threshold: 10240,
                 algorithm: 'gzip',
                 ext: '.gz'
-            }),
-            // 拆包
-            chunkSplitPlugin({
-                strategy: 'default',
-                customSplitting: {
-                    plyr: ['plyr'],
-                    swiper: ['swiper']
-                }
             })
+            // 拆包
+            // chunkSplitPlugin({
+            //     strategy: 'default',
+            //     customSplitting: {
+            //         plyr: ['plyr'],
+            //         swiper: ['swiper']
+            //     }
+            // })
         ],
         build: {
-            outDir: 'test2',
+            outDir: 'test',
             minify: 'terser',
+            chunkSizeWarningLimit: 500,
+            cssCodeSplit: true, // 如果设置为false，整个项目中的所有 CSS 将被提取到一个 CSS 文件中
             terserOptions: {
                 compress: {
                     //生产环境时移除console
@@ -134,6 +136,13 @@ export default defineConfig(({ mode }) => {
                 }
             },
             rollupOptions: {
+                maxParallelFileOps: 5,
+                manualChunks: {
+                    // 拆分代码，这个就是分包，配置完后自动按需加载，现在还比不上webpack的splitchunk，不过也能用了。
+                    common: ['vue', 'vue-router', 'pinia', 'vue-lazyload', 'js-cookie', 'axios'],
+                    player: ['plyr'],
+                    swiper: ['swiper']
+                },
                 output: {
                     chunkFileNames: 'static/js/[name]-[hash].js',
                     entryFileNames: 'static/js/[name]-[hash].js',

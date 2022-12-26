@@ -33,7 +33,7 @@ const router = useRouter()
 const route = useRoute()
 const storageStore = useStorageStore()
 const MySongs = useMySongs()
-const qrcode = ref('')
+const qrcode = ref('/img_loading.gif')
 const unikey = ref('')
 const notify = ref('打开网易云音乐APP扫码登录')
 // 获取二维码
