@@ -4,4 +4,4 @@
 
 <script setup></script>
 
-<style></style>
+<style lang="less" scoped></style>

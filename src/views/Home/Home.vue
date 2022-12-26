@@ -1,7 +1,18 @@
 <template>
     <div>我是Home组件</div>
+    <el-button type="primary" size="default">22222</el-button>
+    <p>{{ homeStore.counter }}</p>
 </template>
 
-<script setup></script>
+<script setup>
+import { useHomeStore } from '@/store/Home.js'
 
-<style lang="less"></style>
+const homeStore = useHomeStore()
+</script>
+
+<style lang="less" scoped>
+p {
+    color: black;
+    user-select: auto;
+}
+</style>
