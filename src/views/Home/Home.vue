@@ -1,7 +1,8 @@
 <template>
-    <div>我是Home组件</div>
+    <div>2</div>
+    <router-view></router-view>
 </template>
 
-<script setup></script>
+<script setup lang="ts"></script>
 
-<style lang="less"></style>
+<style scoped></style>

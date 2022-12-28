@@ -1,5 +1,7 @@
 <template>
-    <div>1</div>
-    <router-view></router-view>
+    <div>3333</div>
 </template>
+
 <script setup lang="ts"></script>
+
+<style scoped></style>
