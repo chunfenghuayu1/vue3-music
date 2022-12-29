@@ -1,9 +1,10 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue","./components.d.ts"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue","components.d.ts","auto-import.d.ts","types/**/*.d.ts"],
+  "exclude": ["node_modules", "dist", "**/*.js"],
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "ES2015",
+    "target": "ESNext",
+    "module": "ESNext",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
@@ -18,7 +19,11 @@
     "noEmit": false,
     "noEmitOnError": true,
     "noImplicitThis": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    // 添加"vite/client"
+    "types": ["vite-plugin-svg-icons/client","vite/client"],
+    // 编译过程中需要引入的库文件的列表。
+    "lib": ["dom", "esnext"],
   },
   "references": [
     {

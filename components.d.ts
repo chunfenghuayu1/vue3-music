@@ -7,9 +7,16 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     Explore: typeof import('./src/views/Explore/Explore.vue')['default']
     Home: typeof import('./src/views/Home/Home.vue')['default']
+    My: typeof import('./src/views/My/My.vue')['default']
+    NavBar: typeof import('./src/components/NavBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchInput: typeof import('./src/components/SearchInput.vue')['default']
+    SvgIcon: typeof import('./src/components/SvgIcon.vue')['default']
+    SwitchTheme: typeof import('./src/components/SwitchTheme.vue')['default']
   }
 }

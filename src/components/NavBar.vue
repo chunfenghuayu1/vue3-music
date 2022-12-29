@@ -1,0 +1,53 @@
+<template>
+    <nav
+        class="sticky top-0 h-16 min-w-max w-full px-10vw lg:px-10 bg-opacity-90 backdrop-saturate-180 backdrop-blur-lg flex items-center justify-center border-collapse"
+    >
+        <div class="flex items-center flex-1 space-x-4 lg:space-x-2">
+            <button class="hover:bg-gray-200 rounded-lg active:scale-90 transition-all p-0.5">
+                <SvgIcon name="back" size="32" color="#000"></SvgIcon>
+            </button>
+            <button class="hover:bg-gray-200 rounded-lg active:scale-90 transition-all p-0.5">
+                <SvgIcon name="forward" size="32" color="#000"></SvgIcon>
+            </button>
+        </div>
+        <div class="flex flex-1 flex-shrink-0 justify-center items-center">
+            <router-link
+                to="/"
+                class="mx-4 my-1 px-2 py-1 text-lg font-bold active:scale-95 rounded-md"
+                >首页</router-link
+            >
+            <router-link
+                to="/explore"
+                class="mx-4 my-1 px-2 py-1 text-lg font-bold active:scale-95 rounded-md"
+                >发现</router-link
+            >
+            <router-link
+                to="/my"
+                class="mx-4 my-1 px-2 py-1 text-lg font-bold active:scale-95 rounded-md"
+                >我的</router-link
+            >
+        </div>
+        <div class="flex flex-1 items-center justify-end min-w-max space-x-5">
+            <SearchInput></SearchInput>
+            <SwitchTheme></SwitchTheme>
+            <el-avatar
+                fit="cover"
+                class="select-none cursor-pointer"
+                src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+            >
+            </el-avatar>
+        </div>
+    </nav>
+</template>
+
+<script setup lang="ts">
+// import { useStorageStore } from '@/store/Storage.ts'
+// const storageStore = useStorageStore()
+// const router = useRouter()
+// const loginout = async (): Promise<void> => {
+//     await storageStore.handlerLogout()
+//     router.go(0)
+// }
+</script>
+
+<style scoped></style>

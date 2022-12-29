@@ -12,7 +12,8 @@ module.exports = {
         'plugin:vue/vue3-essential', // 使用插件支持vue3
         'eslint:recommended', //使用推荐的eslint
         '@vue/eslint-config-typescript', //支持ts
-        '@vue/eslint-config-prettier' //处理prettier和eslint冲突
+        '@vue/eslint-config-prettier', //处理prettier和eslint冲突
+        './.eslintrc-auto-import.json'
     ],
     parserOptions: {
         parser: '@typescript-eslint/parser',

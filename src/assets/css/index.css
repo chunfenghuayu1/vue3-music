@@ -1,0 +1,11 @@
+@import './fonts.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply antialiased font-Barlow;
+}
+#app {
+  min-width: 900px;
+}

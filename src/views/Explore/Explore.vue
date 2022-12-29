@@ -1,5 +1,5 @@
 <template>
-    <div>3333</div>
+    <div>explore</div>
 </template>
 
 <script setup lang="ts"></script>

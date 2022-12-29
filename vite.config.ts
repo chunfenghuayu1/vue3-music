@@ -7,6 +7,10 @@ import eslintPlugin from '@nabla/vite-plugin-eslint'
 import AutoImport from 'unplugin-auto-import/vite'
 // 组件自动引入
 import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// svg
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -39,7 +43,8 @@ export default defineConfig(({ mode }) => {
                     enabled: false, // Default `false`
                     filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
                     globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
-                }
+                },
+                resolvers: [ElementPlusResolver()]
             }),
             // 组件自动引入
             Components({
@@ -50,7 +55,7 @@ export default defineConfig(({ mode }) => {
                 // 搜索子目录
                 deep: true,
                 // 自定义组件的解析器
-                // resolvers: [ElementPlusResolver()],
+                resolvers: [ElementPlusResolver()],
                 // 生成 `components.d.ts` 全局声明，
                 // 也接受自定义文件名的路径
                 dts: true,
@@ -67,6 +72,25 @@ export default defineConfig(({ mode }) => {
                 include: [/.vue$/, /.vue?vue/],
                 // eslint-disable-next-line no-useless-escape
                 exclude: [/[\/]node_modules[\/]/, /[\/].git[\/]/, /[\/].nuxt[\/]/]
+            }),
+            // 增加svg处理插件
+            createSvgIconsPlugin({
+                // 指定需要缓存的图标文件夹
+                iconDirs: [resolve(process.cwd(), 'src/assets/icons')],
+                // 指定symbolId格式
+                symbolId: 'icon-[name]',
+
+                /**
+                 * 自定义插入位置
+                 * @default: body-last
+                 */
+                inject: 'body-first'
+
+                /**
+                 * custom dom id
+                 * @default: __svg__icons__dom__
+                 */
+                // customDomId: '__svg__icons__dom__',
             })
         ],
         resolve: {
@@ -82,7 +106,7 @@ export default defineConfig(({ mode }) => {
             open: env.VITE_MODE_NAME === 'development',
             proxy: {
                 '/dev-api': {
-                    target: 'http://127.0.0.1:3000/',
+                    target: 'http://120.48.31.206:3000/',
                     changeOrigin: true,
                     rewrite: path => path.replace(/^\/dev-api/, '')
                 }
