@@ -1,4 +1,5 @@
 import Request from './axios'
+
 // 配置项
 const config = {
     // 基础路径
@@ -8,4 +9,5 @@ const config = {
     // 请求超时
     timeout: 3000
 }
+
 export default new Request(config)

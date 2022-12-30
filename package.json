@@ -12,16 +12,20 @@
   },
   "dependencies": {
     "axios": "^1.2.1",
+    "axios-retry": "^3.3.1",
     "element-plus": "^2.2.27",
     "js-cookie": "^3.0.1",
     "pinia": "^2.0.28",
     "qs": "^6.11.0",
+    "swiper": "^8.4.5",
     "vue": "^3.2.45",
+    "vue-lazyload": "^3.0.0-rc.2",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@nabla/vite-plugin-eslint": "^1.5.0",
     "@rushstack/eslint-patch": "^1.1.4",
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@types/node": "^18.11.12",
     "@types/qs": "^6.9.7",
     "@vitejs/plugin-vue": "^4.0.0",

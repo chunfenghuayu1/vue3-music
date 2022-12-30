@@ -1,6 +1,6 @@
 <template>
     <nav
-        class="sticky top-0 h-16 min-w-max w-full px-10vw lg:px-10 bg-opacity-90 backdrop-saturate-180 backdrop-blur-lg flex items-center justify-center border-collapse"
+        class="sticky z-10 top-0 h-16 min-w-max w-full px-10vw lg:px-10 bg-white bg-opacity-80 backdrop-saturate-180 backdrop-blur-lg flex items-center justify-center"
     >
         <div class="flex items-center flex-1 space-x-4 lg:space-x-2">
             <button class="hover:bg-gray-200 rounded-lg active:scale-90 transition-all p-0.5">
@@ -14,16 +14,19 @@
             <router-link
                 to="/"
                 class="mx-4 my-1 px-2 py-1 text-lg font-bold active:scale-95 rounded-md"
+                :class="$route.name === 'home' ? 'text-green-500' : ''"
                 >首页</router-link
             >
             <router-link
                 to="/explore"
                 class="mx-4 my-1 px-2 py-1 text-lg font-bold active:scale-95 rounded-md"
+                :class="$route.name === 'explore' ? 'text-green-500' : ''"
                 >发现</router-link
             >
             <router-link
                 to="/my"
                 class="mx-4 my-1 px-2 py-1 text-lg font-bold active:scale-95 rounded-md"
+                :class="$route.name === 'my' ? 'text-green-500' : ''"
                 >我的</router-link
             >
         </div>

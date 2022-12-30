@@ -1,0 +1,47 @@
+<template>
+    <div>
+        <div class="flex justify-between items-end mb-5 mt-16">
+            <h3 class="text-3xl font-bold">{{ title }}</h3>
+            <template v-if="isMore">
+                <slot name="more"></slot>
+            </template>
+        </div>
+        <div class="grid gap-10 lg:gap-x-5" :class="columns ? 'grid-cols-5' : 'grid-cols-6'">
+            <Cover
+                v-for="(item, index) in list"
+                :key="index"
+                :listItem="(item as Object)"
+                :isTextCenter="isTextCenter"
+                :isRounded="isRounded"
+            >
+                <template #subTilte v-if="item.updateFrequency">
+                    <div class="text-xs text-gray-400">{{ item.updateFrequency }}</div>
+                </template>
+            </Cover>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+defineProps({
+    // 标题
+    title: String,
+    // 网格布局列数 如果是true 则使用5格布局
+    columns: Boolean,
+    // 是否显示更多
+    isMore: Boolean,
+    // 渲染的item
+    list: Array(Object),
+    // cover的定义
+    isTextCenter: {
+        type: Boolean,
+        default: false
+    },
+    isRounded: {
+        type: Boolean,
+        default: false
+    }
+})
+</script>
+
+<style></style>

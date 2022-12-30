@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     mode: 'jit',
-    content: ['./index.html', './src/**/*.{vue,ts}'],
+    content: ['index.html', './src/**/*.{vue,ts}'],
     theme: {
         screens: {
             xl: { max: '1279px' },
@@ -28,5 +28,5 @@ module.exports = {
             }
         }
     },
-    plugins: []
+    plugins: [require('@tailwindcss/line-clamp')]
 }

@@ -32,7 +32,7 @@ module.exports = {
         semi: ['warn', 'never'], // 禁止尾部使用分号
         eqeqeq: 'warn', // 要求使用 === 和 !==
         indent: ['warn', 4], // 要求使用JS一致缩进4个空格
-        'vue/max-attributes-per-line': ['warn', { singleline: 5 }], // 要求每一行标签的最大属性不超五个
+        'vue/max-attributes-per-line': ['warn',{ singleline: 5 }], // 要求每一行标签的最大属性不超五个
         'vue/multi-word-component-names': 'off'
     }
 }

@@ -6,7 +6,6 @@ import type {
     CancelTokenStatic
 } from 'axios'
 import axios from 'axios'
-
 class Request {
     // axios实例
     private instance: AxiosInstance
