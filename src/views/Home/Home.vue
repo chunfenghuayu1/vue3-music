@@ -60,7 +60,7 @@ const getData = () => {
     } catch (error: any) {
         proxy?.$message({
             message: error,
-            type: 'error'
+            type: 'warning'
         })
     }
 }

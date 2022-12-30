@@ -6,6 +6,7 @@ import type {
     CancelTokenStatic
 } from 'axios'
 import axios from 'axios'
+import { ElMessage } from 'element-plus'
 class Request {
     // axios实例
     private instance: AxiosInstance
@@ -56,6 +57,11 @@ class Request {
                 return res.data
             },
             (error: AxiosError) => {
+                // 提示错误
+                ElMessage({
+                    message: error.message,
+                    type: 'error'
+                })
                 return Promise.reject(error)
             }
         )

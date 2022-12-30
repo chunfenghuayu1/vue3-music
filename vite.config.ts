@@ -8,6 +8,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 // 组件自动引入
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import ElementPlus from 'unplugin-element-plus/vite'
 // svg
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { resolve } from 'path'
@@ -20,6 +21,8 @@ export default defineConfig(({ mode }) => {
         base: '/', //项目基础路径
         plugins: [
             vue(),
+            // 导入样式
+            ElementPlus(),
             // 增加下面的配置项,这样在运行时就能检查eslint规范
             eslintPlugin({
                 eslintOptions: {
