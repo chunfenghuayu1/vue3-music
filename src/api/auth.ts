@@ -1,11 +1,20 @@
 import http from '@/utils/axios/request'
+import type { LoginKey, LoginQRCode, Captcha, CaptchaVerify } from './modules/auth'
+enum Api {
+    LoginKey = '/login/qr/key',
+    LoginQRCode = '/login/qr/create',
+    LoginCheck = '/login/qr/check',
+    Captcha = '/captcha/sent',
+    CaptchaVerify = '/captcha/verify',
+    Logout = '/logout',
+    LoginStatus = '/login/status'
+}
 
 /**
  * 二维码 key 生成接口
  * 说明: 调用此接口可生成一个 key
  */
-export const reqLoginKey = ({ timestamp = +new Date() }) =>
-    http.get({ url: `/login/qr/key`, params: { timestamp } })
+export const reqLoginKey = (params: LoginKey) => http.get({ url: Api.LoginKey, params })
 
 /**
  * 二维码生成接口
@@ -13,16 +22,14 @@ export const reqLoginKey = ({ timestamp = +new Date() }) =>
  * 必选参数: key,由第一个接口生成
  * 可选参数: qrimg 传入后会额外返回二维码图片 base64 编码
  */
-export const reqLoginQRCode = ({ key, timestamp = +new Date() }) =>
-    http.get({ url: `/login/qr/create`, params: { key, timestamp } })
+export const reqLoginQRCode = (params: LoginQRCode) => http.get({ url: Api.LoginQRCode, params })
 
 /**
  * 二维码检测扫码状态接口
  * 说明: 轮询此接口可获取二维码扫码状态,800 为二维码过期,801 为等待扫码,802 为待确认,803 为授权登录成功(803 状态码下会返回 cookies)必选参数: key,由第一个接口生成
  *
  */
-export const reqLoginCheck = ({ key, timestamp = +new Date() }) =>
-    http.get({ url: `/login/qr/check`, params: { key, timestamp } })
+export const reqLoginCheck = (params: LoginQRCode) => http.get({ url: Api.LoginCheck, params })
 
 /**
  * 发送验证码
@@ -30,7 +37,7 @@ export const reqLoginCheck = ({ key, timestamp = +new Date() }) =>
  * 必选参数 : phone: 手机号码
  * 可选参数 : ctcode: 国家区号,默认 86 即中国
  */
-export const reqCaptcha = ({ phone }) => http.get({ url: `/captcha/sent?phone=${phone}` })
+export const reqCaptcha = (params: Captcha) => http.get({ url: Api.Captcha, params })
 
 /**
  * 验证验证码
@@ -39,15 +46,15 @@ export const reqCaptcha = ({ phone }) => http.get({ url: `/captcha/sent?phone=${
  * captcha: 验证码
  * 可选参数 :ctcode: 国家区号,默认 86 即中国
  */
-export const reqCaptchaVerify = ({ phone, captcha }) =>
-    http.get({ url: `/captcha/verify?phone=${phone}&captcha=${captcha}` })
+export const reqCaptchaVerify = (params: CaptchaVerify) =>
+    http.get({ url: Api.CaptchaVerify, params })
 
 /**
  * 退出登录
  */
-export const reqLogout = () => http.get({ url: '/logout' })
+export const reqLogout = () => http.get({ url: Api.Logout })
 
 /**
  * 获取登录状态
  */
-export const reqLoginStatus = () => http.get({ url: '/login/status' })
+export const reqLoginStatus = () => http.get({ url: Api.LoginStatus })

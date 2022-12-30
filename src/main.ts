@@ -3,13 +3,16 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-import './assets/css/index.css'
+import '@/assets/css/index.css'
 import 'virtual:svg-icons-register'
-import './api/index'
+import * as API from '@/api'
 
 const app = createApp(App)
-const pinia = createPinia()
 
+app.config.globalProperties.$http = API
+app.config.performance = true
+
+const pinia = createPinia()
 app.use(pinia)
 app.use(router)
 app.mount('#app')

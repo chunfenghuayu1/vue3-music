@@ -1,4 +1,13 @@
 import http from '@/utils/axios/request'
+import type {
+    PlayList,
+    AlbumListList,
+    HighqualityPlaylist,
+    Album,
+    RecomNewSong,
+    PlayListDetail,
+    PlayLsitTrankAll
+} from './modules/playList'
 enum Api {
     AlbumList = '/personalized',
     HighqualityPlaylist = '/top/playlist/highquality',
@@ -15,10 +24,9 @@ enum Api {
 /**
  * 获取推荐歌单
  * 可选参数 : limit: 取出数量 , 默认为 30 (不支持 offset)
- * @param { number } limit
+ * @params { number }
  */
-export const reqAlbumListList = (limit: number = 30) =>
-    http.get({ url: Api.AlbumList, params: { limit } })
+export const reqAlbumListList = (params: AlbumListList) => http.get({ url: Api.AlbumList, params })
 
 /**
  * 获取精品歌单
@@ -26,11 +34,8 @@ export const reqAlbumListList = (limit: number = 30) =>
  * limit: 取出歌单数量 , 默认为 50
  * before: 分页参数,取上一页最后一个歌单的 updateTime 获取下一页数据
  */
-export const reqHighqualityPlaylist = (
-    limit: number = 50,
-    cat: string = '全部',
-    before: null | number
-) => http.get({ url: Api.HighqualityPlaylist, params: { limit, cat, before } })
+export const reqHighqualityPlaylist = (params: HighqualityPlaylist) =>
+    http.get({ url: Api.HighqualityPlaylist, params })
 
 /**
  * 获取排行榜单数据
@@ -44,12 +49,7 @@ export const reqRankList = () => http.get({ url: Api.RankList })
  * limit: 取出歌单数量 , 默认为 50
  * offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*50, 其中 50 为 limit 的值
  */
-export const reqPlayList = (
-    order: 'hot' | 'new',
-    limit: number = 50,
-    cat: string = '全部',
-    offset: number
-) => http.get({ url: Api.PlayList, params: { order, limit, cat, offset } })
+export const reqPlayList = (params: PlayList) => http.get({ url: Api.PlayList, params })
 
 /**
  * 获取热门新专辑
@@ -60,14 +60,13 @@ export const reqAlbumNewest = () => http.get({ url: Api.AlbumNewest })
  * 获取专辑内容
  * 必选参数 : id: 专辑 id
  */
-export const reqAlbumDetail = (id: number) => http.get({ url: Api.AlbumDetail, params: { id } })
+export const reqAlbumDetail = (params: Album) => http.get({ url: Api.AlbumDetail, params })
 
 /**
  * 获取推荐新音乐
  * @param {number} limit
  */
-export const reqRecomNewSong = (limit: number) =>
-    http.get({ url: Api.RecomNewSong, params: { limit } })
+export const reqRecomNewSong = (params: RecomNewSong) => http.get({ url: Api.RecomNewSong, params })
 
 /**
  * 获取热门歌单标签
@@ -85,8 +84,8 @@ export const reqCatTags = () => http.get({ url: Api.CatTags })
  * 必选参数 : id : 歌单 id
  * 可选参数 : s : 歌单最近的 s 个收藏者,默认为 8
  */
-export const reqPlayListDetail = (id: number, s: number = 8) =>
-    http.get({ url: Api.PlayListDetail, params: { id, s } })
+export const reqPlayListDetail = (params: PlayListDetail) =>
+    http.get({ url: Api.PlayListDetail, params })
 
 /**
  * 获取歌单所有歌曲
@@ -97,5 +96,5 @@ export const reqPlayListDetail = (id: number, s: number = 8) =>
  * @param {number} offset
  * @param {number} limit
  */
-export const reqPlayLsitTrankAll = (id: number, offset: number = 0, limit: number) =>
-    http.get({ url: Api.PlayLsitTrankAll, params: { id, offset, limit } })
+export const reqPlayLsitTrankAll = (params: PlayLsitTrankAll) =>
+    http.get({ url: Api.PlayLsitTrankAll, params })

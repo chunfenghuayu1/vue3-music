@@ -1,12 +1,4 @@
-import type {
-    AxiosInstance,
-    AxiosRequestConfig,
-    AxiosError,
-    AxiosResponse,
-    CancelTokenStatic
-} from 'axios'
-import axios from 'axios'
-
+import Request from './axios'
 // 配置项
 const config = {
     // 基础路径
@@ -15,89 +7,5 @@ const config = {
     withCredentials: true,
     // 请求超时
     timeout: 3000
-}
-
-class Request {
-    // axios实例
-    private instance: AxiosInstance
-    // 取消请求
-    private cancelToken: CancelTokenStatic = axios.CancelToken
-    private pending: Array<{ url: string; cancel: Function }> = []
-
-    constructor(config: AxiosRequestConfig) {
-        this.instance = axios.create(config)
-        this.requestInterceptor()
-        this.responseInterceptor()
-    }
-    // 请求拦截器
-    private requestInterceptor() {
-        this.instance.interceptors.request.use(
-            (config: AxiosRequestConfig) => {
-                this.removePending(config)
-                config.cancelToken = new this.cancelToken((c: any) => {
-                    this.pending.push({
-                        url: `${config.url}/${JSON.stringify(config.data)}&request_type=${
-                            config.method
-                        }`,
-                        cancel: c
-                    })
-                })
-                // 处理请求头逻辑
-                const token = ''
-                if (token) {
-                    if (config && config.headers) {
-                        config.headers['Athorization'] = 'Bearer ' + ''
-                    }
-                }
-                // this.requestLog(config)
-                return config
-            },
-            (error: AxiosError) => {
-                // 对错误做些什么
-                return Promise.reject(error)
-            }
-        )
-    }
-    // 响应拦截器
-    private responseInterceptor() {
-        this.instance.interceptors.response.use(
-            (res: AxiosResponse) => {
-                this.removePending(res.config)
-                // 处理响应码逻辑
-                return res.data
-            },
-            (error: AxiosError) => {
-                return Promise.reject(error)
-            }
-        )
-    }
-    // 取消重复请求
-    private removePending(config: AxiosRequestConfig): void {
-        this.pending.map((item, index) => {
-            if (
-                item.url ===
-                `${config.url}/${JSON.stringify(config.data)}&request_type=${config.method}`
-            ) {
-                item.cancel()
-                this.pending.splice(index, 1)
-            }
-            return item
-        })
-    }
-    private request<T = any>(config: AxiosRequestConfig): Promise<T> {
-        return this.instance.request(config)
-    }
-    get<T = any>({ url, params, data, headers }: AxiosRequestConfig): Promise<T> {
-        return this.request({ url, method: 'GET', params, data, headers })
-    }
-    post<T = any>({ url, params, data, headers }: AxiosRequestConfig): Promise<T> {
-        return this.request({ url, method: 'POST', params, data, headers })
-    }
-    put<T = any>({ url, params, data, headers }: AxiosRequestConfig): Promise<T> {
-        return this.request({ url, method: 'PUT', params, data, headers })
-    }
-    delete<T = any>({ url, params, data, headers }: AxiosRequestConfig): Promise<T> {
-        return this.request({ url, method: 'DELETE', params, data, headers })
-    }
 }
 export default new Request(config)
