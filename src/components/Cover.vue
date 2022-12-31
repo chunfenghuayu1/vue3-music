@@ -1,12 +1,15 @@
 <template>
     <div class="flex flex-col">
-        <div class="mb-2 overflow-hidden" :class="isRounded ? 'rounded-full' : 'rounded-lg'">
+        <div
+            class="mb-2 overflow-hidden text-center"
+            :class="isRounded ? 'rounded-full' : 'rounded-lg'"
+        >
             <router-link to="/" class="">
                 <img
                     v-lazy="$imgUrl(imgUrl)"
                     :alt="listItem?.name"
                     lazy="loaded"
-                    class="object-cover w-full h-full"
+                    class="object-cover w-full h-full align-middle"
                 />
             </router-link>
         </div>

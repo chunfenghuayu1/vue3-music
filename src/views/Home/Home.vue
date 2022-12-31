@@ -1,6 +1,13 @@
 <template>
-    <div>
-        <Section title="推荐歌单" :columns="true" :isMore="true" :list="albumList">
+    <div v-if="albumList.length > 0">
+        <Section
+            title="推荐歌单"
+            :columns="true"
+            :isMore="true"
+            :list="albumList"
+            :isTextCenter="false"
+            :isRounded="false"
+        >
             <template #more>
                 <router-link to="/explore" class="font-semibold text-sm">查看更多</router-link>
             </template>
@@ -14,7 +21,14 @@
             :isRounded="true"
         ></Section>
         <corusal-section :list="albumNewestList"></corusal-section>
-        <Section title="排行榜" :columns="true" :isMore="true" :list="rankList">
+        <Section
+            title="排行榜"
+            :columns="true"
+            :isMore="true"
+            :list="rankList"
+            :isTextCenter="false"
+            :isRounded="false"
+        >
             <template #more>
                 <router-link to="/explore" class="font-semibold text-sm">查看更多</router-link>
             </template>
@@ -38,6 +52,7 @@ const dataList: DataList = reactive({
     albumNewestList: [],
     rankList: []
 })
+
 const { albumList, topArtists, albumNewestList, rankList } = toRefs(dataList)
 const getData = () => {
     try {

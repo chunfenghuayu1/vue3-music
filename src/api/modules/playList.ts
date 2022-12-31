@@ -10,7 +10,7 @@ export interface AlbumListList {
 export interface HighqualityPlaylist {
     cat?: string
     limit?: number
-    brfore?: Date
+    brfore?: number
 }
 export interface Album {
     id: number

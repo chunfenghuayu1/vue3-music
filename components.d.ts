@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     Explore: typeof import('./src/views/Explore/Explore.vue')['default']
+    ExploreTag: typeof import('./src/views/Explore/ExploreTag.vue')['default']
     Home: typeof import('./src/views/Home/Home.vue')['default']
     Item: typeof import('./src/components/Item.vue')['default']
     My: typeof import('./src/views/My/My.vue')['default']
@@ -23,5 +24,9 @@ declare module '@vue/runtime-core' {
     Section: typeof import('./src/components/Section.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon.vue')['default']
     SwitchTheme: typeof import('./src/components/SwitchTheme.vue')['default']
+    TagSelector: typeof import('./src/views/Explore/TagSelector.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
   }
 }

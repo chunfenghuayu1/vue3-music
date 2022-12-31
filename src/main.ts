@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+// 数据持久化
+import persist from '@/stores/persist'
 import App from './App.vue'
 import router from './router'
 import '@/assets/css/index.css'
@@ -31,6 +33,7 @@ app.use(VueLazyload, {
     attempt: 1 // 加载错误后最大尝试次数
 })
 const pinia = createPinia()
+pinia.use(persist)
 app.use(pinia)
 app.use(router)
 app.mount('#app')

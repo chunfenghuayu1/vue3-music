@@ -11,8 +11,8 @@
                 v-for="(item, index) in list"
                 :key="index"
                 :listItem="(item as Object)"
-                :isTextCenter="isTextCenter"
-                :isRounded="isRounded"
+                :isTextCenter="$attrs.isTextCenter === true"
+                :isRounded="$attrs.isRounded === true"
             >
                 <template #subTilte v-if="item.updateFrequency">
                     <div class="text-xs text-gray-400">{{ item.updateFrequency }}</div>
@@ -31,16 +31,7 @@ defineProps({
     // 是否显示更多
     isMore: Boolean,
     // 渲染的item
-    list: Array(Object),
-    // cover的定义
-    isTextCenter: {
-        type: Boolean,
-        default: false
-    },
-    isRounded: {
-        type: Boolean,
-        default: false
-    }
+    list: Array(Object)
 })
 </script>
 

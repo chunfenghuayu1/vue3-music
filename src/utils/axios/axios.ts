@@ -60,7 +60,8 @@ class Request {
                 // 提示错误
                 ElMessage({
                     message: error.message,
-                    type: 'error'
+                    type: 'error',
+                    duration: 1000
                 })
                 return Promise.reject(error)
             }
