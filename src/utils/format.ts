@@ -10,7 +10,7 @@ export const formatPlayCount = (count: number): number | string => {
 }
 
 // 毫秒转年月日
-export const formatDate = (value: Date): string => {
+export const formatDate = (value: Date | number): string => {
     const date = new Date(value)
     const YY = date.getFullYear()
     const MM = date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
@@ -19,7 +19,7 @@ export const formatDate = (value: Date): string => {
 }
 
 // 毫秒转分钟
-export const forminute = (value: Date): string => {
+export const forminute = (value: number): string => {
     const time = new Date(value)
     const mm = time.getMinutes()
     const ss = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds()

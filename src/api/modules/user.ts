@@ -19,5 +19,5 @@ export interface LikeArtist {
 }
 export interface UserRecord {
     uid: number
-    type?: 1 | 0
+    type?: number
 }

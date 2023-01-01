@@ -5,9 +5,14 @@ const activeTags = explore.tags.filter((item: tags) => item.hot === true).map(it
 export interface settings {
     activeTags: string[]
 }
+export interface user {
+    userId: number
+    avatarUrl: string
+    nickname: string
+}
 export interface data {
     loginMode: string
-    user: {}
+    user: user
 }
 
 interface localStore {
@@ -18,7 +23,11 @@ interface localStore {
 const localStore: localStore = {
     data: {
         loginMode: '',
-        user: {}
+        user: {
+            userId: 0,
+            avatarUrl: '',
+            nickname: ''
+        }
     },
     settings: {
         activeTags

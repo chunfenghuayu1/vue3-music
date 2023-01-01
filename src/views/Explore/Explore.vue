@@ -1,5 +1,5 @@
 <template>
-    <div v-if="mounted">
+    <div v-if="mounted" class="px-10vw lg:px-10 pb-16">
         <h3 class="font-bold text-6xl my-8">发现</h3>
         <!-- 标签栏 -->
         <ExploreTag
@@ -26,8 +26,8 @@
             v-infinite-scroll="load"
             class="mt-12 grid gap-10 grid-cols-6 lg:gap-x-5"
             :infinite-scroll-immediate="false"
-            infinite-scroll-distance="300"
-            infinite-scroll-delay="800"
+            infinite-scroll-distance="1"
+            infinite-scroll-delay="1000"
         >
             <div v-for="(item, index) in playList" :key="index">
                 <Cover :listItem="item"></Cover>
@@ -87,11 +87,10 @@ const getPlayList = ({ limit, cat, offset, before }: params) => {
         proxy?.$http
             .reqHighqualityPlaylist({ limit: 24, cat: '全部', before } as HighqualityPlaylist)
             .then(res => {
-                console.log(res)
                 playList.value = [...playList.value, ...res.playlists] as any
 
-                more.value = res.data.more
-                lasttime.value = res.data.lasttime
+                more.value = res.more
+                lasttime.value = res.lasttime
             })
         return
     }
@@ -131,10 +130,15 @@ onBeforeRouteUpdate(to => {
 // 解决无限滚动获取不到dom的问题
 const mounted = ref(false)
 onMounted(() => {
-    mounted.value = true
     reset()
     // 获取标签信息
-    getPlayList({ limit: limit.value, cat: category.value, offset: offset.value * limit.value })
+    mounted.value = true
+    getPlayList({
+        limit: limit.value,
+        cat: category.value,
+        offset: offset.value * limit.value
+    })
+    // console.log(1)
 })
 </script>
 

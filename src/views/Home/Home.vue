@@ -1,5 +1,5 @@
 <template>
-    <div v-if="albumList.length > 0">
+    <div v-if="albumList.length > 0" class="px-10vw lg:px-10 pb-16">
         <Section
             title="推荐歌单"
             :columns="true"

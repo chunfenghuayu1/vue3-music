@@ -1,12 +1,16 @@
 <template>
-    <el-scrollbar height="100vh">
+    <el-scrollbar height="100vh" ref="scrollbarRef">
         <NavBar></NavBar>
-        <div class="px-10vw lg:px-10 pb-16">
+        <div>
             <router-view></router-view>
         </div>
     </el-scrollbar>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ElScrollbar } from 'element-plus'
+const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
+provide('scroll', scrollbarRef)
+</script>
 <style lang="postcss">
 .el-scrollbar__bar {
     z-index: 20;

@@ -28,7 +28,7 @@ class Request {
                     this.pending.push({
                         url: `${config.url}/${JSON.stringify(config.data)}&request_type=${
                             config.method
-                        }`,
+                        }/${JSON.stringify(config.params)}`,
                         cancel: c
                     })
                 })
@@ -58,8 +58,10 @@ class Request {
             },
             (error: AxiosError) => {
                 // 提示错误
+                console.log(error)
+
                 ElMessage({
-                    message: error.message,
+                    message: error as any,
                     type: 'error',
                     duration: 1000
                 })

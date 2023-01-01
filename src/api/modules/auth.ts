@@ -1,8 +1,8 @@
 export interface LoginKey {
-    timestamp: string
+    timestamp: number
 }
 export interface LoginQRCode {
-    key: number
+    key: string
     timestamp: number
 }
 export interface Captcha {

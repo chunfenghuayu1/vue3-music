@@ -1,3 +1,3 @@
-export const imgUrl = <T>(url: T): T => {
-    return (url + `?param=512y512`) as T
+export const imgUrl = (url: string): string => {
+    return url.replace(/^http:\/\//, 'https://') + `?param=512y512`
 }
