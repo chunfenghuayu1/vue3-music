@@ -17,10 +17,16 @@ export interface artistData {
 }
 export interface EPData {
     type: string
-    [k: any]: any
+    name: string
+    id: number
+    picUrl?: string
+    coverImgUrl?: string
+    [k: string]: any
 }
 export interface mvsData {
-    imgurl: string
+    artistName: string
     name: string
-    publishTime: string
+    artists: any[]
+    cover: string
+    [k: string]: any
 }

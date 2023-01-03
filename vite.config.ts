@@ -1,5 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
+// import type { PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 // eslint插件
 import eslintPlugin from '@nabla/vite-plugin-eslint'
@@ -12,13 +13,14 @@ import ElementPlus from 'unplugin-element-plus/vite'
 // svg
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { resolve } from 'path'
+// import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, __dirname)
     return {
         root: './', //项目根目录
-        base: '/', //项目基础路径
+        base: env.VITE_MODE_NAME === 'development' ? '/' : './', //项目基础路径
         plugins: [
             vue(),
             // 导入样式
@@ -43,7 +45,7 @@ export default defineConfig(({ mode }) => {
                 // 必须声明
                 dts: 'auto-import.d.ts',
                 eslintrc: {
-                    enabled: false, // Default `false`
+                    enabled: true, // Default `false`
                     filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
                     globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
                 },
@@ -95,7 +97,43 @@ export default defineConfig(({ mode }) => {
                  */
                 // customDomId: '__svg__icons__dom__',
             })
+            // visualizer({
+            //     gzipSize: true,
+            //     brotliSize: true,
+            //     emitFile: false,
+            //     filename: 'test.html', //分析图生成的文件名
+            //     open: true //如果存在本地服务端口，将在打包后自动展示
+            // }) as PluginOption
         ],
+        build: {
+            outDir: 'dist',
+            // minify: 'terser',
+            assetsInlineLimit: 4096, //小于此阈值的导入或引用资源将内联为 base64 编码，以避免额外的 http 请求。设置为 0 可以完全禁用此项。
+            chunkSizeWarningLimit: 500,
+            cssCodeSplit: true, // 如果设置为false，整个项目中的所有 CSS 将被提取到一个 CSS 文件中
+            terserOptions: {
+                ecma: 2015,
+                compress: {
+                    //生产环境时移除console
+                    drop_console: true,
+                    drop_debugger: true
+                }
+            },
+            rollupOptions: {
+                maxParallelFileOps: 5,
+                output: {
+                    chunkFileNames: 'static/js/[name]-[hash].js',
+                    entryFileNames: 'static/js/[name]-[hash].js',
+                    assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+                    manualChunks: {
+                        // 拆分代码，这个就是分包，配置完后自动按需加载，现在还比不上webpack的splitchunk，不过也能用了。
+                        plyr: ['plyr'],
+                        swiper: ['swiper/vue'],
+                        lodash: ['lodash']
+                    }
+                }
+            }
+        },
         resolve: {
             // 解决路径问题
             alias: {

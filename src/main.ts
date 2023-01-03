@@ -9,7 +9,7 @@ import 'virtual:svg-icons-register'
 import * as API from '@/api'
 import { ElMessage } from 'element-plus'
 import VueLazyload from 'vue-lazyload'
-import lazyImg from './assets/img/img_loading.gif'
+import lazyImg from '@/assets/img/img_loading.gif'
 // 处理图片参数
 import { imgUrl } from './utils/imgUrl'
 declare module 'vue' {

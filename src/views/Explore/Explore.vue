@@ -49,7 +49,7 @@ const { proxy } = getCurrentInstance() as ComponentInternalInstance
 // 如果点击更多，则进行切换,用两个值进行控制，同时控制下面选择框显示与隐藏
 const showMore = ref(false)
 // 该值依赖路由
-const category = computed(() => {
+const category = computed<string>(() => {
     const { query } = route
     return (query?.cat as string) || '全部'
 })

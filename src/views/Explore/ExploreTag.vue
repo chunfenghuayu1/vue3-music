@@ -14,20 +14,12 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-    activeTags: {
-        type: Array<string>,
-        required: true
-    },
-    category: {
-        type: String,
-        required: true
-    },
-    showMore: {
-        type: Boolean,
-        required: true
-    }
-})
+interface Dprops {
+    activeTags: string[]
+    category: string
+    showMore: boolean
+}
+defineProps<Dprops>()
 // 直接把值给过去就行了父组件v-model自动触发
 const emit = defineEmits(['update:showMore'])
 const router = useRouter()

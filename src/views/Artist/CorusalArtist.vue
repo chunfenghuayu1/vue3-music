@@ -44,9 +44,7 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Grid } from 'swiper'
 import type { Ref } from 'vue'
-defineProps({
-    list: Array(Object)
-})
+defineProps<{ list: { [k: string]: any } }>()
 const mySwiper: Ref<typeof Swiper> = ref(Swiper)
 const onSwiper = (swiper: any) => {
     mySwiper.value = swiper

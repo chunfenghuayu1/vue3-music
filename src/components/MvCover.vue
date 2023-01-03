@@ -19,7 +19,7 @@
             class="text-xs text-gray-400 italic hover:underline"
             :to="{
                 name: 'artist',
-                params: { id: artistId }
+                params: { id: item.artists[0]?.id }
             }"
         >
             {{ subText }}
@@ -31,35 +31,21 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-    item: {
-        type: Object,
-        required: true
-    },
-    showTitle: {
-        type: Boolean,
-        default: true
-    },
-    name: {
-        type: String,
-        default: ''
-    },
-    imgUrl: {
-        type: String,
-        required: true
-    },
-    subText: {
-        type: String,
-        default: ''
-    },
-    artistId: {
-        type: Number,
-        default: 0
-    },
-    showArtist: {
-        type: Boolean,
-        default: false
-    }
+console.log('MvCover', '数据定义问题')
+interface Dprops {
+    item: { artistName: string; name: string; artists: any[]; cover: string; [k: string]: any }
+    showTitle: boolean
+    name?: string
+    imgUrl: string
+    subText?: string
+    showArtist?: boolean
+    artistId?: number
+}
+withDefaults(defineProps<Dprops>(), {
+    name: '',
+    subText: '',
+    showArtist: false,
+    artistId: 0
 })
 </script>
 

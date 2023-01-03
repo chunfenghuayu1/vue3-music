@@ -1,6 +1,6 @@
 export interface DataList {
-    albumList: []
+    albumList: any[]
     topArtists: any[]
-    albumNewestList: []
-    rankList: []
+    albumNewestList: any[]
+    rankList: any[]
 }

@@ -30,28 +30,13 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-    item: {
-        type: Object,
-        required: true
-    },
-    picUrl: {
-        type: String,
-        required: true
-    },
-    name: {
-        type: String,
-        required: true
-    },
-    alia: {
-        type: Array,
-        required: true
-    },
-    ar: {
-        type: Array<any>,
-        required: true
-    }
-})
+interface Dprops {
+    picUrl: string
+    name: string
+    alia: any[]
+    ar: { id: number; name: string }[]
+}
+defineProps<Dprops>()
 </script>
 
 <style lang="postcss"></style>

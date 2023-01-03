@@ -29,22 +29,23 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-    row: {
-        type: Array<any>,
-        default: () => []
-    },
-    toggleShow: {
-        type: Boolean,
-        default: false
-    },
-    type: {
-        type: Number,
-        default: 1
+interface DrowType {
+    type: number
+    name: string
+}
+const props = withDefaults(
+    defineProps<{
+        row: DrowType[]
+        toggleShow?: boolean
+        type?: number
+    }>(),
+    {
+        toggleShow: false,
+        type: 1
     }
-})
+)
 const emit = defineEmits(['update:toggleShow', 'update:type'])
-const handlerClick = (item: any) => {
+const handlerClick = (item: DrowType) => {
     emit('update:toggleShow', false)
     emit('update:type', item.type)
 }

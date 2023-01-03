@@ -105,8 +105,8 @@ const getPlayListDetail = (id: number) => {
 const CDList = computed(() => {
     const CDs = uniqBy(track.value, 'cd')
     const isTitle = CDs.length > 1 ? true : false
-    const list = CDs.map(item => {
-        return { list: track.value.filter(i => i.cd === item.cd), cd: item.cd }
+    const list = CDs.map((item: any) => {
+        return { list: track.value.filter((i: any) => i.cd === item.cd), cd: item.cd }
     })
     return { list, isTitle }
 })

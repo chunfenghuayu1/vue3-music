@@ -77,19 +77,24 @@
 import { useMySong } from '@/stores/MySong'
 import { forminute } from '@/utils/format'
 const MySong = useMySong()
-defineProps({
+interface Dprops {
     song: {
-        type: Object,
-        default: () => {}
-    },
-    isShowAlbum: {
-        type: Boolean,
-        default: true
-    },
-    isShowOther: {
-        type: Boolean,
-        default: true
+        al: {
+            picUrl: string
+            name: string
+        }
+        name: string
+        alia: any[]
+        ar: { name: string }[]
+        id: number
+        dt: number
     }
+    isShowAlbum?: boolean
+    isShowOther?: boolean
+}
+withDefaults(defineProps<Dprops>(), {
+    isShowAlbum: true,
+    isShowOther: true
 })
 const showBtn = ref(false)
 </script>

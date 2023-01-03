@@ -1,5 +1,5 @@
 <template>
-    <div v-if="MySong.tracksCount">
+    <div v-show="MySong.tracksCount">
         <div ref="section1">
             <!-- 标题 -->
             <div class="flex items-center space-x-4 my-8">
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-16 space-y-8 min-h-screen">
+        <div class="mt-16 space-y-8">
             <!-- 歌单标题 -->
             <div class="flex justify-between items-center h-9">
                 <!-- 左侧选择区域 -->
@@ -66,7 +66,7 @@
                         :class="btnType === item.type ? 'bg-gray-100 text-skin-primary' : ''"
                         @click="hanlderClick(item.type)"
                     >
-                        <template v-if="item.type === 1">
+                        <template v-if="item.type === 1 && item.child">
                             <DropDown
                                 v-model:toggleShow="toggleShow"
                                 v-model:type="type"

@@ -4,32 +4,19 @@
     </svg>
 </template>
 
-<script>
-export default defineComponent({
-    name: 'SvgIcon',
-    props: {
-        prefix: {
-            type: String,
-            default: 'icon'
-        },
-        name: {
-            type: String,
-            required: true
-        },
-        color: {
-            type: String,
-            default: '#fff'
-        },
-        size: {
-            type: String,
-            default: '14'
-        }
-    },
-    setup(props) {
-        const symbolId = computed(() => `#${props.prefix}-${props.name}`)
-        return { symbolId }
-    }
+<script setup lang="ts">
+interface Dprops {
+    prefix?: string
+    name: string
+    color?: string
+    size?: string
+}
+const props = withDefaults(defineProps<Dprops>(), {
+    prefix: 'icon',
+    color: '#fff',
+    size: '14'
 })
+const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 </script>
 
 <style lang="postcss">

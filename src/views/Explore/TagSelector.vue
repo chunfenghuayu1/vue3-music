@@ -30,16 +30,11 @@
 import explore from '@/utils/localData.js'
 import { useLocalStore } from '@/stores/localStore'
 const localStore = useLocalStore()
-defineProps({
-    showMore: {
-        type: Boolean,
-        required: true
-    },
-    activeTags: {
-        type: Array<string>,
-        required: true
-    }
-})
+interface Dprops {
+    showMore: boolean
+    activeTags: string[]
+}
+defineProps<Dprops>()
 
 // 类型的种类
 const categories = computed(() => {

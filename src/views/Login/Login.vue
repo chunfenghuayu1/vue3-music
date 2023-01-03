@@ -25,13 +25,12 @@
 </template>
 
 <script setup lang="ts">
-import type { ComponentInternalInstance, Ref } from 'vue'
+import type { ComponentInternalInstance } from 'vue'
 import QRCode from 'qrcode'
 import { useLocalStore } from '@/stores/localStore'
 import { useMySong } from '@/stores/MySong'
 import loading from '@/assets/img/img_loading.gif'
 import success from '@/assets/img/success.gif'
-// import { useMySongs } from '@/store/MySongs.js'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const router = useRouter()
 const route = useRoute()

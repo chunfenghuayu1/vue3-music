@@ -56,9 +56,14 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Scrollbar } from 'swiper'
 import type { Ref } from 'vue'
-defineProps({
-    list: Array(Object)
-})
+interface Dprops {
+    list: {
+        artist: { name: string }
+        name: string
+        id: number
+    }[]
+}
+defineProps<Dprops>()
 const mySwiper: Ref<typeof Swiper> = ref(Swiper)
 const onSwiper = (swiper: any) => {
     mySwiper.value = swiper

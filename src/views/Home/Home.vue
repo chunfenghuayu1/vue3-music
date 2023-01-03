@@ -1,36 +1,36 @@
 <template>
     <div v-if="albumList.length > 0">
         <Section
-            title="推荐歌单"
+            :title="'推荐歌单'"
             :columns="true"
             :isMore="true"
             :list="albumList"
             :isTextCenter="false"
             :isRounded="false"
-            listType="歌单"
+            :listType="'歌单'"
         >
             <template #more>
                 <router-link to="/explore" class="font-semibold text-sm">查看更多</router-link>
             </template>
         </Section>
         <Section
-            title="热门歌手"
+            :title="'热门歌手'"
             :columns="false"
             :isMore="false"
             :list="topArtists"
             :isTextCenter="true"
             :isRounded="true"
-            listType="歌手"
+            :listType="'歌手'"
         ></Section>
         <corusal-section :list="albumNewestList"></corusal-section>
         <Section
-            title="排行榜"
+            :title="'排行榜'"
             :columns="true"
             :isMore="true"
             :list="rankList"
             :isTextCenter="false"
             :isRounded="false"
-            listType="歌单"
+            :listType="'歌单'"
         >
             <template #more>
                 <router-link to="/explore" class="font-semibold text-sm">查看更多</router-link>

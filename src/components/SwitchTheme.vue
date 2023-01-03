@@ -13,7 +13,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 控制主题切换
 const toggleTheme = ref(true)
 const switchTheme = () => {

@@ -12,10 +12,12 @@
             </div>
         </div>
         <!-- 歌名 作者 -->
-        <div class="flex flex-col justify-center flex-1">
-            <div class="flex font-bold text-lg line-clamp-1">
+        <div class="flex flex-col justify-center flex-1 line-clamp-1">
+            <div class="flex font-bold text-lg">
                 <span class="line-clamp-1 select-none" :title="song.name"> {{ song.name }}</span>
-                <span v-if="song.alia[0]" class="line-clamp-1"> ({{ song.alia[0] }}) </span>
+                <span v-if="song.alia[0]" class="line-clamp-1 text-gray-400">
+                    ({{ song.alia[0] }})
+                </span>
             </div>
         </div>
         <!-- 收藏或喜欢 -->
@@ -44,12 +46,16 @@
 import { useMySong } from '@/stores/MySong'
 import { forminute } from '@/utils/format'
 const MySong = useMySong()
-defineProps({
+interface Dprops {
     song: {
-        type: Object,
-        default: () => {}
+        id: number
+        no: number
+        name: string
+        alia: any[]
+        dt: number
     }
-})
+}
+defineProps<Dprops>()
 const showBtn = ref(false)
 </script>
 

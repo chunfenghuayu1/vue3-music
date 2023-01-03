@@ -7,7 +7,7 @@
             <router-link :to="routeParams">
                 <img
                     v-lazy="$imgUrl(imgUrl)"
-                    :alt="listItem?.name"
+                    :alt="listItem.name"
                     lazy="loaded"
                     class="object-cover w-full h-full align-middle"
                 />
@@ -17,7 +17,7 @@
             <router-link
                 :to="routeParams"
                 class="cursor-pointer hover:underline font-semibold"
-                :title="listItem?.name"
+                :title="listItem.name"
             >
                 {{ listItem?.name }}
             </router-link>
@@ -30,28 +30,32 @@
 
 <script setup lang="ts">
 import type { RouteLocationRaw } from 'vue-router'
-const props = defineProps({
-    listItem: Object,
-    isTextCenter: {
-        type: Boolean,
-        default: false
-    },
-    isRounded: {
-        type: Boolean,
-        default: false
-    },
-    listType: String
+interface Dprops {
+    listItem: {
+        name: string
+        id: number
+        picUrl?: string
+        coverImgUrl?: string
+    }
+    isTextCenter?: boolean
+    isRounded?: boolean
+    listType: string
+}
+const props = withDefaults(defineProps<Dprops>(), {
+    isTextCenter: false,
+    isRounded: false
 })
-const imgUrl = computed(() => props.listItem?.picUrl || props.listItem?.coverImgUrl)
+
+const imgUrl = computed(() => props.listItem.picUrl || props.listItem.coverImgUrl || '')
 const routeParams = computed((): RouteLocationRaw => {
     if (props.listType === '歌单') {
-        return { name: 'playlist', params: { id: props.listItem?.id } }
+        return { name: 'playlist', params: { id: props.listItem.id } }
     }
     if (props.listType === '歌手') {
-        return { name: 'artist', params: { id: props.listItem?.id } }
+        return { name: 'artist', params: { id: props.listItem.id } }
     }
     if (props.listType === '专辑') {
-        return { name: 'album', params: { id: props.listItem?.id } }
+        return { name: 'album', params: { id: props.listItem.id } }
     }
     return {}
 })

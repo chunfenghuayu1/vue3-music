@@ -78,7 +78,7 @@
                 <h3 class="font-bold text-2xl mb-4">EP和单曲</h3>
                 <div class="grid grid-cols-5 gap-10 lg:gap-x-5">
                     <div v-for="(item, index) in EP" :key="index">
-                        <Cover :listItem="item" listType="专辑">
+                        <Cover :listItem="item" :listType="'专辑'">
                             <!-- 最新专辑显示歌手名 -->
                             <template #subTilte>
                                 <div class="text-xs text-gray-400 italic">
@@ -112,7 +112,7 @@
                     <div v-for="(item, index) in simi" :key="index">
                         <Cover
                             :listItem="item"
-                            listType="歌手"
+                            :listType="'歌手'"
                             :isRounded="true"
                             :isTextCenter="true"
                         >
@@ -126,7 +126,6 @@
 
 <script setup lang="ts">
 import type { ComponentInternalInstance, Ref } from 'vue'
-// import { formatDate, formatDateStr } from '@/utils/format'
 import type { topSongData, artistData, EPData, mvsData } from './index'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const route = useRoute()
@@ -155,7 +154,7 @@ const getAritstDetail = () => {
 
         data.artist.cover =
             data.user?.avatarUrl.replace(/^http:\/\//, 'https://') ||
-            data.artist.cover.replace(/^http:\/\//, 'https://')
+            data.artist?.cover.replace(/^http:\/\//, 'https://')
         artist.value = data.artist
     })
     // 获取热门歌曲

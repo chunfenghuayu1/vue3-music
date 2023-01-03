@@ -10,7 +10,7 @@
             <Cover
                 v-for="(item, index) in list"
                 :key="index"
-                :listItem="(item as Object)"
+                :listItem="item"
                 :isTextCenter="$attrs.isTextCenter === true"
                 :isRounded="$attrs.isRounded === true"
                 :listType="($attrs.listType as string)"
@@ -24,16 +24,17 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
+interface Dprops {
     // 标题
-    title: String,
+    title: string
     // 网格布局列数 如果是true 则使用5格布局
-    columns: Boolean,
+    columns: boolean
     // 是否显示更多
-    isMore: Boolean,
+    isMore: boolean
     // 渲染的item
-    list: Array(Object)
-})
+    list: any[]
+}
+defineProps<Dprops>()
 </script>
 
 <style></style>

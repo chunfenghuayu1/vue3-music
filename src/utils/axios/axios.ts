@@ -58,7 +58,7 @@ class Request {
             },
             (error: AxiosError) => {
                 // 提示错误
-                console.log(error)
+                // console.log(error)
 
                 ElMessage({
                     message: error as any,

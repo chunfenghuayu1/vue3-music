@@ -27,10 +27,10 @@ export const forminute = (value: number): string => {
 }
 
 // xxxx-xx-xx
-export const formatDateStr = <T>(value: T): T => {
-    const arr = (value as string).split('-')
+export const formatDateStr = <T>(value: T): string => {
+    const arr = (value as any).split('-')
     const y = arr[0]
     const m = arr[1]
     const d = arr[2]
-    return `${y}年${m}月${d}日` as T
+    return `${y}年${m}月${d}日`
 }
