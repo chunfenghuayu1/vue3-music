@@ -1,6 +1,7 @@
 <template>
     <nav
-        class="sticky z-10 top-0 h-16 min-w-max w-full px-10vw lg:px-10 bg-white bg-opacity-80 backdrop-saturate-180 backdrop-blur-lg flex items-center justify-center"
+        class="fixed z-10 top-0 h-16 min-w-max w-full px-10vw lg:px-10 bg-white flex items-center justify-center transition-all duration-300 ease-linear"
+        :class="isOpacity ? 'bg-opacity-70' : 'filter'"
     >
         <div class="flex items-center flex-1 space-x-4 lg:space-x-2">
             <button class="hover:bg-gray-200 rounded-lg active:scale-90 transition-all p-0.5">
@@ -36,7 +37,7 @@
             <el-avatar
                 fit="cover"
                 class="select-none cursor-pointer"
-                src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+                :src="localStore.data.user.avatarUrl || avatar"
             >
             </el-avatar>
         </div>
@@ -44,13 +45,25 @@
 </template>
 
 <script setup lang="ts">
-// import { useStorageStore } from '@/store/Storage.ts'
-// const storageStore = useStorageStore()
-// const router = useRouter()
-// const loginout = async (): Promise<void> => {
-//     await storageStore.handlerLogout()
-//     router.go(0)
-// }
+import avatar from '@/assets/img/avatar.png'
+import { useLocalStore } from '@/stores/localStore'
+const localStore = useLocalStore()
+const props = defineProps({
+    scrollDistance: {
+        default: { scrollTop: 0, scrollLeft: 0 }
+    }
+})
+const isOpacity = computed(() => {
+    if (props.scrollDistance.scrollTop > 0) {
+        return false
+    } else {
+        return true
+    }
+})
 </script>
 
-<style scoped></style>
+<style scoped lang="postcss">
+.filter {
+    @apply bg-opacity-80 backdrop-saturate-180 backdrop-blur-lg;
+}
+</style>

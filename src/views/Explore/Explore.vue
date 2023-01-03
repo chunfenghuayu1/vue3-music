@@ -1,5 +1,5 @@
 <template>
-    <div v-if="mounted" class="px-10vw lg:px-10 pb-16">
+    <div v-if="mounted">
         <h3 class="font-bold text-6xl my-8">发现</h3>
         <!-- 标签栏 -->
         <ExploreTag
@@ -30,7 +30,7 @@
             infinite-scroll-delay="1000"
         >
             <div v-for="(item, index) in playList" :key="index">
-                <Cover :listItem="item"></Cover>
+                <Cover :listItem="item" listType="歌单"></Cover>
             </div>
         </div>
     </div>
@@ -39,6 +39,7 @@
 <script setup lang="ts">
 import type { ComponentInternalInstance } from 'vue'
 import type { HighqualityPlaylist } from '@/api/modules/playList'
+import type { params } from './index'
 import { useLocalStore } from '@/stores/localStore'
 const localStore = useLocalStore()
 const route = useRoute()
@@ -69,12 +70,7 @@ const reset = (): void => {
 }
 // 请求对象歌单数据
 const playList = ref<any[]>([])
-interface params {
-    limit: number
-    cat: string
-    offset?: number
-    before?: number
-}
+
 const getPlayList = ({ limit, cat, offset, before }: params) => {
     if (cat === '排行榜') {
         // 不需要滚动加载

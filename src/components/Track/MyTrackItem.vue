@@ -14,7 +14,7 @@
                 <span v-if="alia.length > 0" class="text-skin-tertiary"> ({{ alia[0] }}) </span>
             </div>
             <!-- 歌手 -->
-            <div class="text-xs lineClamp1 text-skin-tertiary">
+            <div class="text-xs line-clamp-1 text-skin-tertiary">
                 <div v-for="(ar1, index1) in ar" :key="index1" class="inline">
                     <span v-if="index1 !== 0"> / </span>
                     <router-link

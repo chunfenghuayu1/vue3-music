@@ -1,5 +1,5 @@
 <template>
-    <div v-if="true" class="px-10vw lg:px-10 pb-16">
+    <div v-if="MySong.tracksCount">
         <div ref="section1">
             <!-- 标题 -->
             <div class="flex items-center space-x-4 my-8">
@@ -104,7 +104,7 @@
             >
                 <template v-if="btnType === 1">
                     <div v-for="(item, index) in MySong.playlist(type)" :key="index">
-                        <Cover :listItem="item">
+                        <Cover :listItem="item" listType="专辑">
                             <template #subTilte>
                                 <div>
                                     <span class="text-xs text-skin-tertiary line-clamp-1 mt-1">
@@ -117,12 +117,12 @@
                 </template>
                 <template v-if="btnType === 2">
                     <div v-for="(item, index) in MySong.likeAlbum" :key="index">
-                        <Cover :listItem="item"></Cover>
+                        <Cover :listItem="item" listType="专辑"></Cover>
                     </div>
                 </template>
                 <template v-if="btnType === 3">
                     <div v-for="(item, index) in MySong.likeArtist" :key="index">
-                        <Cover :listItem="item"></Cover>
+                        <Cover :listItem="item" listType="歌手"></Cover>
                     </div>
                 </template>
                 <template v-if="btnType === 4">
@@ -213,8 +213,7 @@ const hanlderClick = (typeV: number) => {
     // 切换标签
     btnType.value = typeV
     // 滑动效果
-    const distance = section1.value.offsetHeight + 80
-    scroll.value.setScrollTop(distance)
+    scroll.value.scrollTo({ top: section1.value.offsetHeight + 80, behavior: 'smooth' })
 
     // 隐藏下拉框
     toggleShow.value = false

@@ -1,5 +1,5 @@
 <template>
-    <div class="px-10vw lg:px-10 pb-16">
+    <div>
         <!-- 头部 -->
         <div class="flex items-center space-x-4 my-8">
             <!-- 头像 -->

@@ -69,7 +69,7 @@ export const useLocalStore = defineStore('useLocalStore', {
         // 用户名
         nickname: state => state.data.user.nickname,
         // 用户头像
-        avatarUrl: state => state.data.user.avatarUrl.replace(/^http:/, 'https://')
+        avatarUrl: state => state.data.user.avatarUrl.replace(/^http:\/\//, 'https://')
     },
     // 开启持久化
     persist: {

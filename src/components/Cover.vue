@@ -4,7 +4,7 @@
             class="mb-2 overflow-hidden text-center"
             :class="isRounded ? 'rounded-full' : 'rounded-lg'"
         >
-            <router-link to="/" class="">
+            <router-link :to="routeParams">
                 <img
                     v-lazy="$imgUrl(imgUrl)"
                     :alt="listItem?.name"
@@ -15,7 +15,7 @@
         </div>
         <div :class="isTextCenter ? 'text-center' : 'text-left'" class="line-clamp-2">
             <router-link
-                to="/"
+                :to="routeParams"
                 class="cursor-pointer hover:underline font-semibold"
                 :title="listItem?.name"
             >
@@ -24,10 +24,12 @@
         </div>
         <!-- 副标题插槽 -->
         <slot name="subTilte"></slot>
+        <div></div>
     </div>
 </template>
 
 <script setup lang="ts">
+import type { RouteLocationRaw } from 'vue-router'
 const props = defineProps({
     listItem: Object,
     isTextCenter: {
@@ -37,9 +39,22 @@ const props = defineProps({
     isRounded: {
         type: Boolean,
         default: false
-    }
+    },
+    listType: String
 })
 const imgUrl = computed(() => props.listItem?.picUrl || props.listItem?.coverImgUrl)
+const routeParams = computed((): RouteLocationRaw => {
+    if (props.listType === '歌单') {
+        return { name: 'playlist', params: { id: props.listItem?.id } }
+    }
+    if (props.listType === '歌手') {
+        return { name: 'artist', params: { id: props.listItem?.id } }
+    }
+    if (props.listType === '专辑') {
+        return { name: 'album', params: { id: props.listItem?.id } }
+    }
+    return {}
+})
 </script>
 
 <style scoped></style>

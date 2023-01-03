@@ -13,6 +13,7 @@
                 :listItem="(item as Object)"
                 :isTextCenter="$attrs.isTextCenter === true"
                 :isRounded="$attrs.isRounded === true"
+                :listType="($attrs.listType as string)"
             >
                 <template #subTilte v-if="item.updateFrequency">
                     <div class="text-xs text-gray-400">{{ item.updateFrequency }}</div>

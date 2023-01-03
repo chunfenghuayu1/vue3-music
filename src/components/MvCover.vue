@@ -1,5 +1,5 @@
 <template>
-    <div class="relative">
+    <div>
         <router-link :to="{ name: 'mv', params: { vid: item.id || item.vid } }">
             <img :src="$imgUrl(imgUrl)" class="rounded-lg object-cover aspect-video" />
         </router-link>
@@ -31,8 +31,6 @@
 </template>
 
 <script setup lang="ts">
-// 控制遮罩显示
-const show = ref(false)
 defineProps({
     item: {
         type: Object,

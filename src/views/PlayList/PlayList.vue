@@ -1,5 +1,5 @@
 <template>
-    <div v-show="playList.name" class="px-10vw lg:px-10 pb-16">
+    <div v-show="playList.name">
         <!-- 头部 -->
         <div class="flex space-x-12 mt-8 my-16">
             <div class="flex items-center justify-center flex-shrink-0 relative">
@@ -12,7 +12,7 @@
             </div>
             <div class="flex flex-col justify-center">
                 <!-- 歌单标题 -->
-                <h3 class="font-bold text-5xl mb-4">
+                <h3 class="font-bold text-4xl mb-4">
                     {{ playList.name }}
                 </h3>
                 <!-- 歌单简介 -->
@@ -35,7 +35,7 @@
                 </div>
                 <!-- 歌单描述 -->
                 <div
-                    class="mt-2 mb-4 line-clamp-3 text-gray-500 text-sm"
+                    class="my-4 line-clamp-3 text-gray-500 text-sm"
                     v-text="playList.description"
                 ></div>
                 <!-- 操作区 -->
@@ -88,6 +88,7 @@
 
 <script setup lang="ts">
 import type { ComponentInternalInstance, Ref } from 'vue'
+import type { List, PlayListDetail } from './index'
 import { useMySong } from '@/stores/MySong'
 import { formatDate } from '@/utils/format'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
@@ -95,17 +96,6 @@ const route = useRoute()
 const MySong = useMySong()
 
 // 获取对应id
-interface List {
-    name: string
-    coverImgUrl: string
-    creator: {
-        userId: number
-        nickname: string
-    }
-    updateTime: number
-    trackCount: number
-    description: string
-}
 const playList: Ref<List> = ref({
     name: '',
     coverImgUrl: '',
@@ -118,11 +108,7 @@ const playList: Ref<List> = ref({
     description: ''
 })
 const trackAll: Ref<any[]> = ref([])
-interface PlayListDetail {
-    id: number
-    limit: number
-    offset: number
-}
+
 const getPlayListDetail = ({ id, limit, offset }: PlayListDetail) => {
     // 获取歌单详情
     if (offset < 1) {
