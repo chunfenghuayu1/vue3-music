@@ -174,6 +174,12 @@
 </template>
 
 <script setup lang="ts">
+import Track from '@/components/Track/Track.vue'
+import MvCover from '@/components/MvCover.vue'
+import Cover from '@/components/Cover.vue'
+import DropDown from '@/components/DropDown.vue'
+import MyTrackItem from '@/components/Track/MyTrackItem.vue'
+
 import { useLocalStore } from '@/stores/localStore'
 import { useMySong } from '@/stores/MySong'
 const localStore = useLocalStore()

@@ -40,7 +40,10 @@
 </template>
 
 <script setup lang="ts">
+import Section from '@/components/Section.vue'
+
 import { sampleSize } from 'lodash'
+
 import type { ComponentInternalInstance } from 'vue'
 import type { DataList } from './index'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance

@@ -37,9 +37,14 @@
 </template>
 
 <script setup lang="ts">
+import ExploreTag from './ExploreTag.vue'
+import TagSelector from './TagSelector.vue'
+import Cover from '@/components/Cover.vue'
+
 import type { ComponentInternalInstance } from 'vue'
 import type { HighqualityPlaylist } from '@/api/modules/playList'
 import type { params } from './index'
+
 import { useLocalStore } from '@/stores/localStore'
 const localStore = useLocalStore()
 const route = useRoute()

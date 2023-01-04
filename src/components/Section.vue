@@ -24,6 +24,8 @@
 </template>
 
 <script setup lang="ts">
+import Cover from './Cover.vue'
+
 interface Dprops {
     // 标题
     title: string

@@ -7,6 +7,8 @@
     </el-scrollbar>
 </template>
 <script setup lang="ts">
+import NavBar from './components/NavBar.vue'
+
 import { ElScrollbar } from 'element-plus'
 import 'element-plus/es/components/scrollbar/style/css'
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()

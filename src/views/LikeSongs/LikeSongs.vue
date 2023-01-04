@@ -17,6 +17,8 @@
 </template>
 
 <script setup lang="ts">
+import Track from '@/components/Track/Track.vue'
+
 import { useLocalStore } from '@/stores/localStore'
 import { useMySong } from '@/stores/MySong'
 const storageStore = useLocalStore()

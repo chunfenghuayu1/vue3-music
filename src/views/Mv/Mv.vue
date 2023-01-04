@@ -35,8 +35,11 @@
 </template>
 
 <script setup lang="ts">
+import MvCover from '@/components/MvCover.vue'
+
 import type { ComponentInternalInstance, Ref } from 'vue'
 import type { mvData, simiMvItem } from './index'
+
 import { formatPlayCount } from '@/utils/format.js'
 import Plyr from 'plyr'
 import 'plyr/dist/plyr.css'

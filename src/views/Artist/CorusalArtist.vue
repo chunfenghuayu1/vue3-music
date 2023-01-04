@@ -41,9 +41,12 @@
 </template>
 
 <script setup lang="ts">
+import MyTrackItem from '@/components/Track/MyTrackItem.vue'
+
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Grid } from 'swiper'
 import type { Ref } from 'vue'
+
 defineProps<{ list: { [k: string]: any } }>()
 const mySwiper: Ref<typeof Swiper> = ref(Swiper)
 const onSwiper = (swiper: any) => {

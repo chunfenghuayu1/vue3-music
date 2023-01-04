@@ -87,6 +87,8 @@
 </template>
 
 <script setup lang="ts">
+import Track from '@/components/Track/Track.vue'
+
 import type { ComponentInternalInstance, Ref } from 'vue'
 import type { List, PlayListDetail } from './index'
 import { useMySong } from '@/stores/MySong'

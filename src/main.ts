@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 // 数据持久化
 import persist from '@/stores/persist'
+import SvgIcon from './components/SvgIcon.vue'
 import App from './App.vue'
 import router from './router'
 import '@/assets/css/index.css'
@@ -32,6 +33,7 @@ app.use(VueLazyload, {
     // error: errorimage, //图片加载失败时显示的图片
     attempt: 1 // 加载错误后最大尝试次数
 })
+app.component('SvgIcon', SvgIcon)
 const pinia = createPinia()
 pinia.use(persist)
 app.use(pinia)

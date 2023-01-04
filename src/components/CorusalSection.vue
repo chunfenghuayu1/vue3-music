@@ -53,6 +53,8 @@
 </template>
 
 <script setup lang="ts">
+import Cover from './Cover.vue'
+
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Scrollbar } from 'swiper'
 import type { Ref } from 'vue'

@@ -54,29 +54,29 @@ export default defineConfig(({ mode }) => {
             // 组件自动引入
             Components({
                 // 要搜索组件的目录的相对路径
-                dirs: ['src/components', 'src/views'],
-                // 组件的有效文件扩展名。
-                extensions: ['vue'],
-                // 搜索子目录
-                deep: true,
-                // 自定义组件的解析器
-                resolvers: [ElementPlusResolver()],
-                // 生成 `components.d.ts` 全局声明，
-                // 也接受自定义文件名的路径
-                dts: true,
-                // 允许子目录作为组件的命名空间前缀。
-                directoryAsNamespace: false,
-                // 自动导入指令
-                // 默认值：Vue 3 的`true`，Vue 2 的`false`
-                // 需要 Babel 来为 Vue 2 进行转换，出于性能考虑，它默认处于禁用状态。
-                directives: true,
-                // 忽略命名空间前缀的子目录路径
-                // 当`directoryAsNamespace: true` 时有效
-                globalNamespaces: [],
-                // filters for transforming targets
-                include: [/.vue$/, /.vue?vue/],
-                // eslint-disable-next-line no-useless-escape
-                exclude: [/[\/]node_modules[\/]/, /[\/].git[\/]/, /[\/].nuxt[\/]/]
+                // dirs: ['src/components', 'src/views'],
+                // // 组件的有效文件扩展名。
+                // extensions: ['vue'],
+                // // 搜索子目录
+                // deep: true,
+                // // 自定义组件的解析器
+                resolvers: [ElementPlusResolver()]
+                // // 生成 `components.d.ts` 全局声明，
+                // // 也接受自定义文件名的路径
+                // dts: true,
+                // // 允许子目录作为组件的命名空间前缀。
+                // directoryAsNamespace: false,
+                // // 自动导入指令
+                // // 默认值：Vue 3 的`true`，Vue 2 的`false`
+                // // 需要 Babel 来为 Vue 2 进行转换，出于性能考虑，它默认处于禁用状态。
+                // directives: true,
+                // // 忽略命名空间前缀的子目录路径
+                // // 当`directoryAsNamespace: true` 时有效
+                // globalNamespaces: [],
+                // // filters for transforming targets
+                // include: [/.vue$/, /.vue?vue/],
+                // // eslint-disable-next-line no-useless-escape
+                // exclude: [/[\/]node_modules[\/]/, /[\/].git[\/]/, /[\/].nuxt[\/]/]
             }),
             // 增加svg处理插件
             createSvgIconsPlugin({
@@ -107,7 +107,7 @@ export default defineConfig(({ mode }) => {
         ],
         build: {
             outDir: 'dist',
-            // minify: 'terser',
+            minify: 'terser',
             assetsInlineLimit: 4096, //小于此阈值的导入或引用资源将内联为 base64 编码，以避免额外的 http 请求。设置为 0 可以完全禁用此项。
             chunkSizeWarningLimit: 500,
             cssCodeSplit: true, // 如果设置为false，整个项目中的所有 CSS 将被提取到一个 CSS 文件中
@@ -127,8 +127,9 @@ export default defineConfig(({ mode }) => {
                     assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
                     manualChunks: {
                         // 拆分代码，这个就是分包，配置完后自动按需加载，现在还比不上webpack的splitchunk，不过也能用了。
+                        common: ['vue-lazyload', 'js-cookie', 'axios'],
                         plyr: ['plyr'],
-                        swiper: ['swiper/vue'],
+                        swiper: ['swiper'],
                         lodash: ['lodash']
                     }
                 }

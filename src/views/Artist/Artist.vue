@@ -125,8 +125,13 @@
 </template>
 
 <script setup lang="ts">
+import Cover from '@/components/Cover.vue'
+import MvCover from '@/components/MvCover.vue'
+import CorusalArtist from './CorusalArtist.vue'
+
 import type { ComponentInternalInstance, Ref } from 'vue'
 import type { topSongData, artistData, EPData, mvsData } from './index'
+
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const route = useRoute()
 const router = useRouter()
