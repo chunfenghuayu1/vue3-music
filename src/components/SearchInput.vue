@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { debounce } from 'lodash'
+import { debounce } from 'lodash-es'
 const router = useRouter()
 
 const keywords = ref('')

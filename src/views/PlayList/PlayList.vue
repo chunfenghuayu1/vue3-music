@@ -35,7 +35,8 @@
                 </div>
                 <!-- 歌单描述 -->
                 <div
-                    class="my-4 line-clamp-3 text-gray-500 text-sm"
+                    class="my-4 line-clamp-3 text-gray-500 text-sm select-none"
+                    :title="playList.description"
                     v-text="playList.description"
                 ></div>
                 <!-- 操作区 -->

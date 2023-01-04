@@ -8,6 +8,7 @@ const Mv = () => import('@/views/Mv/Mv.vue')
 const LikeSongs = () => import('@/views/LikeSongs/LikeSongs.vue')
 const PlayList = () => import('@/views/PlayList/PlayList.vue')
 const Album = () => import('@/views/Album/Album.vue')
+const Search = () => import('@/views/Search/Search.vue')
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
@@ -53,6 +54,11 @@ const routes: RouteRecordRaw[] = [
         path: '/album/:id',
         name: 'album',
         component: Album
+    },
+    {
+        path: '/search',
+        name: 'search',
+        component: Search
     }
 ]
 export default routes

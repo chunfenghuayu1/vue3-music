@@ -10,6 +10,7 @@ export interface mvData {
 
 export interface simiMvItem {
     artistName: string
+    artistId: number
     name: string
     artists: any[]
     cover: string

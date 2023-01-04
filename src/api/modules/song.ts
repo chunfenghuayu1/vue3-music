@@ -1,4 +1,4 @@
 export interface SongDetail {
-    ids: number
+    ids: number | string
     timestamp?: number
 }

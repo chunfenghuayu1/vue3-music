@@ -1,3 +1,3 @@
-export const imgUrl = (url: string): string => {
-    return url.replace(/^http:\/\//, 'https://') + `?param=512y512`
+export const imgUrl = (url: string, k: number): string => {
+    return url.replace(/^http:\/\//, 'https://') + `?param=${k}y${k}`
 }

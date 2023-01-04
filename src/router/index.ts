@@ -2,11 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
 import jsCookie from 'js-cookie'
 const router = createRouter({
-    history: createWebHistory(),
-    scrollBehavior() {
-        // 始终滚动到顶部
-        return { top: 0 }
-    },
+    history: createWebHistory('/'),
     routes
 })
 router.beforeEach(to => {

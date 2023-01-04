@@ -115,16 +115,12 @@ const checkQRCodeLogin = () => {
 // 处理登录成功后的事件
 const afterLogin = async () => {
     // 本地存储更改用户登录状态,获取用户信息
-    await updateData()
+    await localStore.getUserInfo()
     // 获取路由参数
     const query = route.query.redirect as any
     query ? router.replace(query) : router.go(0)
 }
-// 刷新数据
-const updateData = async () => {
-    await localStore.getUserInfo()
-    mysong.initMySong()
-}
+
 onMounted(() => {
     getQRCode()
 })

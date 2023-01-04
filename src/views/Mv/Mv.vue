@@ -24,9 +24,10 @@
                         :item="item"
                         :show-title="true"
                         :name="item.name"
-                        :img-url="item.cover.replace(/^http:\/\//, 'https://')"
+                        :img-url="$imgUrl(item.cover, 512)"
                         :sub-text="item.artistName"
                         :show-artist="true"
+                        :artistId="item.artistId"
                     ></MvCover>
                 </div>
             </div>
@@ -40,7 +41,7 @@ import MvCover from '@/components/MvCover.vue'
 import type { ComponentInternalInstance, Ref } from 'vue'
 import type { mvData, simiMvItem } from './index'
 
-import { formatPlayCount } from '@/utils/format.js'
+import { formatPlayCount } from '@/utils/format'
 import Plyr from 'plyr'
 import 'plyr/dist/plyr.css'
 import { onBeforeRouteUpdate } from 'vue-router'
@@ -48,10 +49,10 @@ const route = useRoute()
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 
 // 视频对象
-const VPlayer = ref()
+const VPlayer = ref<Plyr>()
 
 // 播放器refs
-const VideoPlayer = ref()
+const VideoPlayer = ref<HTMLElement>()
 const initVideo = () => {
     // 视频播放配置项
     let options = {
@@ -65,7 +66,7 @@ const initVideo = () => {
         },
         speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 4] }
     }
-    VPlayer.value = new Plyr(VideoPlayer.value, options)
+    VPlayer.value = new Plyr(VideoPlayer.value as HTMLElement, options)
 }
 
 // 获取视频数据
@@ -89,7 +90,7 @@ const getMVDetail = (mvid: number) => {
                     size: item.data.r
                 }
             })
-            VPlayer.value.source = {
+            VPlayer.value!.source = {
                 type: 'video',
                 title: mv.value.name,
                 sources: sources,

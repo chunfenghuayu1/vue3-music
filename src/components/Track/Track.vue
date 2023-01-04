@@ -9,18 +9,12 @@
         <div
             class="flex items-center justify-center rounded-md overflow-hidden relative w-12 flex-shrink-0"
         >
-            <img
-                v-lazy="`${song.al.picUrl.replace(/^http:\/\//, 'https://')}?param=48y48`"
-                class="w-12 h-12"
-                loading="lazy"
-            />
+            <img v-lazy="$imgUrl(song.al.picUrl, 48)" class="w-12 h-12" loading="lazy" />
         </div>
         <!-- 歌名 作者 -->
         <div class="flex flex-col justify-center flex-1">
-            <div class="flex font-bold text-lg line-clamp-1">
-                <span class="cursor-pointer hover:underline" :title="song.name">
-                    {{ song.name }}</span
-                >
+            <div class="flex font-bold text-lg line-clamp-1 select-none">
+                <span :title="song.name"> {{ song.name }}</span>
                 <span v-if="song.alia[0]" class="text-gray-500"> ({{ song.alia[0] }}) </span>
             </div>
             <div class="text-sm text-gray-500 line-clamp-1">

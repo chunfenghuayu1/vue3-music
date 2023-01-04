@@ -43,7 +43,7 @@
                     >
                         <MyTrackItem
                             :item="item"
-                            :pic-url="item.al.picUrl.replace(/^http:\/\//, 'https://')"
+                            :pic-url="$imgUrl(item.al.picUrl, 36)"
                             :name="item.name"
                             :alia="item.alia"
                             :ar="item.ar"
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-16 space-y-8">
+        <div class="mt-16 space-y-8 min-h-screen">
             <!-- 歌单标题 -->
             <div class="flex justify-between items-center h-9">
                 <!-- 左侧选择区域 -->
@@ -104,7 +104,7 @@
             >
                 <template v-if="btnType === 1">
                     <div v-for="(item, index) in MySong.playlist(type)" :key="index">
-                        <Cover :listItem="item" listType="专辑">
+                        <Cover :listItem="item" listType="歌单">
                             <template #subTilte>
                                 <div>
                                     <span class="text-xs text-skin-tertiary line-clamp-1 mt-1">
@@ -198,6 +198,7 @@ const type = ref(1)
 const typeList = reactive([
     {
         type: 1,
+        name: '歌单',
         child: [
             { type: 1, name: '创建的歌单' },
             { type: 2, name: '所有歌单' },
@@ -227,9 +228,10 @@ const hanlderClick = (typeV: number) => {
 
 // 切换听歌排行时间周期
 const toggleDate = ref(1)
-
-MySong.getMyData()
-MySong.initMySong()
+onActivated(() => {
+    MySong.getMyData()
+    MySong.initMySong()
+})
 </script>
 
 <style lang="postcss"></style>

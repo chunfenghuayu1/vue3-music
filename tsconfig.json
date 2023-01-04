@@ -9,7 +9,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "jsx": "preserve",
+    // "jsx": "preserve",
     "esModuleInterop": true,
     "allowJs": true,
     "checkJs": true,

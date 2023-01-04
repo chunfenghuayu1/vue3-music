@@ -80,7 +80,7 @@ import type { ComponentInternalInstance, Ref } from 'vue'
 import type { albumData } from './index'
 
 import { formatDate } from '@/utils/format.js'
-import { uniqBy } from 'lodash'
+import { uniqBy } from 'lodash-es'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const route = useRoute()
 

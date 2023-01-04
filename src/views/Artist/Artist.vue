@@ -3,10 +3,10 @@
         <!-- 头部 -->
         <div class="flex space-x-12 mt-8 my-16">
             <div class="flex items-center justify-center flex-shrink-0 relative">
-                <img v-lazy="`${artist.cover}?param=512y512`" class="rounded-full h-72 w-72" />
+                <img v-lazy="$imgUrl(artist.cover, 512)" class="rounded-full h-72 w-72" />
                 <!-- 图片阴影层 -->
                 <img
-                    v-lazy="`${artist.cover}?param=512y512`"
+                    v-lazy="$imgUrl(artist.cover, 512)"
                     class="h-72 w-72 absolute top-3 -z-10 bg-cover blur-md opacity-60 rounded-full"
                 />
             </div>
@@ -157,18 +157,17 @@ const getAritstDetail = () => {
     proxy?.$http.reqArtistDetail({ id }).then(({ data }) => {
         // 获取正确的头像
 
-        data.artist.cover =
-            data.user?.avatarUrl.replace(/^http:\/\//, 'https://') ||
-            data.artist?.cover.replace(/^http:\/\//, 'https://')
+        data.artist.cover = data.user?.avatarUrl || data.artist?.cover
         artist.value = data.artist
     })
     // 获取热门歌曲
     proxy?.$http.reqAritstTop({ id }).then(data => {
-        topSongs.value = data.songs
+        topSongs.value = data.songs.slice(0, 48)
     })
     // 获取专辑
     proxy?.$http.reqArtistAlbum({ id, limit: 50 }).then(data => {
         // 过滤出专辑
+
         albums.value = data.hotAlbums.filter((item: any) => item.type === '专辑')
         // 过滤出ep和单曲
         EP.value = data.hotAlbums.filter(

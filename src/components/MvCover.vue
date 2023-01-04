@@ -1,13 +1,13 @@
 <template>
     <div>
-        <router-link :to="{ name: 'mv', params: { vid: item.id || item.vid } }">
-            <img :src="$imgUrl(imgUrl)" class="rounded-lg object-cover aspect-video" />
+        <router-link :to="{ name: 'mv', params: { vid: item?.id || item.vid } }">
+            <img :src="$imgUrl(imgUrl, 512)" class="rounded-lg object-cover aspect-video" />
         </router-link>
     </div>
     <div v-if="showTitle" class="mt-1">
         <div class="font-bold line-clamp-2">
             <router-link
-                :to="{ name: 'mv', params: { vid: item.id || item.vid } }"
+                :to="{ name: 'mv', params: { vid: item?.id || item.vid } }"
                 class="hover:underline"
             >
                 {{ name }}
@@ -19,7 +19,7 @@
             class="text-xs text-gray-400 italic hover:underline"
             :to="{
                 name: 'artist',
-                params: { id: item.artists[0]?.id }
+                params: { id: artistId }
             }"
         >
             {{ subText }}
@@ -31,12 +31,19 @@
 </template>
 
 <script setup lang="ts">
-console.log('MvCover', '数据定义问题')
+// console.log('MvCover', '数据定义问题')
 interface Dprops {
-    item: { artistName: string; name: string; artists: any[]; cover: string; [k: string]: any }
+    item: {
+        artistName: string
+        name: string
+        artists: any[]
+        cover: string
+        [k: string | number]: any
+    }
     showTitle: boolean
     name?: string
     imgUrl: string
+    // 传递mv所有歌手
     subText?: string
     showArtist?: boolean
     artistId?: number

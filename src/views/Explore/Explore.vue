@@ -1,5 +1,5 @@
 <template>
-    <div v-if="mounted">
+    <div v-show="mounted">
         <h3 class="font-bold text-6xl my-8">发现</h3>
         <!-- 标签栏 -->
         <ExploreTag
@@ -54,10 +54,8 @@ const { proxy } = getCurrentInstance() as ComponentInternalInstance
 // 如果点击更多，则进行切换,用两个值进行控制，同时控制下面选择框显示与隐藏
 const showMore = ref(false)
 // 该值依赖路由
-const category = computed<string>(() => {
-    const { query } = route
-    return (query?.cat as string) || '全部'
-})
+const category = computed<string>(() => (route.query.cat as string) || '全部')
+
 // 基础数据
 const initData = reactive({
     limit: 24,
@@ -130,7 +128,7 @@ onBeforeRouteUpdate(to => {
 })
 // 解决无限滚动获取不到dom的问题
 const mounted = ref(false)
-onMounted(() => {
+onActivated(() => {
     reset()
     // 获取标签信息
     mounted.value = true
@@ -139,7 +137,6 @@ onMounted(() => {
         cat: category.value,
         offset: offset.value * limit.value
     })
-    // console.log(1)
 })
 </script>
 

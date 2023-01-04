@@ -6,7 +6,7 @@
         >
             <router-link :to="routeParams">
                 <img
-                    v-lazy="$imgUrl(imgUrl)"
+                    v-lazy="$imgUrl(imgUrl, 512)"
                     :alt="listItem.name"
                     lazy="loaded"
                     class="object-cover w-full h-full align-middle"

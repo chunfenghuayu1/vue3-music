@@ -4,6 +4,8 @@ import type { data, settings } from './initLocal'
 import type { tags } from '@/utils/localData'
 import { reqLoginStatus, reqLogout } from '@/api/auth'
 import jsCookie from 'js-cookie'
+import { ElMessage } from 'element-plus'
+import { imgUrl } from '@/utils/imgUrl'
 // 导入本地初始化数据
 import localStore from './initLocal'
 // 如果本地存储不存在data数据，初始化
@@ -37,7 +39,14 @@ export const useLocalStore = defineStore('useLocalStore', {
         async getUserInfo() {
             await reqLoginStatus().then(({ data }) => {
                 // 如果获取不到用户状态，则退出登录
-                if (data.profile === null) return this.handlerLogout()
+                if (data.profile === null) {
+                    this.handlerLogout()
+                    ElMessage({
+                        message: '获取用户信息失败，请重新登陆',
+                        type: 'warning',
+                        duration: 1000
+                    })
+                }
                 if (data.code === 200) {
                     this.data.user = data.profile
                     this.data.loginMode = 'qrcode'
@@ -59,6 +68,17 @@ export const useLocalStore = defineStore('useLocalStore', {
                     jsCookie.remove('MUSIC_U')
                     jsCookie.remove('__csrf')
                     jsCookie.remove('NMTID')
+                    ElMessage({
+                        message: '退出登录成功',
+                        type: 'success',
+                        duration: 1000
+                    })
+                } else {
+                    ElMessage({
+                        message: '退出登录失败，请稍后重试',
+                        type: 'warning',
+                        duration: 1000
+                    })
                 }
             })
         }
@@ -69,7 +89,7 @@ export const useLocalStore = defineStore('useLocalStore', {
         // 用户名
         nickname: state => state.data.user.nickname,
         // 用户头像
-        avatarUrl: state => state.data.user.avatarUrl.replace(/^http:\/\//, 'https://')
+        avatarUrl: state => imgUrl(state.data.user.avatarUrl, 48)
     },
     // 开启持久化
     persist: {

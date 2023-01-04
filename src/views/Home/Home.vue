@@ -1,5 +1,5 @@
 <template>
-    <div v-if="albumList.length > 0">
+    <div v-show="albumList.length > 0">
         <Section
             :title="'推荐歌单'"
             :columns="true"
@@ -10,7 +10,11 @@
             :listType="'歌单'"
         >
             <template #more>
-                <router-link to="/explore" class="font-semibold text-sm">查看更多</router-link>
+                <router-link
+                    :to="{ name: 'explore', query: { cat: '推荐歌单' } }"
+                    class="font-semibold text-sm"
+                    >查看更多</router-link
+                >
             </template>
         </Section>
         <Section
@@ -33,7 +37,11 @@
             :listType="'歌单'"
         >
             <template #more>
-                <router-link to="/explore" class="font-semibold text-sm">查看更多</router-link>
+                <router-link
+                    :to="{ name: 'explore', query: { cat: '排行榜' } }"
+                    class="font-semibold text-sm"
+                    >查看更多</router-link
+                >
             </template>
         </Section>
     </div>
@@ -42,7 +50,7 @@
 <script setup lang="ts">
 import Section from '@/components/Section.vue'
 
-import { sampleSize } from 'lodash'
+import { sampleSize } from 'lodash-es'
 
 import type { ComponentInternalInstance } from 'vue'
 import type { DataList } from './index'
@@ -81,8 +89,9 @@ const getData = () => {
         })
     }
 }
-
-getData()
+onActivated(() => {
+    getData()
+})
 </script>
 
 <style scoped></style>
