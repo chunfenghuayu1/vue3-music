@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { useLocalStore } from '@/stores/localStore'
-import jsCookie from 'js-cookie'
 import {
     reqUserPlayList,
     reqLikeSongs,
@@ -8,7 +7,8 @@ import {
     reqLikeArtist,
     reqLikeMV,
     reqlikeCloud,
-    reqUserRecord
+    reqUserRecord,
+    reqRecomSongs
 } from '@/api/user'
 import { reqPlayListDetail } from '@/api/playList'
 
@@ -33,7 +33,9 @@ export const useMySong = defineStore('MySong', {
                 likeRecord: {
                     weekData: <any>[],
                     allData: <any>[]
-                }
+                },
+                // 用户每日推荐
+                dailySongs: <any>[]
             },
             // 用户全部歌单
             userList: {
@@ -49,7 +51,7 @@ export const useMySong = defineStore('MySong', {
         async initMySong() {
             const localStore = useLocalStore()
             // 如果没有登录，则不发送请求
-            if (!jsCookie.get('__csrf')) {
+            if (!localStore.loginStatus) {
                 localStore.data.loginMode = ''
                 localStore.data.user = {
                     userId: 0,
@@ -58,6 +60,7 @@ export const useMySong = defineStore('MySong', {
                 }
                 return
             }
+            // 验证用户信息是否可以拿到
             await localStore.getUserInfo()
             // 如果登录了
             // 则获取用户歌单及喜欢的音乐
@@ -143,6 +146,11 @@ export const useMySong = defineStore('MySong', {
                     return
                 }
             }
+        },
+        //获取用户每日推荐
+        async getUserPersonalRecom() {
+            const { data } = await reqRecomSongs()
+            this.like.dailySongs = data.dailySongs
         }
     },
     getters: {

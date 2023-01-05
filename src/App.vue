@@ -4,7 +4,7 @@
         <div class="px-10vw lg:px-10 py-16">
             <router-view v-slot="{ Component }">
                 <transition name="fade-route" mode="out-in">
-                    <keep-alive :include="['Home', 'Explore', 'My']">
+                    <keep-alive :include="['Home', 'My']">
                         <component :is="Component"></component>
                     </keep-alive>
                 </transition>

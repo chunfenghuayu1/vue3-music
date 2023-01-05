@@ -56,7 +56,7 @@ export const useLocalStore = defineStore('useLocalStore', {
         },
         // 退出登录
         async handlerLogout() {
-            await reqLogout().then(({ data }) => {
+            await reqLogout().then(data => {
                 if (data.code === 200) {
                     this.data.loginMode = ''
                     this.data.user = {
@@ -89,7 +89,9 @@ export const useLocalStore = defineStore('useLocalStore', {
         // 用户名
         nickname: state => state.data.user.nickname,
         // 用户头像
-        avatarUrl: state => imgUrl(state.data.user.avatarUrl, 48)
+        avatarUrl: state => imgUrl(state.data.user.avatarUrl, 48),
+        // 登录状态 通过登录模式判断
+        loginStatus: state => state.data.loginMode !== ''
     },
     // 开启持久化
     persist: {

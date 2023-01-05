@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex justify-between items-end mb-5 mt-16">
-            <h3 class="text-3xl font-bold">{{ title }}</h3>
+            <h3 class="text-3xl font-semibold">{{ title }}</h3>
             <template v-if="isMore">
                 <slot name="more"></slot>
             </template>

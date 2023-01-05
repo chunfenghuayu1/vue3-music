@@ -1,5 +1,5 @@
 <template>
-    <div v-show="mounted">
+    <div v-if="mounted">
         <h3 class="font-bold text-6xl my-8">发现</h3>
         <!-- 标签栏 -->
         <ExploreTag
@@ -128,7 +128,7 @@ onBeforeRouteUpdate(to => {
 })
 // 解决无限滚动获取不到dom的问题
 const mounted = ref(false)
-onActivated(() => {
+onMounted(() => {
     reset()
     // 获取标签信息
     mounted.value = true

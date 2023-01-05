@@ -1,5 +1,6 @@
 import { setLocal } from '@/utils/localStorage.js'
 import type { PiniaPluginContext } from 'pinia'
+
 export default ({ store, options }: PiniaPluginContext): void => {
     if (options.persist?.enable) {
         store.$subscribe(() => {

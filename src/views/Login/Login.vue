@@ -14,7 +14,7 @@
             <p>{{ notify }}</p>
         </div>
         <!-- 切换登录方式 -->
-        <div class="mt-5">
+        <div class="mt-5" v-if="false">
             <p class="text-sm text-gray-500 hover:underline hover:cursor-pointer">手机号登录</p>
         </div>
         <!-- 提示 -->
@@ -28,14 +28,12 @@
 import type { ComponentInternalInstance } from 'vue'
 import QRCode from 'qrcode'
 import { useLocalStore } from '@/stores/localStore'
-import { useMySong } from '@/stores/MySong'
 import loading from '@/assets/img/img_loading.gif'
 import success from '@/assets/img/success.gif'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const router = useRouter()
 const route = useRoute()
 const localStore = useLocalStore()
-const mysong = useMySong()
 
 const qrcode = ref(loading)
 const unikey = ref('')

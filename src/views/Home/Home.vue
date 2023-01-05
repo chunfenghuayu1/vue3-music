@@ -12,11 +12,12 @@
             <template #more>
                 <router-link
                     :to="{ name: 'explore', query: { cat: '推荐歌单' } }"
-                    class="font-semibold text-sm"
+                    class="font-semibold text-xs text-gray-400"
                     >查看更多</router-link
                 >
             </template>
         </Section>
+        <PersonalRecom v-if="localStore.loginStatus"></PersonalRecom>
         <Section
             :title="'热门歌手'"
             :columns="false"
@@ -39,7 +40,7 @@
             <template #more>
                 <router-link
                     :to="{ name: 'explore', query: { cat: '排行榜' } }"
-                    class="font-semibold text-sm"
+                    class="font-semibold text-xs text-gray-400"
                     >查看更多</router-link
                 >
             </template>
@@ -49,12 +50,13 @@
 
 <script setup lang="ts">
 import Section from '@/components/Section.vue'
-
+import { useLocalStore } from '@/stores/localStore'
 import { sampleSize } from 'lodash-es'
 
 import type { ComponentInternalInstance } from 'vue'
 import type { DataList } from './index'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
+const localStore = useLocalStore()
 
 const dataList: DataList = reactive({
     albumList: [],

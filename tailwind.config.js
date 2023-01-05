@@ -25,6 +25,15 @@ module.exports = {
             },
             backdropSaturate: {
                 180: '1.8'
+            },
+            keyframes: {
+                bgMove: {
+                    '0%': { 'background-position': '0% 0%' },
+                    '100%': { 'background-position': '0% 80%' }
+                }
+            },
+            animation: {
+                'move-y': 'bgMove 30s infinite linear alternate'
             }
         }
     },

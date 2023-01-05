@@ -5,10 +5,12 @@ const router = createRouter({
     history: createWebHistory('/'),
     routes
 })
+import { useLocalStore } from '@/stores/localStore'
 router.beforeEach(to => {
+    const localStore = useLocalStore()
     // to.meta.scrollTop = document.documentElement.scrollTop
     if (to.meta.requireAuth) {
-        if (!jsCookie.get('__csrf')) {
+        if (!localStore.loginStatus) {
             return { path: '/login', query: { redirect: to.path } }
         }
         return true

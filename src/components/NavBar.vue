@@ -4,13 +4,13 @@
     >
         <div class="flex items-center flex-1 space-x-4 lg:space-x-2">
             <button
-                class="hover:bg-gray-200 rounded-lg active:scale-90 transition-all p-0.5"
+                class="hover:bg-gray-100 rounded-lg active:scale-90 transition-all p-0.5"
                 @click="$router.go(-1)"
             >
                 <SvgIcon name="back" size="32" color="#000"></SvgIcon>
             </button>
             <button
-                class="hover:bg-gray-200 rounded-lg active:scale-90 transition-all p-0.5"
+                class="hover:bg-gray-100 rounded-lg active:scale-90 transition-all p-0.5"
                 @click="$router.go(1)"
             >
                 <SvgIcon name="forward" size="32" color="#000"></SvgIcon>
@@ -42,7 +42,7 @@
             <el-avatar
                 fit="cover"
                 class="select-none cursor-pointer"
-                :src="localStore.avatarUrl || avatar"
+                :src="localStore.data.user.avatarUrl || avatar"
             >
             </el-avatar>
         </div>

@@ -228,9 +228,9 @@ const hanlderClick = (typeV: number) => {
 
 // 切换听歌排行时间周期
 const toggleDate = ref(1)
-onActivated(() => {
+onActivated(async () => {
+    await MySong.initMySong()
     MySong.getMyData()
-    MySong.initMySong()
 })
 </script>
 

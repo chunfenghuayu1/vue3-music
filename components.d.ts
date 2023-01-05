@@ -15,6 +15,7 @@ declare module '@vue/runtime-core' {
     MvCover: typeof import('./src/components/MvCover.vue')['default']
     MyTrackItem: typeof import('./src/components/Track/MyTrackItem.vue')['default']
     NavBar: typeof import('./src/components/NavBar.vue')['default']
+    PersonalRecom: typeof import('./src/components/PersonalRecom.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchInput: typeof import('./src/components/SearchInput.vue')['default']

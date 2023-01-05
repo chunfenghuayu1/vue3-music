@@ -7,7 +7,7 @@ const config = {
     // `withCredentials` 表示跨域请求时是否需要使用凭证
     withCredentials: true,
     // 请求超时
-    timeout: 3000
+    timeout: 5000
 }
 
 export default new Request(config)

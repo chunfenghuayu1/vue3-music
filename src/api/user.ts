@@ -9,7 +9,8 @@ enum Api {
     LikeArtist = '/artist/sublist',
     LikeMV = '/mv/sublist',
     likeCloud = '/user/cloud',
-    UserRecord = '/user/record'
+    UserRecord = '/user/record',
+    RecomSongs = '/recommend/songs'
 }
 
 /**
@@ -74,3 +75,9 @@ export const reqlikeCloud = (params: LikeAlbum) => http.get({ url: Api.likeCloud
  * 可选参数 : type : type=1 时只返回 weekData, type=0 时返回 allData
  */
 export const reqUserRecord = (params: UserRecord) => http.get({ url: Api.UserRecord, params })
+
+/**
+ * 获取每日推荐歌曲
+ * 说明 : 调用此接口 , 可获得每日推荐歌曲 ( 需要登录 )
+ */
+export const reqRecomSongs = () => http.get({ url: Api.RecomSongs })
