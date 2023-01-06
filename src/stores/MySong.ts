@@ -200,6 +200,8 @@ export const useMySong = defineStore('MySong', {
             // 1为一周，0为全部
             if (value === 1) return state.like.likeRecord.weekData
             if (value === 0) return state.like.likeRecord.allData
-        }
+        },
+        // 每日推荐
+        dailySongs: state => state.like.dailySongs
     }
 })

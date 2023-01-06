@@ -4,7 +4,7 @@
             <!-- 标题 -->
             <div class="flex items-center space-x-4 my-8">
                 <!-- 头像 -->
-                <img :src="`${localStore.avatarUrl}?param=54y54`" class="rounded-full" />
+                <img :src="localStore.avatarUrl" class="rounded-full" />
                 <!-- 用户名 -->
                 <h3 class="text-5xl font-bold flex-wrap">{{ localStore.nickname }}的音乐库</h3>
             </div>

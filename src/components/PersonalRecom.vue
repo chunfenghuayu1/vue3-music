@@ -74,14 +74,13 @@ const imgTemp = ref<string[]>([
     'https://p3.music.126.net/JE3DYh_gqRIiAyhWAEWRjw==/109951167596992903.jpg',
     'https://p3.music.126.net/t05hLDCz72CkGkH6XcOUfA==/109951167606527269.jpg'
 ])
-const picUrl = computed(() => {
-    if (localStore.loginStatus) {
-        return mySong.like.dailySongs[0].al.picUrl
+const picUrl = computed<string>(() => {
+    if (localStore.loginStatus && mySong.dailySongs.length > 0) {
+        return mySong.dailySongs[0].al.picUrl
     } else {
         return `${sample(imgTemp.value)}?param=512y512`
     }
 })
-
 mySong.getUserPersonalRecom()
 </script>
 

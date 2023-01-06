@@ -42,7 +42,7 @@
             <el-avatar
                 fit="cover"
                 class="select-none cursor-pointer"
-                :src="localStore.data.user.avatarUrl || avatar"
+                :src="localStore.avatarUrl || avatar"
             >
             </el-avatar>
         </div>
