@@ -88,7 +88,9 @@ export const useLocalStore = defineStore('useLocalStore', {
             this.settings.theme = value
             if (this.settings.theme === 'dark') {
                 document.documentElement.classList.add('dark')
+                document.documentElement.classList.remove('light')
             } else {
+                document.documentElement.classList.add('light')
                 document.documentElement.classList.remove('dark')
             }
         }

@@ -1,6 +1,6 @@
 <template>
     <nav
-        class="fixed z-10 top-0 h-16 min-w-max w-full px-10vw lg:px-10 flex items-center justify-center backdrop-saturate-180 backdrop-blur-lg transition-navBar duration-300 ease-linear bg-theme-base bg-opacity-80"
+        class="fixed z-10 top-0 h-16 min-w-max w-full px-10vw lg:px-10 flex items-center justify-center backdrop-saturate-150 backdrop-blur-lg transition-all duration-300 ease-linear bg-theme-base bg-opacity-80"
     >
         <div class="flex items-center flex-1 space-x-4 lg:space-x-2">
             <button

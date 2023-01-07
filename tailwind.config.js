@@ -47,10 +47,6 @@ module.exports = {
             animation: {
                 'move-y': 'bgMove 30s infinite linear alternate'
             },
-            // 增加导航栏响应过渡动画
-            transitionProperty: {
-                navbar: 'background-color, color, responsive'
-            },
             // 以下为主题设置
             backgroundColor: {
                 theme: {
