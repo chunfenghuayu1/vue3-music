@@ -101,7 +101,13 @@ export const useLocalStore = defineStore('useLocalStore', {
         // 用户名
         nickname: state => state.data.user.nickname,
         // 用户头像
-        avatarUrl: state => imgUrl(state.data.user.avatarUrl, 48),
+        avatarUrl: state => {
+            if (state.data.user.avatarUrl) {
+                return imgUrl(state.data.user.avatarUrl, 48)
+            } else {
+                return ''
+            }
+        },
         // 登录状态 通过登录模式判断
         loginStatus: state => state.data.loginMode !== ''
     },
