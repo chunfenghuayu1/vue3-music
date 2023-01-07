@@ -1,8 +1,7 @@
 name: Build and Deploy
 on: # 监听 new-design 分支上的 push 事件
   push:
-    branches:
-      - new-design
+    branches: [ new-design ]
 jobs:
   build:
     runs-on: ubuntu-latest # 构建环境使用 ubuntu
