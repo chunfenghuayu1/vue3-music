@@ -13,10 +13,13 @@
                 />
             </router-link>
         </div>
-        <div :class="isTextCenter ? 'text-center' : 'text-left'" class="line-clamp-2">
+        <div
+            :class="isTextCenter ? 'text-center' : 'text-left'"
+            class="line-clamp-2 text-theme-base"
+        >
             <router-link
                 :to="routeParams"
-                class="cursor-pointer hover:underline font-semibold text-theme-base"
+                class="cursor-pointer hover:underline font-semibold"
                 :title="listItem.name"
             >
                 {{ listItem?.name }}
