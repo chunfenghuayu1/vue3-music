@@ -28,6 +28,6 @@ jobs:
           host: ${{secrets.HOST}}
           user: ${{secrets.USERNAME}}
           pass: ${{secrets.PASSWORD}}
-          post: ${{secrets.PORT}}
+          port: ${{secrets.PORT}}
           local: './dist'
           remote: /www/wwwroot/120.48.31.206
