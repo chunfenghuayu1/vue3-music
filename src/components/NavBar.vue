@@ -4,13 +4,13 @@
     >
         <div class="flex items-center flex-1 space-x-4 lg:space-x-2">
             <button
-                class="hover:bg-gray-100 rounded-lg active:scale-90 transition p-0.5"
+                class="hover:bg-theme-baseSecond rounded-lg active:scale-90 transition p-0.5"
                 @click="$router.go(-1)"
             >
                 <SvgIcon name="back" size="32" class="text-theme-base fill-current"></SvgIcon>
             </button>
             <button
-                class="hover:bg-gray-100 rounded-lg active:scale-90 transition p-0.5"
+                class="hover:bg-theme-baseSecond rounded-lg active:scale-90 transition p-0.5"
                 @click="$router.go(1)"
             >
                 <SvgIcon name="forward" size="32" class="text-theme-base fill-current"></SvgIcon>
