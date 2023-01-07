@@ -5,20 +5,20 @@
             <img src="@/assets/img/nest.png" />
         </div>
         <!-- 登录账号 -->
-        <div class="font-bold text-xl mb-10">登录网易云账号</div>
+        <div class="font-bold text-theme-base text-xl mb-10">登录网易云账号</div>
         <!-- 二维码 -->
         <div class="flex flex-col items-center space-y-4">
-            <div class="bg-gray-100 p-6 rounded-xl">
+            <div class="bg-theme-baseSecond p-6 rounded-xl">
                 <img :src="qrcode" class="w-48 h-48" />
             </div>
-            <p>{{ notify }}</p>
+            <p class="text-theme-base">{{ notify }}</p>
         </div>
         <!-- 切换登录方式 -->
         <div class="mt-5" v-if="false">
-            <p class="text-sm text-gray-500 hover:underline hover:cursor-pointer">手机号登录</p>
+            <p class="text-sm text-theme-base hover:underline hover:cursor-pointer">手机号登录</p>
         </div>
         <!-- 提示 -->
-        <div class="mt-10 text-xs text-gray-400">
+        <div class="mt-10 text-xs text-theme-baseSecond">
             本网站不获取并且不使用用户任何数据，只用作数据展示
         </div>
     </div>
@@ -29,7 +29,6 @@ import type { ComponentInternalInstance } from 'vue'
 import QRCode from 'qrcode'
 import { useLocalStore } from '@/stores/localStore'
 import loading from '@/assets/img/img_loading.gif'
-import success from '@/assets/img/success.gif'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const router = useRouter()
 const route = useRoute()
@@ -99,7 +98,6 @@ const checkQRCodeLogin = () => {
                     type: 'success',
                     duration: 1000
                 })
-                qrcode.value = success
                 // 清除定时器
                 clearInterval(loginInterval.value)
                 loginInterval.value = null

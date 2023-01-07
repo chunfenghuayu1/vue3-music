@@ -111,9 +111,7 @@
                         <Cover :listItem="item" listType="歌单">
                             <template #subTilte>
                                 <div>
-                                    <span
-                                        class="text-xs text-theme-baseSecond opacity-50 line-clamp-1 mt-1"
-                                    >
+                                    <span class="text-xs text-theme-baseSecond line-clamp-1 mt-1">
                                         by {{ item.creator.nickname }}
                                     </span>
                                 </div>
