@@ -169,7 +169,7 @@
                     <div v-for="(item, index) in MySong.likeRecord(toggleDate)" :key="index">
                         <Track :song="item.song" :isShowAlbum="false" :isShowOther="false">
                             <template #other>
-                                <div class="font-bold">{{ item.playCount }}1</div>
+                                <div class="font-bold text-theme-base">{{ item.playCount }}1</div>
                             </template>
                         </Track>
                     </div>
