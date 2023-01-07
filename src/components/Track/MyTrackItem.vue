@@ -7,8 +7,8 @@
         <!-- 歌曲描述 -->
         <div class="flex flex-col justify-center">
             <!-- 歌名 -->
-            <div class="font-bold line-clamp-1 select-none" :title="name">
-                <span class="text-theme-base">{{ name }}</span>
+            <div class="font-bold text-theme-base line-clamp-1 select-none" :title="name">
+                <span>{{ name }}</span>
                 <span v-if="alia.length > 0" class="text-theme-baseSecond"> ({{ alia[0] }}) </span>
             </div>
             <!-- 歌手 -->

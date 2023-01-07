@@ -13,8 +13,8 @@
         </div>
         <!-- 歌名 作者 -->
         <div class="flex flex-col justify-center flex-1">
-            <div class="flex font-bold text-lg line-clamp-1 select-none">
-                <span :title="song.name" class="text-theme-base"> {{ song.name }}</span>
+            <div class="flex font-bold text-lg text-theme-base line-clamp-1 select-none">
+                <span :title="song.name"> {{ song.name }}</span>
                 <span v-if="song.alia[0]" class="text-theme-baseSecond">
                     ({{ song.alia[0] }})
                 </span>

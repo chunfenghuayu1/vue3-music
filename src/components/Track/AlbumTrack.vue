@@ -12,7 +12,7 @@
             </div>
         </div>
         <!-- 歌名 作者 -->
-        <div class="flex flex-col justify-center flex-1 line-clamp-1">
+        <div class="flex flex-col justify-center flex-1">
             <div class="flex font-bold text-lg select-none">
                 <span class="text-theme-base line-clamp-1" :title="song.name">
                     {{ song.name }}</span
