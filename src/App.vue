@@ -1,6 +1,6 @@
 <template>
     <el-scrollbar height="100vh" ref="scrollbarRef">
-        <div>测试</div>
+        <div>测试111</div>
         <NavBar></NavBar>
         <div class="px-10vw lg:px-10 py-16">
             <router-view v-slot="{ Component }">
