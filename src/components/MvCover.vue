@@ -5,10 +5,10 @@
         </router-link>
     </div>
     <div v-if="showTitle" class="mt-1">
-        <div class="font-bold line-clamp-2">
+        <div class="font-bold text-theme-base line-clamp-2">
             <router-link
                 :to="{ name: 'mv', params: { vid: item?.id || item.vid } }"
-                class="text-theme-base hover:underline"
+                class="hover:underline"
             >
                 {{ name }}
             </router-link>
