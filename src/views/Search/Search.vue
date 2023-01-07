@@ -1,14 +1,14 @@
 <template>
     <div v-show="isShow && searchList.songs.length > 0" class="space-y-8">
         <!-- 标题 -->
-        <div class="mt-8 flex space-x-8 items-center font-bold text-5xl">
+        <div class="mt-8 flex space-x-8 items-center text-theme-base font-bold text-5xl">
             <h3>搜索</h3>
             <p>{{ `"${$route.query.kw}"` }}</p>
         </div>
         <!-- 艺人和专辑 -->
         <div class="flex justify-between space-x-40">
             <div class="flex-1 flex flex-col space-y-5" v-if="searchList.artists.length > 0">
-                <h3 class="text-3xl font-bold">艺人</h3>
+                <h3 class="text-theme-base text-3xl font-bold">艺人</h3>
                 <div class="grid gap-10 lg:gap-x-5 grid-cols-3">
                     <template v-for="(item, index) in searchList.artists" :key="index">
                         <Cover
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="flex-1 flex flex-col space-y-5" v-if="searchList.albums.length > 0">
-                <h3 class="text-3xl font-bold">专辑</h3>
+                <h3 class="text-theme-base text-3xl font-bold">专辑</h3>
                 <div class="grid gap-10 lg:gap-x-5 grid-cols-3">
                     <template v-for="(item, index) in searchList.albums" :key="index">
                         <Cover :listItem="item" listType="专辑"></Cover>
@@ -35,7 +35,7 @@
         </div>
         <!-- 视频 -->
         <div class="space-y-5" v-if="searchList.mvs.length > 0">
-            <h3 class="text-3xl font-bold">视频</h3>
+            <h3 class="text-theme-base text-3xl font-bold">视频</h3>
             <div class="grid grid-cols-5 gap-10 lg:gap-x-5">
                 <div v-for="(item, index) in searchList.mvs" :key="index">
                     <MvCover
@@ -51,7 +51,7 @@
         </div>
         <!-- 歌单 -->
         <div class="space-y-5" v-if="searchList.playlists.length > 0">
-            <h3 class="text-3xl font-bold">歌单</h3>
+            <h3 class="text-theme-base text-3xl font-bold">歌单</h3>
             <div class="grid grid-cols-5 gap-10 lg:gap-x-5">
                 <div v-for="(item, index) in searchList.playlists" :key="index">
                     <Cover :listItem="item" listType="歌单"></Cover>

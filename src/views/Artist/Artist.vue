@@ -12,48 +12,59 @@
             </div>
             <div class="flex flex-col justify-center">
                 <!-- 专辑标题 -->
-                <h3 class="font-bold text-5xl pb-4 line-clamp-2">
+                <h3 class="text-theme-base font-bold text-5xl pb-4 line-clamp-2">
                     {{ artist.name }}
                 </h3>
                 <!-- 专辑简介 -->
                 <div class="flex justify-start space-x-4">
                     <div class="flex items-center text-sm space-x-1">
-                        <SvgIcon name="music" size="20" class="text-gray-400"></SvgIcon>
-                        <span>{{ artist.musicSize }}首</span>
+                        <SvgIcon name="music" size="20" class="text-theme-base"></SvgIcon>
+                        <span class="text-theme-base">{{ artist.musicSize }}首</span>
                     </div>
                     <div class="flex items-center text-sm space-x-1">
-                        <SvgIcon name="album" size="20" class="text-gray-400"></SvgIcon>
-                        <span>{{ artist.albumSize }}张</span>
+                        <SvgIcon name="album" size="20" class="text-theme-base"></SvgIcon>
+                        <span class="text-theme-base">{{ artist.albumSize }}张</span>
                     </div>
                     <div class="flex items-center text-sm space-x-1">
-                        <SvgIcon name="video" size="20" class="text-gray-400"></SvgIcon>
-                        <span>{{ artist.mvSize }}部</span>
+                        <SvgIcon name="video" size="20" class="text-theme-base"></SvgIcon>
+                        <span class="text-theme-base">{{ artist.mvSize }}部</span>
                     </div>
                 </div>
                 <!-- 专辑描述 -->
                 <div
-                    class="my-4 line-clamp-4 text-sm whitespace-pre-wrap select-none text-gray-400"
+                    class="my-4 line-clamp-4 text-sm whitespace-pre-wrap select-none text-theme-baseSecond"
                     v-text="artist.briefDesc"
                     :title="artist.briefDesc"
                 ></div>
                 <!-- 操作区 -->
                 <div class="mt-4 flex items-center space-x-8">
                     <button
-                        class="py-1.5 px-2.5 rounded-lg flex items-center justify-center space-x-1 bg-skin-primary bg-opacity-20 flex-shrink-0"
+                        class="bg-theme-baseActive bg-opacity-20 text-theme-baseActive text-opacity-90 py-1.5 px-2.5 rounded-lg flex items-center justify-center space-x-1 flex-shrink-0 active:scale-95 transition"
                     >
-                        <SvgIcon name="play" size="24" class=""></SvgIcon>
+                        <SvgIcon name="playfill" size="24" class="fill-current"></SvgIcon>
                         <span class="font-bold">播放</span>
                     </button>
                     <button
-                        class="p-2 rounded-lg flex items-center justify-center bg-gray-400 bg-opacity-10 flex-shrink-0"
+                        class="p-2 rounded-lg flex items-center justify-center bg-theme-baseActive bg-opacity-20 flex-shrink-0 active:scale-95 transition"
                     >
-                        <SvgIcon v-if="true" name="dislike" size="20" class=""></SvgIcon>
-                        <SvgIcon v-else name="like" size="20" class=""></SvgIcon>
+                        <SvgIcon
+                            v-if="true"
+                            name="dislike"
+                            size="20"
+                            class="fill-current text-theme-baseActive"
+                        ></SvgIcon>
+                        <SvgIcon
+                            v-else
+                            name="like"
+                            size="20"
+                            class="fill-current text-theme-baseActive"
+                        ></SvgIcon>
                     </button>
                     <button
-                        class="p-0.5 rounded-lg flex items-center justify-center bg-gray-400 bg-opacity-10 flex-shrink-0"
+                        v-if="false"
+                        class="p-0.5 rounded-lg flex items-center justify-center bg-theme-baseSecond flex-shrink-0"
                     >
-                        <SvgIcon name="more" size="32" class="text-skin-primary"></SvgIcon>
+                        <SvgIcon name="more" size="32"></SvgIcon>
                     </button>
                 </div>
             </div>
@@ -66,7 +77,7 @@
             </div>
             <!-- 专辑 -->
             <div v-if="albums.length > 0">
-                <h3 class="font-bold text-2xl mb-4">专辑</h3>
+                <h3 class="text-theme-base font-bold text-2xl mb-4">专辑</h3>
                 <div class="grid grid-cols-5 gap-8 lg:gap-x-5">
                     <div v-for="(item, index) in albums" :key="index">
                         <Cover :listItem="item" listType="专辑"></Cover>
@@ -75,13 +86,13 @@
             </div>
             <!-- EP和单曲 -->
             <div v-if="EP.length > 0">
-                <h3 class="font-bold text-2xl mb-4">EP和单曲</h3>
+                <h3 class="text-theme-base font-bold text-2xl mb-4">EP和单曲</h3>
                 <div class="grid grid-cols-5 gap-10 lg:gap-x-5">
                     <div v-for="(item, index) in EP" :key="index">
                         <Cover :listItem="item" :listType="'专辑'">
                             <!-- 最新专辑显示歌手名 -->
                             <template #subTilte>
-                                <div class="text-xs text-gray-400 italic">
+                                <div class="text-xs text-theme-baseSecond italic">
                                     {{ item.type }}
                                 </div>
                             </template>
@@ -91,7 +102,7 @@
             </div>
             <!-- MVs -->
             <div v-if="mvs.length > 0">
-                <h3 class="font-bold text-2xl mb-4">MVs</h3>
+                <h3 class="text-theme-base font-bold text-2xl mb-4">MVs</h3>
                 <div class="grid grid-cols-5 gap-10 lg:gap-x-5">
                     <div v-for="(item, index) in mvs" :key="index">
                         <MvCover
@@ -107,7 +118,7 @@
             </div>
             <!-- 相似歌手 -->
             <div v-if="simi.length > 0">
-                <h3 class="font-bold text-2xl mb-4">相似歌手</h3>
+                <h3 class="text-theme-base font-bold text-2xl mb-4">相似歌手</h3>
                 <div class="grid gap-10 grid-cols-6 lg:gap-x-5">
                     <div v-for="(item, index) in simi" :key="index">
                         <Cover

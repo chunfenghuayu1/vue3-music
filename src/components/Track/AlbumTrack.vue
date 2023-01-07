@@ -1,21 +1,23 @@
 <template>
     <div
         v-show="song.name"
-        class="flex space-x-6 items-center hover:bg-opacity-10 hover:bg-gray-400 transition-all rounded-lg py-3 px-4"
+        class="flex space-x-6 items-center hover:bg-theme-baseSecond transition-all rounded-lg py-3 px-4"
         @mouseenter="showBtn = true"
         @mouseleave="showBtn = false"
     >
         <!-- 序号 -->
         <div class="w-2 flex items-center justify-center">
-            <div class="font-semibold italic">
+            <div class="text-theme-baseSecond font-bold italic">
                 {{ song.no }}
             </div>
         </div>
         <!-- 歌名 作者 -->
         <div class="flex flex-col justify-center flex-1 line-clamp-1">
-            <div class="flex font-bold text-lg">
-                <span class="line-clamp-1 select-none" :title="song.name"> {{ song.name }}</span>
-                <span v-if="song.alia[0]" class="line-clamp-1 text-gray-400">
+            <div class="flex font-bold text-lg select-none">
+                <span class="text-theme-base line-clamp-1" :title="song.name">
+                    {{ song.name }}</span
+                >
+                <span v-if="song.alia[0]" class="line-clamp-1 text-theme-baseSecond">
                     ({{ song.alia[0] }})
                 </span>
             </div>
@@ -30,13 +32,18 @@
                     v-if="MySong.likeSongIds(song.id)"
                     name="like"
                     size="20"
-                    class=""
+                    class="text-theme-baseActive stroke-current"
                 ></SvgIcon>
-                <SvgIcon v-else name="dislike" size="20" class=""></SvgIcon>
+                <SvgIcon
+                    v-else
+                    name="dislike"
+                    size="20"
+                    class="text-theme-baseActive stroke-current"
+                ></SvgIcon>
             </div>
         </div>
         <!-- 歌曲时间 -->
-        <div v-if="song.dt" class="flex items-center justify-center">
+        <div v-if="song.dt" class="text-theme-base flex items-center justify-center">
             {{ forminute(song.dt) }}
         </div>
     </div>

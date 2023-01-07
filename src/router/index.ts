@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
-import jsCookie from 'js-cookie'
+// import jsCookie from 'js-cookie'
 const router = createRouter({
     history: createWebHistory('/'),
     routes
@@ -15,7 +15,7 @@ router.beforeEach(to => {
         }
         return true
     }
-    if (to.path === '/login' && jsCookie.get('__csrf')) {
+    if (to.path === '/login' && localStore.loginStatus) {
         return { path: '/' }
     }
     if (to.path === '/explore' && !to.query.cat) {

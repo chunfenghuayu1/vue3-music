@@ -2,26 +2,39 @@
     <div class="cursor-pointer relative w-5 h-5 select-none" @click="switchTheme">
         <Transition name="theme-slide" mode="out-in">
             <SvgIcon
-                v-if="toggleTheme"
+                v-if="localStore.settings.theme === 'light'"
                 name="light"
                 size="20"
-                color="#000"
+                color="#000000cc"
                 class="absolute"
             ></SvgIcon>
-            <SvgIcon v-else name="dark" size="20" color="#000" class="absolute"></SvgIcon>
+            <SvgIcon
+                v-else
+                name="dark"
+                size="20"
+                class="absolute text-theme-base text-opacity-70"
+            ></SvgIcon>
         </Transition>
     </div>
 </template>
 
 <script setup lang="ts">
+import { useLocalStore } from '@/stores/localStore'
+const localStore = useLocalStore()
 // 控制主题切换
-const toggleTheme = ref(true)
 const switchTheme = () => {
-    toggleTheme.value = !toggleTheme.value
+    // console.log(localStore.settings.theme)
+    if (localStore.settings.theme === 'light') {
+        localStore.switchTheme('dark')
+    } else {
+        localStore.switchTheme('light')
+    }
 }
+// 默认进行一次主题切换
+document.documentElement.classList.add(localStore.settings.theme)
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .theme-slide-enter-active,
 .theme-slide-leave-active {
     @apply transition-all duration-150;

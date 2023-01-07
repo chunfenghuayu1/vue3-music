@@ -21,3 +21,9 @@ export interface UserRecord {
     uid: number
     type?: number
 }
+export interface PersonalFM {
+    timestamp: number
+}
+export interface TrashFM {
+    id: number
+}

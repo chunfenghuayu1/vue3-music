@@ -6,18 +6,20 @@
                 <video ref="VideoPlayer" style="--plyr-color-main: #63bbd0"></video>
             </div>
             <div class="flex items-center space-x-8">
-                <div class="font-bold text-2xl">{{ mv.artistName }} - {{ mv.name }}</div>
+                <div class="text-theme-base font-bold text-2xl">
+                    {{ mv.artistName }} - {{ mv.name }}
+                </div>
             </div>
-            <div class="flex items-center space-x-4 font-semibold text-gray-500">
+            <div class="flex items-center space-x-4 font-semibold text-theme-baseSecond">
                 <div class="text-sm">{{ mv.publishTime }}</div>
                 <div class="flex items-center text-sm">
-                    <SvgIcon name="play" size="18"></SvgIcon>{{ formatPlayCount(mv.playCount) }}
+                    <SvgIcon name="playfill" size="18"></SvgIcon>{{ formatPlayCount(mv.playCount) }}
                 </div>
             </div>
         </div>
         <!-- 更多mv -->
         <div class="mt-12">
-            <div class="font-semibold text-lg">更多视频</div>
+            <div class="text-theme-base font-semibold text-lg">更多视频</div>
             <div class="grid grid-cols-5 gap-10 lg:gap-x-5 mt-4">
                 <div v-for="(item, index) in simiMv" :key="index">
                     <MvCover

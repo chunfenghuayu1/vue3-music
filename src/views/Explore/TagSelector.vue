@@ -2,10 +2,12 @@
     <transition name="tagSelector" mode="in-out">
         <div
             v-if="showMore"
-            class="space-y-8 p-8 bg-gray-300 bg-opacity-30 rounded-lg text-gray-800 text-opacity-80 origin-top"
+            class="space-y-8 p-8 bg-theme-baseSecond rounded-lg text-theme-baseSecond origin-top"
         >
             <div v-for="(item, index) in categories" :key="index" class="flex space-x-8">
-                <h3 class="text-2xl font-bold flex-shrink-0 h-10 flex items-center">{{ item }}</h3>
+                <h3 class="text-2xl font-bold flex-shrink-0 h-10 flex items-center select-none">
+                    {{ item }}
+                </h3>
                 <div class="flex flex-wrap">
                     <div
                         v-for="(tag, index1) in getTags(index * 1)"
@@ -13,8 +15,8 @@
                         class="flex min-w-24 items-center justify-center"
                     >
                         <span
-                            class="h-10 py-1 px-2.5 flex items-center justify-center rounded-md hover:bg-skin-primary hover:bg-opacity-30 hover:text-skin-primary cursor-pointer"
-                            :class="activeTags.includes(tag.name) ? 'text-red-300' : ''"
+                            class="h-10 py-1 px-2.5 flex items-center justify-center rounded-md hover:text-theme-baseActive hover:text-opacity-90 cursor-pointer"
+                            :class="activeTags.includes(tag.name) ? 'text-theme-baseActive' : ''"
                             @click="localStore.storeTags(tag)"
                         >
                             {{ tag.name }}

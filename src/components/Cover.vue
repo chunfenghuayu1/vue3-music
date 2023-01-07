@@ -2,7 +2,7 @@
     <div class="flex flex-col">
         <div
             class="mb-2 overflow-hidden text-center"
-            :class="isRounded ? 'rounded-full' : 'rounded-lg'"
+            :class="isRounded ? 'rounded-full' : 'rounded-xl'"
         >
             <router-link :to="routeParams">
                 <img
@@ -16,7 +16,7 @@
         <div :class="isTextCenter ? 'text-center' : 'text-left'" class="line-clamp-2">
             <router-link
                 :to="routeParams"
-                class="cursor-pointer hover:underline font-semibold"
+                class="cursor-pointer hover:underline font-semibold text-theme-base"
                 :title="listItem.name"
             >
                 {{ listItem?.name }}
@@ -36,6 +36,7 @@ interface Dprops {
         id: number
         picUrl?: string
         coverImgUrl?: string
+        img1v1Url?: string
     }
     isTextCenter?: boolean
     isRounded?: boolean
@@ -46,7 +47,9 @@ const props = withDefaults(defineProps<Dprops>(), {
     isRounded: false
 })
 
-const imgUrl = computed(() => props.listItem.picUrl || props.listItem.coverImgUrl || '')
+const imgUrl = computed(
+    () => props.listItem.img1v1Url || props.listItem.picUrl || props.listItem.coverImgUrl || ''
+)
 const routeParams = computed((): RouteLocationRaw => {
     if (props.listType === '歌单') {
         return { name: 'playlist', params: { id: props.listItem.id } }

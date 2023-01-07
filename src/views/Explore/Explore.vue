@@ -1,6 +1,6 @@
 <template>
     <div v-if="mounted">
-        <h3 class="font-bold text-6xl my-8">发现</h3>
+        <h3 class="font-bold text-6xl text-theme-base my-8">发现</h3>
         <!-- 标签栏 -->
         <ExploreTag
             v-model:showMore="showMore"
@@ -9,8 +9,12 @@
         >
             <template #more>
                 <div
-                    class="font-bold text-lg text-gray-600 text-opacity-80 bg-gray-300 bg-opacity-30 py-1.5 px-3.5 rounded-lg hover:bg-skin-primary hover:bg-opacity-20 hover:text-skin-primary cursor-pointer mr-4 my-2"
-                    :class="showMore ? 'bg-red-400 bg-opacity-20 text-red-300' : ''"
+                    class="font-bold text-lg py-1.5 px-3.5 rounded-lg cursor-pointer mr-4 my-2 hover:bg-theme-baseActive hover:text-theme-baseActive hover:bg-opacity-30 hover:text-opacity-90 transition-all"
+                    :class="
+                        showMore
+                            ? 'bg-theme-baseActive text-theme-baseActive bg-opacity-30 text-opacity-90'
+                            : 'text-theme-baseSecond bg-theme-baseSecond'
+                    "
                     @click="showMore = !showMore"
                 >
                     &bull;&bull;&bull;

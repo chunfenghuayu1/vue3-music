@@ -5,7 +5,9 @@
             <!-- 头像 -->
             <img :src="localStore.avatarUrl" class="rounded-full" />
             <!-- 用户名 -->
-            <h3 class="text-5xl font-bold flex-wrap">{{ localStore.nickname }}喜欢的音乐</h3>
+            <h3 class="text-5xl text-theme-base font-bold line-clamp-1">
+                {{ localStore.nickname }}喜欢的音乐
+            </h3>
         </div>
         <!-- 内容 -->
         <div>

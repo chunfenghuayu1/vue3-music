@@ -8,9 +8,11 @@ import {
     reqLikeMV,
     reqlikeCloud,
     reqUserRecord,
-    reqRecomSongs
+    reqRecomSongs,
+    reqPersonalFM
 } from '@/api/user'
 import { reqPlayListDetail } from '@/api/playList'
+import { imgUrl } from '@/utils/imgUrl'
 
 export const useMySong = defineStore('MySong', {
     state: () => {
@@ -35,7 +37,9 @@ export const useMySong = defineStore('MySong', {
                     allData: <any>[]
                 },
                 // 用户每日推荐
-                dailySongs: <any>[]
+                dailySongs: <any>[],
+                // FM
+                personalFM: <any>[]
             },
             // 用户全部歌单
             userList: {
@@ -151,6 +155,12 @@ export const useMySong = defineStore('MySong', {
         async getUserPersonalRecom() {
             const { data } = await reqRecomSongs()
             this.like.dailySongs = data.dailySongs
+        },
+        // 获取私人FM
+        async getUserPersonalFM() {
+            const res = await reqPersonalFM({ timestamp: +new Date() })
+            this.like.personalFM = res.data[0]
+            this.like.personalFM.picUrl = imgUrl(res.data[0].album.picUrl, 512)
         }
     },
     getters: {
@@ -202,6 +212,8 @@ export const useMySong = defineStore('MySong', {
             if (value === 0) return state.like.likeRecord.allData
         },
         // 每日推荐
-        dailySongs: state => state.like.dailySongs
+        dailySongs: state => state.like.dailySongs,
+        //FM
+        personalFM: state => state.like.personalFM
     }
 })

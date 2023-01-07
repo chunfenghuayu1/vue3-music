@@ -3,8 +3,12 @@
         <div
             v-for="item in activeTags"
             :key="item"
-            class="font-bold text-lg text-gray-600 text-opacity-80 bg-gray-300 bg-opacity-30 py-1.5 px-3.5 rounded-lg hover:bg-skin-primary hover:bg-opacity-20 hover:text-skin-primary cursor-pointer mr-4 my-2 transition-all"
-            :class="category === item && !showMore ? 'bg-red-500 bg-opacity-20 text-red-300' : ''"
+            class="font-bold text-lg py-1.5 px-3.5 rounded-lg hover:bg-theme-baseActive hover:text-theme-baseActive hover:bg-opacity-20 hover:text-opacity-90 cursor-pointer mr-4 my-2 transition-all"
+            :class="
+                category === item && !showMore
+                    ? 'bg-theme-baseActive text-theme-baseActive bg-opacity-20 text-opacity-90'
+                    : 'text-theme-baseSecond bg-theme-baseSecond'
+            "
             @click="changeCategory(item)"
         >
             {{ item }}

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex justify-between items-end mb-5 mt-16">
-            <h3 class="text-3xl font-semibold">{{ title }}</h3>
+            <h3 class="text-3xl font-semibold text-theme-base">{{ title }}</h3>
             <template v-if="isMore">
                 <slot name="more"></slot>
             </template>
@@ -16,7 +16,7 @@
                 :listType="($attrs.listType as string)"
             >
                 <template #subTilte v-if="item.updateFrequency">
-                    <div class="text-xs text-gray-400">{{ item.updateFrequency }}</div>
+                    <div class="text-xs text-theme-baseSecond">{{ item.updateFrequency }}</div>
                 </template>
             </Cover>
         </div>

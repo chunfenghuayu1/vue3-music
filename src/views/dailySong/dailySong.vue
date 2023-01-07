@@ -1,0 +1,43 @@
+<template>
+    <div>
+        <div class="mt-32 text-center mb-32 space-y-2 select-none">
+            <p
+                class="letter text-7xl leading-tight font-semibold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500"
+            >
+                每日歌曲推荐
+            </p>
+            <p class="text-theme-base letter text-lg font-light">
+                根据你的音乐口味生成 · 每天6:00更新
+            </p>
+        </div>
+        <div>
+            <template v-for="(item, index) in MySong.dailySongs" :key="index">
+                <Track :song="item"></Track>
+            </template>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import Track from '@/components/Track/Track.vue'
+import { useMySong } from '@/stores/MySong'
+const MySong = useMySong()
+
+onMounted(() => {
+    MySong.getUserPersonalRecom()
+})
+</script>
+
+<style lang="postcss">
+@keyframes letterspacing {
+    0% {
+        letter-spacing: 0em;
+    }
+    100% {
+        letter-spacing: 0.05em;
+    }
+}
+.letter {
+    animation: letterspacing 1.5s ease-out forwards;
+}
+</style>

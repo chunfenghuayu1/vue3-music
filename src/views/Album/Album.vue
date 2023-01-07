@@ -12,12 +12,12 @@
             </div>
             <div class="flex flex-col justify-center">
                 <!-- 专辑标题 -->
-                <h3 class="font-bold text-5xl mb-4 lineClamp2">
+                <h3 class="text-theme-base font-bold text-4xl mb-4 line-clamp-1">
                     {{ album.name }}
                 </h3>
                 <!-- 专辑简介 -->
                 <div class="">
-                    <div class="line-clamp-1 font-bold mb-4">
+                    <div class="text-theme-base font-bold mb-4 line-clamp-1">
                         <span>专辑列表</span>
                         <span> &bull; </span>
                         <router-link
@@ -27,7 +27,7 @@
                             >{{ album.artist.name }}</router-link
                         >
                     </div>
-                    <div class="line-clamp-1 text-sm">
+                    <div class="text-theme-baseSecond text-sm line-clamp-1">
                         <span>发布于{{ formatDate(album.publishTime) }}</span>
                         <span> &bull; </span>
                         <span>{{ album.size }}首歌</span>
@@ -35,28 +35,39 @@
                 </div>
                 <!-- 专辑描述 -->
                 <div
-                    class="my-4 line-clamp-3 text-sm whitespace-pre-wrap"
+                    class="text-theme-baseSecond my-4 line-clamp-3 text-sm select-none"
                     :title="album.description"
                     v-text="album.description"
                 ></div>
                 <!-- 操作区 -->
                 <div class="mt-4 flex items-center space-x-8">
                     <button
-                        class="py-1.5 px-2.5 rounded-lg flex items-center justify-center space-x-1 bg-skin-primary bg-opacity-20 flex-shrink-0"
+                        class="bg-theme-baseActive bg-opacity-20 text-theme-baseActive text-opacity-90 py-1.5 px-2.5 rounded-lg flex items-center justify-center space-x-1 flex-shrink-0 active:scale-95 transition"
                     >
-                        <SvgIcon name="play" size="24" class=""></SvgIcon>
+                        <SvgIcon name="playfill" size="24" class="fill-current"></SvgIcon>
                         <span class="font-bold">播放</span>
                     </button>
                     <button
-                        class="p-2 rounded-lg flex items-center justify-center bg-gray-400 bg-opacity-10 flex-shrink-0"
+                        class="p-2 rounded-lg flex items-center justify-center bg-theme-baseActive bg-opacity-20 flex-shrink-0 active:scale-95 transition"
                     >
-                        <SvgIcon v-if="true" name="dislike" size="20" class=""></SvgIcon>
-                        <SvgIcon v-else name="like" size="20" class=""></SvgIcon>
+                        <SvgIcon
+                            v-if="true"
+                            name="dislike"
+                            size="20"
+                            class="fill-current text-theme-baseActive"
+                        ></SvgIcon>
+                        <SvgIcon
+                            v-else
+                            name="like"
+                            size="20"
+                            class="fill-current text-theme-baseActive"
+                        ></SvgIcon>
                     </button>
                     <button
-                        class="p-0.5 rounded-lg flex items-center justify-center bg-gray-400 bg-opacity-10 flex-shrink-0"
+                        v-if="false"
+                        class="p-0.5 rounded-lg flex items-center justify-center bg-theme-baseSecond flex-shrink-0"
                     >
-                        <SvgIcon name="more" size="32" class=""></SvgIcon>
+                        <SvgIcon name="more" size="32"></SvgIcon>
                     </button>
                 </div>
             </div>

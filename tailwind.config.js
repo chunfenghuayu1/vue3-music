@@ -1,6 +1,18 @@
 /** @type {import('tailwindcss').Config} */
+// 默认主题字体
+const defaultTheme = require('tailwindcss/defaultTheme')
+// 切换颜色包含透明度函数
+function withOpacity(variableName) {
+    return ({ opacityValue }) => {
+        if (opacityValue !== undefined) {
+            return `rgba(var(${variableName}),${opacityValue})`
+        }
+        return `rgb(var(${variableName})`
+    }
+}
 module.exports = {
     mode: 'jit',
+    darkMode: 'class',
     content: ['index.html', './src/**/*.{vue,ts}'],
     theme: {
         screens: {
@@ -17,7 +29,7 @@ module.exports = {
             // => @media (max-width: 639px) { ... }
         },
         fontFamily: {
-            Barlow: ['Barlow']
+            Barlow: ['Barlow', ...defaultTheme.fontFamily.sans]
         },
         extend: {
             padding: {
@@ -34,6 +46,25 @@ module.exports = {
             },
             animation: {
                 'move-y': 'bgMove 30s infinite linear alternate'
+            },
+            // 增加导航栏响应过渡动画
+            transitionProperty: {
+                navbar: 'background-color, color, responsive'
+            },
+            // 以下为主题设置
+            backgroundColor: {
+                theme: {
+                    base: withOpacity('--color-base'),
+                    baseActive: withOpacity('--color-baseActive'),
+                    baseSecond: withOpacity('--color-baseSecond')
+                }
+            },
+            textColor: {
+                theme: {
+                    base: withOpacity('--color-font'),
+                    baseActive: withOpacity('--color-fontActive'),
+                    baseSecond: withOpacity('--color-fontSecond')
+                }
             }
         }
     },

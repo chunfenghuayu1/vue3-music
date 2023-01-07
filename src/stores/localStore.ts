@@ -81,6 +81,16 @@ export const useLocalStore = defineStore('useLocalStore', {
                     })
                 }
             })
+        },
+        // 切换主题
+        switchTheme(value: 'light' | 'dark') {
+            // 此处不自动适应系统变化，切换逻辑是进行light和dark的切换
+            this.settings.theme = value
+            if (this.settings.theme === 'dark') {
+                document.documentElement.classList.add('dark')
+            } else {
+                document.documentElement.classList.remove('dark')
+            }
         }
     },
     getters: {

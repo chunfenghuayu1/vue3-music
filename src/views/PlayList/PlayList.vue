@@ -12,12 +12,12 @@
             </div>
             <div class="flex flex-col justify-center">
                 <!-- 歌单标题 -->
-                <h3 class="font-bold text-4xl mb-4">
+                <h3 class="text-theme-base font-bold text-4xl mb-4 line-clamp-1">
                     {{ playList.name }}
                 </h3>
                 <!-- 歌单简介 -->
                 <div>
-                    <div class="line-clamp-1 font-bold mb-2">
+                    <div class="text-theme-base line-clamp-1 font-bold mb-2">
                         <span>歌单列表</span>
                         <span> &bull; </span>
                         <a
@@ -27,7 +27,7 @@
                             >{{ playList.creator?.nickname }}</a
                         >
                     </div>
-                    <div class="line-clamp-1 text-gray-500 text-sm">
+                    <div class="text-theme-baseSecond line-clamp-1 text-sm">
                         <span>最后更新于{{ formatDate(playList.updateTime) }}</span>
                         <span> &bull; </span>
                         <span>{{ playList.trackCount }}首歌</span>
@@ -35,34 +35,40 @@
                 </div>
                 <!-- 歌单描述 -->
                 <div
-                    class="my-4 line-clamp-3 text-gray-500 text-sm select-none"
+                    class="my-4 line-clamp-3 text-theme-baseSecond text-sm select-none"
                     :title="playList.description"
                     v-text="playList.description"
                 ></div>
                 <!-- 操作区 -->
                 <div class="mt-4 flex items-center space-x-8">
                     <button
-                        class="py-1.5 px-2.5 rounded-lg flex items-center justify-center space-x-1 bg-skin-primary bg-opacity-20 flex-shrink-0"
+                        class="bg-theme-baseActive bg-opacity-20 text-theme-baseActive text-opacity-90 py-1.5 px-2.5 rounded-lg flex items-center justify-center space-x-1 flex-shrink-0 active:scale-95 transition"
                     >
-                        <SvgIcon name="play" size="24" class="text-skin-primary"></SvgIcon>
-                        <span class="font-bold text-skin-primary">播放</span>
+                        <SvgIcon name="playfill" size="24" class="fill-current"></SvgIcon>
+                        <span class="font-bold">播放</span>
                     </button>
                     <button
                         v-if="likeBtn"
-                        class="p-2 rounded-lg flex items-center justify-center bg-gray-400 bg-opacity-10 flex-shrink-0"
+                        class="p-2 rounded-lg flex items-center justify-center bg-theme-baseActive bg-opacity-20 flex-shrink-0 active:scale-95 transition"
                     >
                         <SvgIcon
                             v-if="true"
                             name="dislike"
                             size="20"
-                            class="text-skin-primary"
+                            class="fill-current text-theme-baseActive"
                         ></SvgIcon>
-                        <SvgIcon v-else name="like" size="20" class="text-skin-primary"></SvgIcon>
+                        <SvgIcon
+                            v-else
+                            name="like"
+                            size="20"
+                            class="fill-current text-theme-baseActive"
+                        ></SvgIcon>
                     </button>
                     <button
-                        class="p-0.5 rounded-lg flex items-center justify-center bg-gray-400 bg-opacity-10 flex-shrink-0"
+                        v-if="false"
+                        class="p-0.5 rounded-lg flex items-center justify-center bg-theme-baseSecond flex-shrink-0"
                     >
-                        <SvgIcon name="more" size="32" class="text-skin-primary"></SvgIcon>
+                        <SvgIcon name="more" size="32"></SvgIcon>
                     </button>
                 </div>
             </div>
@@ -81,7 +87,9 @@
             </transition-group>
         </div>
         <!-- 到底了 -->
-        <div class="text-sm text-gray-400 flex items-center justify-center mt-8 select-none">
+        <div
+            class="text-sm text-theme-baseSecond flex items-center justify-center mt-8 select-none"
+        >
             <div v-if="more">没有更多数据了......</div>
         </div>
     </div>

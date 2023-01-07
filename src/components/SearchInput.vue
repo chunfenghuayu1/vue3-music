@@ -1,18 +1,13 @@
 <template>
     <div
-        class="w-52 flex items-center justify-center bg-opacity-20 rounded-lg p-1 transition-all"
+        class="w-52 flex items-center justify-center rounded-lg p-1 transition-all"
         :class="
             inputFocus
-                ? 'text-cyan-600 bg-cyan-600 ring-2 ring-current'
-                : 'bg-gray-400 text-gray-400'
+                ? ' text-theme-baseActive ring-2 ring-current'
+                : ' bg-theme-baseSecond text-theme-base text-opacity-40'
         "
     >
-        <SvgIcon
-            name="search"
-            size="18"
-            :color="inputFocus ? 'text-cyan-600' : 'text-gray-400'"
-            class="mx-1"
-        ></SvgIcon>
+        <SvgIcon name="search" size="18" class="mx-1 fill-current"></SvgIcon>
         <input
             v-model.trim="keywords"
             type="search"

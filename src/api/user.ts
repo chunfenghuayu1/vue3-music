@@ -1,5 +1,13 @@
 import http from '@/utils/axios/request'
-import type { UserPlayList, LikeSongs, LikeAlbum, LikeArtist, UserRecord } from './modules/user'
+import type {
+    UserPlayList,
+    LikeSongs,
+    LikeAlbum,
+    LikeArtist,
+    UserRecord,
+    PersonalFM,
+    TrashFM
+} from './modules/user'
 enum Api {
     Account = '/user/account',
     Subcount = '/user/subcount',
@@ -10,7 +18,9 @@ enum Api {
     LikeMV = '/mv/sublist',
     likeCloud = '/user/cloud',
     UserRecord = '/user/record',
-    RecomSongs = '/recommend/songs'
+    RecomSongs = '/recommend/songs',
+    PersonalFM = '/personal_fm',
+    trashFM = '/fm_trash'
 }
 
 /**
@@ -81,3 +91,13 @@ export const reqUserRecord = (params: UserRecord) => http.get({ url: Api.UserRec
  * 说明 : 调用此接口 , 可获得每日推荐歌曲 ( 需要登录 )
  */
 export const reqRecomSongs = () => http.get({ url: Api.RecomSongs })
+
+/**
+ * 获取私人FM
+ */
+export const reqPersonalFM = (params: PersonalFM) => http.get({ url: Api.PersonalFM, params })
+
+/**
+ * 调用此接口 , 传入音乐 id, 可把该音乐从私人 FM 中移除至垃圾桶
+ */
+export const reqTrashFM = (params: TrashFM) => http.get({ url: Api.trashFM, params })

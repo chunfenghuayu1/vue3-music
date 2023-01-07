@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="song.al"
-        class="flex space-x-6 items-center hover:bg-opacity-10 hover:bg-gray-500 transition-all rounded-lg p-2 my-2"
+        class="flex space-x-6 items-center hover:bg-theme-baseSecond transition-all rounded-lg p-2 my-2"
         @mouseenter="showBtn = true"
         @mouseleave="showBtn = false"
     >
@@ -14,23 +14,30 @@
         <!-- 歌名 作者 -->
         <div class="flex flex-col justify-center flex-1">
             <div class="flex font-bold text-lg line-clamp-1 select-none">
-                <span :title="song.name"> {{ song.name }}</span>
-                <span v-if="song.alia[0]" class="text-gray-500"> ({{ song.alia[0] }}) </span>
+                <span :title="song.name" class="text-theme-base"> {{ song.name }}</span>
+                <span v-if="song.alia[0]" class="text-theme-baseSecond">
+                    ({{ song.alia[0] }})
+                </span>
             </div>
-            <div class="text-sm text-gray-500 line-clamp-1">
+            <div class="text-sm text-theme-baseSecond line-clamp-1">
                 <span v-for="(item, index) in song.ar" :key="index">
                     <span v-if="index !== 0"> / </span
-                    ><span class="hover:underline cursor-pointer">{{ item.name }}</span></span
+                    ><router-link
+                        :to="{ name: 'artist', params: { id: item.id } }"
+                        class="hover:underline cursor-pointer"
+                        >{{ item.name }}</router-link
+                    ></span
                 >
             </div>
         </div>
         <!-- 专辑名 -->
         <div class="flex items-center flex-1">
-            <span
+            <router-link
+                :to="{ name: 'album', params: { id: song.al.id } }"
                 v-if="isShowAlbum && song.al.name"
-                class="hover:underline cursor-pointer line-clamp-1"
+                class="text-theme-base hover:underline cursor-pointer line-clamp-1"
                 :title="song.al.name"
-                >{{ song.al.name }}</span
+                >{{ song.al.name }}</router-link
             >
         </div>
         <div class="flex items-center justify-end">
@@ -42,19 +49,18 @@
                             v-if="MySong.likeSongIds(song.id)"
                             name="like"
                             size="22"
-                            color="red"
+                            class="text-theme-baseActive fill-current"
                         ></SvgIcon>
                         <SvgIcon
                             v-else
                             name="dislike"
                             size="22"
-                            color="red"
-                            class="text-red-300"
+                            class="text-theme-baseActive stroke-current"
                         ></SvgIcon>
                     </div>
                 </div>
                 <!-- 歌曲时间 -->
-                <div class="flex items-center justify-center select-none w-12">
+                <div class="flex items-center justify-center text-theme-base select-none w-12">
                     {{ forminute(song.dt) }}
                 </div>
             </template>
@@ -76,10 +82,11 @@ interface Dprops {
         al: {
             picUrl: string
             name: string
+            id: number
         }
         name: string
         alia: any[]
-        ar: { name: string }[]
+        ar: { name: string; id: number }[]
         id: number
         dt: number
     }

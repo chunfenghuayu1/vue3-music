@@ -8,7 +8,7 @@
         <div class="font-bold line-clamp-2">
             <router-link
                 :to="{ name: 'mv', params: { vid: item?.id || item.vid } }"
-                class="hover:underline"
+                class="text-theme-base hover:underline"
             >
                 {{ name }}
             </router-link>
@@ -16,7 +16,7 @@
 
         <router-link
             v-if="showArtist"
-            class="text-xs text-gray-400 italic hover:underline"
+            class="text-xs text-theme-baseSecond italic hover:underline"
             :to="{
                 name: 'artist',
                 params: { id: artistId }
@@ -24,7 +24,7 @@
         >
             {{ subText }}
         </router-link>
-        <div v-else class="text-xs text-gray-400 italic">
+        <div v-else class="text-xs text-theme-baseSecond italic">
             {{ subText }}
         </div>
     </div>

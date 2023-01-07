@@ -6,7 +6,9 @@
                 <!-- 头像 -->
                 <img :src="localStore.avatarUrl" class="rounded-full" />
                 <!-- 用户名 -->
-                <h3 class="text-5xl font-bold flex-wrap">{{ localStore.nickname }}的音乐库</h3>
+                <h3 class="text-5xl font-bold flex-wrap text-theme-base">
+                    {{ localStore.nickname }}的音乐库
+                </h3>
             </div>
             <!-- 喜欢的音乐 -->
             <div
@@ -14,23 +16,31 @@
             >
                 <!-- 左侧横幅 -->
                 <div
-                    class="h-56 flex justify-between flex-col flex-shrink-0 bg-red-300 bg-opacity-20 w-1/3 rounded-lg p-4 lg:w-full cursor-pointer"
+                    class="h-56 flex justify-between flex-col flex-shrink-0 bg-theme-baseActive bg-opacity-50 w-1/3 rounded-2xl p-4 lg:w-full cursor-pointer"
                     @click="$router.push('/likesongs')"
                 >
                     <!-- 描述内容 -->
-                    <div class="text-red-300 flex-shrink-0" v-text="str"></div>
+                    <div class="text-theme-baseActive flex-shrink-0" v-text="str"></div>
                     <!-- 喜欢的音乐 -->
                     <div class="flex justify-between">
                         <div class="flex-grow flex-shrink-0 space-y-1">
-                            <div class="text-2xl font-bold text-red-300">我喜欢的音乐</div>
-                            <div class="text-red-300 text-sm">共{{ MySong.tracksCount }}首歌</div>
+                            <div class="text-2xl font-semibold text-theme-baseActive">
+                                我喜欢的音乐
+                            </div>
+                            <div class="text-theme-baseActive text-sm">
+                                共{{ MySong.tracksCount }}首歌
+                            </div>
                         </div>
                         <!-- 播放按钮 -->
                         <div
                             class="p-1.5 flex items-center justify-center rounded-full"
                             @click="$router.replace('/')"
                         >
-                            <SvgIcon name="play" size="30" color="red"></SvgIcon>
+                            <SvgIcon
+                                name="playfill"
+                                size="42"
+                                class="text-theme-baseActive fill-current"
+                            ></SvgIcon>
                         </div>
                     </div>
                 </div>
@@ -57,13 +67,15 @@
             <div class="flex justify-between items-center h-9">
                 <!-- 左侧选择区域 -->
                 <div
-                    class="flex space-x-8 font-bold items-center text-skin-tertiary flex-shrink-0 select-none"
+                    class="flex space-x-8 font-bold items-center text-theme-base flex-shrink-0 select-none"
                 >
                     <div
                         v-for="(item, index) in typeList"
                         :key="index"
-                        class="cursor-pointer hover:bg-gray-100 rounded-lg flex justify-center items-center transition-all"
-                        :class="btnType === item.type ? 'bg-gray-100 text-skin-primary' : ''"
+                        class="cursor-pointer hover:bg-theme-baseSecond hover:text-theme-baseActive rounded-lg flex justify-center items-center transition-all"
+                        :class="
+                            btnType === item.type ? 'bg-theme-baseSecond text-theme-baseActive' : ''
+                        "
                         @click="hanlderClick(item.type)"
                     >
                         <template v-if="item.type === 1 && item.child">
@@ -89,14 +101,6 @@
                         </template>
                     </div>
                 </div>
-                <!-- 右侧 新建歌单-->
-                <!-- 功能后续考虑 -->
-                <div
-                    v-if="false"
-                    class="text-sm text-skin-tertiary flex-shrink-0 cursor-pointer select-none"
-                >
-                    +&nbsp;&nbsp;新建歌单
-                </div>
             </div>
             <!-- 歌单内容 -->
             <div
@@ -107,7 +111,9 @@
                         <Cover :listItem="item" listType="歌单">
                             <template #subTilte>
                                 <div>
-                                    <span class="text-xs text-skin-tertiary line-clamp-1 mt-1">
+                                    <span
+                                        class="text-xs text-theme-baseSecond opacity-50 line-clamp-1 mt-1"
+                                    >
                                         by {{ item.creator.nickname }}
                                     </span>
                                 </div>
@@ -144,17 +150,17 @@
                     </div>
                 </template>
                 <template v-if="btnType === 6">
-                    <div class="text-sm text-skin-tertiary flex items-center space-x-2 mb-4 ml-2">
+                    <div class="text-sm text-theme-base flex items-center space-x-2 mb-4 ml-2">
                         <div
-                            class="cursor-pointer hover:bg-gray-100 rounded-lg flex justify-center items-center p-2 transition-all"
-                            :class="toggleDate === 1 ? 'bg-gray-100' : ''"
+                            class="cursor-pointer hover:bg-theme-baseSecond rounded-lg flex justify-center items-center p-2 transition-all"
+                            :class="toggleDate === 1 ? 'bg-theme-baseSecond' : ''"
                             @click="toggleDate = 1"
                         >
                             最近一周
                         </div>
                         <div
-                            class="cursor-pointer hover:bg-gray-100 rounded-lg flex justify-center items-center p-2 transition-all"
-                            :class="toggleDate === 0 ? 'bg-gray-100' : ''"
+                            class="cursor-pointer hover:bg-theme-baseSecond rounded-lg flex justify-center items-center p-2 transition-all"
+                            :class="toggleDate === 0 ? 'bg-theme-baseSecond' : ''"
                             @click="toggleDate = 0"
                         >
                             所有时间

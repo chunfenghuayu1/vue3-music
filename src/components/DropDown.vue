@@ -9,15 +9,13 @@
                 class="absolute left-0 top-full z-10 w-full origin-top-right shadow-lg"
             >
                 <div class="w-full flex justify-center">
-                    <div
-                        class="w-2 h-2 bg-gray-100 rotate-45 translate-y-1/2 border border-solid rounded-tl-sm border-b-transparent border-r-transparent"
-                    ></div>
+                    <div class="w-2 h-2 bg-theme-baseSecond rotate-45 translate-y-1/2"></div>
                 </div>
-                <div class="bg-gray-100 rounded-md border border-solid py-1">
+                <div class="bg-theme-baseSecond rounded-md border border-none px-1 py-2">
                     <div
                         v-for="(item, index) in row"
                         :key="index"
-                        class="font-bold py-1 px-2 hover:bg-gray-100 hover:bg-opacity-20"
+                        class="font-bold py-1 px-2 text-theme-base hover:text-theme-baseActive"
                         @click="handlerClick(item)"
                     >
                         {{ item.name }}

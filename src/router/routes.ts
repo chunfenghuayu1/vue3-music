@@ -9,6 +9,7 @@ const LikeSongs = () => import('@/views/LikeSongs/LikeSongs.vue')
 const PlayList = () => import('@/views/PlayList/PlayList.vue')
 const Album = () => import('@/views/Album/Album.vue')
 const Search = () => import('@/views/Search/Search.vue')
+const DailySong = () => import('@/views/dailySong/dailySong.vue')
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
@@ -59,6 +60,12 @@ const routes: RouteRecordRaw[] = [
         path: '/search',
         name: 'search',
         component: Search
+    },
+    {
+        path: '/dailySong',
+        name: 'dailySong',
+        component: DailySong,
+        meta: { requireAuth: true }
     }
 ]
 export default routes

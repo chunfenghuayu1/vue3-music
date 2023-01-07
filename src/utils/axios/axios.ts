@@ -58,13 +58,14 @@ class Request {
             },
             (error: AxiosError) => {
                 // 提示错误
-                // console.log(error)
+                // console.log(error.response?.status)
 
                 ElMessage({
                     message: error as any,
                     type: 'error',
                     duration: 1000
                 })
+
                 return Promise.reject(error)
             }
         )

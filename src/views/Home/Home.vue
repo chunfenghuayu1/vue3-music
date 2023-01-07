@@ -12,7 +12,7 @@
             <template #more>
                 <router-link
                     :to="{ name: 'explore', query: { cat: '推荐歌单' } }"
-                    class="font-semibold text-xs text-gray-400"
+                    class="font-semibold text-xs text-theme-baseSecond"
                     >查看更多</router-link
                 >
             </template>
@@ -40,7 +40,7 @@
             <template #more>
                 <router-link
                     :to="{ name: 'explore', query: { cat: '排行榜' } }"
-                    class="font-semibold text-xs text-gray-400"
+                    class="font-semibold text-xs text-theme-baseSecond"
                     >查看更多</router-link
                 >
             </template>

@@ -4,6 +4,7 @@ const activeTags = explore.tags.filter((item: tags) => item.hot === true).map(it
 
 export interface settings {
     activeTags: string[]
+    theme: 'light' | 'dark'
 }
 export interface user {
     userId: number
@@ -30,7 +31,8 @@ const localStore: localStore = {
         }
     },
     settings: {
-        activeTags
+        activeTags,
+        theme: 'light'
     }
 }
 
