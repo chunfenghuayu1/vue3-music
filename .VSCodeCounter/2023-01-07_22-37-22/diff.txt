@@ -1,0 +1,92 @@
+Date : 2023-01-07 22:37:22
+Directory : d:\code collections\music\src
+Total : 40 files,  329 codes, 29 comments, 14 blanks, all 372 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| vue        |         22 |        259 |          0 |          9 |        268 |
+| TypeScript |          9 |         54 |         21 |          5 |         80 |
+| PostCSS    |          2 |         19 |          8 |          0 |         27 |
+| XML        |          7 |         -3 |          0 |          0 |         -3 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                           | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                              |         40 |        329 |         29 |         14 |        372 |
+| api                                                            |          2 |         20 |         10 |          3 |         33 |
+| api (Files)                                                    |          1 |         14 |         10 |          3 |         27 |
+| api\modules                                                    |          1 |          6 |          0 |          0 |          6 |
+| assets                                                         |          9 |         16 |          8 |          0 |         24 |
+| assets (Files)                                                 |          1 |         -9 |          0 |          0 |         -9 |
+| assets\css                                                     |          2 |         19 |          8 |          0 |         27 |
+| assets\icons                                                   |          6 |          6 |          0 |          0 |          6 |
+| components                                                     |          9 |        162 |          2 |          6 |        170 |
+| components (Files)                                             |          6 |        150 |          2 |          6 |        158 |
+| components\Track                                               |          3 |         12 |          0 |          0 |         12 |
+| router                                                         |          2 |          8 |          1 |          0 |          9 |
+| stores                                                         |          4 |         26 |         10 |          1 |         37 |
+| utils                                                          |          1 |          0 |          0 |          1 |          1 |
+| utils\axios                                                    |          1 |          0 |          0 |          1 |          1 |
+| views                                                          |         13 |         97 |         -2 |          3 |         98 |
+| views\Album                                                    |          1 |         11 |          0 |          0 |         11 |
+| views\Artist                                                   |          2 |         15 |          0 |          0 |         15 |
+| views\Explore                                                  |          3 |         10 |          0 |          0 |         10 |
+| views\Home                                                     |          1 |          3 |          0 |         -1 |          2 |
+| views\LikeSongs                                                |          1 |          2 |          0 |          0 |          2 |
+| views\Login                                                    |          1 |         -2 |          0 |          0 |         -2 |
+| views\Mv                                                       |          1 |          2 |          0 |          0 |          2 |
+| views\My                                                       |          1 |          8 |         -2 |          0 |          6 |
+| views\PlayList                                                 |          1 |          8 |          0 |          0 |          8 |
+| views\dailySong                                                |          1 |         40 |          0 |          4 |         44 |
++----------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                       | language   | code       | comment    | blank      | total      |
++----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\code collections\music\src\api\modules\user.ts              | TypeScript |          6 |          0 |          0 |          6 |
+| d:\code collections\music\src\api\user.ts                      | TypeScript |         14 |         10 |          3 |         27 |
+| d:\code collections\music\src\assets\css\fonts.css             | PostCSS    |        -36 |          0 |         -1 |        -37 |
+| d:\code collections\music\src\assets\css\index.css             | PostCSS    |         55 |          8 |          1 |         64 |
+| d:\code collections\music\src\assets\icons\pause.svg           | XML        |          1 |          0 |          0 |          1 |
+| d:\code collections\music\src\assets\icons\playfill.svg        | XML        |          1 |          0 |          0 |          1 |
+| d:\code collections\music\src\assets\icons\playforwardfill.svg | XML        |          1 |          0 |          0 |          1 |
+| d:\code collections\music\src\assets\icons\radio.svg           | XML        |          1 |          0 |          0 |          1 |
+| d:\code collections\music\src\assets\icons\thumbs-down.svg     | XML        |          1 |          0 |          0 |          1 |
+| d:\code collections\music\src\assets\icons\trash.svg           | XML        |          1 |          0 |          0 |          1 |
+| d:\code collections\music\src\assets\logo.svg                  | XML        |         -9 |          0 |          0 |         -9 |
+| d:\code collections\music\src\components\CorusalSection.vue    | vue        |         -1 |          0 |         -1 |         -2 |
+| d:\code collections\music\src\components\Cover.vue             | vue        |          3 |          0 |          0 |          3 |
+| d:\code collections\music\src\components\DropDown.vue          | vue        |         -2 |          0 |          0 |         -2 |
+| d:\code collections\music\src\components\PersonalRecom.vue     | vue        |        142 |          2 |          7 |        151 |
+| d:\code collections\music\src\components\SearchInput.vue       | vue        |         -5 |          0 |          0 |         -5 |
+| d:\code collections\music\src\components\SwitchTheme.vue       | vue        |         13 |          0 |          0 |         13 |
+| d:\code collections\music\src\components\Track\AlbumTrack.vue  | vue        |          7 |          0 |          0 |          7 |
+| d:\code collections\music\src\components\Track\MyTrackItem.vue | vue        |         -2 |          0 |          0 |         -2 |
+| d:\code collections\music\src\components\Track\Track.vue       | vue        |          7 |          0 |          0 |          7 |
+| d:\code collections\music\src\router\index.ts                  | TypeScript |          1 |          1 |          0 |          2 |
+| d:\code collections\music\src\router\routes.ts                 | TypeScript |          7 |          0 |          0 |          7 |
+| d:\code collections\music\src\stores\MySong.ts                 | TypeScript |         15 |          7 |          0 |         22 |
+| d:\code collections\music\src\stores\initLocal.ts              | TypeScript |          2 |          0 |          0 |          2 |
+| d:\code collections\music\src\stores\localStore.ts             | TypeScript |          9 |          3 |          0 |         12 |
+| d:\code collections\music\src\stores\persist.ts                | TypeScript |          0 |          0 |          1 |          1 |
+| d:\code collections\music\src\utils\axios\axios.ts             | TypeScript |          0 |          0 |          1 |          1 |
+| d:\code collections\music\src\views\Album\Album.vue            | vue        |         11 |          0 |          0 |         11 |
+| d:\code collections\music\src\views\Artist\Artist.vue          | vue        |         11 |          0 |          0 |         11 |
+| d:\code collections\music\src\views\Artist\CorusalArtist.vue   | vue        |          4 |          0 |          0 |          4 |
+| d:\code collections\music\src\views\Explore\Explore.vue        | vue        |          4 |          0 |          0 |          4 |
+| d:\code collections\music\src\views\Explore\ExploreTag.vue     | vue        |          4 |          0 |          0 |          4 |
+| d:\code collections\music\src\views\Explore\TagSelector.vue    | vue        |          2 |          0 |          0 |          2 |
+| d:\code collections\music\src\views\Home\Home.vue              | vue        |          3 |          0 |         -1 |          2 |
+| d:\code collections\music\src\views\LikeSongs\LikeSongs.vue    | vue        |          2 |          0 |          0 |          2 |
+| d:\code collections\music\src\views\Login\Login.vue            | vue        |         -2 |          0 |          0 |         -2 |
+| d:\code collections\music\src\views\Mv\Mv.vue                  | vue        |          2 |          0 |          0 |          2 |
+| d:\code collections\music\src\views\My\My.vue                  | vue        |          8 |         -2 |          0 |          6 |
+| d:\code collections\music\src\views\PlayList\PlayList.vue      | vue        |          8 |          0 |          0 |          8 |
+| d:\code collections\music\src\views\dailySong\dailySong.vue    | vue        |         40 |          0 |          4 |         44 |
+| Total                                                          |            |        329 |         29 |         14 |        372 |
++----------------------------------------------------------------+------------+------------+------------+------------+------------+
