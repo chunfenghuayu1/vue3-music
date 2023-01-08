@@ -20,7 +20,7 @@
             <!-- 播放数量 -->
             <div
                 v-if="isPlayCount"
-                class="absolute bottom-2 left-2 flex text-white italic select-none text-sm lg:text-xs flex-shrink-0 font-semibold text-opacity-80"
+                class="absolute bottom-2 right-2 flex text-white italic select-none text-sm lg:text-xs flex-shrink-0 font-semibold text-opacity-80"
             >
                 <SvgIcon name="playfill" size="18" class="opacity-80 fill-current"></SvgIcon>
                 {{ listItem.playCount && formatPlayCount(listItem.playCount) }}

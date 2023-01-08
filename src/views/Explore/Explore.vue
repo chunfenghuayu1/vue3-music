@@ -34,7 +34,7 @@
             infinite-scroll-delay="1000"
         >
             <div v-for="(item, index) in playList" :key="index">
-                <Cover :listItem="item" listType="歌单"></Cover>
+                <Cover :listItem="item" listType="歌单" :isPlayCount="true"></Cover>
             </div>
         </div>
     </div>

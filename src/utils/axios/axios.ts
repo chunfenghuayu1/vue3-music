@@ -33,12 +33,12 @@ class Request {
                     })
                 })
                 // 处理请求头逻辑
-                const token = ''
-                if (token) {
-                    if (config && config.headers) {
-                        config.headers['Athorization'] = 'Bearer ' + ''
-                    }
-                }
+                // const token = ''
+                // if (token) {
+                //     if (config && config.headers) {
+                //         config.headers['Athorization'] = 'Bearer ' + ''
+                //     }
+                // }
                 // this.requestLog(config)
                 return config
             },
