@@ -166,9 +166,12 @@ watch(
         // 重置数据
         Object.assign(searchList, resetSearchList)
         getSearchData()
+    },
+    {
+        immediate: true
     }
 )
-getSearchData()
+// getSearchData()
 </script>
 
 <style lang="postcss"></style>
