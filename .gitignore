@@ -13,6 +13,7 @@ test2
 dist-ssr
 *.local
 test
+.VSCodeCounter
 
 # Editor directories and files
 .vscode/*
