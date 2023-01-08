@@ -33,7 +33,7 @@
             @swiper="onSwiper"
         >
             <swiper-slide v-for="(item, index) in list" :key="index">
-                <Cover :listItem="item" listType="专辑">
+                <Cover :listItem="item" listType="专辑" :isPlayCount="false">
                     <template #subTilte>
                         <div class="mb-1">
                             <router-link

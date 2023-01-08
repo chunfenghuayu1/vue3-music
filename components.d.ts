@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AlbumTrack: typeof import('./src/components/Track/AlbumTrack.vue')['default']
+    Button: typeof import('./src/components/Button.vue')['default']
     CorusalSection: typeof import('./src/components/CorusalSection.vue')['default']
     Cover: typeof import('./src/components/Cover.vue')['default']
     DropDown: typeof import('./src/components/DropDown.vue')['default']

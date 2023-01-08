@@ -41,34 +41,23 @@
                 ></div>
                 <!-- 操作区 -->
                 <div class="mt-4 flex items-center space-x-8">
-                    <button
-                        class="bg-theme-baseActive bg-opacity-20 text-theme-baseActive text-opacity-90 py-1.5 px-2.5 rounded-lg flex items-center justify-center space-x-1 flex-shrink-0 active:scale-95 transition"
-                    >
+                    <Button text="播放" @click="handle">
                         <SvgIcon name="playfill" size="24" class="fill-current"></SvgIcon>
-                        <span class="font-bold">播放</span>
-                    </button>
-                    <button
-                        class="p-2 rounded-lg flex items-center justify-center bg-theme-baseActive bg-opacity-20 flex-shrink-0 active:scale-95 transition"
-                    >
+                    </Button>
+                    <Button @click="handle">
                         <SvgIcon
                             v-if="true"
                             name="dislike"
-                            size="20"
+                            size="24"
                             class="fill-current text-theme-baseActive"
                         ></SvgIcon>
                         <SvgIcon
                             v-else
                             name="like"
-                            size="20"
+                            size="24"
                             class="fill-current text-theme-baseActive"
                         ></SvgIcon>
-                    </button>
-                    <button
-                        v-if="false"
-                        class="p-0.5 rounded-lg flex items-center justify-center bg-theme-baseSecond flex-shrink-0"
-                    >
-                        <SvgIcon name="more" size="32"></SvgIcon>
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>
@@ -86,6 +75,7 @@
 
 <script setup lang="ts">
 import AlbumTrack from '@/components/Track/AlbumTrack.vue'
+import Button from '@/components/Button.vue'
 
 import type { ComponentInternalInstance, Ref } from 'vue'
 import type { albumData } from './index'
@@ -94,6 +84,10 @@ import { formatDate } from '@/utils/format.js'
 import { uniqBy } from 'lodash-es'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const route = useRoute()
+
+const handle = () => {
+    console.log(1)
+}
 
 // 获取对应id
 const album: Ref<albumData> = ref({

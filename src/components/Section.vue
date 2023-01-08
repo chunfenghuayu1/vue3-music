@@ -13,6 +13,7 @@
                 :listItem="item"
                 :isTextCenter="$attrs.isTextCenter === true"
                 :isRounded="$attrs.isRounded === true"
+                :isPlayCount="$attrs.isPlayCount === true"
                 :listType="($attrs.listType as string)"
             >
                 <template #subTilte v-if="item.updateFrequency">

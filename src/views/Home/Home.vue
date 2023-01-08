@@ -7,6 +7,7 @@
             :list="albumList"
             :isTextCenter="false"
             :isRounded="false"
+            :isPlayCount="true"
             :listType="'歌单'"
         >
             <template #more>
@@ -25,6 +26,7 @@
             :list="topArtists"
             :isTextCenter="true"
             :isRounded="true"
+            :isPlayCount="false"
             :listType="'歌手'"
         ></Section>
         <corusal-section :list="albumNewestList"></corusal-section>
@@ -35,6 +37,7 @@
             :list="rankList"
             :isTextCenter="false"
             :isRounded="false"
+            :isPlayCount="true"
             :listType="'歌单'"
         >
             <template #more>

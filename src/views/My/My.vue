@@ -11,12 +11,10 @@
                 </h3>
             </div>
             <!-- 喜欢的音乐 -->
-            <div
-                class="flex space-x-6 lg:space-x-0 lg:flex-wrap lg:h-full lg:flex-col lg:space-y-8"
-            >
+            <div class="flex justify-center space-x-6">
                 <!-- 左侧横幅 -->
                 <div
-                    class="h-56 flex justify-between flex-col flex-shrink-0 bg-theme-baseActive bg-opacity-50 w-1/3 rounded-2xl p-4 lg:w-full cursor-pointer"
+                    class="h-56 flex justify-between flex-col flex-shrink-0 bg-theme-baseActive bg-opacity-50 w-1/3 rounded-2xl p-4 cursor-pointer"
                     @click="$router.push('/likesongs')"
                 >
                     <!-- 描述内容 -->
@@ -45,7 +43,7 @@
                     </div>
                 </div>
                 <!-- 右侧音乐列表 -->
-                <div class="w-2/3 h-56 lg:w-full flex flex-wrap items-center">
+                <div class="w-2/3 h-56 flex flex-wrap items-center">
                     <div
                         v-for="(item, index) in MySong.showLikeSongs"
                         :key="index"
