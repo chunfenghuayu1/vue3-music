@@ -1,5 +1,9 @@
 <template>
-    <el-scrollbar height="100vh" ref="scrollbarRef">
+    <el-scrollbar
+        height="100vh"
+        ref="scrollbarRef"
+        class="bg-theme-base transition-all duration-300 ease-linear"
+    >
         <NavBar></NavBar>
         <div class="px-10vw lg:px-10 py-16">
             <router-view v-slot="{ Component }">
@@ -20,6 +24,7 @@ import 'element-plus/es/components/scrollbar/style/css'
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
 provide('scroll', scrollbarRef)
 const route = useRoute()
+
 // 解决页面回到顶部的问题
 watch(
     () => route.path,

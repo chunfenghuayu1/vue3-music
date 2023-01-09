@@ -25,4 +25,7 @@ declare module '@vue/runtime-core' {
     SwitchTheme: typeof import('./src/components/SwitchTheme.vue')['default']
     Track: typeof import('./src/components/Track/Track.vue')['default']
   }
+  export interface ComponentCustomProperties {
+    vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
+  }
 }
