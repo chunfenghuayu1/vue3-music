@@ -39,12 +39,25 @@
         <div class="flex flex-1 items-center justify-end min-w-max space-x-5">
             <SearchInput></SearchInput>
             <SwitchTheme></SwitchTheme>
-            <el-avatar
-                fit="cover"
-                class="select-none cursor-pointer"
-                :src="localStore.avatarUrl === '' ? avatar : localStore.avatarUrl"
-            >
-            </el-avatar>
+            <!-- 头像 -->
+            <div class="relative">
+                <DropDown
+                    v-model:toggleShow="toggleShow"
+                    v-model:type="type"
+                    :row="list"
+                    @click="handlerDrop"
+                >
+                    <template #button>
+                        <el-avatar
+                            fit="cover"
+                            class="select-none cursor-pointer align-middle"
+                            :src="localStore.avatarUrl === '' ? avatar : localStore.avatarUrl"
+                            @click.stop="toggleShow = !toggleShow"
+                        >
+                        </el-avatar>
+                    </template>
+                </DropDown>
+            </div>
         </div>
     </nav>
 </template>
@@ -57,6 +70,7 @@ import avatar from '@/assets/img/avatar.png'
 import { useLocalStore } from '@/stores/localStore'
 const localStore = useLocalStore()
 const route = useRoute()
+const router = useRouter()
 // 解决发现页面缓存路由信息的问题
 const cat = ref('')
 watch(
@@ -67,6 +81,41 @@ watch(
         }
     }
 )
+// 下拉组件
+const toggleShow = ref(false)
+const type = ref(1)
+const dropDownList = reactive([
+    { type: 1, name: '设置', svgIcon: 'setting' },
+    { type: 2, name: '退出登录', svgIcon: 'logout' },
+    { type: 3, name: '登录', svgIcon: 'login' },
+    { type: 4, name: 'GitHub', svgIcon: 'github' }
+])
+const list = computed(() => {
+    if (localStore.loginStatus) {
+        return dropDownList.filter(item => item.type !== 3)
+    } else {
+        return dropDownList.filter(item => item.type !== 2)
+    }
+})
+
+const handlerDrop = async (item: { type: number; name: string }) => {
+    console.log(item)
+    if (item.type === 1) {
+        router.replace('/')
+        console.log('设置')
+    }
+    if (item.type === 2) {
+        await localStore.handlerLogout()
+        router.replace('/')
+    }
+    if (item.type === 3) {
+        router.push('/login')
+    }
+    if (item.type === 4) {
+        // window.open('https://www.baidu.com')
+        router.push('/')
+    }
+}
 </script>
 
 <style scoped lang="postcss"></style>

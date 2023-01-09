@@ -76,6 +76,7 @@
                         "
                         @click="hanlderClick(item.type)"
                     >
+                        <!-- item.child可能为空 -->
                         <template v-if="item.type === 1 && item.child">
                             <DropDown
                                 v-model:toggleShow="toggleShow"
