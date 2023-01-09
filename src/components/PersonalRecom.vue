@@ -18,7 +18,10 @@
                 </div>
             </div>
             <!-- 私人fm -->
-            <div class="h-52 rounded-2xl bg-red-400 flex px-4 space-x-4 shadow-lg">
+            <div
+                class="h-52 rounded-2xl flex px-4 space-x-4 shadow-lg"
+                :style="{ backgroundColor: bgColor }"
+            >
                 <div class="align-middle h-full py-4 flex-shrink-0">
                     <img class="h-full rounded-2xl" :src="MySong.personalFM.picUrl" />
                 </div>
@@ -94,6 +97,7 @@
 import { useLocalStore } from '@/stores/localStore'
 import { useMySong } from '@/stores/MySong'
 import { sample } from 'lodash-es'
+import * as Vibrant from 'node-vibrant/dist/vibrant.worker.min.js'
 import type { ComponentInternalInstance } from 'vue'
 
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
@@ -113,6 +117,18 @@ const picUrl = computed<string>(() => {
         return MySong.dailySongs[0].al.picUrl
     } else {
         return `${sample(imgTemp.value)}?param=512y512`
+    }
+})
+// 获取图片背景色
+const bgColor = ref('')
+watchEffect(() => {
+    if (MySong.personalFM.picUrl) {
+        Vibrant.from(MySong.personalFM.picUrl, { colorCount: 1 })
+            .getPalette()
+            // ts自动推断
+            .then((palette: { Vibrant: { _rgb: { toString: () => any } } }) => {
+                bgColor.value = `rgb(${palette.Vibrant._rgb.toString()})`
+            })
     }
 })
 // FM操作
@@ -141,6 +157,7 @@ const nextFM = async () => {
     playFM(MySong.personalFM.id, true)
     console.log(MySong.personalFM.name)
 }
+
 onMounted(() => {
     MySong.getUserPersonalRecom()
     MySong.getUserPersonalFM()
