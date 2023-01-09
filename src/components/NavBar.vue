@@ -65,6 +65,7 @@
 <script setup lang="ts">
 import SearchInput from './SearchInput.vue'
 import SwitchTheme from './SwitchTheme.vue'
+import DropDown from '@/components/DropDown.vue'
 
 import avatar from '@/assets/img/avatar.png'
 import { useLocalStore } from '@/stores/localStore'
