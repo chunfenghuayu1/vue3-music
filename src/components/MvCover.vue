@@ -1,7 +1,11 @@
 <template>
     <div>
         <router-link :to="{ name: 'mv', params: { vid: item?.id || item.vid } }">
-            <img :src="$imgUrl(imgUrl, 512)" class="rounded-lg object-cover aspect-video" />
+            <img
+                :src="$imgUrl(imgUrl, 512)"
+                class="rounded-lg object-cover aspect-video"
+                loading="lazy"
+            />
         </router-link>
     </div>
     <div v-if="showTitle" class="mt-1">

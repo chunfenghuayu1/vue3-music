@@ -6,7 +6,7 @@
         <transition name="dropDown" mode="in-out">
             <div
                 v-if="toggleShow"
-                class="absolute left-0 top-full z-10 w-full origin-top-right shadow-lg"
+                class="absolute left-0 top-full z-20 w-full origin-top-right shadow-lg"
             >
                 <div class="w-full flex justify-center">
                     <div class="w-2 h-2 bg-theme-baseSecond rotate-45 translate-y-1/2"></div>

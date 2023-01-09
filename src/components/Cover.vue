@@ -1,31 +1,32 @@
 <template>
     <div class="flex flex-col">
         <!-- 图片 -->
-        <div class="mb-2 text-center cover relative">
-            <router-link :to="routeParams">
-                <img
-                    v-lazy="$imgUrl(imgUrl, 512)"
-                    :alt="listItem.name"
-                    lazy="loaded"
-                    class="object-cover w-full h-full align-middle"
-                    :class="isRounded ? 'rounded-full' : 'rounded-xl'"
-                />
-                <!-- 图片阴影层 -->
-                <div
-                    :style="{ backgroundImage: `url(${$imgUrl(imgUrl, 512)})` }"
-                    class="coverbg -z-10 opacity-0 absolute w-full top-3 scale-95 transition duration-300 ease-linear bg-no-repeat bg-center bg-cover blur-lg aspect-square"
-                    :class="isRounded ? 'rounded-full' : 'rounded-xl'"
-                ></div>
-            </router-link>
+        <router-link :to="routeParams" class="cover mb-2 text-center aspect-square relative">
+            <img
+                v-lazy="$imgUrl(imgUrl, 512)"
+                :alt="listItem.name"
+                loading="lazy"
+                class="object-cover w-full align-middle absolute z-10"
+                :class="isRounded ? 'rounded-full' : 'rounded-xl'"
+            />
+            <!-- 图片阴影层 -->
+            <img
+                v-lazy="$imgUrl(imgUrl, 512)"
+                :alt="listItem.name"
+                loading="lazy"
+                class="coverbg opacity-0 absolute w-full top-3 scale-95 transition duration-300 ease-linear bg-no-repeat bg-center bg-cover blur-lg"
+                :class="isRounded ? 'rounded-full' : 'rounded-xl'"
+            />
             <!-- 播放数量 -->
             <div
                 v-if="isPlayCount"
-                class="absolute bottom-2 right-2 flex text-white italic select-none text-sm lg:text-xs flex-shrink-0 font-semibold text-opacity-80"
+                class="absolute bottom-2 z-20 right-2 flex text-white italic select-none text-sm lg:text-xs flex-shrink-0 font-semibold text-opacity-80"
             >
                 <SvgIcon name="playfill" size="18" class="opacity-80 fill-current"></SvgIcon>
                 {{ listItem.playCount && formatPlayCount(listItem.playCount) }}
             </div>
-        </div>
+        </router-link>
+
         <!-- 标题 -->
         <div
             :class="isTextCenter ? 'text-center' : 'text-left'"

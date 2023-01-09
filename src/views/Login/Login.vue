@@ -2,14 +2,14 @@
     <div class="flex flex-col items-center my-8">
         <!-- logo -->
         <div class="w-24 h-24 mb-4">
-            <img src="@/assets/img/nest.png" />
+            <img src="@/assets/img/nest.png" loading="lazy" />
         </div>
         <!-- 登录账号 -->
         <div class="font-bold text-theme-base text-xl mb-10">登录网易云账号</div>
         <!-- 二维码 -->
         <div class="flex flex-col items-center space-y-4">
             <div class="bg-theme-baseSecond p-6 rounded-xl">
-                <img :src="qrcode" class="w-48 h-48" />
+                <img :src="qrcode" class="w-48 h-48" loading="lazy" />
             </div>
             <p class="text-theme-base">{{ notify }}</p>
         </div>

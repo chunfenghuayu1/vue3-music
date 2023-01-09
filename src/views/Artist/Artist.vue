@@ -3,11 +3,11 @@
         <!-- 头部 -->
         <div class="flex space-x-12 mt-8 my-16">
             <div class="flex items-center justify-center flex-shrink-0 relative">
-                <img v-lazy="$imgUrl(artist.cover, 512)" class="rounded-full h-72 w-72" />
+                <img :src="$imgUrl(artist.cover, 512)" class="rounded-full h-72 w-72 z-10" />
                 <!-- 图片阴影层 -->
                 <img
-                    v-lazy="$imgUrl(artist.cover, 512)"
-                    class="h-72 w-72 absolute top-3 -z-10 bg-cover blur-md opacity-60 rounded-full"
+                    :src="$imgUrl(artist.cover, 512)"
+                    class="h-72 w-72 absolute top-3 bg-cover blur-md opacity-60 rounded-full"
                 />
             </div>
             <div class="flex flex-col justify-center">

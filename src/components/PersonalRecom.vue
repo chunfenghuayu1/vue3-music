@@ -23,7 +23,11 @@
                 :style="{ backgroundColor: bgColor }"
             >
                 <div class="align-middle h-full py-4 flex-shrink-0">
-                    <img class="h-full rounded-2xl" :src="MySong.personalFM.picUrl" />
+                    <img
+                        class="h-full rounded-2xl"
+                        :src="MySong.personalFM.picUrl"
+                        loading="lazy"
+                    />
                 </div>
                 <div class="py-4 flex flex-col justify-between w-full">
                     <div>

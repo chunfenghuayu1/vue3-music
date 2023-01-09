@@ -37,7 +37,7 @@ watch(
 </script>
 <style lang="postcss">
 .el-scrollbar__bar {
-    z-index: 20;
+    z-index: 40;
 }
 .fade-route-enter-active,
 .fade-route-leave-active {

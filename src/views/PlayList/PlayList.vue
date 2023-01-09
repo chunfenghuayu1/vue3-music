@@ -3,11 +3,14 @@
         <!-- 头部 -->
         <div class="flex space-x-12 mt-8 my-16">
             <div class="flex items-center justify-center flex-shrink-0 relative">
-                <img :src="`${playList.coverImgUrl}?param=512y512`" class="rounded-lg h-72 w-72" />
+                <img
+                    :src="`${playList.coverImgUrl}?param=512y512`"
+                    class="rounded-lg h-72 w-72 z-10"
+                />
                 <!-- 图片阴影层 -->
                 <img
                     :src="`${playList.coverImgUrl}?param=512y512`"
-                    class="h-72 w-72 absolute top-3 -z-10 bg-cover blur-md opacity-60 rounded-lg"
+                    class="h-72 w-72 top-3 absolute blur-md opacity-60 rounded-lg"
                 />
             </div>
             <div class="flex flex-col justify-center">
