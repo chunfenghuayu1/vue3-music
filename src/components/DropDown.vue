@@ -1,20 +1,27 @@
 <template>
-    <div class="relative">
+    <div class="relative" @mouseleave.stop="emit('update:toggleShow', false)">
+        <!-- 提供给外面的按钮 -->
         <slot name="button" :active="activeItem"></slot>
 
-        <transition name="tagSelector" mode="in-out">
+        <transition name="dropDown" mode="in-out">
             <div
                 v-if="toggleShow"
-                class="absolute left-0 top-full z-10 mt-1 w-full origin-top-right rounded-md bg-white shadow-lg border border-solid"
+                class="absolute top-full left-0 z-20 w-full origin-top shadow-lg min-w-max"
+                ref="dropDown"
+                :style="{ marginLeft: `${setMargin}px` }"
             >
-                <div class="py-1">
+                <div class="flex justify-center">
+                    <div class="w-2 h-2 bg-theme-baseSecond rotate-45 translate-y-1/2"></div>
+                </div>
+                <div class="bg-theme-baseSecond rounded-xl px-1 py-2">
                     <div
                         v-for="(item, index) in row"
                         :key="index"
-                        class="font-bold text-base text-skin-tertiary py-1 px-2 hover:bg-skin-tertiary hover:bg-opacity-20"
+                        class="flex items-center space-x-1 font-semibold py-1 px-1.5 text-theme-base cursor-pointer hover:text-theme-baseActive"
                         @click="handlerClick(item)"
                     >
-                        {{ item.name }}
+                        <SvgIcon v-if="item.svgIcon" :name="item.svgIcon" size="18"></SvgIcon>
+                        <span>{{ item.name }}</span>
                     </div>
                 </div>
             </div>
@@ -22,29 +29,64 @@
     </div>
 </template>
 
-<script setup>
-const props = defineProps({
-    row: {
-        type: Array,
-        default: () => []
-    },
-    toggleShow: {
-        type: Boolean,
-        default: false
-    },
-    type: {
-        type: Number,
-        default: 1
+<script setup lang="ts">
+interface DrowType {
+    type: number
+    name: string
+    svgIcon?: string
+}
+const props = withDefaults(
+    defineProps<{
+        row: DrowType[]
+        toggleShow?: boolean
+        type?: number
+    }>(),
+    {
+        toggleShow: false,
+        type: 1
     }
-})
-const emit = defineEmits(['update:toggleShow', 'update:type'])
-const handlerClick = item => {
+)
+const emit = defineEmits(['update:toggleShow', 'update:type', 'click'])
+const handlerClick = (item: DrowType) => {
     emit('update:toggleShow', false)
     emit('update:type', item.type)
+    emit('click', item)
 }
 const activeItem = computed(() => {
     return props.row.filter(item => item.type === props.type)[0]
 })
+
+// 解决下拉框偏移
+const dropDown = ref<HTMLElement>()
+const setMargin = ref(0)
+const getPosition = () => {
+    if (props.toggleShow) {
+        nextTick(() => {
+            // 外层节点宽度
+            const outWidth: number = dropDown.value!.parentElement!.offsetWidth
+            // 下拉框宽度
+            const innerWidth: number = dropDown.value!.offsetWidth
+            // 如果外层元素宽度小于内层元素宽度，则让下拉框偏移
+            if (outWidth < innerWidth) {
+                setMargin.value = (outWidth - innerWidth) / 2
+            }
+        })
+    }
+}
+getPosition()
+watch(() => props.toggleShow, getPosition)
 </script>
 
-<style lang="postcss"></style>
+<style lang="postcss" scoped>
+.dropDown-enter-active,
+.dropDown-leave-active {
+    transform: rotateX(0deg);
+    @apply transition duration-300 ease-in-out;
+}
+
+.dropDown-enter-from,
+.dropDown-leave-to {
+    transform: rotateX(90deg);
+    @apply opacity-30;
+}
+</style>

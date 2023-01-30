@@ -1,146 +1,94 @@
 <template>
-    <div class="relative">
-        <!-- 播放按钮 遮罩层 -->
-        <div
-            class="flex items-center justify-center absolute top-0 w-full h-full bg-opacity-0 cursor-pointer"
-            @mouseenter="show = true"
-            @mouseleave="show = false"
-        >
-            <transition name="cover-playbtn" mode="out-in">
-                <div
-                    v-show="show"
-                    class="flex items-center justify-center backdrop-saturate-180 backdrop-blur-md rounded-full p-2 bg-white bg-opacity-20 active:scale-90 transition-all z-10"
-                    @click.stop="handlePlay"
-                >
-                    <SvgIcon name="play" size="36" class="text-white"></SvgIcon>
-                </div>
-            </transition>
-            <router-link :to="handleRouter" class="w-full h-full absolute top-0"></router-link>
-        </div>
-        <!-- 播放数量插槽 -->
-        <slot name="playCount" :play-count="playCount"></slot>
-        <!-- 图片层 -->
-        <img
-            v-lazy="picUrl"
-            loading="lazy"
-            :class="rowType === 'recomArtist' ? 'rounded-full' : 'rounded-lg'"
-            class="object-cover w-full h-full"
-        />
-
-        <!-- 图片阴影层 -->
-        <transition name="cover" mode="out-in">
+    <div class="flex flex-col">
+        <!-- 图片 -->
+        <router-link :to="routeParams" class="cover mb-2 text-center aspect-square relative">
             <img
-                v-show="show"
-                :src="picUrl"
-                class="w-full h-full absolute top-3 -z-10 bg-cover blur-md opacity-60 scale-95"
-                :class="rowType === 'recomArtist' ? 'rounded-full' : 'rounded-lg'"
+                v-lazy="$imgUrl(imgUrl, 512)"
+                :alt="listItem.name"
                 loading="lazy"
+                class="object-cover w-full align-middle absolute z-10"
+                :class="isRounded ? 'rounded-full' : 'rounded-xl'"
             />
-        </transition>
-    </div>
-    <!-- 标题 -->
-    <div
-        v-if="showTitle"
-        class="mt-2 flex items-center"
-        :class="rowType === 'recomArtist' ? 'justify-center' : ''"
-    >
-        <div v-if="rowType === 'mylist' && rowListItem.privacy !== 0" class="mr-1">
-            <SvgIcon name="lock" size="20"></SvgIcon>
-        </div>
-        <div class="lineClamp2">
-            <router-link class="cursor-pointer hover:underline font-semibold" :to="handleRouter">
-                {{ rowListItem.name }}
+            <!-- 图片阴影层 -->
+            <img
+                v-lazy="$imgUrl(imgUrl, 512)"
+                :alt="listItem.name"
+                loading="lazy"
+                class="coverbg opacity-0 absolute w-full top-3 scale-95 transition duration-300 ease-linear bg-no-repeat bg-center bg-cover blur-lg"
+                :class="isRounded ? 'rounded-full' : 'rounded-xl'"
+            />
+            <!-- 播放数量 -->
+            <div
+                v-if="isPlayCount"
+                class="absolute bottom-2 z-20 right-2 flex text-white italic select-none text-sm lg:text-xs flex-shrink-0 font-semibold text-opacity-80"
+            >
+                <SvgIcon name="playfill" size="18" class="opacity-80 fill-current"></SvgIcon>
+                {{ listItem.playCount && formatPlayCount(listItem.playCount) }}
+            </div>
+        </router-link>
+
+        <!-- 标题 -->
+        <div
+            :class="isTextCenter ? 'text-center' : 'text-left'"
+            class="line-clamp-2 text-theme-base"
+        >
+            <router-link
+                :to="routeParams"
+                class="cursor-pointer hover:underline font-semibold"
+                :title="listItem.name"
+            >
+                {{ listItem?.name }}
             </router-link>
         </div>
+        <!-- 副标题插槽 -->
+        <slot name="subTilte"></slot>
     </div>
-    <!-- 副标题 -->
-    <slot name="subTilte" :row-list-item="rowListItem"></slot>
 </template>
 
-<script setup>
-import { formatPlayCount } from '@/utils/format.js'
-
-const props = defineProps({
-    rowListItem: {
-        type: Object,
-        default: () => {}
-    },
-    rowType: {
-        type: String,
-        default: ''
-    },
-    showTitle: {
-        type: Boolean,
-        default: true
+<script setup lang="ts">
+import type { RouteLocationRaw } from 'vue-router'
+import { formatPlayCount } from '@/utils/format'
+interface Dprops {
+    listItem: {
+        name: string
+        id: number
+        picUrl?: string
+        coverImgUrl?: string
+        img1v1Url?: string
+        playCount?: number
     }
-})
-// 控制遮罩显示
-const show = ref(false)
-
-// 计算图片地址
-const picUrl = computed(() => {
-    if (props.rowListItem.img1v1 === -1) {
-        return `https://p1.music.126.net/VnZiScyynLG7atLIZ2YPkw==/18686200114669622.jpg?param=512y512`
-    }
-    let url =
-        props.rowListItem.img1v1Url || props.rowListItem.picUrl || props.rowListItem.coverImgUrl
-    return `${url?.replace(/^http:/, 'https://')}?param=512y512`
-})
-// 计算播放数量
-const playCount = computed(() => {
-    let count = props.rowListItem?.playCount
-    return formatPlayCount(count)
-})
-
-// 处理跳转和播放
-const handleRouter = computed(() => {
-    // 隐藏动画
-    // show.value = false
-    const type = props.rowType
-    const id = props.rowListItem.id
-    if (type === '') {
-        // router.push({ name: 'playlist', params: { id } })
-        return { name: 'playlist', params: { id } }
-    }
-    // 如果点击新专辑，则传递type参数
-    if (type === 'newAlbum') {
-        return { name: 'newAlbum', params: { id } }
-    }
-    // 如果点击歌手
-    if (type === 'recomArtist') {
-        return { name: 'artist', params: { id } }
-    }
-    // 如果是我的歌单
-    if (type === 'mylist') {
-        return { name: 'playlist', params: { id } }
-    }
-})
-const handlePlay = () => {
-    console.log(props.rowListItem)
+    isTextCenter?: boolean
+    isRounded?: boolean
+    listType: string
+    isPlayCount?: boolean
 }
-onActivated(() => {
-    show.value = false
+const props = withDefaults(defineProps<Dprops>(), {
+    isTextCenter: false,
+    isRounded: false,
+    isPlayCount: false
+})
+
+const imgUrl = computed(
+    () => props.listItem.img1v1Url || props.listItem.picUrl || props.listItem.coverImgUrl || ''
+)
+const routeParams = computed((): RouteLocationRaw => {
+    if (props.listType === '歌单') {
+        return { name: 'playlist', params: { id: props.listItem.id } }
+    }
+    if (props.listType === '歌手') {
+        return { name: 'artist', params: { id: props.listItem.id } }
+    }
+    if (props.listType === '专辑') {
+        return { name: 'album', params: { id: props.listItem.id } }
+    }
+    return {}
 })
 </script>
 
-<style lang="postcss">
-.cover-enter-active,
-.cover-leave-active {
-    @apply transition-opacity duration-300;
-}
-
-.cover-enter-from,
-.cover-leave-to {
-    @apply opacity-0;
-}
-
-.cover-playbtn-enter-active,
-.cover-playbtn-leave-active {
-    @apply transition-all duration-300;
-}
-
-.cover-playbtn-enter-from,
-.cover-playbtn-leave-to {
-    @apply opacity-0 scale-90;
+<style scoped lang="postcss">
+.cover:hover {
+    .coverbg {
+        opacity: 0.95;
+    }
 }
 </style>

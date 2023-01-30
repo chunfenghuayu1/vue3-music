@@ -8,18 +8,22 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.DS_Store
 dist
-test2
 dist-ssr
+dist-electron
+release/*
+coverage
 *.local
-test
 .VSCodeCounter
+
+/cypress/videos/
+/cypress/screenshots/
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
