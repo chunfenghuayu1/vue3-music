@@ -1,5 +1,5 @@
 import Request from './axios'
-import { IS_ELECTRON } from '../myAPI'
+import { IS_ELECTRON } from '@/utils/electron/myAPI'
 let baseURL = ''
 if (IS_ELECTRON) {
     // baseURL = import.meta.env.DEV ? 'http://127.0.0.1:15452' : import.meta.env.VITE_APP_BASE_API

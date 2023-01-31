@@ -21,6 +21,7 @@ export interface RecomNewSong {
 export interface PlayListDetail {
     id: number
     s?: number
+    timestamp: number
 }
 export interface PlayLsitTrankAll {
     id: number

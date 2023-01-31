@@ -1,13 +1,14 @@
 export interface IElectronAPI {
-    IS_ELECTRON: boolean
-    IS_Development: boolean
-    handleStore: () => void
+    handleStore: (arg: any) => void
     minWindow: () => void
     maxOrUnmaxWindow: () => void
     closeWindow: () => void
-    isMaximize: any
-    exitTypeSwitch: any
+    isMaximize: (callback: (e: Electron.IpcRendererEvent, arg: boolean) => void) => void
+    exitTypeSwitch: (
+        callback: (e: Electron.IpcRendererEvent, arg: 'confirm' | 'minimize' | 'quit') => void
+    ) => void
     islockMusic: () => void
+    dbCache: (type: 'trackDetail' | 'trackSource' | 'lyric', data: any[]) => void
 }
 
 declare global {

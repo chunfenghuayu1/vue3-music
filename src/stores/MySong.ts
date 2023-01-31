@@ -13,6 +13,8 @@ import {
 } from '@/api/user'
 import { reqPlayListDetail } from '@/api/playList'
 import { imgUrl } from '@/utils/imgUrl'
+import { useDB } from '@/utils/electron/myAPI'
+const { dbCache } = useDB()
 
 export const useMySong = defineStore('MySong', {
     state: () => {
@@ -96,9 +98,14 @@ export const useMySong = defineStore('MySong', {
         },
         // 获取用户喜欢的音乐列表信息（包括音乐信息，但没有详细信息）
         async getUserLikeSongs() {
-            const res = await reqPlayListDetail({ id: this.userList.playlist[0].id })
+            const res = await reqPlayListDetail({
+                id: this.userList.playlist[0].id,
+                timestamp: +new Date()
+            })
             if (res.code === 200) {
                 this.like.tracks = res.playlist.tracks
+
+                dbCache('trackDetail', res.playlist.tracks.slice(0, 12))
             }
         },
         // 获取用户已喜欢的音乐列表

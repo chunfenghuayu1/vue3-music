@@ -2,11 +2,10 @@
  * 唯一缺点：接受的数据源格式需要@param AudioBuffer
  * 如果直接传递文件或者路径进行解码，则会
  */
-import { connect } from 'http2'
 import { round } from 'lodash-es'
 interface options {
     buffer: AudioBuffer
-    volume?: number
+    volume: number
 }
 class AudioCalss {
     private instance: AudioContext = new AudioContext()
@@ -19,7 +18,7 @@ class AudioCalss {
         this.volumeGainNode = this.instance.createGain()
         this.fadeGainNode = this.instance.createGain()
         this.bufferSourceNode.buffer = options.buffer
-        this.volumeGainNode.gain.value = options.volume || 1
+        this.volumeGainNode.gain.value = options.volume
         this.setFadein()
         this.bufferSourceNode.connect(this.volumeGainNode)
         this.volumeGainNode.connect(this.fadeGainNode)

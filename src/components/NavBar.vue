@@ -70,7 +70,7 @@ import SearchInput from './SearchInput.vue'
 import SwitchTheme from './SwitchTheme.vue'
 import DropDown from '@/components/DropDown.vue'
 
-import { IS_ELECTRON } from '@/utils/myAPI'
+import { IS_ELECTRON } from '@/utils/electron/myAPI'
 
 import avatar from '@/assets/img/avatar.png'
 import { useLocalStore } from '@/stores/localStore'

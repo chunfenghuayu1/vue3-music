@@ -20,13 +20,13 @@
 
 <script setup lang="ts">
 import Track from '@/components/Track/Track.vue'
-
+import { IS_ELECTRON } from '@/utils/electron/myAPI'
 import { useLocalStore } from '@/stores/localStore'
 import { useMySong } from '@/stores/MySong'
 const localStore = useLocalStore()
 const MySong = useMySong()
 onActivated(() => {
-    MySong.getUserPlayList()
+    !IS_ELECTRON && MySong.getUserPlayList()
 })
 </script>
 

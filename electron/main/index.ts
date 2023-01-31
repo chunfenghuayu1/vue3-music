@@ -5,8 +5,7 @@ import installExtension from 'electron-devtools-installer'
 import store from './store'
 import CreateMenu from './menu'
 import { createProxy } from './express'
-import './sqlite'
-
+import { dbListen } from './sqliteDB/dbListen'
 process.env.DIST_ELECTRON = join(__dirname, '..')
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist')
 process.env.PUBLIC = process.env.VITE_DEV_SERVER_URL
@@ -41,7 +40,8 @@ class CreatWindow {
         createProxy()
         // 开启主进程监听
         this.appListen()
-
+        // 开启数据库监听
+        dbListen()
         // ......
     }
 
@@ -66,7 +66,7 @@ class CreatWindow {
                 // 关闭node环境，开启隔离
                 nodeIntegration: false,
                 contextIsolation: true,
-                webSecurity: false
+                webSecurity: true
             }
         }
         this.win = new BrowserWindow(options)
@@ -126,12 +126,11 @@ class CreatWindow {
             // electron-vite-vue#298
 
             this.win.loadURL(`${process.env.VITE_DEV_SERVER_URL}`)
-            // this.win.loadURL('http://127.0.0.1:20231')
 
             // Open devTool if the app is not packaged
             // this.win.webContents.openDevTools()
         } else {
-            this.win.loadFile(join(process.env.DIST, 'index.html'))
+            this.win.loadURL('http://127.0.0.1:20231')
         }
 
         // Make all links open with the browser, not with the application

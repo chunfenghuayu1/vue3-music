@@ -119,7 +119,7 @@ const trackAll: Ref<any[]> = ref([])
 const getPlayListDetail = ({ id, limit, offset }: PlayListDetail) => {
     // 获取歌单详情
     if (offset < 1) {
-        proxy?.$http.reqPlayListDetail({ id }).then(data => {
+        proxy?.$http.reqPlayListDetail({ id, timestamp: +new Date() }).then(data => {
             playList.value = data.playlist
         })
     }

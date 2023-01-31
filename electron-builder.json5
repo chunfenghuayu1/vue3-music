@@ -3,7 +3,7 @@
  */
 {
   "appId": "com.music.app",
-  "asar": false,
+  "asar": true,
   "icon": "public/logo.ico",
   "directories": {
     "output": "release/${version}"

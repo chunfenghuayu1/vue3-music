@@ -9,15 +9,16 @@ import { getLocal } from '@/utils/localStorage'
  * 切换音乐前需要销毁创建的音频实例
  * 避免内存空间占用/缓冲区冲突
  */
-let timer: NodeJS.Timeout
+let timer: number
 class Player {
+    private _enable: boolean = false
     private _duration: number = 300
     private _index: number = 0
     private _playList: any[] = [mp1, mp2, mp3, mp4]
     private _playing: boolean = false
     private _currentTime: number = 0
     private _currentTrack: string = mp4
-    private _volume: number = 0.1
+    private _volume: number = 0.3
     private _audio: AudioCalss | null = null
     private _buffer: AudioBuffer | null = null
     constructor() {
@@ -67,9 +68,9 @@ class Player {
         }
 
         if (this.playing) {
-            this.currentTime = currentTime || 0
             clearTimeout(timer)
-            timer = setTimeout(() => {
+            timer = window.setTimeout(() => {
+                this.currentTime = currentTime || 0
                 this.refreshTime(flag)
             }, 1000)
         }
@@ -89,6 +90,7 @@ class Player {
         }
     }
     public play() {
+        !this._enable && (this._enable = true)
         if (this._audio && this._audio.state !== 'closed') {
             this._audio.state === 'suspended'
                 ? this._audio.resume()
@@ -136,6 +138,8 @@ class Player {
             this[key] = value
         }
     }
+    // 更新数据库缓存
+    public dbCacheReplace() {}
     get duration() {
         return this._duration
     }

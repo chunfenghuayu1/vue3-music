@@ -75,6 +75,7 @@
     "unplugin-element-plus": "^0.4.1",
     "unplugin-vue-components": "^0.22.12",
     "vite": "^4.0.3",
+    "vite-plugin-commonjs": "^0.6.1",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-electron": "^0.11.1",
     "vite-plugin-electron-renderer": "^0.11.4",

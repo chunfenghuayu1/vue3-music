@@ -130,6 +130,7 @@ import { useLocalStore } from '@/stores/localStore'
 import * as Vibrant from 'node-vibrant/dist/vibrant.worker.min.js'
 import { forminute, toPercent } from '@/utils/format'
 import { usePlay } from '@/utils/player/usePlayer.js'
+import { useMyAPI } from '@/utils/electron/myAPI'
 const {
     isPlaying,
     playOrPause,
@@ -162,9 +163,10 @@ watchEffect(() => {
     // }
 })
 const localStore = useLocalStore()
+const { islockMusic } = useMyAPI()
 const change = () => {
     localStore.settings.unlockMusic = !localStore.settings.unlockMusic
-    window.myAPI.islockMusic()
+    islockMusic()
     console.log(localStore.settings.unlockMusic)
 }
 </script>

@@ -1,7 +1,8 @@
 import { setLocal } from '@/utils/localStorage.js'
 import type { PiniaPluginContext } from 'pinia'
 
-import { handleStore } from '@/utils/myAPI'
+import { useMyAPI } from '@/utils/electron/myAPI'
+const { handleStore } = useMyAPI()
 
 export default ({ store, options }: PiniaPluginContext): void => {
     if (options.persist?.enable) {
