@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { useLocalStore } from '@/stores/localStore'
+import { useLocalStore } from '@stores/localStore'
 const localStore = useLocalStore()
 // 控制主题切换
 const switchTheme = () => {

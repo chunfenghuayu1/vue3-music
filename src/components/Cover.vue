@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 import type { RouteLocationRaw } from 'vue-router'
-import { formatPlayCount } from '@/utils/format'
+import { formatPlayCount } from '@utils/format'
 interface Dprops {
     listItem: {
         name: string

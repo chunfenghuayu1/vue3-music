@@ -1,18 +1,18 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
 // import jsCookie from 'js-cookie'
-import { IS_ELECTRON } from '@/utils/electron/myAPI'
+import { IS_ELECTRON } from '@utils/electron/myAPI'
 const router = createRouter({
     history: IS_ELECTRON ? createWebHashHistory() : createWebHistory(),
     routes
 })
 
-import { useLocalStore } from '@/stores/localStore'
+import { useLocalStore } from '@stores/localStore'
 
 router.beforeEach(to => {
     const localStore = useLocalStore()
     // 暂不开启win端强制登陆
-    if (IS_ELECTRON) {
+    if (!IS_ELECTRON) {
         if (!localStore.loginStatus && to.path !== '/login') {
             return { path: '/login' }
         }

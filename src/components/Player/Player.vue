@@ -126,11 +126,9 @@
 </template>
 
 <script setup lang="ts">
-import { useLocalStore } from '@/stores/localStore'
 import * as Vibrant from 'node-vibrant/dist/vibrant.worker.min.js'
-import { forminute, toPercent } from '@/utils/format'
-import { usePlay } from '@/utils/player/usePlayer.js'
-import { useMyAPI } from '@/utils/electron/myAPI'
+import { forminute, toPercent } from '@utils/format'
+import { usePlay } from '@utils/player/usePlayer.js'
 const {
     isPlaying,
     playOrPause,
@@ -162,13 +160,6 @@ watchEffect(() => {
         )
     // }
 })
-const localStore = useLocalStore()
-const { islockMusic } = useMyAPI()
-const change = () => {
-    localStore.settings.unlockMusic = !localStore.settings.unlockMusic
-    islockMusic()
-    console.log(localStore.settings.unlockMusic)
-}
 </script>
 
 <style lang="postcss" scoped>

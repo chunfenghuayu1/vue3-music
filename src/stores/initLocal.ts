@@ -1,5 +1,5 @@
-import explore from '@/utils/localData'
-import type { tags } from '@/utils/localData'
+import explore from '@utils/localData'
+import type { tags } from '@utils/localData'
 const activeTags = explore.tags.filter((item: tags) => item.hot === true).map(item => item.name)
 
 export interface settings {

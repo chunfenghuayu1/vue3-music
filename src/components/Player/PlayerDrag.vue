@@ -97,8 +97,8 @@
 </template>
 
 <script setup lang="ts">
-import { toPercent, forminute } from '@/utils/format'
-import { usePlay } from '@/utils/player/usePlayer.js'
+import { toPercent, forminute } from '@utils/format'
+import { usePlay } from '@utils/player/usePlayer.js'
 const {
     isPlaying,
     playOrPause,

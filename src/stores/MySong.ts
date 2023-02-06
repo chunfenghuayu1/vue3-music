@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { useLocalStore } from '@/stores/localStore'
+import { useLocalStore } from '@stores/localStore'
 import {
     reqUserPlayList,
     reqLikeSongs,
@@ -11,9 +11,9 @@ import {
     reqRecomSongs,
     reqPersonalFM
 } from '@/api/user'
-import { reqPlayListDetail } from '@/api/playList'
-import { imgUrl } from '@/utils/imgUrl'
-import { useDB } from '@/utils/electron/myAPI'
+import { reqPlayListDetail } from '@api/playList'
+import { imgUrl } from '@utils/imgUrl'
+import { useDB } from '@utils/electron/myAPI'
 const { dbCache } = useDB()
 
 export const useMySong = defineStore('MySong', {

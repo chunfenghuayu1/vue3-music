@@ -1,4 +1,4 @@
-import http from '@/utils/axios/request'
+import http from '@utils/axios/request'
 import type { LoginKey, LoginQRCode, Captcha, CaptchaVerify } from './modules/auth'
 enum Api {
     LoginKey = '/login/qr/key',

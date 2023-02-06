@@ -68,7 +68,7 @@
             <div v-if="albums.length > 0">
                 <h3 class="text-theme-base font-bold text-2xl mb-4">专辑</h3>
                 <div class="grid grid-cols-5 gap-8 lg:gap-x-5">
-                    <div v-for="(item, index) in albums" :key="index">
+                    <div v-for="item in albums" :key="item.id">
                         <Cover :listItem="item" listType="专辑"></Cover>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
             <div v-if="EP.length > 0">
                 <h3 class="text-theme-base font-bold text-2xl mb-4">EP和单曲</h3>
                 <div class="grid grid-cols-5 gap-10 lg:gap-x-5">
-                    <div v-for="(item, index) in EP" :key="index">
+                    <div v-for="item in EP" :key="item.id">
                         <Cover :listItem="item" :listType="'专辑'">
                             <!-- 最新专辑显示歌手名 -->
                             <template #subTilte>
@@ -93,7 +93,7 @@
             <div v-if="mvs.length > 0">
                 <h3 class="text-theme-base font-bold text-2xl mb-4">MVs</h3>
                 <div class="grid grid-cols-5 gap-10 lg:gap-x-5">
-                    <div v-for="(item, index) in mvs" :key="index">
+                    <div v-for="item in mvs" :key="item.id">
                         <MvCover
                             :item="item"
                             :img-url="item.imgurl"
@@ -109,7 +109,7 @@
             <div v-if="simi.length > 0">
                 <h3 class="text-theme-base font-bold text-2xl mb-4">相似歌手</h3>
                 <div class="grid gap-10 grid-cols-6 lg:gap-x-5">
-                    <div v-for="(item, index) in simi" :key="index">
+                    <div v-for="item in simi" :key="item.id">
                         <Cover
                             :listItem="item"
                             :listType="'歌手'"
@@ -125,14 +125,14 @@
 </template>
 
 <script setup lang="ts">
-import Cover from '@/components/Cover.vue'
-import MvCover from '@/components/MvCover.vue'
+import Cover from '@components/Cover.vue'
+import MvCover from '@components/MvCover.vue'
 import CorusalArtist from './CorusalArtist.vue'
-import Button from '@/components/Button.vue'
+import Button from '@components/Button.vue'
 
 import type { ComponentInternalInstance, Ref } from 'vue'
 import type { topSongData, artistData, EPData, mvsData } from './index'
-import { useLocalStore } from '@/stores/localStore'
+import { useLocalStore } from '@stores/localStore'
 const localStore = useLocalStore()
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const route = useRoute()
@@ -150,10 +150,10 @@ const artist: Ref<artistData> = ref({
     briefDesc: ''
 })
 const topSongs: Ref<topSongData[]> = ref([])
-const albums = ref([])
+const albums: Ref<any[]> = ref([])
 const EP: Ref<EPData[]> = ref([])
 const mvs: Ref<mvsData[]> = ref([])
-const simi = ref([])
+const simi: Ref<any[]> = ref([])
 
 // 获取歌手数据
 const getAritstDetail = () => {
@@ -194,7 +194,7 @@ getAritstDetail()
 
 watch(route, (toParams, prev) => {
     // 对路由变化做出响应...
-    prev.name === toParams.name
+    prev.name === toParams.name && getAritstDetail()
 })
 </script>
 

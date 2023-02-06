@@ -74,8 +74,8 @@
 </template>
 
 <script setup lang="ts">
-import { useMySong } from '@/stores/MySong'
-import { forminute } from '@/utils/format'
+import { useMySong } from '@stores/MySong'
+import { forminute } from '@utils/format'
 const MySong = useMySong()
 interface Dprops {
     song: {

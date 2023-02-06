@@ -1,16 +1,16 @@
 import type { RouteRecordRaw } from 'vue-router'
-const Home = () => import('@/views/Home/Home.vue')
-const Explore = () => import('@/views/Explore/Explore.vue')
-const My = () => import('@/views/My/My.vue')
-const Login = () => import('@/views/Login/Login.vue')
-const Artist = () => import('@/views/Artist/Artist.vue')
-const Mv = () => import('@/views/Mv/Mv.vue')
-const LikeSongs = () => import('@/views/LikeSongs/LikeSongs.vue')
-const PlayList = () => import('@/views/PlayList/PlayList.vue')
-const Album = () => import('@/views/Album/Album.vue')
-const Search = () => import('@/views/Search/Search.vue')
-const DailySong = () => import('@/views/dailySong/dailySong.vue')
-const Settings = () => import('@/views/Settings/Settings.vue')
+const Home = () => import('@views/Home/Home.vue')
+const Explore = () => import('@views/Explore/Explore.vue')
+const My = () => import('@views/My/My.vue')
+const Login = () => import('@views/Login/Login.vue')
+const Artist = () => import('@views/Artist/Artist.vue')
+const Mv = () => import('@views/Mv/Mv.vue')
+const LikeSongs = () => import('@views/LikeSongs/LikeSongs.vue')
+const PlayList = () => import('@views/PlayList/PlayList.vue')
+const Album = () => import('@views/Album/Album.vue')
+const Search = () => import('@views/Search/Search.vue')
+const DailySong = () => import('@views/dailySong/dailySong.vue')
+const Settings = () => import('@views/Settings/Settings.vue')
 
 const routes: RouteRecordRaw[] = [
     {

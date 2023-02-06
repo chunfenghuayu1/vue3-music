@@ -63,9 +63,9 @@
 
 <script setup lang="ts">
 import type { ComponentInternalInstance } from 'vue'
-import CorusalArtist from '@/views/Artist/CorusalArtist.vue'
-import MvCover from '@/components/MvCover.vue'
-import Cover from '@/components/Cover.vue'
+import CorusalArtist from '@views/Artist/CorusalArtist.vue'
+import MvCover from '@components/MvCover.vue'
+import Cover from '@components/Cover.vue'
 
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const route = useRoute()

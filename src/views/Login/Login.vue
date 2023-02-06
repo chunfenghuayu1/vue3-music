@@ -27,8 +27,8 @@
 <script setup lang="ts">
 import type { ComponentInternalInstance } from 'vue'
 import QRCode from 'qrcode'
-import { useLocalStore } from '@/stores/localStore'
-import loading from '@/assets/img/img_loading.gif'
+import { useLocalStore } from '@stores/localStore'
+import loading from '@assets/img/img_loading.gif'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const router = useRouter()
 const route = useRoute()

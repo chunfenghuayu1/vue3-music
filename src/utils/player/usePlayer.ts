@@ -1,6 +1,7 @@
-import { useSlider } from '@/utils/player/useSlider'
-import { useLocalStore } from '@/stores/localStore'
+import { useSlider } from '@utils/player/useSlider'
+import { useLocalStore } from '@stores/localStore'
 import { round } from 'lodash-es'
+
 /**
  * player hooks
  */
@@ -65,6 +66,15 @@ export function usePlay() {
     const remainProgress = computed(() => player.value.duration - player.value.currentTime)
     // 总时长
     const duration = computed(() => player.value.duration)
+
+    // 是否显示播放器
+    const showPlayer = computed(() => player.value.enable)
+    // 添加播放列表
+    const addPlayList = (arr: any[]) => {
+        player.value.addPlayList(arr)
+    }
+    // 获取track信息
+    const currentTrack = computed(() => player.value.currentTrack)
     return {
         isPlaying,
         playOrPause,
@@ -73,6 +83,10 @@ export function usePlay() {
         progress,
         sliderVolume,
         sliderProgress,
-        remainProgress
+        remainProgress,
+        showPlayer,
+        addPlayList,
+        currentTrack
     }
 }
+console.log('start')

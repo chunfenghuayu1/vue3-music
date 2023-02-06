@@ -8,8 +8,8 @@
         </div>
         <div class="grid gap-10 lg:gap-x-5" :class="columns ? 'grid-cols-5' : 'grid-cols-6'">
             <Cover
-                v-for="(item, index) in list"
-                :key="index"
+                v-for="item in list"
+                :key="item.id"
                 :listItem="item"
                 :isTextCenter="$attrs.isTextCenter === true"
                 :isRounded="$attrs.isRounded === true"

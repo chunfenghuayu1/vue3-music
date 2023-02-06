@@ -14,5 +14,6 @@ export interface simiMvItem {
     name: string
     artists: any[]
     cover: string
+    id: number
     [k: any]: any
 }

@@ -1,4 +1,4 @@
-import http from '@/utils/axios/request'
+import http from '@utils/axios/request'
 import type { Search } from './modules/search'
 enum Api {
     Search = '/search'

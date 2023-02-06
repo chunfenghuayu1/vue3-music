@@ -52,8 +52,8 @@
 </template>
 
 <script setup lang="ts">
-import Section from '@/components/Section.vue'
-import { useLocalStore } from '@/stores/localStore'
+import Section from '@components/Section.vue'
+import { useLocalStore } from '@stores/localStore'
 import { sampleSize } from 'lodash-es'
 
 import type { ComponentInternalInstance } from 'vue'
@@ -94,6 +94,7 @@ const getData = () => {
         })
     }
 }
+
 onActivated(() => {
     getData()
 })

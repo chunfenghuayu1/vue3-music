@@ -68,12 +68,12 @@
 <script setup lang="ts">
 import SearchInput from './SearchInput.vue'
 import SwitchTheme from './SwitchTheme.vue'
-import DropDown from '@/components/DropDown.vue'
+import DropDown from '@components/DropDown.vue'
 
-import { IS_ELECTRON } from '@/utils/electron/myAPI'
+import { IS_ELECTRON } from '@utils/electron/myAPI'
 
-import avatar from '@/assets/img/avatar.png'
-import { useLocalStore } from '@/stores/localStore'
+import avatar from '@assets/img/avatar.png'
+import { useLocalStore } from '@stores/localStore'
 const localStore = useLocalStore()
 const route = useRoute()
 const router = useRouter()

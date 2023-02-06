@@ -1,4 +1,4 @@
-import http from '@/utils/axios/request'
+import http from '@utils/axios/request'
 import type { TopArtists, Artist, ArtistAlbum } from './modules/artist'
 enum Api {
     TopArtists = '/top/artists',

@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import '@vscode/codicons/dist/codicon.css'
-import { useMyAPI, IS_ELECTRON } from '@/utils/electron/myAPI'
+import { useMyAPI, IS_ELECTRON } from '@utils/electron/myAPI'
 const { minWindow, maxOrUnmaxWindow, closeWindow, isMaximize } = useMyAPI()
 
 const isMaximized = ref(false)

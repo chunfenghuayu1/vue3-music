@@ -1,8 +1,8 @@
 <template>
     <el-scrollbar
-        height="100vh"
         ref="scrollbarRef"
-        :class="IS_ELECTRON ? 'mt-8' : ''"
+        height="100vh"
+        :class="IS_ELECTRON ? 'mt-8 mb-8' : ''"
         wrap-class="bg-theme-base transition duration-300 ease-linear"
     >
         <NavBar></NavBar>
@@ -21,17 +21,17 @@
     <component :is="PlayerBar" v-if="true"></component>
 </template>
 <script setup lang="ts">
-import NavBar from './components/NavBar.vue'
-import PlayerDrag from './components/Player/PlayerDrag.vue'
-import Player from './components/Player/Player.vue'
-import PlayerBar from './components/Player/PlayerBar.vue'
+import NavBar from '@components/NavBar.vue'
+import PlayerDrag from '@components/Player/PlayerDrag.vue'
+import Player from '@components/Player/Player.vue'
+import PlayerBar from '@components/Player/PlayerBar.vue'
 
-import { useMyAPI, IS_ELECTRON } from '@/utils/electron/myAPI'
+import { useMyAPI, IS_ELECTRON } from '@utils/electron/myAPI'
 
 import { ElScrollbar } from 'element-plus'
 import 'element-plus/es/components/scrollbar/style/css'
 
-import { useLocalStore } from '@/stores/localStore'
+import { useLocalStore } from '@stores/localStore'
 
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
 provide('scroll', scrollbarRef)

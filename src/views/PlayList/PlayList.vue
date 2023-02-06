@@ -72,7 +72,7 @@
             infinite-scroll-delay="600"
         >
             <transition-group tag="div" name="track-item">
-                <div v-for="(item, index) in trackAll" :key="index" class="space-y-6">
+                <div v-for="item in trackAll" :key="item.id" class="space-y-6">
                     <Track :song="item"></Track>
                 </div>
             </transition-group>
@@ -87,19 +87,22 @@
 </template>
 
 <script setup lang="ts">
-import Track from '@/components/Track/Track.vue'
-import Button from '@/components/Button.vue'
-
+import Track from '@components/Track/Track.vue'
+import Button from '@components/Button.vue'
+import { usePlay } from '@utils/player/usePlayer'
 import type { ComponentInternalInstance, Ref } from 'vue'
 import type { List, PlayListDetail } from './index'
 // import { useMySong } from '@/stores/MySong'
-import { formatDate } from '@/utils/format'
+import { formatDate } from '@utils/format'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const route = useRoute()
+
+const { addPlayList, playOrPause } = usePlay()
 // const MySong = useMySong()
 
 const handle = () => {
-    console.log(1)
+    addPlayList(toRaw(trackAll.value))
+    console.log(toRaw(trackAll.value))
 }
 
 // 获取对应id

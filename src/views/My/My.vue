@@ -44,11 +44,7 @@
                 </div>
                 <!-- 右侧音乐列表 -->
                 <div class="w-2/3 h-56 flex flex-wrap items-center">
-                    <div
-                        v-for="(item, index) in MySong.showLikeSongs"
-                        :key="index"
-                        class="w-1/3 h-1/4"
-                    >
+                    <div v-for="item in MySong.showLikeSongs" :key="item.id" class="w-1/3 h-1/4">
                         <MyTrackItem
                             :item="item"
                             :pic-url="$imgUrl(item.al.picUrl, 36)"
@@ -68,8 +64,8 @@
                     class="flex space-x-8 font-bold items-center text-theme-base flex-shrink-0 select-none"
                 >
                     <div
-                        v-for="(item, index) in typeList"
-                        :key="index"
+                        v-for="item in typeList"
+                        :key="item.name"
                         class="cursor-pointer hover:bg-theme-baseSecond hover:text-theme-baseActive rounded-lg flex justify-center items-center transition-all"
                         :class="
                             btnType === item.type ? 'bg-theme-baseSecond text-theme-baseActive' : ''
@@ -106,7 +102,7 @@
                 :class="btnType === 5 || btnType === 6 ? '' : 'grid grid-cols-5 gap-10 lg:gap-x-5'"
             >
                 <template v-if="btnType === 1">
-                    <div v-for="(item, index) in MySong.playlist(type)" :key="index">
+                    <div v-for="item in MySong.playlist(type)" :key="item.id">
                         <Cover :listItem="item" listType="歌单">
                             <template #subTilte>
                                 <div>
@@ -121,17 +117,17 @@
                     </div>
                 </template>
                 <template v-if="btnType === 2">
-                    <div v-for="(item, index) in MySong.likeAlbum" :key="index">
+                    <div v-for="item in MySong.likeAlbum" :key="item.id">
                         <Cover :listItem="item" listType="专辑"></Cover>
                     </div>
                 </template>
                 <template v-if="btnType === 3">
-                    <div v-for="(item, index) in MySong.likeArtist" :key="index">
+                    <div v-for="item in MySong.likeArtist" :key="item.id">
                         <Cover :listItem="item" listType="歌手"></Cover>
                     </div>
                 </template>
                 <template v-if="btnType === 4">
-                    <div v-for="(item, index) in MySong.likeMV" :key="index">
+                    <div v-for="item in MySong.likeMV" :key="item.id">
                         <MvCover
                             :item="item"
                             :show-title="true"
@@ -144,7 +140,7 @@
                     </div>
                 </template>
                 <template v-if="btnType === 5">
-                    <div v-for="(item, index) in MySong.likeCloud" :key="index">
+                    <div v-for="item in MySong.likeCloud" :key="item.id">
                         <Track :song="item.simpleSong"></Track>
                     </div>
                 </template>
@@ -165,7 +161,7 @@
                             所有时间
                         </div>
                     </div>
-                    <div v-for="(item, index) in MySong.likeRecord(toggleDate)" :key="index">
+                    <div v-for="item in MySong.likeRecord(toggleDate)" :key="item.id">
                         <Track :song="item.song" :isShowAlbum="false" :isShowOther="false">
                             <template #other>
                                 <div class="font-bold text-theme-base">{{ item.playCount }}1</div>
@@ -179,14 +175,14 @@
 </template>
 
 <script setup lang="ts">
-import Track from '@/components/Track/Track.vue'
-import MvCover from '@/components/MvCover.vue'
-import Cover from '@/components/Cover.vue'
-import DropDown from '@/components/DropDown.vue'
-import MyTrackItem from '@/components/Track/MyTrackItem.vue'
+import Track from '@components/Track/Track.vue'
+import MvCover from '@components/MvCover.vue'
+import Cover from '@components/Cover.vue'
+import DropDown from '@components/DropDown.vue'
+import MyTrackItem from '@components/Track/MyTrackItem.vue'
 
-import { useLocalStore } from '@/stores/localStore'
-import { useMySong } from '@/stores/MySong'
+import { useLocalStore } from '@stores/localStore'
+import { useMySong } from '@stores/MySong'
 const localStore = useLocalStore()
 const MySong = useMySong()
 // 切换下拉框

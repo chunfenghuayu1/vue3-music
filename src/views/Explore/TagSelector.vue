@@ -4,7 +4,7 @@
             v-if="showMore"
             class="space-y-8 p-8 bg-theme-baseSecond rounded-lg text-theme-baseSecond origin-top"
         >
-            <div v-for="(item, index) in categories" :key="index" class="flex space-x-8">
+            <div v-for="(item, index) in categories" :key="item" class="flex space-x-8">
                 <h3 class="text-2xl font-bold flex-shrink-0 h-10 flex items-center select-none">
                     {{ item }}
                 </h3>
@@ -29,8 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import explore from '@/utils/localData.js'
-import { useLocalStore } from '@/stores/localStore'
+import explore from '@utils/localData.js'
+import { useLocalStore } from '@stores/localStore'
 const localStore = useLocalStore()
 interface Dprops {
     showMore: boolean

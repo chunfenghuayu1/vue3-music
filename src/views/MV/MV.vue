@@ -21,7 +21,7 @@
         <div class="mt-12">
             <div class="text-theme-base font-semibold text-lg">更多视频</div>
             <div class="grid grid-cols-5 gap-10 lg:gap-x-5 mt-4">
-                <div v-for="(item, index) in simiMv" :key="index">
+                <div v-for="item in simiMv" :key="item.id">
                     <MvCover
                         :item="item"
                         :show-title="true"
@@ -38,12 +38,12 @@
 </template>
 
 <script setup lang="ts">
-import MvCover from '@/components/MvCover.vue'
+import MvCover from '@components/MvCover.vue'
 
 import type { ComponentInternalInstance, Ref } from 'vue'
 import type { mvData, simiMvItem } from './index'
 
-import { formatPlayCount } from '@/utils/format'
+import { formatPlayCount } from '@utils/format'
 import Plyr from 'plyr'
 import 'plyr/dist/plyr.css'
 import { onBeforeRouteUpdate } from 'vue-router'

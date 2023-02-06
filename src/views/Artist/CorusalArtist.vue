@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import MyTrackItem from '@/components/Track/MyTrackItem.vue'
+import MyTrackItem from '@components/Track/MyTrackItem.vue'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Grid } from 'swiper'

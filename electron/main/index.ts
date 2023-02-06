@@ -85,7 +85,7 @@ class CreatWindow {
         ])
         this.appTray.setToolTip('Music')
         this.appTray.setContextMenu(contextMenu)
-        this.appTray.on('click', () => {
+        this.appTray.on('double-click', () => {
             this.win.show()
         })
     }
@@ -105,7 +105,7 @@ class CreatWindow {
                     win.webContents.send('switchExitType', response === 0 ? 'minimize' : 'quit')
                 }
                 if (response === 0) {
-                    win.minimize()
+                    win.hide()
                 }
                 if (response === 1) {
                     win = null
@@ -127,6 +127,7 @@ class CreatWindow {
 
             this.win.loadURL(`${process.env.VITE_DEV_SERVER_URL}`)
 
+            // this.win.loadURL('http://127.0.0.1:20231')
             // Open devTool if the app is not packaged
             // this.win.webContents.openDevTools()
         } else {
@@ -162,7 +163,6 @@ class CreatWindow {
                     .then(name => console.log(`Added Extension:  ${name}`))
                     .catch(err => console.log('An error occurred: ', err))
             }
-
             this.createTray()
             this.createWindow()
         })

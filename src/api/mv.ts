@@ -1,4 +1,4 @@
-import http from '@/utils/axios/request'
+import http from '@utils/axios/request'
 import type { MVUrl, MVDetail } from './modules/mv'
 enum Api {
     MVUrl = '/mv/url',

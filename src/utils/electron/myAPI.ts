@@ -1,6 +1,7 @@
 import type { IElectronAPI } from '@/types/myAPI'
 
-export const IS_ELECTRON: boolean = navigator.userAgent.indexOf('Electron') > -1
+export const IS_ELECTRON: boolean =
+    import.meta.env.VITE_APP_IS_ELECTRON || navigator.userAgent.indexOf('Electron') > -1
 
 export function useMyAPI() {
     const handleStore: IElectronAPI['handleStore'] = arg => {
@@ -19,7 +20,9 @@ export function useMyAPI() {
         IS_ELECTRON && window.myAPI.exitTypeSwitch(callback)
     }
     const closeWindow: IElectronAPI['closeWindow'] = () => {
-        IS_ELECTRON && window.myAPI.closeWindow()
+        if (IS_ELECTRON) {
+            window.myAPI.closeWindow()
+        }
     }
     const islockMusic: IElectronAPI['islockMusic'] = () => {
         IS_ELECTRON && window.myAPI.islockMusic()
@@ -36,11 +39,20 @@ export function useMyAPI() {
 }
 
 export function useDB() {
-    // 缓存音乐数据
+    // 缓存replace音乐数据
     const dbCache: IElectronAPI['dbCache'] = (type, data) => {
         IS_ELECTRON && window.myAPI.dbCache(type, data)
     }
+    // 查询数据
+    const selectDB: IElectronAPI['selectDB'] = async (type, id) => {
+        if (IS_ELECTRON) {
+            return await window.myAPI.selectDB(type, id)
+        } else {
+            return await Promise.resolve({ state: true })
+        }
+    }
     return {
-        dbCache
+        dbCache,
+        selectDB
     }
 }

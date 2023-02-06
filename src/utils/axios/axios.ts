@@ -8,7 +8,7 @@ import type {
 } from 'axios'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import { useLocalStore } from '@/stores/localStore'
+import { useLocalStore } from '@stores/localStore'
 
 class Request {
     // axios实例

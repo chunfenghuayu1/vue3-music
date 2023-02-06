@@ -11,7 +11,7 @@
             </p>
         </div>
         <div>
-            <template v-for="(item, index) in MySong.dailySongs" :key="index">
+            <template v-for="item in MySong.dailySongs" :key="item.id">
                 <Track :song="item"></Track>
             </template>
         </div>
@@ -19,8 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import Track from '@/components/Track/Track.vue'
-import { useMySong } from '@/stores/MySong'
+import Track from '@components/Track/Track.vue'
+import { useMySong } from '@stores/MySong'
 const MySong = useMySong()
 
 onMounted(() => {

@@ -74,13 +74,13 @@
 </template>
 
 <script setup lang="ts">
-import AlbumTrack from '@/components/Track/AlbumTrack.vue'
-import Button from '@/components/Button.vue'
+import AlbumTrack from '@components/Track/AlbumTrack.vue'
+import Button from '@components/Button.vue'
 
 import type { ComponentInternalInstance, Ref } from 'vue'
 import type { albumData } from './index'
 
-import { formatDate } from '@/utils/format.js'
+import { formatDate } from '@utils/format.js'
 import { uniqBy } from 'lodash-es'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const route = useRoute()

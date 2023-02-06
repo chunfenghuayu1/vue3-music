@@ -32,7 +32,7 @@
             :allow-touch-move="true"
             @swiper="onSwiper"
         >
-            <swiper-slide v-for="(item, index) in list" :key="index">
+            <swiper-slide v-for="item in list" :key="item.id">
                 <Cover :listItem="item" listType="专辑" :isPlayCount="false">
                     <template #subTilte>
                         <div class="mb-1">

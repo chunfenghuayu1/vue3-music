@@ -143,7 +143,9 @@ export default defineConfig({
             compress: {
                 //生产环境时移除console
                 drop_console: true,
-                drop_debugger: true
+                drop_debugger: true,
+                dead_code: true,
+                toplevel: true
             },
             output: {
                 comments: false
@@ -176,16 +178,22 @@ export default defineConfig({
         open: !isDevelopment,
         proxy: {
             '/dev-api': {
-                target: 'http://127.0.0.1:15452/',
-                changeOrigin: true,
-                rewrite: path => path.replace(/^\/dev-api/, '')
+                target: 'http://127.0.0.1:20231/',
+                changeOrigin: true
             }
         }
     },
     resolve: {
         // 解决路径问题
         alias: {
-            '@': resolve(__dirname, './src')
+            '@': resolve(__dirname, './src'),
+            '@components': resolve(__dirname, './src/components'),
+            '@utils': resolve(__dirname, './src/utils'),
+            '@views': resolve(__dirname, './src/views'),
+            '@stores': resolve(__dirname, './src/stores'),
+            '@api': resolve(__dirname, './src/api'),
+            '@router': resolve(__dirname, './src/router'),
+            '@assets': resolve(__dirname, './src/assets')
         }
     },
     clearScreen: false

@@ -2,7 +2,7 @@
     <div>
         <router-link :to="{ name: 'mv', params: { vid: item?.id || item.vid } }">
             <img
-                :src="$imgUrl(imgUrl, 512)"
+                v-lazy="$imgUrl(imgUrl, 512)"
                 class="rounded-lg object-cover aspect-video"
                 loading="lazy"
             />

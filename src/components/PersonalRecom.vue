@@ -98,8 +98,8 @@
 </template>
 
 <script setup lang="ts">
-import { useLocalStore } from '@/stores/localStore'
-import { useMySong } from '@/stores/MySong'
+import { useLocalStore } from '@stores/localStore'
+import { useMySong } from '@stores/MySong'
 import { sample } from 'lodash-es'
 import * as Vibrant from 'node-vibrant/dist/vibrant.worker.min.js'
 import type { ComponentInternalInstance } from 'vue'

@@ -22,7 +22,7 @@ try {
     db.exec(
         `CREATE TABLE  trackSource (
             id    integer primary key,
-            value text,
+            source blob,
             updateTime timestamp)`
     )
     db.exec(
@@ -68,10 +68,11 @@ class DataHandler {
     public select(table: table, id: id) {
         const selectRow = this.db.prepare(`SELECT * FROM ${table} WHERE id = ?`)
         const row = selectRow.get(id)
+
         return { state: true, res: row }
     }
     // 覆盖
-    public replace(table: table, data: data[]) {
+    public replace(table: Exclude<table, 'trackSource'>, data: data[]) {
         const replace = db.prepare(`REPLACE INTO ${table} VALUES (?, ?, ?)`)
         const replaceMany = db.transaction((data: data[]) => {
             for (const item of data) {
@@ -79,6 +80,12 @@ class DataHandler {
             }
         })
         replaceMany(data)
+        return { state: true }
+    }
+    // 单独处理歌曲数据
+    public replaceSong(table: 'trackSource', id: number, source: Buffer) {
+        const replace = db.prepare(`REPLACE INTO ${table} VALUES (?, ?, ?)`)
+        replace.run(id, source, +new Date())
         return { state: true }
     }
     // 清空数据

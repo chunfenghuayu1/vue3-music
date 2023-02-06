@@ -253,5 +253,15 @@ export const defMod: ModuleDefinition[] = [
         identifier: 'artist_top_song',
         route: '/artist/top/song',
         module: require('NeteaseCloudMusicApi/module/artist_top_song')
+    },
+    {
+        identifier: 'lyric',
+        route: '/lyric',
+        module: require('NeteaseCloudMusicApi/module/lyric')
+    },
+    {
+        identifier: 'song_url',
+        route: '/song/url',
+        module: require('NeteaseCloudMusicApi/module/song_url')
     }
 ]

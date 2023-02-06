@@ -11,7 +11,7 @@
         </div>
         <!-- 内容 -->
         <div>
-            <template v-for="(item, index) in MySong.showAllLikeSongs" :key="index">
+            <template v-for="item in MySong.showAllLikeSongs" :key="item.id">
                 <Track :song="item"></Track>
             </template>
         </div>
@@ -19,10 +19,10 @@
 </template>
 
 <script setup lang="ts">
-import Track from '@/components/Track/Track.vue'
-import { IS_ELECTRON } from '@/utils/electron/myAPI'
-import { useLocalStore } from '@/stores/localStore'
-import { useMySong } from '@/stores/MySong'
+import Track from '@components/Track/Track.vue'
+import { IS_ELECTRON } from '@utils/electron/myAPI'
+import { useLocalStore } from '@stores/localStore'
+import { useMySong } from '@stores/MySong'
 const localStore = useLocalStore()
 const MySong = useMySong()
 onActivated(() => {

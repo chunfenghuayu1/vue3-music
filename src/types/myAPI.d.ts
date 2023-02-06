@@ -9,6 +9,7 @@ export interface IElectronAPI {
     ) => void
     islockMusic: () => void
     dbCache: (type: 'trackDetail' | 'trackSource' | 'lyric', data: any[]) => void
+    selectDB: (type: 'trackDetail' | 'trackSource' | 'lyric', id: number) => Promise<any>
 }
 
 declare global {

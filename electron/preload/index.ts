@@ -11,5 +11,7 @@ contextBridge.exposeInMainWorld('myAPI', {
     closeWindow: () => ipcRenderer.send('close'),
     islockMusic: () => ipcRenderer.send('unlockMusic'),
     dbCache: (type: 'trackDetail' | 'trackSource' | 'lyric', data: any[]) =>
-        ipcRenderer.send('dbCache', { type, data })
+        ipcRenderer.send('dbCache', { type, data }),
+    selectDB: (type: 'trackDetail' | 'trackSource' | 'lyric', id: number) =>
+        ipcRenderer.invoke('selectDB', { type, id })
 })

@@ -1,19 +1,19 @@
 import { createApp } from 'vue'
 
-import pinia from '@/stores'
+import pinia from '@stores/index'
 
 import Directives from '@/directive'
-import SvgIcon from './components/SvgIcon.vue'
+import SvgIcon from '@components/SvgIcon.vue'
 import App from './App.vue'
-import router from './router'
-import '@/assets/css/index.css'
+import router from '@router/index'
+import '@assets/css/index.css'
 import 'virtual:svg-icons-register'
-import * as API from '@/api'
+import * as API from '@api/index'
 import { ElMessage } from 'element-plus'
 import VueLazyload from 'vue-lazyload'
-import lazyImg from '@/assets/img/img_loading.gif'
+import lazyImg from '@assets/img/img_loading.gif'
 // 处理图片参数
-import { imgUrl } from './utils/imgUrl'
+import { imgUrl } from '@utils/imgUrl'
 declare module 'vue' {
     interface ComponentCustomProperties {
         $http: typeof API
