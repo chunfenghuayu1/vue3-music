@@ -12,13 +12,13 @@ node_modules
 dist
 dist-ssr
 dist-electron
-release/*
+release
 coverage
 *.local
 .VSCodeCounter
-.db
-.db-shm
-.db-wal
+*.db
+*.db-shm
+*.db-wal
 
 /cypress/videos/
 /cypress/screenshots/
