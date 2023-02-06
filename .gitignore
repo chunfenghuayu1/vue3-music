@@ -16,6 +16,9 @@ release/*
 coverage
 *.local
 .VSCodeCounter
+.db
+.db-shm
+.db-wal
 
 /cypress/videos/
 /cypress/screenshots/
