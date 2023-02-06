@@ -17,8 +17,8 @@
         </div>
     </el-scrollbar>
     <PlayerDrag v-if="false"></PlayerDrag>
-    <component :is="Player" v-if="false"></component>
-    <component :is="PlayerBar" v-if="true"></component>
+    <component :is="Player" v-if="true"></component>
+    <component :is="PlayerBar" v-if="false"></component>
 </template>
 <script setup lang="ts">
 import NavBar from '@components/NavBar.vue'
@@ -40,7 +40,6 @@ document.documentElement.style.overflow = 'hidden'
 const localStore = useLocalStore()
 const { exitTypeSwitch } = useMyAPI()
 exitTypeSwitch((e, arg) => {
-    console.log(e, arg)
     localStore.switchDialog(arg)
 })
 

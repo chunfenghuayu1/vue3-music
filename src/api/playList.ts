@@ -6,7 +6,9 @@ import type {
     Album,
     RecomNewSong,
     PlayListDetail,
-    PlayLsitTrankAll
+    PlayLsitTrankAll,
+    PlayListSub,
+    PlayListDel
 } from './modules/playList'
 enum Api {
     AlbumList = '/personalized',
@@ -19,7 +21,9 @@ enum Api {
     HotCatTags = '/playlist/hot',
     CatTags = '/playlist/catlist',
     PlayListDetail = '/playlist/detail',
-    PlayLsitTrankAll = '/playlist/track/all'
+    PlayLsitTrankAll = '/playlist/track/all',
+    PlayListSub = '/playlist/subscribe',
+    PlayListDel = '/playlist/delete'
 }
 /**
  * 获取推荐歌单
@@ -98,3 +102,16 @@ export const reqPlayListDetail = (params: PlayListDetail) =>
  */
 export const reqPlayLsitTrankAll = (params: PlayLsitTrankAll) =>
     http.get({ url: Api.PlayLsitTrankAll, params })
+
+/**
+ * 说明 : 调用此接口 , 传入类型和歌单 id 可收藏歌单或者取消收藏歌单
+ * @param {number} t 1:收藏 2：取消
+ * @param {number} id
+ */
+export const reqPlayListSub = (params: PlayListSub) => http.get({ url: Api.PlayListSub, params })
+
+/**
+ * 说明 : 调用此接口 , 传入歌单 id 可删除歌单
+ *必选参数 : id : 歌单 id,可多个,用逗号隔开
+ */
+export const reqPlayListDel = (params: PlayListDel) => http.get({ url: Api.PlayListDel, params })

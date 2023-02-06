@@ -15,7 +15,7 @@
                 <!-- 左侧横幅 -->
                 <div
                     class="h-56 flex justify-between flex-col flex-shrink-0 bg-theme-baseActive bg-opacity-50 w-1/3 rounded-2xl p-4 cursor-pointer"
-                    @click="$router.push('/likesongs')"
+                    @click.self="$router.push('/likesongs')"
                 >
                     <!-- 描述内容 -->
                     <div class="text-theme-baseActive flex-shrink-0" v-text="str"></div>
@@ -31,8 +31,8 @@
                         </div>
                         <!-- 播放按钮 -->
                         <div
-                            class="p-1.5 flex items-center justify-center rounded-full"
-                            @click="$router.replace('/')"
+                            class="p-1.5 pr-1 w-14 h-14 flex items-center justify-center rounded-full bg-theme-baseActive bg-opacity-20"
+                            @click="addPlayList(MySong.like.tracks)"
                         >
                             <SvgIcon
                                 name="playfill"
@@ -180,11 +180,12 @@ import MvCover from '@components/MvCover.vue'
 import Cover from '@components/Cover.vue'
 import DropDown from '@components/DropDown.vue'
 import MyTrackItem from '@components/Track/MyTrackItem.vue'
-
+import { usePlay } from '@utils/player/usePlayer'
 import { useLocalStore } from '@stores/localStore'
 import { useMySong } from '@stores/MySong'
 const localStore = useLocalStore()
 const MySong = useMySong()
+const { addPlayList } = usePlay()
 // 切换下拉框
 const toggleShow = ref(false)
 const str = ref('你成长的经过\n你说你也在美国留学\n住在洛杉矶')

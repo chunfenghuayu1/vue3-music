@@ -37,7 +37,10 @@
                     <div class="flex-col flex justify-center px-4">
                         <div class="font-semibold line-clamp-1">{{ currentTrack.name }}</div>
                         <div class="text-xs opacity-60 font-semibold">
-                            {{ currentTrack.ar[0].name }}
+                            <p v-for="(item, index) in currentTrack.ar" :key="item.id">
+                                <span v-if="index !== 0"> / </span>
+                                <span v-text="item.name"></span>
+                            </p>
                         </div>
                     </div>
                 </div>

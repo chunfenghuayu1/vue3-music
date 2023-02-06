@@ -106,10 +106,8 @@ const list = computed(() => {
 })
 
 const handlerDrop = async (item: { type: number; name: string }) => {
-    console.log(item)
     if (item.type === 1) {
         router.replace('/')
-        console.log('设置')
     }
     if (item.type === 2) {
         await localStore.handlerLogout()
@@ -119,8 +117,7 @@ const handlerDrop = async (item: { type: number; name: string }) => {
         router.push('/login')
     }
     if (item.type === 4) {
-        // window.open('https://www.baidu.com')
-        router.push('/')
+        window.open('https://github.com/chunfenghuayu1/vue3-music/tree/electron')
     }
 }
 </script>

@@ -8,9 +8,7 @@ interface data {
 type id = number
 type table = 'trackDetail' | 'trackSource' | 'lyric'
 
-const db = new Database('music.db', {
-    verbose: console.log
-})
+const db = new Database('music.db')
 db.pragma('journal_mode = WAL')
 try {
     db.exec(
@@ -68,6 +66,7 @@ class DataHandler {
     public select(table: table, id: id) {
         const selectRow = this.db.prepare(`SELECT * FROM ${table} WHERE id = ?`)
         const row = selectRow.get(id)
+        console.log(row)
 
         return { state: true, res: row }
     }

@@ -47,9 +47,11 @@
                     <Button text="播放" @click="handle">
                         <SvgIcon name="playfill" size="24" class="fill-current"></SvgIcon>
                     </Button>
-                    <Button @click="handle">
+                    <Button
+                        @click="MySong.likePlayList(playList.id, MySong.isSubPlayList(playList.id))"
+                    >
                         <SvgIcon
-                            v-if="true"
+                            v-if="!MySong.isSubPlayList(playList.id)"
                             name="dislike"
                             size="24"
                             class="fill-current text-theme-baseActive"
@@ -92,22 +94,22 @@ import Button from '@components/Button.vue'
 import { usePlay } from '@utils/player/usePlayer'
 import type { ComponentInternalInstance, Ref } from 'vue'
 import type { List, PlayListDetail } from './index'
-// import { useMySong } from '@/stores/MySong'
+import { useMySong } from '@/stores/MySong'
 import { formatDate } from '@utils/format'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const route = useRoute()
 
-const { addPlayList, playOrPause } = usePlay()
-// const MySong = useMySong()
+const { addPlayList } = usePlay()
+const MySong = useMySong()
 
 const handle = () => {
-    addPlayList(toRaw(trackAll.value))
-    console.log(toRaw(trackAll.value))
+    addPlayList(trackAll.value)
 }
 
 // 获取对应id
 const playList: Ref<List> = ref({
     name: '',
+    id: 1,
     coverImgUrl: '',
     creator: {
         userId: 0,

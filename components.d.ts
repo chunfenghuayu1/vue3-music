@@ -15,6 +15,7 @@ declare module '@vue/runtime-core' {
     DropDown: typeof import('./src/components/DropDown.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
+    Lyric: typeof import('./src/components/Player/Lyric.vue')['default']
     MvCover: typeof import('./src/components/MvCover.vue')['default']
     MyTrackItem: typeof import('./src/components/Track/MyTrackItem.vue')['default']
     NavBar: typeof import('./src/components/NavBar.vue')['default']

@@ -263,5 +263,20 @@ export const defMod: ModuleDefinition[] = [
         identifier: 'song_url',
         route: '/song/url',
         module: require('NeteaseCloudMusicApi/module/song_url')
+    },
+    {
+        identifier: 'playlist_subscribe',
+        route: '/playlist/subscribe',
+        module: require('NeteaseCloudMusicApi/module/playlist_subscribe')
+    },
+    {
+        identifier: 'playlist_delete',
+        route: '/playlist/delete',
+        module: require('NeteaseCloudMusicApi/module/playlist_delete')
+    },
+    {
+        identifier: 'album_sublist',
+        route: '/album/sublist',
+        module: require('NeteaseCloudMusicApi/module/album_sublist')
     }
 ]

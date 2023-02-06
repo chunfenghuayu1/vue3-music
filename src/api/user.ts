@@ -6,7 +6,8 @@ import type {
     LikeArtist,
     UserRecord,
     PersonalFM,
-    TrashFM
+    TrashFM,
+    AlbumSub
 } from './modules/user'
 enum Api {
     Account = '/user/account',
@@ -14,13 +15,14 @@ enum Api {
     UserPlayList = '/user/playlist',
     LikeSongs = '/likelist',
     LikeAlbum = '/album/sublist',
+    AlbumSub = '/album/sub',
     LikeArtist = '/artist/sublist',
     LikeMV = '/mv/sublist',
-    likeCloud = '/user/cloud',
+    LikeCloud = '/user/cloud',
     UserRecord = '/user/record',
     RecomSongs = '/recommend/songs',
     PersonalFM = '/personal_fm',
-    trashFM = '/fm_trash'
+    TrashFM = '/fm_trash'
 }
 
 /**
@@ -47,7 +49,14 @@ export const reqUserPlayList = (params: UserPlayList) => http.get({ url: Api.Use
  * 必选参数 : uid: 用户 id
  */
 export const reqLikeSongs = (params: LikeSongs) => http.get({ url: Api.LikeSongs, params })
-
+/**
+ * 收藏/取消收藏专辑
+ * 说明 : 调用此接口,可收藏/取消收藏专辑
+ * 必选参数 :
+ * id : 专辑 id
+ * t : 1 为收藏,其他为取消收藏
+ */
+export const reqAlbumSub = (params: AlbumSub) => http.get({ url: Api.AlbumSub, params })
 /**
  * 获取已收藏专辑列表
  * 说明 : 调用此接口 , 可获得已收藏专辑列表
@@ -76,7 +85,7 @@ export const reqLikeMV = (params: LikeArtist) => http.get({ url: Api.LikeMV, par
  * limit : 返回数量 , 默认为 30
  * offset : 偏移数量，用于分页 , 如 :( 页数 -1)*200, 其中 200 为 limit 的值 , 默认为 0
  */
-export const reqlikeCloud = (params: LikeAlbum) => http.get({ url: Api.likeCloud, params })
+export const reqlikeCloud = (params: LikeAlbum) => http.get({ url: Api.LikeCloud, params })
 
 /**
  * 获取用户播放记录
@@ -100,4 +109,4 @@ export const reqPersonalFM = (params: PersonalFM) => http.get({ url: Api.Persona
 /**
  * 调用此接口 , 传入音乐 id, 可把该音乐从私人 FM 中移除至垃圾桶
  */
-export const reqTrashFM = (params: TrashFM) => http.get({ url: Api.trashFM, params })
+export const reqTrashFM = (params: TrashFM) => http.get({ url: Api.TrashFM, params })

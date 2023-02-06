@@ -12,17 +12,17 @@
                 <div class="w-24 h-24">
                     <img
                         class="rounded-lg align-middle object-cover shadow-lg"
-                        :src="
-                            $imgUrl(
-                                'http://p2.music.126.net/Esjm32Q05PQoX8pF008u7w==/109951165793871057.jpg',
-                                96
-                            )
-                        "
+                        :src="$imgUrl(currentTrack.al.picUrl, 96)"
                     />
                 </div>
                 <div class="flex flex-col flex-1 px-2">
-                    <div class="font-semibold">红颜如霜</div>
-                    <div class="text-sm opacity-80">周杰伦</div>
+                    <div class="font-semibold" v-text="currentTrack.name"></div>
+                    <div class="text-sm opacity-80">
+                        <p v-for="(item, index) in currentTrack.ar" :key="item.id">
+                            <span v-if="index !== 0"> / </span>
+                            <span v-text="item.name"></span>
+                        </p>
+                    </div>
                 </div>
                 <div class="opacity-20 hover:opacity-80 transition-opacity cursor-pointer">
                     <SvgIcon name="expand" size="20"></SvgIcon>
@@ -106,7 +106,8 @@ const {
     progress,
     sliderVolume,
     sliderProgress,
-    remainProgress
+    remainProgress,
+    currentTrack
 } = usePlay()
 </script>
 

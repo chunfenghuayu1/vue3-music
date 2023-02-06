@@ -9,7 +9,7 @@
                 }"
             ></div>
             <img
-                :src="url"
+                :src="$imgUrl(currentTrack.al.picUrl, 512)"
                 class="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full -z-10"
             />
         </div>
@@ -22,17 +22,25 @@
                         :style="{ width: '54vh', height: '54vh' }"
                         class="flex justify-center items-center"
                     >
-                        <img :src="url" class="object-cover rounded-xl shadow-xl" />
+                        <img
+                            :src="$imgUrl(currentTrack.al.picUrl, 512)"
+                            class="object-cover rounded-xl shadow-xl"
+                        />
                     </div>
                     <!-- 操作区域 -->
                     <div class="select-none">
                         <!-- 歌曲信息 -->
-                        <div class="flex justify-between mt-8">
-                            <div class="flex flex-col text-white text-md">
-                                <div class="font-semibold">红颜如霜</div>
-                                <div class="opacity-80">周杰伦</div>
+                        <div class="mt-8">
+                            <div class="flex justify-between text-white text-md">
+                                <div class="font-semibold" v-text="currentTrack.name"></div>
+                                <div class="text-white">顺序播放</div>
                             </div>
-                            <div class="text-white">顺序播放</div>
+                            <div class="opacity-80 flex justify-start">
+                                <p v-for="(item, index) in currentTrack.ar" :key="item.id">
+                                    <span v-if="index !== 0">&nbsp;/&nbsp;</span>
+                                    <span v-text="item.name"></span>
+                                </p>
+                            </div>
                         </div>
                         <!-- 进度 -->
                         <div class="h-8 flex flex-col justify-center progress mt-4">
@@ -107,19 +115,7 @@
                 </div>
             </div>
             <div class="flex-1 flex flex-col items-start h-full transition-all duration-300">
-                <!-- 歌词 -->
-                <el-scrollbar class="pr-16 my-12">
-                    <div :style="{ marginTop: '54vh' }"></div>
-                    <span
-                        v-for="(item, index) in 50"
-                        :key="index"
-                        class="flex font-bold select-none text-3xl p-4 hover:bg-white rounded-xl hover:bg-opacity-10 transition duration-300 origin-left ease-out"
-                        :class="1 === index ? 'scale-100 opacity-80' : 'scale-90 opacity-30'"
-                    >
-                        何故远走潇湘 你却语多委婉 何故远走潇湘 你却语多委婉
-                    </span>
-                    <div :style="{ marginBottom: '54vh' }"></div>
-                </el-scrollbar>
+                <Lyric></Lyric>
             </div>
         </div>
     </div>
@@ -136,7 +132,8 @@ const {
     progress,
     sliderVolume,
     sliderProgress,
-    remainProgress
+    remainProgress,
+    currentTrack
 } = usePlay()
 
 let url = 'https://p1.music.126.net/eo9_AxfxdR0D-ZLhvOEF1Q==/109951163766465119.jpg?param=1024y1024'

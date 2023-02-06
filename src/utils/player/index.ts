@@ -19,6 +19,7 @@ class Player {
     private _playList: any[] = []
     private _playing: boolean = false
     private _currentTime: number = 0
+    private _throttle: boolean = false //防止频繁切歌
     private _currentTrack = {
         id: 1962166818,
         al: {
@@ -41,6 +42,7 @@ class Player {
         this._playList.length > 0 && (this.enable = true)
         this.enable && this.init()
         this._playing = false
+        this._throttle = false
         Object.defineProperty(this, '_buffer', {
             enumerable: false
         })
@@ -66,11 +68,20 @@ class Player {
             this._buffer = res
         } else {
             ElMessage({
-                message: '歌曲无法播放',
+                message: '歌曲无法播放,自动播放下一首',
                 type: 'warning',
-                duration: 1000
+                duration: 3000
             })
-            this.nextOrPrePlay('next')
+            // 如果这首歌不能播放，则从播放列表删除，并跳转到下一首
+            // 更新索引
+            if (this._index === 0 || this._index === this._playList.length - 1) {
+                this._index = 0
+            } else {
+                this._index--
+            }
+            this._playList = this._playList.filter(id => id !== currentTrack)
+            this._throttle = false
+            await this.nextOrPrePlay('next')
         }
     }
     // 实例化音频
@@ -122,6 +133,7 @@ class Player {
                 : this._audio.play(this.currentTime)
             this._playing = true
             this.refreshTime()
+            this.cacheNextTrack()
         }
     }
     public pause() {
@@ -133,6 +145,9 @@ class Player {
         }
     }
     public async nextOrPrePlay(value: 'next' | 'pre') {
+        if (this._throttle) return
+        this._throttle = true
+
         if (value === 'next') {
             if (this._index === this._playList.length - 1) {
                 this._index = 0
@@ -148,17 +163,18 @@ class Player {
         // 清空缓存
         this._buffer = null
         await this.updateTrack()
-        this.cacheBuffer().then(() => {
-            if (this._audio && this._audio?.state !== 'closed') {
-                this._audio.close()
-            }
-            this.creatAudio()
-            if (this._audio) {
-                this.duration = this._audio.duration
-            }
-            this.currentTime = 0
-            this.play()
-        })
+        await this.cacheBuffer()
+        if (this._audio && this._audio?.state !== 'closed') {
+            this._audio.close()
+        }
+        this.creatAudio()
+
+        if (this._audio) {
+            this.duration = this._audio.duration
+        }
+        this.currentTime = 0
+        this.play()
+        this._throttle = false
     }
     private setFromLocal() {
         const player = getLocal('player')
@@ -176,12 +192,16 @@ class Player {
     public async updateTrack() {
         const { selectDB } = useDB()
         await selectDB('trackDetail', this._playList[this._index]).then(({ res }) => {
-            console.log(res)
-
             if (res) {
                 this._currentTrack = JSON.parse(res.value)
             }
         })
+    }
+    // 缓存下一曲
+    private cacheNextTrack() {
+        if (this._index + 1 < this._playList.length - 1) {
+            reqSongUrl({ id: this._playList[this._index + 1] })
+        }
     }
     // 添加播放列表并播放
     /**
@@ -191,22 +211,21 @@ class Player {
      */
     public addPlayList(arr: any[]) {
         this._enable = true
-        console.log(arr)
-
         this.dbCacheReplace(arr)
         this._playList = arr.map(item => item.id)
         this._index = 0
         this._currentTrack = arr[0]
+        this._buffer = null
         this.cacheBuffer().then(() => {
-            if (this._audio) {
+            if (this._audio && this._audio?.state !== 'closed') {
                 this._audio.close()
-                this.creatAudio()
-                this.duration = this._audio.duration
-                this.currentTime = 0
-                console.log(111)
-
-                this.play()
             }
+            this.creatAudio()
+            if (this._audio) {
+                this.duration = this._audio.duration
+            }
+            this.currentTime = 0
+            this.play()
         })
     }
     get duration() {

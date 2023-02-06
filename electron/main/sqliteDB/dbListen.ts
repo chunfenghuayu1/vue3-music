@@ -36,33 +36,30 @@ export function dbListen() {
      * 查询数据
      */
     ipcMain.handle('selectDB', async (e, arg) => {
-        const { type, id } = arg
-
-        if (type === 'trackSource') {
-            const { res } = myDB.select('trackSource', id)
-            if (res) {
-                return res.source
-            } else {
-                try {
+        try {
+            const { type, id } = arg
+            if (type === 'trackSource') {
+                const { res } = myDB.select('trackSource', id)
+                if (res) {
+                    return res.source
+                } else {
                     const { url, source } = await handlerAudioSource(id)
+                    if (!url) return
 
-                    if (!url) {
-                        return { state: true }
-                    }
                     if (source === 'bilibili') {
-                        const buffer = Buffer.from(url, 'base64')
-                        myDB.replaceSong('trackSource', id, buffer)
-                        return buffer
+                        myDB.replaceSong('trackSource', id, url)
+                        return url
                     } else {
                         const res = await cacheBuffer(url)
+                        myDB.replaceSong('trackSource', id, res)
                         return res
                     }
-                } catch (err) {
-                    return null
                 }
             }
+            return myDB.select(type, id)
+        } catch (err) {
+            console.log(err)
         }
-        return myDB.select(type, id)
     })
 
     // 检查数据是否过期,过期时间设置从elelctron-store取出

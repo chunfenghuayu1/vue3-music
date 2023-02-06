@@ -35,13 +35,6 @@ export function createProxy() {
     expressApp.listen(20231)
 }
 
-function toBuffer(data) {
-    if (data instanceof Buffer) {
-        return data
-    } else {
-        return Buffer.from(data)
-    }
-}
 async function getBiliVideoFile(url) {
     const response = await axios.get(url, {
         headers: {
@@ -51,10 +44,7 @@ async function getBiliVideoFile(url) {
         responseType: 'arraybuffer'
     })
 
-    const buffer = toBuffer(response.data)
-    const encodedData = buffer.toString('base64')
-
-    return encodedData
+    return response.data
 }
 export const handlerAudioSource = async (sourceId: number) => {
     const { res } = myDB.select('trackDetail', sourceId)

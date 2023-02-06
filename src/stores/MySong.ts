@@ -11,9 +11,10 @@ import {
     reqRecomSongs,
     reqPersonalFM
 } from '@/api/user'
-import { reqPlayListDetail } from '@api/playList'
+import { reqPlayListDetail, reqPlayListSub } from '@api/playList'
 import { imgUrl } from '@utils/imgUrl'
 import { useDB } from '@utils/electron/myAPI'
+import { ElMessage } from 'element-plus'
 const { dbCache } = useDB()
 
 export const useMySong = defineStore('MySong', {
@@ -172,6 +173,20 @@ export const useMySong = defineStore('MySong', {
             const res = await reqPersonalFM({ timestamp: +new Date() })
             this.like.personalFM = res.data[0]
             this.like.personalFM.picUrl = imgUrl(res.data[0].album.picUrl, 512)
+        },
+        // 喜欢歌单
+        async likePlayList(id: number, flag: boolean) {
+            await this.getUserPlayList()
+            const { code } = await reqPlayListSub({ id, t: flag ? 2 : 1 })
+
+            if (code === 200) {
+                await this.getUserPlayList()
+            } else {
+                ElMessage({
+                    message: '添加失败',
+                    type: 'error'
+                })
+            }
         }
     },
     getters: {
@@ -225,6 +240,8 @@ export const useMySong = defineStore('MySong', {
         // 每日推荐
         dailySongs: state => state.like.dailySongs,
         //FM
-        personalFM: state => state.like.personalFM
+        personalFM: state => state.like.personalFM,
+        isSubPlayList: state => (id: number) =>
+            state.userList.playlist.some((item: { id: number }) => item.id === id) as boolean
     }
 })

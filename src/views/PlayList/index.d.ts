@@ -1,5 +1,6 @@
 export interface List {
     name: string
+    id: number
     coverImgUrl: string
     creator: {
         userId: number

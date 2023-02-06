@@ -27,3 +27,7 @@ export interface PersonalFM {
 export interface TrashFM {
     id: number
 }
+export interface AlbumSub {
+    id: number
+    t: 1 | 2
+}

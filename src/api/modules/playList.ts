@@ -28,3 +28,10 @@ export interface PlayLsitTrankAll {
     limit?: number
     offset?: number
 }
+export interface PlayListSub {
+    id: number
+    t: 1 | 2
+}
+export interface PlayListDel {
+    id: number | string
+}

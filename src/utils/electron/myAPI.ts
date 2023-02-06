@@ -46,9 +46,12 @@ export function useDB() {
     // 查询数据
     const selectDB: IElectronAPI['selectDB'] = async (type, id) => {
         if (IS_ELECTRON) {
-            return await window.myAPI.selectDB(type, id)
-        } else {
-            return await Promise.resolve({ state: true })
+            try {
+                const res = await window.myAPI.selectDB(type, id)
+                return res
+            } catch (err) {
+                return null
+            }
         }
     }
     return {

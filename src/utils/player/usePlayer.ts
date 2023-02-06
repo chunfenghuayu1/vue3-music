@@ -71,7 +71,9 @@ export function usePlay() {
     const showPlayer = computed(() => player.value.enable)
     // 添加播放列表
     const addPlayList = (arr: any[]) => {
-        player.value.addPlayList(arr)
+        // 必须复制一份
+        const res = toRaw(arr)
+        player.value.addPlayList(res)
     }
     // 获取track信息
     const currentTrack = computed(() => player.value.currentTrack)
@@ -89,4 +91,3 @@ export function usePlay() {
         currentTrack
     }
 }
-console.log('start')
