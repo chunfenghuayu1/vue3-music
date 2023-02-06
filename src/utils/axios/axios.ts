@@ -65,7 +65,7 @@ class Request {
                     ElMessage({
                         message: '需要登录',
                         type: 'warning',
-                        duration: 1000
+                        duration: 2000
                     })
                     // 退出登录
                     const localStore = useLocalStore()
@@ -75,7 +75,7 @@ class Request {
                     ElMessage({
                         message: error as any,
                         type: 'error',
-                        duration: 1000
+                        duration: 2000
                     })
                 }
 

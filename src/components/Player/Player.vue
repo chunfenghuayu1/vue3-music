@@ -24,7 +24,9 @@
                     >
                         <img
                             :src="$imgUrl(currentTrack.al.picUrl, 512)"
-                            class="object-cover rounded-xl shadow-xl"
+                            class="object-cover rounded-xl shadow-xl transition duration-300 origin-top"
+                            :class="isPlaying ? 'hover:scale-95' : 'scale-95'"
+                            draggable="false"
                         />
                     </div>
                     <!-- 操作区域 -->

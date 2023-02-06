@@ -61,7 +61,7 @@ class Player {
         })
     }
     // 缓冲音频文件
-    async cacheBuffer(currentTrack: number = this._currentTrack.id) {
+    private async cacheBuffer(currentTrack: number = this._currentTrack.id) {
         const source = await reqSongUrl({ id: currentTrack })
         if (source) {
             const res = await getArrayBuffer(source)
@@ -147,6 +147,7 @@ class Player {
     public async nextOrPrePlay(value: 'next' | 'pre') {
         if (this._throttle) return
         this._throttle = true
+        this._playing = false
 
         if (value === 'next') {
             if (this._index === this._playList.length - 1) {

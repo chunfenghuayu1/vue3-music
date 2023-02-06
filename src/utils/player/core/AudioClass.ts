@@ -1,6 +1,7 @@
 /**
- * 唯一缺点：接受的数据源格式需要@param AudioBuffer
- * 如果直接传递文件或者路径进行解码，则会
+ * 唯一缺点：接受的数据源格式需要
+ * @param AudioBuffer
+ *
  */
 import { round } from 'lodash-es'
 interface options {

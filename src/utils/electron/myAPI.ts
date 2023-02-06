@@ -1,7 +1,7 @@
 import type { IElectronAPI } from '@/types/myAPI'
 
 export const IS_ELECTRON: boolean =
-    import.meta.env.VITE_APP_IS_ELECTRON || navigator.userAgent.indexOf('Electron') > -1
+    navigator.userAgent.indexOf('Electron') > -1 || import.meta.env.VITE_APP_IS_ELECTRON
 
 export function useMyAPI() {
     const handleStore: IElectronAPI['handleStore'] = arg => {
