@@ -1,4 +1,4 @@
-import { setLocal } from '@utils/localStorage.js'
+import { setLocal } from '@utils/localStorage'
 import type { PiniaPluginContext } from 'pinia'
 
 import { useMyAPI } from '@utils/electron/myAPI'

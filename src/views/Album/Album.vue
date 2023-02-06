@@ -80,7 +80,7 @@ import Button from '@components/Button.vue'
 import type { ComponentInternalInstance, Ref } from 'vue'
 import type { albumData } from './index'
 
-import { formatDate } from '@utils/format.js'
+import { formatDate } from '@utils/format'
 import { uniqBy } from 'lodash-es'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const route = useRoute()

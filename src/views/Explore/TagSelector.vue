@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import explore from '@utils/localData.js'
+import explore from '@utils/localData'
 import { useLocalStore } from '@stores/localStore'
 const localStore = useLocalStore()
 interface Dprops {

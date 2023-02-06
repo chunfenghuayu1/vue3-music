@@ -124,7 +124,7 @@
 <script setup lang="ts">
 import * as Vibrant from 'node-vibrant/dist/vibrant.worker.min.js'
 import { forminute, toPercent } from '@utils/format'
-import { usePlay } from '@utils/player/usePlayer.js'
+import { usePlay } from '@utils/player/usePlayer'
 const {
     isPlaying,
     playOrPause,
