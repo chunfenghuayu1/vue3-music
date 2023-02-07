@@ -15,7 +15,13 @@ export function usePlay() {
     const playOrPause = () => {
         player.value.playing ? player.value.pause() : player.value.play()
     }
-    const nextOrPrePlay = (value: 'next' | 'pre') => player.value.nextOrPrePlay(value)
+    const nextOrPrePlay = (value: 'next' | 'pre') => {
+        if (playType.value === 'fm') {
+            FMPlayNext()
+            return
+        }
+        player.value.nextOrPrePlay(value)
+    }
 
     // 设置音量
     const volume = computed({
@@ -77,6 +83,13 @@ export function usePlay() {
     }
     // 获取track信息
     const currentTrack = computed(() => player.value.currentTrack)
+    // 获取播放类型
+    const playType = computed(() => player.value.playType)
+    // fm信息
+    const FMTrack = computed(() => player.value.FMTrack)
+    // fm播放
+    const FMPlay = () => player.value.FMPlay()
+    const FMPlayNext = () => player.value.FMPlayNext()
     return {
         isPlaying,
         playOrPause,
@@ -88,6 +101,10 @@ export function usePlay() {
         remainProgress,
         showPlayer,
         addPlayList,
-        currentTrack
+        currentTrack,
+        playType,
+        FMTrack,
+        FMPlay,
+        FMPlayNext
     }
 }

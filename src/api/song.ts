@@ -22,11 +22,11 @@ export const reqSongDetail = (params: SongDetail) => http.get({ url: Api.SongDet
 export const reqLyric = async (params: Lyric) => {
     const { res } = await selectDB('lyric', params.id)
     if (res) {
-        return Promise.resolve(JSON.parse(res.value).lyrics)
+        return JSON.parse(res.value).lyrics
     } else {
         const res2 = await http.get({ url: Api.Lyric, params })
         dbCache('lyric', [{ id: params.id, lyrics: res2 }])
-        return Promise.resolve(res2)
+        return res2
     }
 }
 

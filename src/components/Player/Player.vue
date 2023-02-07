@@ -24,7 +24,7 @@
                     >
                         <img
                             :src="$imgUrl(currentTrack.al.picUrl, 512)"
-                            class="object-cover rounded-xl shadow-xl transition duration-300 origin-top"
+                            class="object-cover rounded-xl shadow-xl transition duration-300 origin-center"
                             :class="isPlaying ? 'hover:scale-95' : 'scale-95'"
                             draggable="false"
                         />
@@ -34,12 +34,15 @@
                         <!-- 歌曲信息 -->
                         <div class="mt-8">
                             <div class="flex justify-between text-white text-md">
-                                <div class="font-semibold" v-text="currentTrack.name"></div>
+                                <div
+                                    class="font-semibold text-2xl line-clamp-1"
+                                    v-text="currentTrack.name"
+                                ></div>
                                 <div class="text-white">顺序播放</div>
                             </div>
                             <div class="opacity-80 flex justify-start">
                                 <p v-for="(item, index) in currentTrack.ar" :key="item.id">
-                                    <span v-if="index !== 0">&nbsp;/&nbsp;</span>
+                                    <i v-if="index !== 0">&nbsp;/&nbsp;</i>
                                     <span v-text="item.name"></span>
                                 </p>
                             </div>

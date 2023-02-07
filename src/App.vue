@@ -16,8 +16,8 @@
             </router-view>
         </div>
     </el-scrollbar>
-    <PlayerDrag v-if="false"></PlayerDrag>
-    <component :is="Player" v-if="true"></component>
+    <PlayerDrag v-if="true"></PlayerDrag>
+    <component :is="Player" v-if="false"></component>
     <component :is="PlayerBar" v-if="false"></component>
 </template>
 <script setup lang="ts">

@@ -8,11 +8,9 @@ import {
     reqLikeMV,
     reqlikeCloud,
     reqUserRecord,
-    reqRecomSongs,
-    reqPersonalFM
-} from '@/api/user'
+    reqRecomSongs
+} from '@api/user'
 import { reqPlayListDetail, reqPlayListSub } from '@api/playList'
-import { imgUrl } from '@utils/imgUrl'
 import { useDB } from '@utils/electron/myAPI'
 import { ElMessage } from 'element-plus'
 const { dbCache } = useDB()
@@ -40,9 +38,7 @@ export const useMySong = defineStore('MySong', {
                     allData: <any>[]
                 },
                 // 用户每日推荐
-                dailySongs: <any>[],
-                // FM
-                personalFM: <any>[]
+                dailySongs: <any>[]
             },
             // 用户全部歌单
             userList: {
@@ -168,12 +164,6 @@ export const useMySong = defineStore('MySong', {
             const { data } = await reqRecomSongs()
             this.like.dailySongs = data.dailySongs
         },
-        // 获取私人FM
-        async getUserPersonalFM() {
-            const res = await reqPersonalFM({ timestamp: +new Date() })
-            this.like.personalFM = res.data[0]
-            this.like.personalFM.picUrl = imgUrl(res.data[0].album.picUrl, 512)
-        },
         // 喜欢歌单
         async likePlayList(id: number, flag: boolean) {
             await this.getUserPlayList()
@@ -239,8 +229,6 @@ export const useMySong = defineStore('MySong', {
         },
         // 每日推荐
         dailySongs: state => state.like.dailySongs,
-        //FM
-        personalFM: state => state.like.personalFM,
         isSubPlayList: state => (id: number) =>
             state.userList.playlist.some((item: { id: number }) => item.id === id) as boolean
     }
