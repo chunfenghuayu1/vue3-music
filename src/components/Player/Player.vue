@@ -2,15 +2,20 @@
     <div class="fixed top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center">
         <!-- 模糊效果 -->
         <div class="absolute top-0 bottom-0 left-0 right-0">
+            <!-- :style="{
+                    background: 'rgb(34,34,34,0.7)'
+                }" -->
             <div
-                class="w-full h-full backdrop-saturate-150 backdrop-blur-3xl"
+                class="w-full h-full backdrop-saturate-150 backdrop-blur-3xl transition-all duration-300"
                 :style="{
                     background: 'rgb(34,34,34,0.7)'
                 }"
             ></div>
             <img
+                ref="playerImg"
                 :src="$imgUrl(currentTrack.al.picUrl, 512)"
                 class="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full -z-10"
+                :class="{ fadeImg: flag }"
             />
         </div>
         <!-- 界面 -->
@@ -25,8 +30,11 @@
                         <img
                             :src="$imgUrl(currentTrack.al.picUrl, 512)"
                             class="object-cover rounded-xl shadow-xl transition duration-300 origin-center"
-                            :class="isPlaying ? 'hover:scale-95' : 'scale-95'"
                             draggable="false"
+                            :class="{
+                                'scale-95': !isPlaying,
+                                'hover:scale-95': isPlaying
+                            }"
                         />
                     </div>
                     <!-- 操作区域 -->
@@ -147,7 +155,7 @@ const bgColor = ref('')
 watchEffect(() => {
     // MySong.personalFM.picUrl
     // if (MySong.personalFM.picUrl) {
-    Vibrant.from(url, {
+    Vibrant.from(currentTrack.value.al.picUrl, {
         colorCount: 1
     })
         .getPalette()
@@ -162,6 +170,26 @@ watchEffect(() => {
         )
     // }
 })
+
+const flag = ref(false)
+let timer = ref<number>()
+const playerImg = ref<HTMLElement>()
+watch(
+    () => currentTrack.value.al.picUrl,
+    () => {
+        clearTimeout(timer.value)
+        timer.value = 0
+        flag.value = true
+        playerImg.value?.addEventListener('load', () => {
+            timer.value = window.setTimeout(() => {
+                flag.value = false
+            }, 800)
+        })
+    },
+    {
+        immediate: true
+    }
+)
 </script>
 
 <style lang="postcss" scoped>
@@ -199,5 +227,17 @@ watchEffect(() => {
 
 :deep(.el-scrollbar__thumb) {
     background-color: transparent;
+}
+.fadeImg {
+    animation: fadeImg ease-in-out 0.8s forwards;
+    opacity: 0;
+}
+@keyframes fadeImg {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 </style>

@@ -5,34 +5,35 @@
  */
 import { round } from 'lodash-es'
 interface options {
-    buffer: AudioBuffer
+    source: string
     volume: number
 }
 class AudioCalss {
     private instance: AudioContext = new AudioContext()
-    private bufferSourceNode: AudioBufferSourceNode | null = null
+    private bufferSourceNode: MediaElementAudioSourceNode | null = null
     private volumeGainNode: GainNode | null = null
     private fadeGainNode: GainNode | null = null
-    private startTime: number = 0
+    private audio: HTMLAudioElement = new Audio()
     constructor(options: options) {
-        this.bufferSourceNode = this.instance.createBufferSource()
+        this.audio.crossOrigin = ''
+        this.audio.src = options.source
+        this.bufferSourceNode = this.instance.createMediaElementSource(this.audio)
         this.volumeGainNode = this.instance.createGain()
         this.fadeGainNode = this.instance.createGain()
-        this.bufferSourceNode.buffer = options.buffer
         this.volumeGainNode.gain.value = options.volume
         this.setFadein()
         this.bufferSourceNode.connect(this.volumeGainNode)
         this.volumeGainNode.connect(this.fadeGainNode)
         this.fadeGainNode.connect(this.instance.destination)
-        this.bufferSourceNode?.addEventListener('ended', () => {
+        this.audio.addEventListener('ended', () => {
             this.close()
         })
     }
     private setFadein() {
         const waveArray = new Float32Array(2)
         waveArray[0] = 0.01
-        waveArray[1] = 1
-        this.fadeGainNode?.gain?.setValueCurveAtTime(waveArray, this.currentTime, 3)
+        waveArray[1] = this.volumeGainNode!.gain.value
+        this.fadeGainNode?.gain?.setValueCurveAtTime(waveArray, this.currentTime, 2)
     }
     /**
      *  如果没有实例则return
@@ -41,13 +42,12 @@ class AudioCalss {
      * @param currentTime 声音延迟播放时间
      * @param startTime 声音跳转到什么时间播放
      */
-    public play(startTime: number = 0, delay: number = 0) {
+    public play(startTime: number = 0) {
         if (!this.instance) return
         if (startTime !== 0) {
-            this.startTime = startTime
+            this.audio.currentTime = startTime
         }
-        // 设置播放开始时间
-        this.bufferSourceNode?.start(delay, startTime)
+        this.audio.play()
     }
     public pause() {
         this.instance.suspend()
@@ -59,11 +59,11 @@ class AudioCalss {
     public close() {
         this.instance.close()
     }
-    get duration() {
-        return round(this.bufferSourceNode?.buffer?.duration || 0, 1)
-    }
     get currentTime() {
-        return round(this.instance.currentTime + this.startTime, 1)
+        return round(this.audio.currentTime, 1)
+    }
+    get duration() {
+        return round(this.audio.duration, 1)
     }
     get state() {
         return this.instance.state

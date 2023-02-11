@@ -2,6 +2,7 @@ import http from '@utils/axios/request'
 import { useDB } from '@utils/electron/myAPI'
 import type { SongDetail, Lyric, SongUrl } from './modules/song'
 import { getLocal } from '@utils/localStorage'
+import getArrayBuffer from '@utils/getArrayBuffer'
 enum Api {
     SongDetail = '/song/detail',
     Lyric = '/lyric',
@@ -45,9 +46,10 @@ export const reqLyric = async (params: Lyric) => {
 export const reqSongUrl = async (params: SongUrl) => {
     const { unlockMusic } = getLocal('settings')
     if (unlockMusic) {
-        const res = await selectDB('trackSource', params.id)
+        const source = await selectDB('trackSource', params.id)
 
-        if (res) {
+        if (source) {
+            const res = URL.createObjectURL(new Blob([source]))
             return res
         }
         const res2 = await http.get({ url: Api.SongUrl, params: { id: params.id, br: '350000' } })
@@ -55,6 +57,8 @@ export const reqSongUrl = async (params: SongUrl) => {
             // 如果存在链接则存储
             res2.data[0].source = res2.data[0].url
             dbCache('trackSource', [{ id: params.id, song: res2.data[0] }])
+            console.log(res2.data[0].source)
+
             return res2.data[0].source
         }
     } else {

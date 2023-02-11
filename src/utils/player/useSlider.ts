@@ -13,14 +13,8 @@ export function useSlider(initValue: Ref<number>) {
         document.onmousemove = e => {
             flag.value = true
 
-            x.value = round(x2 + (e.clientX - mouseX) / speed, 3)
-
-            if (x.value >= 1) {
-                x.value = 1
-            }
-            if (x.value <= 0) {
-                x.value = 0
-            }
+            const newX = round(x2 + (e.clientX - mouseX) / speed, 3)
+            x.value = Math.min(Math.max(newX, 0), 1)
         }
         document.onmouseup = () => {
             flag.value = false

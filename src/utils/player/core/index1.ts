@@ -1,9 +1,18 @@
-import { reqSongUrl } from '@api/song'
+// import getArrayBuffer from './core/AudioCtx'
+import AudioCalss from './AudioClass'
 import { getLocal } from '@utils/localStorage'
+import { reqSongUrl } from '@api/song'
+import { reqPersonalFM } from '@api/user'
 import { ElMessage } from 'element-plus'
 import { useDB } from '@utils/electron/myAPI'
-import { reqPersonalFM } from '@api/user'
+/**
+ * 切换音乐前需要销毁创建的音频实例
+ * 避免内存空间占用/缓冲区冲突
+ */
 let timer: number
+window.addEventListener('beforeunload', () => {
+    clearTimeout(timer)
+})
 class Player {
     private _enable: boolean = false
     private _duration: number = 300
@@ -42,40 +51,23 @@ class Player {
         ]
     }
     private _volume: number = 0.3
-    private _audio: HTMLAudioElement = new Audio()
-    private _audioCtx: AudioContext = new AudioContext()
-    private bufferSourceNode: MediaElementAudioSourceNode
-    private fadeGainNode: GainNode
+    private _audio: AudioCalss | null = null
+    private _source: string = ''
     constructor() {
         this.setFromLocal()
-        this.setObj()
+        this._playList.length > 0 && (this.enable = true)
+        this.enable && this.init()
         this._playing = false
         this._throttle = false
-
-        this.init()
-        this.getAudio()
-
-        this.bufferSourceNode = this._audioCtx.createMediaElementSource(this._audio)
-        this.fadeGainNode = this._audioCtx.createGain()
-        this.fadeGainNode.gain.setValueCurveAtTime([0.01, 1], this._currentTime, 3)
-        this.bufferSourceNode.connect(this.fadeGainNode)
-        this.fadeGainNode.connect(this._audioCtx.destination)
-    }
-    // 设置对象属性
-    private setObj() {
-        const arr = [
-            '_source',
-            '_audio',
-            '_throttle',
-            '_audioCtx',
-            'bufferSourceNode',
-            'fadeGainNode'
-        ]
-        for (const item of arr) {
-            Object.defineProperty(this, item, {
-                enumerable: false
-            })
-        }
+        Object.defineProperty(this, '_source', {
+            enumerable: false
+        })
+        Object.defineProperty(this, '_audio', {
+            enumerable: false
+        })
+        Object.defineProperty(this, '_throttle', {
+            enumerable: false
+        })
     }
     // 本地存储信息覆盖
     private setFromLocal() {
@@ -87,18 +79,22 @@ class Player {
             }
         }
     }
-    // 初始化
+    // 音频文件初始化
     private init() {
-        this._audio.volume = this.volume
-        this._audio.currentTime = this.currentTime
-        this._audio.preload = 'auto'
-        this._audio.crossOrigin = ''
-        this._audio.controls = false
+        this.cacheBuffer().then(() => {
+            this.creatAudio()
+        })
     }
-    // 获取音频
-    private async getAudio(currentTrack: number = this._currentTrack.id) {
+    // 实例化音频
+    private creatAudio(source = this._source) {
+        this._audio = new AudioCalss({ source, volume: this.volume })
+    }
+    // 缓冲音频文件
+    private async cacheBuffer(currentTrack: number = this._currentTrack.id) {
         const source = await reqSongUrl({ id: currentTrack })
-        if (!source) {
+        if (source) {
+            this._source = source
+        } else {
             ElMessage({
                 message: '歌曲无法播放,自动播放下一首',
                 type: 'warning',
@@ -118,39 +114,14 @@ class Player {
             } else {
                 await this.nextOrPrePlay('next')
             }
-            return
         }
-        this._audio.src = source
+        if (this._audio) {
+            this.duration = this._audio.duration
+            console.log(this._audio.duration)
+        }
     }
-    // 播放
-    public play() {
-        this._audio.play()
-        this._playing = !this._audio.paused
-        this.refreshTime()
-        this.cacheNextTrack()
-    }
-    // 暂停
-    public pause() {
-        this._audio.pause()
-        this._playing = !this._audio.paused
-    }
-    // 切歌
-    public async nextOrPrePlay(value: 'next' | 'pre') {
-        if (this._throttle) return
-        //  节流 增加中间缓存状态
-        this._throttle = true
-        this.updateIndex(value)
-        // 清空缓存
-        await this.updateTrack()
-        await this.updateSource()
-        this.play()
-        this._throttle = false
-    }
-    // 歌曲进度跳转
-    public setPosition(value: number) {
-        this._audio.currentTime = value
-    }
-    // 播放进度
+
+    // 刷新播放进度
     /**
      *  此处需要外部控制
      * @param flag 外部控制进度条拖动时避免干扰
@@ -160,20 +131,76 @@ class Player {
             clearInterval(timer)
             return
         }
-        if (this._audio.ended) {
+        const { state, currentTime } = this._audio || {}
+        if (state === 'closed') {
             clearInterval(timer)
             this._playType === 'fm' ? this.FMPlayNext() : this.nextOrPrePlay('next')
+
             return
         }
         clearInterval(timer)
         if (this.playing) {
             timer = window.setInterval(() => {
-                this.currentTime = this._audio.currentTime || 0
+                this.currentTime = currentTime || 0
                 this.refreshTime()
             }, 1000)
         }
     }
-    // 播放下一曲切换索引
+    // 跳转播放
+    public setPosition(value: number) {
+        if (this._audio && this._audio.state !== 'closed') {
+            this._audio?.close()
+        }
+
+        this.creatAudio()
+        if (this._audio) {
+            if (this.playing) {
+                this._audio.play(value)
+                this.refreshTime()
+            }
+        }
+    }
+    public play() {
+        if (this._audio && this._audio.state !== 'closed') {
+            this._audio.state === 'suspended'
+                ? this._audio.resume()
+                : this._audio.play(this.currentTime)
+            this._playing = true
+            this.refreshTime()
+            this.cacheNextTrack()
+        }
+    }
+    public pause() {
+        if (this._audio) {
+            if (this._audio.state === 'closed') return
+            this._audio.pause()
+            this.refreshTime(true)
+            this._playing = false
+        }
+    }
+    /**
+     * 播放下一曲
+     * 1、节流
+     * 2、播放状态
+     * 3、更新索引
+     * 4、清空音频缓存
+     * 5、更新track
+     * 6、更新缓存
+     * 7、播放
+     */
+    public async nextOrPrePlay(value: 'next' | 'pre') {
+        if (this._throttle) return
+        //  节流 增加中间缓存状态
+        this._throttle = true
+        this.updateIndex(value)
+        // 清空缓存
+        // this._source = null
+        await this.updateTrack()
+        await this.updateBuffer()
+        this.play()
+        this._throttle = false
+    }
+    // 播放下一曲时更新索引
     private updateIndex(value: 'next' | 'pre') {
         if (value === 'next') {
             if (this._index === this._playList.length - 1) {
@@ -187,7 +214,7 @@ class Player {
             this._index = this._playList.length - 1
         }
     }
-    // 播放下一曲更新track
+    // 播放下一曲时更新当前track
     public async updateTrack() {
         const { selectDB } = useDB()
         await selectDB('trackDetail', this._playList[this._index]).then(({ res }) => {
@@ -196,26 +223,34 @@ class Player {
             }
         })
     }
-    // 添加播放列表时更新数据库歌曲信息
+    // 添加播放列表时更新数据库缓存
     public dbCacheReplace(data: any[]) {
         const { dbCache } = useDB()
         dbCache('trackDetail', data)
     }
-    // 播放歌曲缓存下一曲
+    // 播放歌曲时缓存下一曲
     private cacheNextTrack() {
         if (this._index < this._playList.length - 1) {
             reqSongUrl({ id: this._playList[this._index + 1] })
         }
     }
     // 播放下一曲/添加播放列表，更新音频缓存
-    private async updateSource() {
-        await this.getAudio()
-        this._audio.addEventListener('durationchange', () => {
-            this._duration = this._audio.duration
-        })
+    private async updateBuffer() {
+        await this.cacheBuffer()
+        if (this._audio && this._audio?.state !== 'closed') {
+            this._audio.close()
+        }
+        this.creatAudio()
         this.currentTime = 0
     }
-    // 添加播放列表
+    /**
+     * 添加播放列表并播放
+     * 1、节流
+     * 2、播放状态
+     * 3、缓存数据、更新播放列表、索引（指定位置或者0）、清空音频缓存
+     * 4、更新缓存
+     * 5、播放
+     */
     public async addPlayList(arr: any[], type: 'song' | 'fm' = 'song', index?: number) {
         if (this._throttle) return
         //  节流 增加中间缓存状态
@@ -229,7 +264,7 @@ class Player {
         this._playList = arr.map(item => item.id)
         this._index = index || 0
         this._currentTrack = arr[this._index]
-        await this.updateSource()
+        await this.updateBuffer()
         this.play()
         this._throttle = false
     }
@@ -257,10 +292,12 @@ class Player {
             this._currentTrack = this._FMTrack
         }
     }
+
     get duration() {
-        // !isNaN(this._audio.duration) && (this._duration = this._audio.duration)
-        // return isNaN(this._audio.duration) ? this._duration : this._audio.duration
         return this._duration
+    }
+    set duration(value: number) {
+        this._duration = value
     }
     get currentTime() {
         return this._currentTime

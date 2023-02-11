@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { getLocal, setLocal } from '@utils/localStorage'
-import Player from '@utils/player'
+import Player from '@/utils/player/index'
 import type { data, settings } from './initLocal'
 import type { tags } from '@utils/localData'
 import { reqLoginStatus, reqLogout } from '@api/auth'

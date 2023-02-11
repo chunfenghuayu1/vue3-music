@@ -1,16 +1,15 @@
 import { useSlider } from '@utils/player/useSlider'
 import { useLocalStore } from '@stores/localStore'
 import { round } from 'lodash-es'
-
 /**
  * player hooks
  */
 export function usePlay() {
     const localStore = useLocalStore()
     const { player } = storeToRefs(localStore)
-
     // 获取播放状态
     const isPlaying = computed(() => player.value.playing)
+
     // 控制播放/暂停
     const playOrPause = () => {
         player.value.playing ? player.value.pause() : player.value.play()
@@ -70,6 +69,7 @@ export function usePlay() {
     // 获取剩余播放时间 秒
     // 歌曲时长 - 当前播放进度
     const remainProgress = computed(() => player.value.duration - player.value.currentTime)
+
     // 总时长
     const duration = computed(() => player.value.duration)
 

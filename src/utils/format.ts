@@ -20,19 +20,21 @@ export const formatDate = (value: number): string => {
 }
 
 // 毫秒转分钟
+// export const forminute = (value: number): string => {
+//     const time = new Date(value)
+//     const mm = time.getMinutes()
+//     const ss = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds()
+//     return `${mm}:${ss}`
+// }
 export const forminute = (value: number): string => {
     const time = new Date(value)
-    const mm = time.getMinutes()
-    const ss = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds()
-    return `${mm}:${ss}`
+    const mm = String(time.getMinutes()).padStart(2, '0')
+    const ss = String(time.getSeconds()).padStart(2, '0')
+    return `${mm}:${ss} `
 }
-
 // xxxx-xx-xx
-export const formatDateStr = <T>(value: T): string => {
-    const arr = (value as any).split('-')
-    const y = arr[0]
-    const m = arr[1]
-    const d = arr[2]
+export const formatDateStr = (value: string): string => {
+    const [y, m, d] = value.split('-')
     return `${y}年${m}月${d}日`
 }
 // 转百分数
