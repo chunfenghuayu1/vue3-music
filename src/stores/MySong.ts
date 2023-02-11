@@ -84,13 +84,13 @@ export const useMySong = defineStore('MySong', {
             const localStore = useLocalStore()
             const res = await reqUserPlayList({
                 uid: localStore.userId,
-                limit: 100,
+                limit: 500,
                 timestamp: +new Date()
             })
             if (res.code === 200) {
                 this.userList.more = res.more
                 this.userList.playlist = res.playlist
-                this.getUserLikeSongs()
+                await this.getUserLikeSongs()
             }
         },
         // 获取用户喜欢的音乐列表信息（包括音乐信息，但没有详细信息）
@@ -166,8 +166,7 @@ export const useMySong = defineStore('MySong', {
         },
         // 喜欢歌单
         async likePlayList(id: number, flag: boolean) {
-            await this.getUserPlayList()
-            const { code } = await reqPlayListSub({ id, t: flag ? 2 : 1 })
+            const { code } = await reqPlayListSub({ id, t: flag ? 2 : 1, timestamp: +new Date() })
 
             if (code === 200) {
                 await this.getUserPlayList()

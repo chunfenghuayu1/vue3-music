@@ -31,6 +31,7 @@ export interface PlayLsitTrankAll {
 export interface PlayListSub {
     id: number
     t: 1 | 2
+    timestamp: number
 }
 export interface PlayListDel {
     id: number | string

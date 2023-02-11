@@ -90,6 +90,7 @@ export function usePlay() {
     // fm播放
     const FMPlay = () => player.value.FMPlay()
     const FMPlayNext = () => player.value.FMPlayNext()
+
     return {
         isPlaying,
         playOrPause,

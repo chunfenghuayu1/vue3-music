@@ -46,6 +46,7 @@ class Player {
     private _audioCtx: AudioContext = new AudioContext()
     private bufferSourceNode: MediaElementAudioSourceNode
     private fadeGainNode: GainNode
+    private _source = ''
     constructor() {
         this.setFromLocal()
         this.setObj()
@@ -97,6 +98,7 @@ class Player {
     }
     // 获取音频
     private async getAudio(currentTrack: number = this._currentTrack.id) {
+        this._source && this._source.includes('blob') && URL.revokeObjectURL(this._source)
         const source = await reqSongUrl({ id: currentTrack })
         if (!source) {
             ElMessage({
@@ -120,6 +122,7 @@ class Player {
             }
             return
         }
+        this._source = source
         this._audio.src = source
     }
     // 播放
@@ -140,11 +143,16 @@ class Player {
         //  节流 增加中间缓存状态
         this._throttle = true
         this.updateIndex(value)
-        // 清空缓存
-        await this.updateTrack()
-        await this.updateSource()
-        this.play()
-        this._throttle = false
+        try {
+            // 清空缓存
+            await this.updateTrack()
+            await this.updateSource()
+            this.play()
+        } catch (err) {
+            console.log(err)
+        } finally {
+            this._throttle = false
+        }
     }
     // 歌曲进度跳转
     public setPosition(value: number) {
@@ -229,9 +237,14 @@ class Player {
         this._playList = arr.map(item => item.id)
         this._index = index || 0
         this._currentTrack = arr[this._index]
-        await this.updateSource()
-        this.play()
-        this._throttle = false
+        try {
+            await this.updateSource()
+            this.play()
+        } catch (err) {
+            console.log(err)
+        } finally {
+            this._throttle = false
+        }
     }
     // fm播放
     public async FMPlay() {

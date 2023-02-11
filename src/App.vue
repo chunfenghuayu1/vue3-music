@@ -16,9 +16,8 @@
             </router-view>
         </div>
     </el-scrollbar>
-    <PlayerDrag v-if="false"></PlayerDrag>
-    <component :is="Player" v-if="true"></component>
-    <component :is="PlayerBar" v-if="false"></component>
+    <component :is="currentTab"></component>
+    <Player></Player>
 </template>
 <script setup lang="ts">
 import NavBar from '@components/NavBar.vue'
@@ -35,7 +34,6 @@ import { useLocalStore } from '@stores/localStore'
 
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
 provide('scroll', scrollbarRef)
-
 document.documentElement.style.overflow = 'hidden'
 const localStore = useLocalStore()
 const { exitTypeSwitch } = useMyAPI()
@@ -53,6 +51,15 @@ watch(
         }, 240)
     }
 )
+// 动态组件
+const currentTab = computed(() => {
+    if (localStore.settings.switchPlayer === '卡片') {
+        return markRaw(PlayerDrag)
+    }
+    if (localStore.settings.switchPlayer === '底部') {
+        return markRaw(PlayerBar)
+    }
+})
 </script>
 <style lang="postcss">
 .el-scrollbar__bar {

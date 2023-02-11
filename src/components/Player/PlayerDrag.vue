@@ -32,7 +32,10 @@
                             </span>
                         </div>
                     </div>
-                    <div class="opacity-20 hover:opacity-80 transition-opacity cursor-pointer">
+                    <div
+                        class="opacity-20 hover:opacity-80 transition-opacity cursor-pointer"
+                        @click="handleOpenPlayer"
+                    >
                         <SvgIcon name="expand" size="20"></SvgIcon>
                     </div>
                 </div>
@@ -120,6 +123,10 @@
 <script setup lang="ts">
 import { toPercent, forminute } from '@utils/format'
 import { usePlay } from '@utils/player/usePlayer'
+import bus from '@utils/eventBus'
+const handleOpenPlayer = () => {
+    bus.$emit('openPlayer')
+}
 const {
     isPlaying,
     playOrPause,

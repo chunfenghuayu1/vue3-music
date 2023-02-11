@@ -28,16 +28,22 @@
             <div class="px-10vw flex-1 flex justify-between text-theme-base">
                 <!-- 歌曲信息 -->
                 <div class="flex items-center h-full flex-1">
-                    <div class="w-12 h-12">
+                    <div class="w-12">
                         <img
                             class="rounded-lg align-middle object-cover shadow-lg"
                             :src="$imgUrl(currentTrack.al.picUrl, 96)"
                         />
                     </div>
                     <div class="flex-col flex justify-center px-4">
-                        <div class="font-semibold line-clamp-1">{{ currentTrack.name }}</div>
-                        <div class="text-xs opacity-60 font-semibold">
-                            <p v-for="(item, index) in currentTrack.ar" :key="item.id">
+                        <div class="font-semibold line-clamp-1">
+                            {{ currentTrack.name }}
+                        </div>
+                        <div class="text-xs opacity-60 font-semibold line-clamp-1">
+                            <p
+                                v-for="(item, index) in currentTrack.ar"
+                                :key="item.id"
+                                class="inline"
+                            >
                                 <span v-if="index !== 0"> / </span>
                                 <span v-text="item.name"></span>
                             </p>
@@ -92,9 +98,10 @@
                             <SvgIcon name="volume-high" size="18"></SvgIcon>
                         </div>
                     </div>
-                    <!-- 显示 -->
+                    <!-- 显示播放器 -->
                     <div
-                        class="flex items-center justify-center rotate-90 cursor-pointer w-9 h-9 rounded-lg hover:bg-theme-baseSecond"
+                        class="flex items-center justify-center rotate-90 cursor-pointer w-9 h-9 rounded-lg hover:bg-theme-baseSecond hover:bg-opacity-50"
+                        @click="handleOpenPlayer"
                     >
                         <SvgIcon name="back" size="32"></SvgIcon>
                     </div>
@@ -107,6 +114,7 @@
 <script setup lang="ts">
 import { toPercent } from '@utils/format'
 import { usePlay } from '@utils/player/usePlayer'
+import bus from '@utils/eventBus'
 const {
     isPlaying,
     playOrPause,
@@ -116,6 +124,9 @@ const {
     showPlayer,
     currentTrack
 } = usePlay()
+const handleOpenPlayer = () => {
+    bus.$emit('openPlayer')
+}
 </script>
 
 <style scoped lang="postcss">

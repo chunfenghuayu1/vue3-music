@@ -55,10 +55,14 @@ export const handlerAudioSource = async (sourceId: number) => {
      * @param {Array<String>||undefined} source support qq, xiami, baidu, kugou, kuwo, migu, joox
      * @return {Promise<Object>}
      */
-    const result = await match(id, ['pyncmd', 'kugou', 'bilibili'])
-    if (result.url.includes('bilivideo.com')) {
-        result.source = 'bilibili'
-        result.url = await getBiliVideoFile(result.url)
+    try {
+        const result = await match(id, ['pyncmd', 'kugou', 'bilibili'])
+        if (result.url.includes('bilivideo.com')) {
+            result.source = 'bilibili'
+            result.url = await getBiliVideoFile(result.url)
+        }
+        return result
+    } catch (err) {
+        console.log(err)
     }
-    return result
 }

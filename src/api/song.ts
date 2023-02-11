@@ -57,8 +57,6 @@ export const reqSongUrl = async (params: SongUrl) => {
             // 如果存在链接则存储
             res2.data[0].source = res2.data[0].url
             dbCache('trackSource', [{ id: params.id, song: res2.data[0] }])
-            console.log(res2.data[0].source)
-
             return res2.data[0].source
         }
     } else {

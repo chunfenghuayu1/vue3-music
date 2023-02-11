@@ -7,6 +7,7 @@ export interface settings {
     exitType: 'confirm' | 'minimize' | 'quit'
     unlockMusic: boolean
     expire: number
+    switchPlayer: string
 }
 export interface user {
     userId: number
@@ -39,7 +40,8 @@ const localStore: localStore = {
         theme: 'dark',
         exitType: 'confirm',
         unlockMusic: true,
-        expire: 7
+        expire: 7,
+        switchPlayer: '底部'
     },
     player: {}
 }
