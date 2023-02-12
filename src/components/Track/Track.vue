@@ -1,7 +1,12 @@
 <template>
     <div
         v-if="song.al"
-        class="flex space-x-6 items-center hover:bg-theme-baseSecond transition-all rounded-lg p-2 my-2"
+        class="flex space-x-6 items-center transition-all rounded-lg p-2 my-2"
+        :class="
+            song.id === currentTrack.id
+                ? 'bg-theme-baseActive bg-opacity-50'
+                : 'hover:bg-theme-baseSecond'
+        "
         @mouseenter="showBtn = true"
         @mouseleave="showBtn = false"
     >
@@ -13,9 +18,19 @@
         </div>
         <!-- 歌名 作者 -->
         <div class="flex flex-col justify-center flex-1">
-            <div class="flex font-bold text-lg text-theme-base line-clamp-1 select-none">
+            <div
+                class="flex font-bold text-lg line-clamp-1 select-none"
+                :class="song.id === currentTrack.id ? 'text-theme-baseActive' : 'text-theme-base'"
+            >
                 <span :title="song.name"> {{ song.name }}</span>
-                <span v-if="song.alia[0]" class="text-theme-baseSecond">
+                <span
+                    v-if="song.alia[0]"
+                    :class="
+                        song.id === currentTrack.id
+                            ? 'text-theme-baseActive opacity-50'
+                            : 'text-theme-baseSecond'
+                    "
+                >
                     ({{ song.alia[0] }})
                 </span>
             </div>
@@ -25,6 +40,11 @@
                     ><router-link
                         :to="{ name: 'artist', params: { id: item.id } }"
                         class="hover:underline cursor-pointer font-semibold"
+                        :class="
+                            song.id === currentTrack.id
+                                ? 'text-theme-baseActive'
+                                : 'text-theme-baseSecond'
+                        "
                         >{{ item.name }}</router-link
                     ></span
                 >
@@ -35,7 +55,8 @@
             <router-link
                 :to="{ name: 'album', params: { id: song.al.id } }"
                 v-if="isShowAlbum && song.al.name"
-                class="text-theme-base hover:underline cursor-pointer line-clamp-1"
+                class="hover:underline cursor-pointer line-clamp-1 font-semibold"
+                :class="song.id === currentTrack.id ? 'text-theme-baseActive' : 'text-theme-base'"
                 :title="song.al.name"
                 >{{ song.al.name }}</router-link
             >
@@ -44,7 +65,11 @@
             <template v-if="isShowOther">
                 <!-- 收藏或喜欢 -->
                 <div class="flex justify-center items-center w-8">
-                    <div v-show="MySong.likeSongIds(song.id) || showBtn" class="cursor-pointer">
+                    <div
+                        v-show="MySong.likeSongIds(song.id) || showBtn"
+                        class="cursor-pointer"
+                        @click="MySong.likeSongSub(song.id, !MySong.likeSongIds(song.id))"
+                    >
                         <SvgIcon
                             v-if="MySong.likeSongIds(song.id)"
                             name="like"
@@ -60,7 +85,12 @@
                     </div>
                 </div>
                 <!-- 歌曲时间 -->
-                <div class="flex items-center justify-center text-theme-base select-none w-12">
+                <div
+                    class="flex items-center justify-center select-none w-12 font-semibold"
+                    :class="
+                        song.id === currentTrack.id ? 'text-theme-baseActive' : 'text-theme-base'
+                    "
+                >
                     {{ forminute(song.dt) }}
                 </div>
             </template>
@@ -76,6 +106,8 @@
 <script setup lang="ts">
 import { useMySong } from '@stores/MySong'
 import { forminute } from '@utils/format'
+import { usePlay } from '@utils/player/usePlayer'
+const { currentTrack } = usePlay()
 const MySong = useMySong()
 interface Dprops {
     song: {

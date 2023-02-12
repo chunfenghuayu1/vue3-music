@@ -22,7 +22,7 @@
                 rows: 4,
                 fill: 'row'
             }"
-            :space-between="0"
+            :space-between="4"
             :slidesPerGroup="4"
             :speed="800"
             :observer="true"
@@ -33,7 +33,7 @@
         >
             <swiper-slide v-for="(item, index) in list" :key="index">
                 <MyTrackItem
-                    :item="item"
+                    :id="item.id"
                     :pic-url="item.al.picUrl"
                     :name="item.name"
                     :alia="item.alia"

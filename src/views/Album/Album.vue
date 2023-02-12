@@ -41,12 +41,14 @@
                 ></div>
                 <!-- 操作区 -->
                 <div class="mt-4 flex items-center space-x-8">
-                    <Button text="播放" @click="handle">
+                    <Button text="播放" @click="addPlayList(track)">
                         <SvgIcon name="playfill" size="24" class="fill-current"></SvgIcon>
                     </Button>
-                    <Button @click="handle">
+                    <Button
+                        @click="MySong.likeAlbumSub(album.id, MySong.isSubAlbum(album.id) ? 0 : 1)"
+                    >
                         <SvgIcon
-                            v-if="true"
+                            v-if="!MySong.isSubAlbum(album.id)"
                             name="dislike"
                             size="24"
                             class="fill-current text-theme-baseActive"
@@ -64,7 +66,7 @@
         <!-- 列表 -->
         <div v-for="(item, index) in CDList.list" :key="index" class="space-y-2">
             <div v-if="CDList.isTitle" class="flex items-center my-4">
-                <h3 class="font-bold text-2xl">Disc{{ item.cd }}</h3>
+                <h3 class="font-bold text-2xl text-theme-base">Disc{{ item.cd }}</h3>
             </div>
             <div v-for="(song, index1) in item.list" :key="index1">
                 <AlbumTrack :song="song"></AlbumTrack>
@@ -80,14 +82,14 @@ import Button from '@components/Button.vue'
 import type { ComponentInternalInstance, Ref } from 'vue'
 import type { albumData } from './index'
 
+import { useMySong } from '@stores/MySong'
+import { usePlay } from '@utils/player/usePlayer'
 import { formatDate } from '@utils/format'
 import { uniqBy } from 'lodash-es'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const route = useRoute()
-
-const handle = () => {
-    console.log(1)
-}
+const { addPlayList } = usePlay()
+const MySong = useMySong()
 
 // 获取对应id
 const album: Ref<albumData> = ref({
@@ -100,7 +102,8 @@ const album: Ref<albumData> = ref({
     },
     publishTime: 0,
     size: 0,
-    description: ''
+    description: '',
+    id: 0
 })
 const track = ref([])
 const getPlayListDetail = (id: number) => {

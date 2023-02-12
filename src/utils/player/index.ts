@@ -1,4 +1,4 @@
-import { reqSongUrl } from '@api/song'
+import { reqSongUrl, reqScrobble } from '@api/song'
 import { getLocal } from '@utils/localStorage'
 import { ElMessage } from 'element-plus'
 import { useDB } from '@utils/electron/myAPI'
@@ -16,6 +16,7 @@ class Player {
     private _FMTrack = {
         id: 1962166818,
         al: {
+            id: 147779282,
             name: '最伟大的作品',
             picUrl: 'https://p1.music.126.net/xqonK1DZi4inhn4lTM201w==/109951167891239729.jpg'
         },
@@ -30,6 +31,7 @@ class Player {
     private _currentTrack = {
         id: 1962166818,
         al: {
+            id: 147779282,
             name: '最伟大的作品',
             picUrl: 'https://p1.music.126.net/xqonK1DZi4inhn4lTM201w==/109951167891239729.jpg'
         },
@@ -58,7 +60,7 @@ class Player {
 
         this.bufferSourceNode = this._audioCtx.createMediaElementSource(this._audio)
         this.fadeGainNode = this._audioCtx.createGain()
-        this.fadeGainNode.gain.setValueCurveAtTime([0.01, 1], this._currentTime, 3)
+        this.fadeGainNode.gain.setValueCurveAtTime([0.01, 1], 0, 3)
         this.bufferSourceNode.connect(this.fadeGainNode)
         this.fadeGainNode.connect(this._audioCtx.destination)
     }
@@ -144,6 +146,7 @@ class Player {
         this._throttle = true
         this.updateIndex(value)
         try {
+            this.updateScrobbl(this._currentTrack.id, this._currentTrack.al.id, ~~this._currentTime)
             // 清空缓存
             await this.updateTrack()
             await this.updateSource()
@@ -170,6 +173,7 @@ class Player {
         }
         if (this._audio.ended) {
             clearInterval(timer)
+            this.updateScrobbl(this._currentTrack.id, this._currentTrack.al.id, ~~this._duration)
             this._playType === 'fm' ? this.FMPlayNext() : this.nextOrPrePlay('next')
             return
         }
@@ -228,7 +232,6 @@ class Player {
         if (this._throttle) return
         //  节流 增加中间缓存状态
         this._throttle = true
-        this._playing = false
 
         this._enable = true
         this._playType = type
@@ -245,6 +248,15 @@ class Player {
         } finally {
             this._throttle = false
         }
+    }
+    //  听歌排行刷新
+    private updateScrobbl<T extends number>(id: T, sourceid: T, time: T) {
+        reqScrobble({
+            id,
+            sourceid,
+            time,
+            timestamp: +new Date()
+        })
     }
     // fm播放
     public async FMPlay() {

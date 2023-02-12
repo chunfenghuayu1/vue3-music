@@ -2,7 +2,7 @@
     <transition name="player-out">
         <div
             class="fixed bottom-0 left-0 right-0 h-16 z-50 backdrop-saturate-150 backdrop-blur-lg transition-all duration-300 ease-linear bg-theme-base bg-opacity-80 flex flex-col"
-            v-if="showPlayer"
+            v-if="showPlayer && $route.name !== 'mv'"
         >
             <!-- 进度 -->
             <div
@@ -28,7 +28,7 @@
             <div class="px-10vw flex-1 flex justify-between text-theme-base">
                 <!-- 歌曲信息 -->
                 <div class="flex items-center h-full flex-1">
-                    <div class="w-12">
+                    <div class="w-12 h-12">
                         <img
                             class="rounded-lg align-middle object-cover shadow-lg"
                             :src="$imgUrl(currentTrack.al.picUrl, 96)"
@@ -53,10 +53,16 @@
 
                 <!-- 操作 -->
                 <div
-                    class="flex-1 flex justify-center items-center text-theme-base select-none space-x-6"
+                    class="flex-1 flex justify-center items-center text-theme-base select-none space-x-12"
                 >
                     <div class="rounded-full active:scale-90 transition-all cursor-pointer">
-                        <SvgIcon name="playback" size="32" @click="nextOrPrePlay('pre')"></SvgIcon>
+                        <SvgIcon
+                            name="playback"
+                            size="32"
+                            @click="nextOrPrePlay('pre')"
+                            v-if="playType !== 'fm'"
+                        ></SvgIcon>
+                        <SvgIcon name="thumbs-down" size="24" v-else @click="disLikeFM"></SvgIcon>
                     </div>
                     <div class="rounded-full active:scale-90 transition-all cursor-pointer">
                         <SvgIcon
@@ -101,7 +107,7 @@
                     <!-- 显示播放器 -->
                     <div
                         class="flex items-center justify-center rotate-90 cursor-pointer w-9 h-9 rounded-lg hover:bg-theme-baseSecond hover:bg-opacity-50"
-                        @click="handleOpenPlayer"
+                        @click="bus.$emit('openPlayer')"
                     >
                         <SvgIcon name="back" size="32"></SvgIcon>
                     </div>
@@ -122,11 +128,10 @@ const {
     sliderVolume,
     sliderProgress,
     showPlayer,
-    currentTrack
+    currentTrack,
+    playType,
+    disLikeFM
 } = usePlay()
-const handleOpenPlayer = () => {
-    bus.$emit('openPlayer')
-}
 </script>
 
 <style scoped lang="postcss">

@@ -4,7 +4,7 @@ const Explore = () => import('@views/Explore/Explore.vue')
 const My = () => import('@views/My/My.vue')
 const Login = () => import('@views/Login/Login.vue')
 const Artist = () => import('@views/Artist/Artist.vue')
-const Mv = () => import('@views/Mv/Mv.vue')
+const MV = () => import('@views/MV/MV.vue')
 const LikeSongs = () => import('@views/LikeSongs/LikeSongs.vue')
 const PlayList = () => import('@views/PlayList/PlayList.vue')
 const Album = () => import('@views/Album/Album.vue')
@@ -40,7 +40,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/mv/:vid',
         name: 'mv',
-        component: Mv
+        component: MV
     },
     {
         path: '/likesongs',

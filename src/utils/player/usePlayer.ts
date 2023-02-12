@@ -1,6 +1,7 @@
 import { useSlider } from '@utils/player/useSlider'
 import { useLocalStore } from '@stores/localStore'
 import { round } from 'lodash-es'
+import { reqTrashFM } from '@api/index'
 /**
  * player hooks
  */
@@ -85,11 +86,38 @@ export function usePlay() {
     const currentTrack = computed(() => player.value.currentTrack)
     // 获取播放类型
     const playType = computed(() => player.value.playType)
+
+    // ----------------------------------------------------------
     // fm信息
     const FMTrack = computed(() => player.value.FMTrack)
     // fm播放
     const FMPlay = () => player.value.FMPlay()
     const FMPlayNext = () => player.value.FMPlayNext()
+    const isFMPlaying = computed(() => {
+        if (playType.value === 'fm') {
+            return isPlaying.value
+        } else {
+            return false
+        }
+    })
+    const handleFMPlay = () => {
+        if (playType.value === 'fm') {
+            playOrPause()
+        } else {
+            FMPlay()
+        }
+    }
+    // 控制频繁点击
+    const flag = ref(false)
+    const disLikeFM = async () => {
+        if (flag.value) return
+        flag.value = true
+        const res = await reqTrashFM({ id: FMTrack.value.id })
+        if (res.code === 200) {
+            await FMPlayNext()
+            flag.value = false
+        }
+    }
 
     return {
         isPlaying,
@@ -105,7 +133,9 @@ export function usePlay() {
         currentTrack,
         playType,
         FMTrack,
-        FMPlay,
-        FMPlayNext
+        FMPlayNext,
+        isFMPlaying,
+        handleFMPlay,
+        disLikeFM
     }
 }

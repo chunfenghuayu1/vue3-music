@@ -1,5 +1,5 @@
 import http from '@utils/axios/request'
-import type { TopArtists, Artist, ArtistAlbum } from './modules/artist'
+import type { TopArtists, Artist, ArtistAlbum, ArtistSub } from './modules/artist'
 enum Api {
     TopArtists = '/top/artists',
     ArtistDetail = '/artist/detail',
@@ -7,7 +7,8 @@ enum Api {
     ArtistMV = '/artist/mv',
     ArtistAlbum = '/artist/album',
     ArtistSimi = '/simi/artist',
-    AritstTop = '/artist/top/song'
+    ArtistTop = '/artist/top/song',
+    ArtistSub = '/artist/sub'
 }
 /**
  * 获取热门歌手
@@ -58,4 +59,13 @@ export const reqArtistSimi = (params: Artist) => http.get({ url: Api.ArtistSimi,
  * 说明 : 调用此接口,可获取歌手热门 50 首歌曲
  * id : 歌手 id
  */
-export const reqAritstTop = (params: Artist) => http.get({ url: Api.AritstTop, params })
+export const reqAritstTop = (params: Artist) => http.get({ url: Api.ArtistTop, params })
+
+/**
+ * 收藏/取消收藏歌手
+ * 说明 : 调用此接口,可收藏歌手
+ * 必选参数 :id
+ * 歌手 id
+ * t:操作,1 为收藏,其他为取消收藏
+ */
+export const reqArtistSub = (params: ArtistSub) => http.get({ url: Api.ArtistSub, params })

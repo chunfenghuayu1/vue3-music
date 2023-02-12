@@ -1,9 +1,10 @@
 import http from '@utils/axios/request'
-import type { MVUrl, MVDetail } from './modules/mv'
+import type { MVUrl, MVDetail, MVSub } from './modules/mv'
 enum Api {
     MVUrl = '/mv/url',
     MVDetail = '/mv/detail',
-    MVSimi = '/simi/mv'
+    MVSimi = '/simi/mv',
+    MVSub = '/mv/sub'
 }
 /**
  * mv 地址
@@ -26,3 +27,12 @@ export const reqMVDetail = (params: MVDetail) => http.get({ url: Api.MVDetail, p
  * 必选参数 : mvid: mv id
  */
 export const reqMVSimi = (params: MVDetail) => http.get({ url: Api.MVSimi, params })
+
+/**
+ * 收藏/取消收藏 MV
+ * 说明 : 调用此接口,可收藏/取消收藏 MV
+ * 必选参数 :
+ * mvid : MV id
+ * t : 1 为收藏,其他为取消收藏
+ */
+export const reqMVSub = (params: MVSub) => http.get({ url: Api.MVSub, params })

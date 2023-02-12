@@ -18,6 +18,7 @@
                 <!-- :style="{
                     background: 'rgb(34,34,34,0.7)'
                 }" -->
+
                 <div
                     class="w-full h-full backdrop-saturate-150 backdrop-blur-3xl transition duration-300"
                     :style="{
@@ -97,6 +98,13 @@
                                         name="playback"
                                         size="40"
                                         @click="nextOrPrePlay('pre')"
+                                        v-if="playType !== 'fm'"
+                                    ></SvgIcon>
+                                    <SvgIcon
+                                        name="thumbs-down"
+                                        size="28"
+                                        v-else
+                                        @click="disLikeFM"
                                     ></SvgIcon>
                                 </div>
                                 <div
@@ -169,7 +177,9 @@ const {
     sliderVolume,
     sliderProgress,
     remainProgress,
-    currentTrack
+    currentTrack,
+    playType,
+    disLikeFM
 } = usePlay()
 // 获取图片背景色
 const bgColor = ref('')
@@ -215,12 +225,13 @@ const openPlayer = ref(false)
 bus.$on('openPlayer', () => {
     openPlayer.value = !openPlayer.value
 })
-onBeforeUnmount(() => {
-    bus.$off('openPlayer')
-})
+
 const closePlayer = () => {
     openPlayer.value = !openPlayer.value
 }
+onBeforeUnmount(() => {
+    bus.$off('openPlayer')
+})
 </script>
 
 <style lang="postcss" scoped>
@@ -261,7 +272,6 @@ const closePlayer = () => {
 }
 .fadeImg {
     animation: fadeImg ease-in-out 0.8s forwards;
-    opacity: 0;
 }
 @keyframes fadeImg {
     0% {

@@ -77,10 +77,17 @@
 
 <script setup lang="ts">
 import * as Vibrant from 'node-vibrant/dist/vibrant.worker.min.js'
-import type { ComponentInternalInstance } from 'vue'
 import { usePlay } from '@utils/player/usePlayer'
-const { isPlaying, playType, FMTrack, FMPlay, FMPlayNext, playOrPause } = usePlay()
-const { proxy } = getCurrentInstance() as ComponentInternalInstance
+const {
+    isPlaying,
+    playType,
+    FMTrack,
+    isFMPlaying,
+    handleFMPlay,
+    FMPlayNext,
+    disLikeFM,
+    playOrPause
+} = usePlay()
 
 // 获取图片背景色
 const bgColor = ref('')
@@ -94,30 +101,6 @@ watchEffect(() => {
             })
     }
 })
-const isFMPlaying = computed(() => {
-    if (playType.value === 'fm') {
-        return isPlaying.value
-    } else {
-        return false
-    }
-})
-const handleFMPlay = () => {
-    if (playType.value === 'fm') {
-        playOrPause()
-    } else {
-        FMPlay()
-    }
-}
-const flag = ref(false)
-const disLikeFM = async () => {
-    if (flag.value) return
-    flag.value = true
-    const res = await proxy?.$http.reqTrashFM({ id: FMTrack.value.id })
-    if (res.code === 200) {
-        await FMPlayNext()
-        flag.value = false
-    }
-}
 </script>
 
 <style lang="postcss"></style>

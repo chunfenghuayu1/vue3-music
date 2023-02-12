@@ -1,12 +1,13 @@
 import http from '@utils/axios/request'
 import { useDB } from '@utils/electron/myAPI'
-import type { SongDetail, Lyric, SongUrl } from './modules/song'
+import type { SongDetail, Lyric, SongUrl, Scrobble, SongSub } from './modules/song'
 import { getLocal } from '@utils/localStorage'
-import getArrayBuffer from '@utils/getArrayBuffer'
 enum Api {
     SongDetail = '/song/detail',
     Lyric = '/lyric',
-    SongUrl = '/song/url'
+    SongUrl = '/song/url',
+    Scrobble = '/scrobble',
+    SongSub = '/like'
 }
 const { selectDB, dbCache } = useDB()
 /**
@@ -64,3 +65,20 @@ export const reqSongUrl = async (params: SongUrl) => {
         return res.data[0].url
     }
 }
+
+/**
+ * 听歌打卡
+ * 说明 : 调用此接口 , 传入音乐 id, 来源 id，歌曲时间 time，更新听歌
+ * 排行数据
+ * 必选参数 : id: 歌曲 id, sourceid: 歌单或专辑 id
+ * 可选参数 : time: 歌曲播放时间,单位为秒
+ */
+export const reqScrobble = (params: Scrobble) => http.get({ url: Api.Scrobble, params })
+
+/**
+ * 喜欢音乐
+ * 说明 : 调用此接口 , 传入音乐 id, 可喜欢该音乐
+ * 必选参数 : id: 歌曲 id
+ * 可选参数 : like: 布尔值 , 默认为 true 即喜欢 , 若传 false, 则取消喜欢
+ */
+export const reqSongSub = (params: SongSub) => http.get({ url: Api.SongSub, params })

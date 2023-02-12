@@ -1,23 +1,47 @@
 <template>
     <div
         v-show="song.name"
-        class="flex space-x-6 items-center hover:bg-theme-baseSecond transition-all rounded-lg py-3 px-4"
+        class="flex space-x-6 items-center transition-all rounded-lg py-3 px-4"
+        :class="
+            song.id === currentTrack.id
+                ? 'bg-theme-baseActive bg-opacity-50'
+                : 'hover:bg-theme-baseSecond'
+        "
         @mouseenter="showBtn = true"
         @mouseleave="showBtn = false"
     >
         <!-- 序号 -->
         <div class="w-2 flex items-center justify-center">
-            <div class="text-theme-baseSecond font-bold italic">
+            <div
+                class="font-bold italic"
+                :class="
+                    song.id === currentTrack.id ? 'text-theme-baseActive' : 'text-theme-baseSecond'
+                "
+            >
                 {{ song.no }}
             </div>
         </div>
         <!-- 歌名 作者 -->
         <div class="flex flex-col justify-center flex-1">
             <div class="flex font-bold text-lg select-none">
-                <span class="text-theme-base line-clamp-1" :title="song.name">
+                <span
+                    class="line-clamp-1"
+                    :title="song.name"
+                    :class="
+                        song.id === currentTrack.id ? 'text-theme-baseActive' : 'text-theme-base'
+                    "
+                >
                     {{ song.name }}</span
                 >
-                <span v-if="song.alia[0]" class="line-clamp-1 text-theme-baseSecond">
+                <span
+                    v-if="song.alia[0]"
+                    class="line-clamp-1"
+                    :class="
+                        song.id === currentTrack.id
+                            ? 'text-theme-baseActive opacity-50'
+                            : 'text-theme-baseSecond'
+                    "
+                >
                     ({{ song.alia[0] }})
                 </span>
             </div>
@@ -25,8 +49,9 @@
         <!-- 收藏或喜欢 -->
         <div class="flex justify-end items-center w-8">
             <div
-                v-show="MySong.likeSongIds(song.id) || (showBtn && song.dt)"
+                v-show="MySong.likeSongIds(song.id) || showBtn"
                 class="cursor-pointer"
+                @click="MySong.likeSongSub(song.id, !MySong.likeSongIds(song.id))"
             >
                 <SvgIcon
                     v-if="MySong.likeSongIds(song.id)"
@@ -43,7 +68,11 @@
             </div>
         </div>
         <!-- 歌曲时间 -->
-        <div v-if="song.dt" class="text-theme-base flex items-center justify-center">
+        <div
+            v-if="song.dt"
+            class="flex items-center justify-center select-none font-semibold w-12"
+            :class="song.id === currentTrack.id ? 'text-theme-baseActive' : 'text-theme-base'"
+        >
             {{ forminute(song.dt) }}
         </div>
     </div>
@@ -52,6 +81,8 @@
 <script setup lang="ts">
 import { useMySong } from '@stores/MySong'
 import { forminute } from '@utils/format'
+import { usePlay } from '@utils/player/usePlayer'
+const { currentTrack } = usePlay()
 const MySong = useMySong()
 interface Dprops {
     song: {

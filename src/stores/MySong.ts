@@ -8,12 +8,25 @@ import {
     reqLikeMV,
     reqlikeCloud,
     reqUserRecord,
-    reqRecomSongs
-} from '@api/user'
-import { reqPlayListDetail, reqPlayListSub } from '@api/playList'
+    reqRecomSongs,
+    reqPlayListDetail,
+    reqPlayListSub,
+    reqArtistSub,
+    reqAlbumSub,
+    reqSongSub
+} from '@api/index'
 import { useDB } from '@utils/electron/myAPI'
 import { ElMessage } from 'element-plus'
 const { dbCache } = useDB()
+interface tracks {
+    id: number
+    picUrl: string
+    name: string
+    alia: any[]
+    ar: { id: number; name: string }[]
+    al: { picUrl: string; name: string; id: number }
+    dt: number
+}
 
 export const useMySong = defineStore('MySong', {
     state: () => {
@@ -21,7 +34,7 @@ export const useMySong = defineStore('MySong', {
             // 用户喜欢的音乐
             like: {
                 // 我喜欢的音乐列表
-                tracks: <any>[],
+                tracks: [] as tracks[],
                 // 用户喜欢的音乐全部列表 对比用
                 likeSongIds: <any>[],
                 // 用户喜欢的专辑
@@ -165,11 +178,48 @@ export const useMySong = defineStore('MySong', {
             this.like.dailySongs = data.dailySongs
         },
         // 喜欢歌单
-        async likePlayList(id: number, flag: boolean) {
-            const { code } = await reqPlayListSub({ id, t: flag ? 2 : 1, timestamp: +new Date() })
+        async likePlayListSub(id: number, t: 1 | 2) {
+            const { code } = await reqPlayListSub({ id, t, timestamp: +new Date() })
 
             if (code === 200) {
                 await this.getUserPlayList()
+            } else {
+                ElMessage({
+                    message: '添加失败',
+                    type: 'error'
+                })
+            }
+        },
+        // 喜欢歌手
+        async likeArtistSub(id: number, t: 1 | 2) {
+            const { code } = await reqArtistSub({ id, t, timestamp: +new Date() })
+            if (code === 200) {
+                await this.getUserLikeArtist()
+            } else {
+                ElMessage({
+                    message: '添加失败',
+                    type: 'error'
+                })
+            }
+        },
+        // 喜欢专辑
+        async likeAlbumSub(id: number, t: 1 | 0) {
+            const { code } = await reqAlbumSub({ id, t, timestamp: +new Date() })
+            if (code === 200) {
+                await this.getUserLikeAlbum()
+            } else {
+                ElMessage({
+                    message: '添加失败',
+                    type: 'error'
+                })
+            }
+        },
+        // 喜欢歌曲
+        async likeSongSub(id: number, like: boolean) {
+            const { code } = await reqSongSub({ id, like, timestamp: +new Date() })
+            if (code === 200) {
+                await this.getUserLikeSongs()
+                await this.getLikeList()
             } else {
                 ElMessage({
                     message: '添加失败',
@@ -229,6 +279,10 @@ export const useMySong = defineStore('MySong', {
         // 每日推荐
         dailySongs: state => state.like.dailySongs,
         isSubPlayList: state => (id: number) =>
-            state.userList.playlist.some((item: { id: number }) => item.id === id) as boolean
+            state.userList.playlist.some((item: { id: number }) => item.id === id) as boolean,
+        isSubArtist: state => (id: number) =>
+            state.like.likeArtist.some((item: { id: number }) => item.id === id) as boolean,
+        isSubAlbum: state => (id: number) =>
+            state.like.likeAlbum.some((item: { id: number }) => item.id === id) as boolean
     }
 })

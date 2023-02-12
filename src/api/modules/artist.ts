@@ -9,3 +9,8 @@ export interface ArtistAlbum {
     limit?: number
     offset?: number
 }
+export interface ArtistSub {
+    id: number
+    t: 1 | 2
+    timestamp?: number
+}

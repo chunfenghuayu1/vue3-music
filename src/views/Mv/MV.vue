@@ -110,8 +110,8 @@ onMounted(() => {
     initVideo()
     getMVDetail(+route.params.vid)
 })
-onBeforeRouteUpdate(to => {
-    to.name === route.name && getMVDetail(+to.params.vid)
+onBeforeRouteUpdate((to, from) => {
+    to.name === from.name && getMVDetail(+to.params.vid)
 })
 </script>
 

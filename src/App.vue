@@ -31,11 +31,15 @@ import { ElScrollbar } from 'element-plus'
 import 'element-plus/es/components/scrollbar/style/css'
 
 import { useLocalStore } from '@stores/localStore'
+import { useMySong } from '@stores/MySong'
 
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
 provide('scroll', scrollbarRef)
 document.documentElement.style.overflow = 'hidden'
+
 const localStore = useLocalStore()
+const MySong = useMySong()
+
 const { exitTypeSwitch } = useMyAPI()
 exitTypeSwitch((e, arg) => {
     localStore.switchDialog(arg)
@@ -60,6 +64,10 @@ const currentTab = computed(() => {
         return markRaw(PlayerBar)
     }
 })
+if (localStore.loginStatus) {
+    MySong.initMySong()
+    MySong.getMyData()
+}
 </script>
 <style lang="postcss">
 .el-scrollbar__bar {

@@ -10,5 +10,6 @@ export interface albumData {
     publishTime: number
     size: number
     description: string
+    id: number
     [k: any]: any
 }

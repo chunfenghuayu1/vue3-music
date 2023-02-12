@@ -68,7 +68,13 @@
                 <!-- 操作区 -->
                 <div class="flex justify-around items-center mt-2">
                     <div class="active:opacity-20 active:scale-95 transition-all cursor-pointer">
-                        <SvgIcon name="playback" size="32" @click="nextOrPrePlay('pre')"></SvgIcon>
+                        <SvgIcon
+                            name="playback"
+                            size="32"
+                            @click="nextOrPrePlay('pre')"
+                            v-if="playType !== 'fm'"
+                        ></SvgIcon>
+                        <SvgIcon name="thumbs-down" size="24" v-else @click="disLikeFM"></SvgIcon>
                     </div>
                     <div class="active:opacity-20 active:scale-95 transition-all cursor-pointer">
                         <SvgIcon
@@ -136,7 +142,9 @@ const {
     sliderProgress,
     remainProgress,
     currentTrack,
-    showPlayer
+    showPlayer,
+    playType,
+    disLikeFM
 } = usePlay()
 </script>
 

@@ -44,11 +44,16 @@
                 ></div>
                 <!-- 操作区 -->
                 <div class="mt-4 flex items-center space-x-8">
-                    <Button text="播放" @click="handle">
+                    <Button text="播放" @click="addPlayList(trackAll)">
                         <SvgIcon name="playfill" size="24" class="fill-current"></SvgIcon>
                     </Button>
                     <Button
-                        @click="MySong.likePlayList(playList.id, MySong.isSubPlayList(playList.id))"
+                        @click="
+                            MySong.likePlayListSub(
+                                playList.id,
+                                MySong.isSubPlayList(playList.id) ? 2 : 1
+                            )
+                        "
                     >
                         <SvgIcon
                             v-if="!MySong.isSubPlayList(playList.id)"
@@ -102,10 +107,6 @@ const route = useRoute()
 const { addPlayList } = usePlay()
 const MySong = useMySong()
 
-const handle = () => {
-    addPlayList(trackAll.value)
-}
-
 // 获取对应id
 const playList: Ref<List> = ref({
     name: '',
@@ -130,7 +131,7 @@ const getPlayListDetail = ({ id, limit, offset }: PlayListDetail) => {
     }
     // 获取歌单歌曲详情
     proxy?.$http.reqPlayLsitTrankAll({ id, limit, offset }).then(data => {
-        trackAll.value = [...trackAll.value, ...data.songs]
+        trackAll.value = [...toRaw(trackAll.value), ...data.songs]
         // 判断是否全部获取
         more.value = data.songs.length === 0 ? true : false
     })

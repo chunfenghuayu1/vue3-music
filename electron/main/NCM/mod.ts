@@ -278,5 +278,30 @@ export const defMod: ModuleDefinition[] = [
         identifier: 'album_sublist',
         route: '/album/sublist',
         module: require('NeteaseCloudMusicApi/module/album_sublist')
+    },
+    {
+        identifier: 'scrobble',
+        route: '/scrobble',
+        module: require('NeteaseCloudMusicApi/module/scrobble')
+    },
+    {
+        identifier: 'artist_sub',
+        route: '/artist/sub',
+        module: require('NeteaseCloudMusicApi/module/artist_sub')
+    },
+    {
+        identifier: 'album_sub',
+        route: '/album/sub',
+        module: require('NeteaseCloudMusicApi/module/album_sub')
+    },
+    {
+        identifier: 'mv_sub',
+        route: '/mv/sub',
+        module: require('NeteaseCloudMusicApi/module/mv_sub')
+    },
+    {
+        identifier: 'like',
+        route: '/like',
+        module: require('NeteaseCloudMusicApi/module/like')
     }
 ]

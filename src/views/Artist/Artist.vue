@@ -1,5 +1,5 @@
 <template>
-    <div v-show="topSongs.length > 0">
+    <div v-show="show">
         <!-- 头部 -->
         <div class="flex space-x-12 mt-8 my-16">
             <div class="flex items-center justify-center flex-shrink-0 relative">
@@ -16,18 +16,18 @@
                     {{ artist.name }}
                 </h3>
                 <!-- 专辑简介 -->
-                <div class="flex justify-start space-x-4">
+                <div class="flex justify-start space-x-4 text-theme-base">
                     <div class="flex items-center text-sm space-x-1">
-                        <SvgIcon name="music" size="20" class="text-theme-base"></SvgIcon>
-                        <span class="text-theme-base">{{ artist.musicSize }}首</span>
+                        <SvgIcon name="music" size="22"></SvgIcon>
+                        <span>{{ artist.musicSize }}首</span>
                     </div>
                     <div class="flex items-center text-sm space-x-1">
-                        <SvgIcon name="album" size="20" class="text-theme-base"></SvgIcon>
-                        <span class="text-theme-base">{{ artist.albumSize }}张</span>
+                        <SvgIcon name="album" size="22"></SvgIcon>
+                        <span>{{ artist.albumSize }}张</span>
                     </div>
                     <div class="flex items-center text-sm space-x-1">
-                        <SvgIcon name="video" size="20" class="text-theme-base"></SvgIcon>
-                        <span class="text-theme-base">{{ artist.mvSize }}部</span>
+                        <SvgIcon name="video" size="22" class="text-theme-base"></SvgIcon>
+                        <span>{{ artist.mvSize }}部</span>
                     </div>
                 </div>
                 <!-- 专辑描述 -->
@@ -38,22 +38,20 @@
                 ></div>
                 <!-- 操作区 -->
                 <div class="mt-4 flex items-center space-x-8">
-                    <Button text="播放" @click="handle">
-                        <SvgIcon name="playfill" size="24" class="fill-current"></SvgIcon>
+                    <Button text="播放" @click="addPlayList(topSongs)">
+                        <SvgIcon name="playfill" size="24"></SvgIcon>
                     </Button>
-                    <Button @click="handle">
+                    <Button
+                        @click="
+                            MySong.likeArtistSub(artist.id, MySong.isSubArtist(artist.id) ? 2 : 1)
+                        "
+                    >
                         <SvgIcon
-                            v-if="true"
+                            v-if="!MySong.isSubArtist(artist.id)"
                             name="dislike"
                             size="24"
-                            class="fill-current text-theme-baseActive"
                         ></SvgIcon>
-                        <SvgIcon
-                            v-else
-                            name="like"
-                            size="24"
-                            class="fill-current text-theme-baseActive"
-                        ></SvgIcon>
+                        <SvgIcon v-else name="like" size="24"></SvgIcon>
                     </Button>
                 </div>
             </div>
@@ -129,17 +127,19 @@ import Cover from '@components/Cover.vue'
 import MvCover from '@components/MvCover.vue'
 import CorusalArtist from './CorusalArtist.vue'
 import Button from '@components/Button.vue'
-
+import { onBeforeRouteUpdate } from 'vue-router'
+import { useMySong } from '@/stores/MySong'
+import { usePlay } from '@utils/player/usePlayer'
 import type { ComponentInternalInstance, Ref } from 'vue'
 import type { topSongData, artistData, EPData, mvsData } from './index'
 import { useLocalStore } from '@stores/localStore'
+
 const localStore = useLocalStore()
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const route = useRoute()
-const router = useRouter()
-const handle = () => {
-    console.log(1)
-}
+
+const { addPlayList } = usePlay()
+const MySong = useMySong()
 
 const artist: Ref<artistData> = ref({
     name: '',
@@ -147,32 +147,32 @@ const artist: Ref<artistData> = ref({
     albumSize: 0,
     musicSize: 0,
     mvSize: 0,
-    briefDesc: ''
+    briefDesc: '',
+    id: 0
 })
 const topSongs: Ref<topSongData[]> = ref([])
 const albums: Ref<any[]> = ref([])
 const EP: Ref<EPData[]> = ref([])
 const mvs: Ref<mvsData[]> = ref([])
 const simi: Ref<any[]> = ref([])
-
+const show = ref(false)
 // 获取歌手数据
-const getAritstDetail = () => {
-    const id = +route.params.id
+const getAritstDetail = async (id: number) => {
+    show.value = false
     // 获取歌手详情
     proxy?.$http.reqArtistDetail({ id }).then(({ data }) => {
         // 获取正确的头像
-
         data.artist.cover = data.user?.avatarUrl || data.artist?.cover
         artist.value = data.artist
     })
     // 获取热门歌曲
     proxy?.$http.reqAritstTop({ id }).then(data => {
         topSongs.value = data.songs.slice(0, 48)
+        show.value = true
     })
     // 获取专辑
     proxy?.$http.reqArtistAlbum({ id, limit: 50 }).then(data => {
         // 过滤出专辑
-
         albums.value = data.hotAlbums.filter((item: any) => item.type === '专辑')
         // 过滤出ep和单曲
         EP.value = data.hotAlbums.filter(
@@ -190,11 +190,12 @@ const getAritstDetail = () => {
         })
     }
 }
-getAritstDetail()
+getAritstDetail(+route.params.id)
 
-watch(route, (toParams, prev) => {
-    // 对路由变化做出响应...
-    prev.name === toParams.name && getAritstDetail()
+onBeforeRouteUpdate(async (to, from) => {
+    if (to.params.id !== from.params.id) {
+        await getAritstDetail(+to.params.id)
+    }
 })
 </script>
 

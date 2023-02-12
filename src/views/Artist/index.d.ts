@@ -14,6 +14,7 @@ export interface artistData {
     musicSize: number
     mvSize: number
     briefDesc: string
+    id: number
 }
 export interface EPData {
     type: string

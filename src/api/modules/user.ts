@@ -29,5 +29,6 @@ export interface TrashFM {
 }
 export interface AlbumSub {
     id: number
-    t: 1 | 2
+    t: 1 | 0
+    timestamp: number
 }
