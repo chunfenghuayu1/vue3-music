@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex items-center space-x-3 py-2 px-2 rounded-lg"
+        class="flex items-center space-x-3 py-1.5 px-1.5 rounded-lg m-0.5"
         :class="
             id === currentTrack.id
                 ? 'bg-theme-baseActive bg-opacity-50'

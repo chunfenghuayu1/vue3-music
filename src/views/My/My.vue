@@ -44,11 +44,7 @@
                 </div>
                 <!-- 右侧音乐列表 -->
                 <div class="w-2/3 h-56 flex flex-wrap items-center">
-                    <div
-                        v-for="item in MySong.showLikeSongs"
-                        :key="item.id"
-                        class="w-1/3 h-1/4 px-0.5"
-                    >
+                    <div v-for="item in MySong.showLikeSongs" :key="item.id" class="w-1/3 h-1/4">
                         <MyTrackItem
                             :id="item.id"
                             :pic-url="$imgUrl(item.al.picUrl, 36)"
