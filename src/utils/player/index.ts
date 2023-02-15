@@ -124,6 +124,7 @@ class Player {
             } else {
                 await this.nextOrPrePlay('next')
             }
+            return
         }
         this._source = source
         this._audio.src = source
