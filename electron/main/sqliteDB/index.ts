@@ -1,14 +1,14 @@
 import Database from 'better-sqlite3'
-
+import { app } from 'electron'
+import path from 'node:path'
 interface data {
     id: number
     [k: string]: any
 }
-
 type id = number
 type table = 'trackDetail' | 'trackSource' | 'lyric'
-
-const db = new Database('music.db')
+const sqPath = process.env.NODE_ENV ? 'music.db' : path.join(app.getPath('userData'), 'music.db')
+const db = new Database(sqPath)
 db.pragma('journal_mode = WAL')
 try {
     db.exec(
