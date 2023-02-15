@@ -66,10 +66,10 @@ export function usePlay() {
         }
     )
     // 获取当前播放进度 单位秒
-    const progress = computed(() => player.value.currentTime)
+    const currentTime = computed(() => player.value.currentTime)
     // 获取剩余播放时间 秒
     // 歌曲时长 - 当前播放进度
-    const remainProgress = computed(() => player.value.duration - player.value.currentTime)
+    const remainDuration = computed(() => player.value.duration - player.value.currentTime)
 
     // 总时长
     const duration = computed(() => player.value.duration)
@@ -124,10 +124,10 @@ export function usePlay() {
         playOrPause,
         nextOrPrePlay,
         duration,
-        progress,
+        currentTime,
         sliderVolume,
         sliderProgress,
-        remainProgress,
+        remainDuration,
         showPlayer,
         addPlayList,
         currentTrack,

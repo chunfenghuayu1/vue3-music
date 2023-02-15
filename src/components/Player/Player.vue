@@ -55,9 +55,9 @@
                         <div class="select-none">
                             <!-- 歌曲信息 -->
                             <div class="mt-8">
-                                <div class="flex justify-between text-white text-md">
+                                <div class="flex justify-between items-center text-white text-md">
                                     <div
-                                        class="font-semibold text-2xl line-clamp-1"
+                                        class="font-semibold text-2xl line-clamp-1 flex-1"
                                         v-text="currentTrack.name"
                                     ></div>
                                     <div class="text-white">顺序播放</div>
@@ -83,8 +83,8 @@
                                 <div
                                     class="flex justify-between items-center text-sm mt-1 text-white text-opacity-20 select-none h-4"
                                 >
-                                    <div>{{ forminute(Math.round(progress) * 1000) }}</div>
-                                    <div>-{{ forminute(Math.round(remainProgress) * 1000) }}</div>
+                                    <div>{{ forminute(Math.round(currentTime) * 1000) }}</div>
+                                    <div>-{{ forminute(Math.round(remainDuration) * 1000) }}</div>
                                 </div>
                             </div>
                             <!-- 操作 -->
@@ -173,10 +173,10 @@ const {
     isPlaying,
     playOrPause,
     nextOrPrePlay,
-    progress,
+    currentTime,
     sliderVolume,
     sliderProgress,
-    remainProgress,
+    remainDuration,
     currentTrack,
     playType,
     disLikeFM

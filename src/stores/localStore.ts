@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { getLocal, setLocal } from '@utils/localStorage'
-import Player from '@/utils/player/index'
 import type { data, settings } from './initLocal'
 import type { tags } from '@utils/localData'
 import { reqLoginStatus, reqLogout } from '@api/auth'
@@ -9,6 +8,7 @@ import { ElMessage } from 'element-plus'
 import { imgUrl } from '@utils/imgUrl'
 // 导入本地初始化数据
 import localStore from './initLocal'
+import Player from '@utils/player'
 // 如果本地存储不存在data数据，初始化
 // 0代表没有值
 if (!getLocal('data')) {
@@ -18,7 +18,6 @@ if (!getLocal('data')) {
 if (!getLocal('settings')) {
     setLocal('settings', localStore.settings)
 }
-
 if (!getLocal('player')) {
     setLocal('player', localStore.player)
 }

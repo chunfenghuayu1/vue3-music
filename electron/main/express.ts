@@ -1,5 +1,6 @@
 import { serveNCM } from './NCM/service'
-const match = require('@unblockneteasemusic/server')
+// import match from '@unblockneteasemusic/server'
+import UNM from '@unblockneteasemusic/rust-napi'
 import express from 'express'
 import expressProxy from 'express-http-proxy'
 import { join } from 'node:path'
@@ -12,6 +13,7 @@ process.env.DIST = join(process.env.DIST_ELECTRON, '../dist')
 export function createProxy() {
     // 开启node 网易云服务
     serveNCM()
+
     // 配置代理
     const expressApp = express()
     expressApp.use(function (req, res, next) {
@@ -35,7 +37,7 @@ export function createProxy() {
     expressApp.listen(20231)
 }
 
-async function getBiliVideoFile(url) {
+async function getBiliVideoFile(url: string): Promise<Buffer> {
     const response = await axios.get(url, {
         headers: {
             Referer: 'https://www.bilibili.com/',
@@ -46,9 +48,34 @@ async function getBiliVideoFile(url) {
 
     return response.data
 }
-export const handlerAudioSource = async (sourceId: number) => {
+/**
+ * 缓存buffer
+ */
+export async function cacheBuffer(source: string): Promise<Buffer> {
+    const response = await axios.get(source, {
+        responseType: 'arraybuffer'
+    })
+    return response.data
+}
+const unmExecutor = new UNM.Executor()
+export const handlerAudioSource = async (sourceId: number): Promise<Buffer> => {
     const { res } = myDB.select('trackDetail', sourceId)
-    const { id } = JSON.parse(res.value)
+    const { id, name, al, ar, dt } = JSON.parse(res.value)
+    const song = {
+        id: id && id.toString(),
+        name,
+        duration: dt,
+        album: al && {
+            id: al.id && al.id.toString(),
+            name: al.name
+        },
+        artists: ar ? ar.map(({ id, name }) => ({ id: id && id.toString(), name })) : []
+    }
+    const sourceList = ['ytdl', 'bilibili', 'pyncm', 'kugou']
+    const context = {
+        SearchMode: 0,
+        enableFlac: true
+    }
     /**
      * Find matching song from other platforms
      * @param {Number} id netease song id
@@ -56,13 +83,19 @@ export const handlerAudioSource = async (sourceId: number) => {
      * @return {Promise<Object>}
      */
     try {
-        const result = await match(id, ['pyncmd', 'kugou', 'bilibili'])
-        if (result.url.includes('bilivideo.com')) {
-            result.source = 'bilibili'
-            result.url = await getBiliVideoFile(result.url)
+        const matchedAudio = await unmExecutor.search(sourceList, song, context)
+        const retrievedSong = await unmExecutor.retrieve(matchedAudio, context)
+        console.log(retrievedSong)
+
+        if (retrievedSong.url.includes('bilivideo.com')) {
+            const res = await getBiliVideoFile(retrievedSong.url)
+            return res
+        } else {
+            const res = await cacheBuffer(retrievedSong.url)
+            return res
         }
-        return result
     } catch (err) {
         console.log(err)
+        return null
     }
 }

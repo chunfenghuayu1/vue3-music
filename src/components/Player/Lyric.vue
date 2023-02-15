@@ -14,6 +14,18 @@
     </el-scrollbar>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { usePlay } from '@utils/player/usePlayer'
+import type { ComponentInternalInstance } from 'vue'
+const { proxy } = getCurrentInstance() as ComponentInternalInstance
+const { currentTrack, currentTime } = usePlay()
+const lyric = ref()
+watchEffect(() => {
+    proxy?.$http.reqLyric({ id: currentTrack.value.id, timestamp: +new Date() }).then(res => {
+        lyric.value = res.lrc.lyric
+        console.log(lyric.value)
+    })
+})
+</script>
 
 <style scoped></style>

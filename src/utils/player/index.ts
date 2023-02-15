@@ -3,7 +3,6 @@ import { getLocal } from '@utils/localStorage'
 import { ElMessage } from 'element-plus'
 import { useDB } from '@utils/electron/myAPI'
 import { reqPersonalFM } from '@api/user'
-let timer: number
 class Player {
     private _enable: boolean = false
     private _duration: number = 300
@@ -49,14 +48,16 @@ class Player {
     private bufferSourceNode: MediaElementAudioSourceNode
     private fadeGainNode: GainNode
     private _source = ''
+    private _timer: number = 0
     constructor() {
         this.setFromLocal()
         this.setObj()
         this._playing = false
         this._throttle = false
+        this._timer = 0
 
         this.init()
-        this.getAudio()
+        this._enable && this.getAudio()
 
         this.bufferSourceNode = this._audioCtx.createMediaElementSource(this._audio)
         this.fadeGainNode = this._audioCtx.createGain()
@@ -69,6 +70,7 @@ class Player {
         const arr = [
             '_source',
             '_audio',
+            '_timer',
             '_throttle',
             '_audioCtx',
             'bufferSourceNode',
@@ -122,7 +124,6 @@ class Player {
             } else {
                 await this.nextOrPrePlay('next')
             }
-            return
         }
         this._source = source
         this._audio.src = source
@@ -168,21 +169,21 @@ class Player {
      */
     public refreshTime(flag: boolean = false) {
         if (flag) {
-            clearInterval(timer)
+            clearInterval(this._timer)
             return
         }
         if (this._audio.ended) {
-            clearInterval(timer)
+            clearInterval(this._timer)
             this.updateScrobbl(this._currentTrack.id, this._currentTrack.al.id, ~~this._duration)
             this._playType === 'fm' ? this.FMPlayNext() : this.nextOrPrePlay('next')
             return
         }
-        clearInterval(timer)
+        clearInterval(this._timer)
         if (this.playing) {
-            timer = window.setInterval(() => {
+            this._timer = window.setInterval(() => {
                 this.currentTime = this._audio.currentTime || 0
                 this.refreshTime()
-            }, 1000)
+            }, 500)
         }
     }
     // 播放下一曲切换索引
@@ -283,8 +284,6 @@ class Player {
         }
     }
     get duration() {
-        // !isNaN(this._audio.duration) && (this._duration = this._audio.duration)
-        // return isNaN(this._audio.duration) ? this._duration : this._audio.duration
         return this._duration
     }
     get currentTime() {

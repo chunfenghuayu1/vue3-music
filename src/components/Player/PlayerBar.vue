@@ -66,7 +66,7 @@
                     </div>
                     <div class="rounded-full active:scale-90 transition-all cursor-pointer">
                         <SvgIcon
-                            :name="isPlaying ? 'pause' : 'playfill'"
+                            :name="!isPlaying ? 'playfill' : 'pause'"
                             size="32"
                             @click="playOrPause"
                         ></SvgIcon>

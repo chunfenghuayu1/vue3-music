@@ -61,8 +61,8 @@
                     <div
                         class="flex justify-between items-center text-xs mt-1 text-white text-opacity-20"
                     >
-                        <div>{{ forminute(Math.round(progress) * 1000) }}</div>
-                        <div>-{{ forminute(Math.round(remainProgress) * 1000) }}</div>
+                        <div>{{ forminute(Math.round(currentTime) * 1000) }}</div>
+                        <div>-{{ forminute(Math.round(remainDuration) * 1000) }}</div>
                     </div>
                 </div>
                 <!-- 操作区 -->
@@ -137,10 +137,10 @@ const {
     isPlaying,
     playOrPause,
     nextOrPrePlay,
-    progress,
+    currentTime,
     sliderVolume,
     sliderProgress,
-    remainProgress,
+    remainDuration,
     currentTrack,
     showPlayer,
     playType,

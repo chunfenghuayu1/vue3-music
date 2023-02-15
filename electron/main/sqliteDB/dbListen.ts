@@ -1,8 +1,8 @@
 import { ipcMain } from 'electron'
-import myDB from '.'
-import store from '../store'
-import axios from 'axios'
-import { handlerAudioSource } from '../express'
+import myDB from './index'
+import store from './../store'
+import { cacheBuffer } from '../express'
+import { handlerAudioSource } from './../express'
 export function dbListen() {
     // 存储数据库
     /**
@@ -24,15 +24,6 @@ export function dbListen() {
         myDB.replace(type, data)
     })
     /**
-     * 缓存buffer
-     */
-    async function cacheBuffer(source: string) {
-        const response = await axios.get(source, {
-            responseType: 'arraybuffer'
-        })
-        return response.data
-    }
-    /**
      * 查询数据
      */
     ipcMain.handle('selectDB', async (e, arg) => {
@@ -43,17 +34,10 @@ export function dbListen() {
                 if (res) {
                     return res.source
                 } else {
-                    const { url, source } = await handlerAudioSource(id)
-                    if (!url) return
-
-                    if (source === 'bilibili') {
-                        myDB.replaceSong('trackSource', id, url)
-                        return url
-                    } else {
-                        const res = await cacheBuffer(url)
-                        myDB.replaceSong('trackSource', id, res)
-                        return res
-                    }
+                    const res = await handlerAudioSource(id)
+                    if (!res) return
+                    myDB.replaceSong('trackSource', id, res)
+                    return res
                 }
             }
             return myDB.select(type, id)

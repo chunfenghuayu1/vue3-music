@@ -46,6 +46,7 @@ export const reqLyric = async (params: Lyric) => {
  */
 export const reqSongUrl = async (params: SongUrl) => {
     const { unlockMusic } = getLocal('settings')
+
     if (unlockMusic) {
         const source = await selectDB('trackSource', params.id)
 
@@ -60,6 +61,7 @@ export const reqSongUrl = async (params: SongUrl) => {
             dbCache('trackSource', [{ id: params.id, song: res2.data[0] }])
             return res2.data[0].source
         }
+        return
     } else {
         const res = await http.get({ url: Api.SongUrl, params })
         return res.data[0].url

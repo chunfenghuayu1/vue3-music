@@ -10,3 +10,4 @@ declare namespace NodeJS {
     }
 }
 declare module 'NeteaseCloudMusicApi/server'
+declare module '@unblockneteasemusic/server'

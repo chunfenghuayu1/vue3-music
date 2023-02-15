@@ -1,5 +1,6 @@
 import explore from '@utils/localData'
 import type { tags } from '@utils/localData'
+import Player from '@utils/player'
 const activeTags = explore.tags.filter((item: tags) => item.hot === true).map(item => item.name)
 
 export interface settings {
