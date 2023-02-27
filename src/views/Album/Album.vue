@@ -69,7 +69,7 @@
                 <h3 class="font-bold text-2xl text-theme-base">Disc{{ item.cd }}</h3>
             </div>
             <div v-for="(song, index1) in item.list" :key="index1">
-                <AlbumTrack :song="song" @click="addPlayList(item.list, index1)"></AlbumTrack>
+                <AlbumTrack :song="song" @dblclick="addPlayList(item.list, index1)"></AlbumTrack>
             </div>
         </div>
     </div>

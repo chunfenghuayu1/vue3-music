@@ -83,7 +83,7 @@
                     <Track
                         :song="item"
                         :item="trackAll"
-                        @click="addPlayList(trackAll, index)"
+                        @dblclick="addPlayList(trackAll, index)"
                     ></Track>
                 </div>
             </transition-group>

@@ -15,7 +15,7 @@
                 <Track
                     :song="item"
                     :item="MySong.showAllLikeSongs"
-                    @click="addPlayList(MySong.showAllLikeSongs, index)"
+                    @dblclick="addPlayList(MySong.showAllLikeSongs, index)"
                 ></Track>
             </template>
         </div>
