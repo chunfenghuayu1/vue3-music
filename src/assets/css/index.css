@@ -58,23 +58,23 @@ nav {
     /* 背景色 黑色 */
     --color-base: 255, 255, 255;
     /* 背景次要色 灰*/
-    --color-baseSecond:245, 245, 247;
+    --color-baseSecond:189, 205, 214;
     /* 背景活动色 蓝*/
-    --color-baseActive:99, 187, 208;
+    --color-baseActive:114, 134, 211;
     /* 字体颜色 白*/
     --color-font: 0, 0, 0;
      /* 字体次要色 灰*/
     --color-fontSecond:122, 122, 123;
     /* 字体活动颜色 蓝*/
-    --color-fontActive:99, 187, 208;
+    --color-fontActive:114, 134, 211;
   }
   .dark {
-    --color-base: 34, 34, 34;
-    --color-baseSecond:50, 50, 50;
-    --color-baseActive:99, 187, 208;
+    --color-base: 44, 51, 51;
+    --color-baseSecond:57, 91, 100;
+    --color-baseActive:165, 201, 202;
     --color-font: 255, 255, 255;
     --color-fontSecond:122, 122, 123;
-    --color-fontActive:99, 187, 208;
+    --color-fontActive:165, 201, 202;
   }
 }
 

@@ -7,12 +7,27 @@ class Player {
     private _enable: boolean = false
     private _duration: number = 300
     private _index: number = 0
-    private _playList: any[] = []
+    private _playList: number[] = []
     private _playing: boolean = false
     private _currentTime: number = 0
     private _throttle: boolean = false //防止频繁切歌
     private _playType: string = 'song'
     private _FMTrack = {
+        id: 1962166818,
+        al: {
+            id: 147779282,
+            name: '最伟大的作品',
+            picUrl: 'https://p1.music.126.net/xqonK1DZi4inhn4lTM201w==/109951167891239729.jpg'
+        },
+        name: '红颜如霜',
+        ar: [
+            {
+                id: 6452,
+                name: '周杰伦'
+            }
+        ]
+    }
+    private _FMNextTrack = {
         id: 1962166818,
         al: {
             id: 147779282,
@@ -119,6 +134,7 @@ class Player {
             }
             this._playList = this._playList.filter(id => id !== currentTrack)
             this._throttle = false
+            this.refreshTime(false)
             if (this._playType === 'fm') {
                 await this.FMPlayNext()
             } else {
@@ -131,6 +147,7 @@ class Player {
     }
     // 播放
     public play() {
+        !this._enable && (this._enable = true)
         this._audio.play()
         this._playing = !this._audio.paused
         this.refreshTime()
@@ -180,6 +197,7 @@ class Player {
             return
         }
         clearInterval(this._timer)
+        this._timer = 0
         if (this.playing) {
             this._timer = window.setInterval(() => {
                 this.currentTime = this._audio.currentTime || 0
@@ -235,7 +253,6 @@ class Player {
         //  节流 增加中间缓存状态
         this._throttle = true
 
-        this._enable = true
         this._playType = type
 
         this.dbCacheReplace(arr)
@@ -262,27 +279,31 @@ class Player {
     }
     // fm播放
     public async FMPlay() {
-        this._enable = true
         const arr = toRaw(this.FMTrack)
         await this.addPlayList([arr], 'fm')
+        this.updateNextFMTrack()
     }
     public async FMPlayNext() {
         if (this._throttle) return
-        await this.updateFMTrack()
+        this.updateFMTrack()
         await this.FMPlay()
     }
-    public async updateFMTrack() {
+    public updateFMTrack() {
+        this._FMTrack = this._FMNextTrack
+        if (this.playType === 'fm') {
+            this._currentTrack = this._FMTrack
+        }
+    }
+    public async updateNextFMTrack() {
         const { data } = await reqPersonalFM({ timestamp: +new Date() })
         const { id, album: al, artists: ar, name } = data[0]
-        this._FMTrack = {
+        this._FMNextTrack = {
             id,
             al,
             ar,
             name
         }
-        if (this.playType === 'fm') {
-            this._currentTrack = this._FMTrack
-        }
+        await reqSongUrl({ id })
     }
     get duration() {
         return this._duration

@@ -9,11 +9,11 @@
         >
             <template #more>
                 <div
-                    class="font-bold text-lg py-1.5 px-3.5 rounded-lg cursor-pointer mr-4 my-2 hover:bg-theme-baseActive hover:text-theme-baseActive hover:bg-opacity-30 hover:text-opacity-90 transition-all"
+                    class="font-bold text-lg py-1.5 px-3.5 rounded-lg cursor-pointer mr-4 my-2 hover:bg-theme-baseActive hover:text-theme-baseActive hover:bg-opacity-20 hover:text-opacity-90 transition-all"
                     :class="
                         showMore
-                            ? 'bg-theme-baseActive text-theme-baseActive bg-opacity-30 text-opacity-90'
-                            : 'text-theme-baseSecond bg-theme-baseSecond'
+                            ? 'bg-theme-baseActive text-theme-baseActive bg-opacity-20'
+                            : 'text-theme-baseSecond bg-opacity-50 bg-theme-baseSecond'
                     "
                     @click="showMore = !showMore"
                 >

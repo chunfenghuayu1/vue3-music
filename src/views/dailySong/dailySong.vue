@@ -11,8 +11,12 @@
             </p>
         </div>
         <div>
-            <template v-for="item in MySong.dailySongs" :key="item.id">
-                <Track :song="item"></Track>
+            <template v-for="(item, index) in MySong.dailySongs" :key="item.id">
+                <Track
+                    :song="item"
+                    :item="MySong.dailySongs"
+                    @click="addPlayList(MySong.dailySongs, index)"
+                ></Track>
             </template>
         </div>
     </div>
@@ -21,7 +25,9 @@
 <script setup lang="ts">
 import Track from '@components/Track/Track.vue'
 import { useMySong } from '@stores/MySong'
+import { usePlay } from '@utils/player/usePlayer'
 const MySong = useMySong()
+const { addPlayList } = usePlay()
 
 onMounted(() => {
     MySong.getUserPersonalRecom()

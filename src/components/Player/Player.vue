@@ -33,9 +33,16 @@
                 />
             </div>
             <!-- 界面 -->
-            <div class="w-full h-full z-10 flex items-center text-white space-x-16 px-10">
-                <div class="flex-1 flex justify-end">
-                    <div class="py-20">
+            <div
+                class="w-full h-full z-10 flex items-center justify-center text-white space-x-16 px-10 transition-all duration-500"
+            >
+                <div
+                    class="flex justify-end flex-1 transition-all duration-300"
+                    :class="{
+                        '!justify-center': lyric.length === 0
+                    }"
+                >
+                    <div class="">
                         <!-- 图片 -->
                         <div
                             :style="{ width: '54vh', height: '54vh' }"
@@ -43,7 +50,7 @@
                         >
                             <img
                                 :src="$imgUrl(currentTrack.al.picUrl, 512)"
-                                class="object-cover rounded-xl shadow-xl transition duration-300 origin-center"
+                                class="w-full h-full object-cover rounded-xl shadow-xl transition duration-300 origin-center"
                                 draggable="false"
                                 :class="{
                                     'scale-75': !isPlaying,
@@ -57,7 +64,7 @@
                             <div class="mt-8">
                                 <div class="flex justify-between items-center text-white text-md">
                                     <div
-                                        class="font-semibold text-2xl line-clamp-1 flex-1"
+                                        class="font-semibold text-2xl line-clamp-1 w-1/2"
                                         v-text="currentTrack.name"
                                     ></div>
                                     <div class="text-white">顺序播放</div>
@@ -156,8 +163,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-1 flex flex-col items-start h-full transition-all duration-300">
-                    <Lyric></Lyric>
+                <!-- 歌词 -->
+                <div
+                    class="flex flex-1 flex-col h-full transition-all duration-300"
+                    v-if="lyric.length > 0"
+                >
+                    <el-scrollbar class="pr-16 my-12" ref="scrollbar">
+                        <div :style="{ marginTop: '40vh', marginBottom: '40vh' }">
+                            <span
+                                ref="spans"
+                                v-for="(item, index) in lyric"
+                                :key="index"
+                                class="flex font-bold select-none text-3xl p-4 rounded-xl scale-90 opacity-30 transition-all duration-500 origin-left"
+                                :class="{
+                                    '!scale-100 !opacity-80': currentIndex === index,
+                                    'hover:bg-white hover:bg-opacity-10': item.lyric !== ''
+                                }"
+                                @click="playCurrent(item.time)"
+                            >
+                                {{ item.lyric }}
+                            </span>
+                        </div>
+                    </el-scrollbar>
                 </div>
             </div>
         </div>
@@ -169,6 +196,9 @@ import * as Vibrant from 'node-vibrant/dist/vibrant.worker.min.js'
 import { forminute, toPercent } from '@utils/format'
 import { usePlay } from '@utils/player/usePlayer'
 import bus from '@utils/eventBus'
+import { ElScrollbar } from 'element-plus'
+import type { ComponentInternalInstance } from 'vue'
+const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const {
     isPlaying,
     playOrPause,
@@ -179,7 +209,8 @@ const {
     remainDuration,
     currentTrack,
     playType,
-    disLikeFM
+    disLikeFM,
+    playCurrent
 } = usePlay()
 // 获取图片背景色
 const bgColor = ref('')
@@ -211,16 +242,19 @@ watch(
         clearTimeout(timer.value)
         timer.value = 0
         flag.value = true
-        playerImg.value?.addEventListener('load', () => {
-            timer.value = window.setTimeout(() => {
-                flag.value = false
-            }, 800)
-        })
-    },
-    {
-        immediate: true
+        if (playerImg.value) {
+            playerImg.value.onchange = () => {
+                console.log(33)
+            }
+            playerImg.value.onload = () => {
+                timer.value = window.setTimeout(() => {
+                    flag.value = false
+                }, 800)
+            }
+        }
     }
 )
+
 const openPlayer = ref(false)
 bus.$on('openPlayer', () => {
     openPlayer.value = !openPlayer.value
@@ -232,6 +266,74 @@ const closePlayer = () => {
 onBeforeUnmount(() => {
     bus.$off('openPlayer')
 })
+
+/**
+ * 歌词
+ */
+interface Lyric {
+    time: number
+    lyric: any
+}
+const scrollbar = ref<InstanceType<typeof ElScrollbar>>()
+const spans = ref<HTMLElement[]>()
+// 歌词获取
+const lyric = ref<Lyric[]>([])
+watch(
+    () => currentTrack.value.id,
+    () => {
+        proxy?.$http.reqLyric({ id: currentTrack.value.id, timestamp: +new Date() }).then(res => {
+            lyric.value = []
+            if (res.lrc) {
+                const reg = /\[([^\]]+)\]([^[]+)/g
+                let arr: { time: number; lyric: any }[] = []
+                res.lrc.lyric.replace(reg, ($0: any, $1: string, $2: string) => {
+                    arr.push({
+                        time: formatTime($1),
+                        lyric: $2.replace('\n', '')
+                    })
+                })
+                // 过滤空内容
+                lyric.value = arr.filter(item => item.lyric !== '')
+            }
+        })
+    }
+)
+
+const formatTime = (value: string): number => {
+    const res = value.split(':')
+    return Number((Number(res[0]) * 60 + Number(res[1])).toFixed(3))
+}
+// 歌词当前索引
+const currentIndex = ref(-1)
+watch(
+    () => currentTime.value,
+    () => {
+        if (lyric.value.length > 0) {
+            currentIndex.value = lyric.value.findIndex((item, index) => {
+                if (index === 0) {
+                    return currentTime.value < lyric.value[index + 1].time
+                }
+                if (index === lyric.value.length - 1) {
+                    return currentTime.value > item.time
+                }
+                return (
+                    currentTime.value < lyric.value[index + 1].time &&
+                    currentTime.value > lyric.value[index - 1].time
+                )
+            })
+            if (scrollbar.value) {
+                const scrollHeight = scrollbar.value.wrapRef?.offsetHeight
+
+                if (spans.value && scrollHeight) {
+                    scrollbar.value.scrollTo({
+                        top: spans.value[currentIndex.value].offsetTop - scrollHeight / 3,
+                        behavior: 'smooth'
+                    })
+                }
+            }
+        }
+    }
+)
 </script>
 
 <style lang="postcss" scoped>

@@ -31,7 +31,7 @@
                         </div>
                         <!-- 播放按钮 -->
                         <div
-                            class="p-1.5 pr-1 w-14 h-14 flex items-center justify-center rounded-full bg-theme-baseActive bg-opacity-20"
+                            class="p-1.5 pr-1 w-14 h-14 flex items-center justify-center rounded-full bg-theme-baseActive bg-opacity-20 transition duration-300 active:scale-95"
                             @click="addPlayList(MySong.like.tracks)"
                         >
                             <SvgIcon
@@ -46,6 +46,7 @@
                 <div class="w-2/3 h-56 flex flex-wrap items-center">
                     <div v-for="item in MySong.showLikeSongs" :key="item.id" class="w-1/3 h-1/4">
                         <MyTrackItem
+                            :item="MySong.showLikeSongs"
                             :id="item.id"
                             :pic-url="$imgUrl(item.al.picUrl, 36)"
                             :name="item.name"
@@ -66,9 +67,11 @@
                     <div
                         v-for="item in typeList"
                         :key="item.name"
-                        class="cursor-pointer hover:bg-theme-baseSecond hover:text-theme-baseActive rounded-lg flex justify-center items-center transition-all"
+                        class="cursor-pointer hover:bg-theme-baseActive hover:bg-opacity-50 hover:text-theme-baseActive rounded-lg flex justify-center items-center transition"
                         :class="
-                            btnType === item.type ? 'bg-theme-baseSecond text-theme-baseActive' : ''
+                            btnType === item.type
+                                ? 'bg-theme-baseActive bg-opacity-50 text-theme-baseActive'
+                                : ''
                         "
                         @click="hanlderClick(item.type)"
                     >
@@ -141,6 +144,7 @@
                 </template>
                 <template v-if="btnType === 5">
                     <div v-for="item in MySong.likeCloud" :key="item.id">
+                        <!-- 此处类型bug -->
                         <Track :song="item.simpleSong"></Track>
                     </div>
                 </template>
@@ -162,6 +166,7 @@
                         </div>
                     </div>
                     <div v-for="item in MySong.likeRecord(toggleDate)" :key="item.id">
+                        <!-- 此处类型bug -->
                         <Track :song="item.song" :isShowAlbum="false" :isShowOther="false">
                             <template #other>
                                 <div class="font-bold text-theme-base">{{ item.playCount }}1</div>

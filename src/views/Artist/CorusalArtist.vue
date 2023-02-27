@@ -33,6 +33,7 @@
         >
             <swiper-slide v-for="(item, index) in list" :key="index">
                 <MyTrackItem
+                    :item="list"
                     :id="item.id"
                     :pic-url="item.al.picUrl"
                     :name="item.name"
@@ -51,7 +52,24 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Grid } from 'swiper'
 import type { Ref } from 'vue'
 
-defineProps<{ list: { [k: string]: any } }>()
+defineProps<{
+    list: {
+        id: number
+        picUrl: string
+        name: string
+        alia: any[]
+        ar: {
+            id: number
+            name: string
+        }[]
+        al: {
+            picUrl: string
+            name: string
+            id: number
+        }
+        dt: number
+    }[]
+}>()
 const mySwiper: Ref<typeof Swiper> = ref(Swiper)
 const onSwiper = (swiper: any) => {
     mySwiper.value = swiper

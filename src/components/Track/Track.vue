@@ -5,7 +5,7 @@
         :class="
             song.id === currentTrack.id
                 ? 'bg-theme-baseActive bg-opacity-50'
-                : 'hover:bg-theme-baseSecond'
+                : 'hover:bg-theme-baseSecond hover:bg-opacity-50'
         "
         @mouseenter="showBtn = true"
         @mouseleave="showBtn = false"
@@ -125,6 +125,7 @@ interface Dprops {
     isShowAlbum?: boolean
     isShowOther?: boolean
 }
+
 withDefaults(defineProps<Dprops>(), {
     isShowAlbum: true,
     isShowOther: true

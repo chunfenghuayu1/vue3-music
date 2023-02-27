@@ -14,7 +14,8 @@ class CreateMenu {
                         label: '开发者工具',
                         accelerator: 'F12',
                         click: () => {
-                            win.webContents.openDevTools()
+                            import.meta.env.VITE_MODE_NAME === 'development' &&
+                                win.webContents.openDevTools()
                         }
                     }
                 ]

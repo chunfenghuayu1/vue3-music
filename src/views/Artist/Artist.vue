@@ -60,7 +60,7 @@
         <div class="space-y-8">
             <!-- 热门歌曲 -->
             <div v-if="topSongs.length > 0">
-                <CorusalArtist :list="topSongs"></CorusalArtist>
+                <CorusalArtist :list="topSongs as any"></CorusalArtist>
             </div>
             <!-- 专辑 -->
             <div v-if="albums.length > 0">

@@ -2,10 +2,12 @@
     <transition name="tagSelector" mode="in-out">
         <div
             v-if="showMore"
-            class="space-y-8 p-8 bg-theme-baseSecond rounded-lg text-theme-baseSecond origin-top"
+            class="space-y-8 p-8 bg-theme-baseSecond bg-opacity-50 rounded-lg text-theme-baseSecond origin-top"
         >
             <div v-for="(item, index) in categories" :key="item" class="flex space-x-8">
-                <h3 class="text-2xl font-bold flex-shrink-0 h-10 flex items-center select-none">
+                <h3
+                    class="text-theme-baseActive text-2xl font-bold flex-shrink-0 h-10 flex items-center select-none"
+                >
                     {{ item }}
                 </h3>
                 <div class="flex flex-wrap">

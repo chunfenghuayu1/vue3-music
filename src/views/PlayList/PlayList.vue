@@ -79,8 +79,12 @@
             infinite-scroll-delay="600"
         >
             <transition-group tag="div" name="track-item">
-                <div v-for="item in trackAll" :key="item.id" class="space-y-6">
-                    <Track :song="item"></Track>
+                <div v-for="(item, index) in trackAll" :key="item.id" class="space-y-6">
+                    <Track
+                        :song="item"
+                        :item="trackAll"
+                        @click="addPlayList(trackAll, index)"
+                    ></Track>
                 </div>
             </transition-group>
         </div>

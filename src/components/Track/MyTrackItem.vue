@@ -4,7 +4,13 @@
         :class="
             id === currentTrack.id
                 ? 'bg-theme-baseActive bg-opacity-50'
-                : 'hover:bg-theme-baseSecond'
+                : 'hover:bg-theme-baseSecond hover:bg-opacity-50'
+        "
+        @dblclick="
+            addPlayList(
+                item,
+                item.findIndex(i => i.id === id)
+            )
         "
     >
         <!-- 歌曲图片 -->
@@ -54,8 +60,24 @@
 
 <script setup lang="ts">
 import { usePlay } from '@utils/player/usePlayer'
-const { currentTrack } = usePlay()
+const { currentTrack, addPlayList } = usePlay()
 interface Dprops {
+    item: {
+        id: number
+        picUrl: string
+        name: string
+        alia: any[]
+        ar: {
+            id: number
+            name: string
+        }[]
+        al: {
+            picUrl: string
+            name: string
+            id: number
+        }
+        dt: number
+    }[]
     id: number
     picUrl: string
     name: string

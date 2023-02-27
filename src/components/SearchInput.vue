@@ -4,7 +4,7 @@
         :class="
             inputFocus
                 ? ' text-theme-baseActive ring-2 ring-current'
-                : ' bg-theme-baseSecond text-theme-base text-opacity-40'
+                : ' bg-theme-baseSecond bg-opacity-50 text-theme-base text-opacity-40'
         "
     >
         <SvgIcon name="search" size="18" class="mx-1 fill-current"></SvgIcon>

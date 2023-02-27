@@ -22,7 +22,11 @@ export function usePlay() {
         }
         player.value.nextOrPrePlay(value)
     }
-
+    // 跳转播放
+    const playCurrent = (value: number) => {
+        player.value.setPosition(value)
+        !player.value.playing && player.value.play()
+    }
     // 设置音量
     const volume = computed({
         get: () => player.value.volume,
@@ -77,10 +81,10 @@ export function usePlay() {
     // 是否显示播放器
     const showPlayer = computed(() => player.value.enable)
     // 添加播放列表
-    const addPlayList = (arr: any[]) => {
+    const addPlayList = (arr: any[], index?: number) => {
         // 必须复制一份
-        const res = toRaw(arr)
-        player.value.addPlayList(res)
+        const res = arr.map(item => toRaw(item))
+        player.value.addPlayList(res, 'song', index)
     }
     // 获取track信息
     const currentTrack = computed(() => player.value.currentTrack)
@@ -118,7 +122,6 @@ export function usePlay() {
             flag.value = false
         }
     }
-
     return {
         isPlaying,
         playOrPause,
@@ -136,6 +139,7 @@ export function usePlay() {
         FMPlayNext,
         isFMPlaying,
         handleFMPlay,
-        disLikeFM
+        disLikeFM,
+        playCurrent
     }
 }

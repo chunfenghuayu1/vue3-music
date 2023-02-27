@@ -6,6 +6,9 @@ export interface topSongData {
     name: string
     alia: string[]
     ar: any[]
+    id: number
+    dt: number
+    picUrl: string
 }
 export interface artistData {
     name: string

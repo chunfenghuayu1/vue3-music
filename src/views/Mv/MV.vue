@@ -47,6 +47,8 @@ import { formatPlayCount } from '@utils/format'
 import Plyr from 'plyr'
 import 'plyr/dist/plyr.css'
 import { onBeforeRouteUpdate } from 'vue-router'
+import { usePlay } from '@utils/player/usePlayer'
+const { isPlaying, playOrPause } = usePlay()
 const route = useRoute()
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 
@@ -109,6 +111,7 @@ const getMVDetail = (mvid: number) => {
 onMounted(() => {
     initVideo()
     getMVDetail(+route.params.vid)
+    isPlaying.value && playOrPause()
 })
 onBeforeRouteUpdate((to, from) => {
     to.name === from.name && getMVDetail(+to.params.vid)

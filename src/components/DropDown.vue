@@ -6,14 +6,19 @@
         <transition name="dropDown" mode="in-out">
             <div
                 v-if="toggleShow"
-                class="absolute top-full left-0 z-20 w-full origin-top shadow-lg min-w-max"
+                class="absolute top-full left-0 z-20 w-full origin-top min-w-max"
                 ref="dropDown"
                 :style="{ marginLeft: `${setMargin}px` }"
             >
                 <div class="flex justify-center">
-                    <div class="w-2 h-2 bg-theme-baseSecond rotate-45 translate-y-1/2"></div>
+                    <div
+                        class="w-2 h-2 bg-theme-base rotate-45 translate-y-1/2"
+                        :style="{
+                            borderWidth: '1px 0px 0px 1px'
+                        }"
+                    ></div>
                 </div>
-                <div class="bg-theme-baseSecond rounded-xl px-1 py-2">
+                <div class="bg-theme-base rounded-xl px-1 py-2 border">
                     <div
                         v-for="(item, index) in row"
                         :key="index"

@@ -3,11 +3,11 @@
         <div
             v-for="item in activeTags"
             :key="item"
-            class="font-bold text-lg py-1.5 px-3.5 rounded-lg hover:bg-theme-baseActive hover:text-theme-baseActive hover:bg-opacity-20 hover:text-opacity-90 cursor-pointer mr-4 my-2 transition-all"
+            class="font-bold text-lg py-1.5 px-3.5 rounded-lg hover:bg-theme-baseActive hover:text-theme-baseActive hover:bg-opacity-20 cursor-pointer mr-4 my-2 transition-all"
             :class="
                 category === item && !showMore
-                    ? 'bg-theme-baseActive text-theme-baseActive bg-opacity-20 text-opacity-90'
-                    : 'text-theme-baseSecond bg-theme-baseSecond'
+                    ? 'bg-theme-baseActive text-theme-baseActive bg-opacity-20 '
+                    : 'text-theme-baseSecond bg-opacity-50 bg-theme-baseSecond'
             "
             @click="changeCategory(item)"
         >

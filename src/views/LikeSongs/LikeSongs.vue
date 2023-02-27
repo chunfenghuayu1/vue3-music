@@ -11,8 +11,12 @@
         </div>
         <!-- 内容 -->
         <div>
-            <template v-for="item in MySong.showAllLikeSongs" :key="item.id">
-                <Track :song="item"></Track>
+            <template v-for="(item, index) in MySong.showAllLikeSongs" :key="item.id">
+                <Track
+                    :song="item"
+                    :item="MySong.showAllLikeSongs"
+                    @click="addPlayList(MySong.showAllLikeSongs, index)"
+                ></Track>
             </template>
         </div>
     </div>
@@ -23,8 +27,10 @@ import Track from '@components/Track/Track.vue'
 import { IS_ELECTRON } from '@utils/electron/myAPI'
 import { useLocalStore } from '@stores/localStore'
 import { useMySong } from '@stores/MySong'
+import { usePlay } from '@utils/player/usePlayer'
 const localStore = useLocalStore()
 const MySong = useMySong()
+const { addPlayList } = usePlay()
 onActivated(() => {
     !IS_ELECTRON && MySong.getUserPlayList()
 })

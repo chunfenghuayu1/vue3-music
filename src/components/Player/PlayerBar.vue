@@ -5,9 +5,7 @@
             v-if="showPlayer && $route.name !== 'mv'"
         >
             <!-- 进度 -->
-            <div
-                class="w-full h-1 relative bg-theme-baseSecond transition-all duration-300 ease-linear"
-            >
+            <div class="w-full h-1 relative bg-theme-baseSecond duration-300 ease-linear">
                 <!-- 进度 -->
                 <div
                     class="bg-theme-baseActive h-full bg-opacity-80"
@@ -86,7 +84,7 @@
                             <SvgIcon name="volume-low" size="18"></SvgIcon>
                         </div>
                         <div
-                            class="w-32 h-1 rounded-lg relative bg-theme-baseSecond transition-all duration-300 ease-linear"
+                            class="w-32 h-1 rounded-lg relative bg-theme-baseSecond duration-300 ease-linear"
                         >
                             <!-- 进度 -->
                             <div
